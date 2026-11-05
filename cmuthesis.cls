@@ -55,7 +55,7 @@
 \begin{center}
 {\Large \strut \@title\par}
 \vfill
-{\large \begin{tabular}[t]{c}\@author\end{tabular}\par}
+{\large \bf \begin{tabular}[t]{c}\@author\end{tabular}\par}
 \vfill
 {\sc \@trnumber\par}
 \smallskip
@@ -68,10 +68,14 @@
 \vskip 3em
 
 \begin{center}
+    Computer Science Department \\
     School of Computer Science \\
     Carnegie Mellon University \\
     Pittsburgh, PA 15213
 \end{center}
+
+% CSD asks for extra space between the publisher block and the committee
+\vspace{1.5em}
 
 \begin{center}
     {\bf Thesis Committee:} \\
@@ -81,7 +85,7 @@
 \begin{center}
     \em
     Submitted in partial fulfillment of the requirements \\
-    for the degree of Doctor of Philosophy.
+    for the degree of Doctor of Philosophy in Computer Science.
 \end{center}
 
 
