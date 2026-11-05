@@ -1,4 +1,149 @@
 \chapter{Introduction}
-\label{ch:introduction}
+\label{ch:intro}
 
-% TODO: thesis statement, motivation, and contributions (see reference/thesis-proposal/main.tex)
+Large language models (LLMs) have become infrastructure.
+They answer questions, write and review code, drive data analysis, plan and execute multi-step tasks, and increasingly act as the control loop of other software.
+Serving them is now one of the largest computational workloads in the world, and it is an expensive one: a single request to a frontier model traverses hundreds of billions of parameters, token by token, on hardware that costs tens of thousands of dollars per accelerator and is chronically in short supply.
+Every improvement in how efficiently an LLM is served translates directly into lower cost, lower latency, or the ability to use a larger and more capable model for the same budget.
+
+The efficiency of an LLM serving stack is decided at three layers.
+At the \emph{decoding} layer, the model produces one token per forward pass, each conditioned on all the tokens before it.
+This serial loop is memory-bandwidth bound and leaves most of a GPU's compute idle, so the central question is \emph{which tokens to compute next}, and whether it must be only one.
+At the \emph{scheduling} layer, a cluster decides \emph{how to split its GPUs} across the workloads that share a base model: latency-critical inference requests that arrive in bursts, and throughput-oriented work such as finetuning that could absorb the slack between bursts.
+At the \emph{kernel} layer, every operator in the model ultimately runs as a GPU kernel, and \emph{how that kernel is written} for a given operator and a given accelerator determines the ceiling that the layers above it can reach.
+
+Historically, the decisions at each of these layers were made statically, or by hand, by people with scarce expertise.
+Serving systems decoded one token at a time because the dependency structure of autoregressive generation seemed to require it.
+Operators partitioned their clusters into an inference pool and a finetuning pool, provisioning the inference pool for peak demand.
+Kernel engineers wrote and tuned each operator for each GPU generation, and the frameworks everyone uses ship the result of that effort.
+This arrangement worked while the pieces stood still.
+They no longer do.
+
+\paragraph{Everything is moving.}
+Model architectures change every few months: mixture-of-experts routing, linear attention, state-space scans, multi-token prediction heads, low-bit quantization, and multimodal fusion each introduce operators that have no mature kernels on the day they appear.
+Hardware changes just as fast, and each generation reshuffles the tradeoffs among memory bandwidth, tensor-core throughput, on-chip memory, and communication; a kernel that was excellent on one GPU is often mediocre on the next.
+Applications change fastest of all.
+Agentic workloads issue many dependent model calls to complete a single user-visible task, so per-call latency compounds, contexts grow long, and consecutive calls repeat large fractions of their output.
+The deployment pattern has changed too: platforms now offer inference and finetuning against the same models as services, and the demand for each fluctuates independently.
+Expert-driven optimization cannot keep up with three moving targets at once.
+The scarce resource in LLM serving is no longer only GPU hours; it is the engineering attention needed to re-optimize each layer every time something above or below it changes.
+
+\section{Thesis Statement}
+\label{intro:sec:statement}
+
+This dissertation argues that the serving stack should make these decisions itself:
+
+\begin{quote}
+\emph{The optimization decisions that determine the efficiency of LLM serving, which tokens to compute next, how to share GPUs between workloads, and how to write the kernels, should be automated at runtime by models, workload history, and agents, with verification preserving the correctness and service guarantees that production deployments require.
+Such automation is necessary because model architectures, hardware platforms, and application requirements evolve faster than expert-only optimization workflows can scale.}
+\end{quote}
+
+Two ideas in this statement carry the weight.
+The first is \emph{automation at runtime}: rather than fixing a decision at design time, the system makes it continuously, from a cheap source of information that is available while serving, such as a smaller model, the history of previous outputs, the current mix of requests, or a coding agent's own experiments.
+The second is \emph{verification}: an automatically made decision may be wrong, so each system in this thesis pairs its automated proposal with a check that is exact where correctness is at stake and that enforces the service objective where latency is.
+Speculated tokens are verified against the LLM so that its output distribution is unchanged.
+Finetuning work is admitted only when inference deadlines are safe.
+Agent-written kernels are scored on captured production inputs, inside the models they came from, against the kernels those models actually ship.
+The combination is what makes automation deployable: the cheap proposal supplies the speed, and the verifier supplies the guarantee.
+
+\section{Approach}
+\label{intro:sec:approach}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  layer/.style={draw, rounded corners, fill=gray!4, text width=0.92\linewidth, align=left, inner sep=8pt, font=\small}
+]
+\node[layer] (dec) {\textbf{Decoding layer}\quad\textit{which tokens to compute next}\\[3pt]
+  \SpecInfer (\Cref{ch:specinfer}): small models propose a token tree; the LLM verifies it in one pass.\\
+  \SuffixDecoding (\Cref{ch:suffixdecoding}): suffix trees over prior outputs propose tokens with no draft model.};
+\node[layer, below=6pt of dec] (sch) {\textbf{Scheduling layer}\quad\textit{how to share GPUs between workloads}\\[3pt]
+  \FlexLLM (\Cref{ch:flexllm}): a token-level scheduler co-serves inference and finetuning on the same GPUs, admitting finetuning tokens only when inference SLOs are safe.};
+\node[layer, below=6pt of sch] (ker) {\textbf{Kernel layer}\quad\textit{how to write the kernels}\\[3pt]
+  \FastKernels (\Cref{ch:fastkernels}): a production-faithful benchmark that verifies agent-written kernels.\\
+  \KernelSeek (\Cref{ch:kernelseek}): a question-driven coding agent that writes them.};
+\end{tikzpicture}
+\caption{The three layers of the LLM serving stack addressed in this thesis, the decision automated at each, and the systems that automate it.}
+\label{intro:fig:stack}
+\end{figure}
+
+\Cref{intro:fig:stack} summarizes how the thesis develops this argument, layer by layer.
+
+\paragraph{Decoding: speculate, then verify.}
+The serial decode loop is a dependency problem, and the classic systems answer to a dependency problem is speculation.
+\SpecInfer (\Cref{ch:specinfer}) replaces one-token-at-a-time decoding with \emph{tree-based speculative inference and verification}.
+A collection of small speculative models (SSMs), orders of magnitude cheaper than the LLM, proposes not a single sequence of future tokens but a \emph{token tree} whose branches cover diverse plausible continuations.
+A tree-based parallel decoding mechanism then verifies every branch against the LLM in a single forward pass, using a tree attention kernel and a topology-aware causal mask, and accepts the longest verified path.
+For greedy decoding, verification is exact by construction.
+For stochastic decoding, \SpecInfer introduces \emph{multi-step speculative sampling} and proves that it preserves the LLM's output distribution while rejecting fewer tokens than naive sampling.
+The result is that one expensive forward pass yields several tokens instead of one, with no change to what the model would have generated.
+
+\SuffixDecoding (\Cref{ch:suffixdecoding}) asks what the cheapest possible speculator is.
+In agentic workloads, where an agent's consecutive calls regenerate long overlapping stretches of text, the answer turns out to be \emph{no model at all}.
+\SuffixDecoding maintains suffix trees over previous outputs and the current request, matches the current context against them on the CPU in tens of microseconds per token, and builds a compact speculation tree whose depth adapts to how confident the match is.
+Long, frequent matches justify aggressive speculation; weak matches fall back to conservative drafting or to a model-based speculator.
+The LLM verifies the tree exactly as before.
+This treats the history of a workload as a first-class resource: prior outputs are not logs but an execution cache for the inference that follows.
+
+\paragraph{Scheduling: share GPUs at token granularity.}
+Inference and parameter-efficient finetuning (PEFT) of the same base model share almost all of their computation: the frozen base weights are identical, and the forward pass of a finetuning token is the same as that of an inference token.
+Yet production clusters keep them on separate GPUs, because the coarse sharing mechanisms available, time slicing or spatial partitioning, cannot protect bursty inference latency from a long-running training job.
+\FlexLLM (\Cref{ch:flexllm}) makes the sharing decision at the granularity where demand actually changes: tokens, not jobs.
+A set of static compilation optimizations, \emph{dependent parallelization} and \emph{graph pruning}, cuts the activation memory of PEFT so that it fits alongside inference, and a runtime \emph{hybrid token scheduler} fills each serving iteration with inference tokens first and finetuning tokens opportunistically, so that finetuning consumes exactly the capacity that inference leaves idle.
+The scheduler is the verifier here: it admits finetuning work only to the extent that inference service-level objectives remain satisfied.
+
+\paragraph{Kernels: let agents write them, and verify what they write.}
+The kernel layer is where expert bandwidth is scarcest, and it is the layer where LLM coding agents have begun to help.
+But an agent that is evaluated in a sandbox learns to win in a sandbox.
+Existing kernel benchmarks score single kernels on synthetic inputs against weak baselines, and kernels that win there often fail to transfer into vLLM, SGLang, or the attention libraries that production serving actually runs.
+\FastKernels (\Cref{ch:fastkernels}) is the verifier the kernel layer was missing: a benchmark and minimal inference framework whose 384 tasks are derived top-down from 47 real model architectures, whose interfaces match the production modules they replace, whose inputs are captured from real model executions, and whose scoring runs every candidate end to end inside the model it came from, against the kernels that model ships with.
+Its compositional hierarchy, from primitive operators through fused operators and layers to full models, exposes failures that flat benchmarks cannot: a kernel that wins in isolation and breaks once the kernels beneath it change.
+
+\KernelSeek (\Cref{ch:kernelseek}) is the agent.
+Where the prevailing approach equips an autonomous agent with ever more tools, profilers, disassemblers, retrieval, and lessons, \KernelSeek gives a general-purpose coding agent a minimal harness that enforces a verifiable goal and supplies \emph{direction} instead: a short question at a decision point, first from a human and then from a bank of questions the agent applies to itself.
+On the same task and hardware, a tool-rich autonomous agent plateaued at half the speed of FlashAttention-3 after 133 steps; \KernelSeek surpassed it, and went on to produce dependency-free attention kernels for Hopper and Blackwell GPUs that outperform the hand-written libraries they were measured against.
+Analyzing the traces shows that every large gain followed a question that moved the agent to a different layer of the system or rejected a limit it had claimed, never one that handed it information.
+
+\section{Contributions}
+\label{intro:sec:contributions}
+
+This dissertation makes the following contributions.
+
+\begin{enumerate}[leftmargin=*, itemsep=3pt]
+\item \textbf{A unifying argument} that the optimization decisions of the LLM serving stack should be automated at runtime by models, workload history, and agents, paired with verification, and a demonstration of that argument at the decoding, scheduling, and kernel layers.
+
+\item \textbf{\SpecInfer}, the first system to organize speculated tokens as a tree and verify the whole tree against the LLM in one pass. It introduces tree attention and tree-based parallel decoding, and multi-step speculative sampling with a proof that it preserves the LLM's output distribution. \SpecInfer outperforms existing serving systems by 1.5--2.8$\times$ for distributed inference and 2.6--3.5$\times$ for offloading-based inference, with no loss in generation quality.
+
+\item \textbf{\FlexLLM}, the first system to co-serve LLM inference and PEFT finetuning on shared GPUs at token granularity. Its dependent parallelization and graph pruning reduce GPU memory by up to 80\%, and its hybrid token scheduler sustains inference SLO compliance at up to 20 requests per second while improving finetuning throughput by 1.9--4.8$\times$ under heavy inference load and 2.5--6.8$\times$ under light load.
+
+\item \textbf{\SuffixDecoding}, a model-free, repetition-aware speculative decoding method for agentic workloads. Its suffix-tree speculator drafts tokens on the CPU with no GPU overhead and adapts speculation length to match confidence. It decodes up to 2.8$\times$ faster than state-of-the-art model-based methods on standard benchmarks and reduces end-to-end task completion time on SWE-Bench-style agent workloads by up to 4.5$\times$.
+
+\item \textbf{\FastKernels}, a production-faithful benchmark and lightweight inference framework for LLM-based kernel generation agents, with 384 tasks from 47 architectures across 8 categories, production-matched interfaces, captured inputs, end-to-end validation, and a deployment-grounded leaderboard. Its seed evaluation of five representative agents, totaling 6{,}900 agent-hours, shows kernel-level speedups of up to 6.6$\times$ shrinking to at most 1.25$\times$ end to end, and shows that kernel-level scores mis-rank agents.
+
+\item \textbf{\KernelSeek}, a question-driven kernel optimization agent, and the finding that direction, not equipment, is what deep kernel targets require. It produced single-file attention kernels with no library dependencies that are correct on all 182 benchmark scenarios per architecture and reach 1.16$\times$ FlashAttention-3 on Hopper and 1.46$\times$ FlashAttention-4 on Blackwell, together with a released question bank and the full traces behind it.
+\end{enumerate}
+
+\section{Thesis Organization}
+\label{intro:sec:organization}
+
+\Cref{ch:background} provides the background that the rest of the thesis assumes: transformer inference and why decoding underutilizes GPUs, the serving systems that form our baselines, speculative decoding, parameter-efficient finetuning and LLM platforms, agentic workloads, GPU kernels, and LLM agents for kernel generation.
+Each subsequent chapter carries its own related work.
+
+The next three chapters address the runtime layers of the stack.
+\Cref{ch:specinfer} presents \SpecInfer and tree-based speculative inference and verification.
+\Cref{ch:flexllm} presents \FlexLLM and the co-serving of inference and finetuning.
+\Cref{ch:suffixdecoding} presents \SuffixDecoding and model-free speculation for agentic workloads; it is placed after \FlexLLM because it builds on the tree-based verification of \Cref{ch:specinfer} and motivates the agentic setting that the remaining chapters inhabit.
+
+The following two chapters move from using models to optimize the serving stack to using agents to build it.
+\Cref{ch:fastkernels} presents \FastKernels and the problem of evaluating kernel agents against production.
+\Cref{ch:kernelseek} presents \KernelSeek and question-driven kernel optimization.
+\Cref{ch:conclusion} concludes with the lessons that cut across the five systems and the directions they open.
+
+\section{Publications}
+\label{intro:sec:publications}
+
+The work in this thesis was carried out with collaborators at Carnegie Mellon University and elsewhere, who are credited in the publications below and in the acknowledgments.
+\Cref{ch:specinfer} is based on \SpecInfer~\cite{specinfer}, published at ASPLOS 2024.
+\Cref{ch:flexllm} is based on \FlexLLM~\cite{flexllm}, published at NSDI 2026.
+\Cref{ch:suffixdecoding} is based on \SuffixDecoding~\cite{suffixdecoding}, published at NeurIPS 2025.
+\Cref{ch:fastkernels} is based on \FastKernels~\cite{fastkernels}, and \Cref{ch:kernelseek} on \KernelSeek~\cite{kernelseek}; both are under submission at the time of writing.
