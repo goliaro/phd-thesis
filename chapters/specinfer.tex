@@ -281,7 +281,7 @@ Intuitively, each token tree represents a set of token sequences. Merging multip
 For example, \Cref{specinfer:fig:token_tree_merge} shows the token tree derived by merging four sequences of tokens. Each token sequence is identified by a node in the merged token tree.
 
 Note that, in addition to boosting, there are several other ensemble learning methods (e.g., voting, bagging, and stacking)~\cite{ganaie2022ensemble} that can be used to combine the outputs from multiple SSMs, and we leave the exploration as future work.
-\Cref{specinfer:sec:cbt_method} describes the methodology we use to collectively boost-tune SSMs in our evaluation, and \Cref{specinfer:sec:eval_tree_construction_methods} compares the speculative performance of the expansion- and merge-based tree construction methods.
+\Cref{specinfer:subsec:setup} describes the methodology we use to collectively boost-tune SSMs in our evaluation, and \Cref{specinfer:sec:eval_tree_construction_methods} compares the speculative performance of the expansion- and merge-based tree construction methods.
 
 \section{Token Tree Verifier}
 \label{specinfer:sec:verification}
@@ -416,7 +416,24 @@ P(u_i \mid U; \Theta_{LLM}) = P_{\mathrm{SpecInfer}}(u_i \mid U; \Theta_{LLM}, \
 \end{equation}
 \end{theorem}
 
-A proof of this theorem is presented in \Cref{specinfer:sec:proofs}.
+\begin{proof}
+It suffices to prove the equivalency for a single decoding step.
+Let $u_{i-1}$ be the last token we have verified in the speculated token tree $\mathcal{N}$, $m$ be the number of $u_{i-1}$'s child nodes. In multi-step speculative sampling, \SpecInfer iteratively verifies each child node and its SSM against the LLM.
+We define $r_j=\sum_i \max\big(0, P(u_i \mid U, \Theta_{\textrm{SSM}_j})-P(u_i \mid U, \Theta_{\textrm{LLM}})\big), \forall j \in [m]$ as the rejection probability at round $j$, $T_0 = P(u \mid U, \Theta_{\textrm{LLM}})$ and $T_{j}=\frac{T_{j-1}-P(u \mid U, \Theta_{\textrm{SSM}_j})}{r_j}, \forall j \in [m]$.
+We further define $$A_m = \max(0, T_m),$$ $$A_{j-1} = \min(P(u \mid U, \Theta_{\textrm{SSM}_j}), \max(T_{j-1}, 0))+r_{j}A_j, \forall j \in [m]$$
+Then following the \textproc{VerifyStochastic} sampling procedure stated in~\Cref{specinfer:alg2}, the probability of sampling $u_i$ is:
+$$P_{\mathrm{SpecInfer}}(u_i \mid U; \Theta_{LLM}, \{\Theta_{SSM_j}\}) = A_0$$
+Next, we will show that $A_j = \max(0, T_j), \forall j \in [m]$ by backward induction.
+For the base case $j=m$, we have $A_m = \max(0, T_m)$ by definition. Suppose $A_j = \max(0, T_j)$ for $j=n$, we then have:
+\begin{align*}
+    A_{n-1} &= \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))+r_{n}A_n \\
+    &= \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))+r_{n}\max(0, T_n) \\
+    &= \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))+\max(0, T_{n-1}-P(u \mid U, \Theta_{\textrm{SSM}_n})) \\
+    &= \max(0, T_{n-1})
+\end{align*}
+Thus, we have $A_j = \max(0, T_j), \forall j \in [m]$.
+Combining previous results, we have $P_{\mathrm{SpecInfer}}(u_i \mid U; \Theta_{LLM}, \{\Theta_{SSM_j}\}) = A_0 = \max(0, T_0) = P(u_i \mid U; \Theta_{LLM})$, which concludes our proof. Notice that the overall rejection probability is $\prod_{j=1}^m r_j$.
+\end{proof}
 
 We acknowledge that a more straightforward approach to preserving the probability distribution of stochastic decoding is directly sampling the next token $x \sim P(u_i \mid U; \Theta_{LLM})$ and examining whether $x$ is a child node of $u_{i-1}$ in the speculated token tree. We call this approach {\em naive sampling} (NS) and show that \SpecInfer's multi-step speculative sampling has a uniformly lower rejection probability than naive sampling.
 
@@ -425,7 +442,66 @@ We acknowledge that a more straightforward approach to preserving the probabilit
     Let $P\left(\textrm{reject} \mid \textrm{MSS}, U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\} \right)$ denote the probability of rejecting speculation following multi-step speculative sampling with abbreviation $P(\textrm{reject}\mid \textrm{MSS})$, and $P\left(\textrm{reject} \mid \textrm{NS}, U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\}\right)$ the probability of rejecting speculation following Naive Sampling (NS) with abbreviation $P(\textrm{reject}\mid\textrm{NS})$. Then $\forall U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\}$, we have $$P(\textrm{reject}\mid \textrm{MSS}) \leq P(\textrm{reject}\mid\textrm{NS})$$
 \end{theorem}
 
-We present a proof of~\Cref{specinfer:theorem:MSS} in \Cref{specinfer:sec:proofs}.
+\begin{proof}
+As before, we only need to prove the inequality for a single step as this suffices for proving over multiple steps. By the law of total probability, it suffices to show
+$$P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{NS}) \geq P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS})$$
+for all tokens $t$. Here $\mathcal{O}(u)$ denotes the token selected by the according algorithm. Without loss of generality, we can fix token $t$. Let $m$ be the number of child nodes.
+
+NS rejects the speculation while selecting token $t$ with probability $P(t \mid U, \Theta_{\textrm{LLM}})\prod_{j=1}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))$ as this occurs when the LLM selects token $t$, but none of the $m$ children do.
+
+As for MSS, denote $r_j$ as the rejection probability at round $j$. With intermediate results from \Cref{specinfer:thm:stochastic_sampling}, we may equivalently define $A_0 = P(t \mid U, \Theta_{\textrm{LLM}})$ and
+$$A_{j} = \frac{A_{j-1} - \min(P(t \mid U, \Theta_{\textrm{SSM}_j}),A_{j-1})}{r_j} = \max\left(0, \frac{A_{j-1}-P(t \mid U, \Theta_{\textrm{SSM}_j})}{r_j}\right), \forall j \in [m].$$
+Note that for $j \in [m]$, $A_j$ is the probability of sampling $t$ for the normalized residual distribution at the end of round $j$, and $A_{m}$ is the probability of sampling $t$ if the procedure rejects the speculation.
+
+Thus, MSS rejects the speculation while selecting token $t$ with probability $A_{m}\prod_{j=1}^m r_j$. We claim that this is upper bounded by $\max(0, (P(t \mid U, \Theta_{\textrm{LLM}})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})))$.
+We now case on whether there exists round $k$ such that $P(t \mid U, \Theta_{\textrm{SSM}_k}) \geq A_{k-1}$.
+
+\textbf{Case 1:} $P(t \mid U, \Theta_{\textrm{SSM}_k}) \geq A_{k-1}$ for some $k$. Then $A_{\ell} = 0$ for all $\ell \geq k$, and $A_{m}\prod_{j=1}^m r_j = 0$, and our upper bound holds.
+
+\textbf{Case 2:} $P(t \mid U, \Theta_{\textrm{SSM}_k}) < A_{k-1}$ for all rounds $k$. Then $A_{j} = \frac{A_{j-1}-P(t \mid U, \Theta_{\textrm{SSM}_j})}{r_j}, \forall j \in [m]$. A lower bound for $r_j$ is $A_{j-1} - P(t \mid U, \Theta_{\textrm{SSM}_j})$. We show
+$$
+A_{m}\prod_{j=1}^m r_j \leq (P(t \mid U, \Theta_{LLM}) -P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})).
+$$
+To do this, we prove the stronger claim that
+$$
+ A_{n} \prod_{j=1}^n r_j \leq (P(t \mid U, \Theta_{LLM}) -P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^n (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))
+$$
+for all $n \leq m$ through induction.
+
+\textbf{Base case:} $n=1$. As $A_1 = \frac{A_0 - P(t \mid U, \Theta_{\textrm{SSM}_1})}{r_1} = \frac{P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1})}{r_1}$, the LHS is $P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1})$, which is equal to the RHS.
+
+\textbf{Inductive hypothesis:} Assume the upper bound holds for all $n < N$.
+
+\textbf{Inductive step:} Consider the case where $n = N$. Then
+\[
+A_{N} = \frac{A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})}{r_N}
+\]
+The LHS is
+\begin{align*}
+    &\frac{A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})}{r_N}\prod_{j=1}^N r_j \\
+	&= (A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})) \prod_{j=1}^{N-1} r_j \\
+	&= \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - \left(P(t \mid U, \Theta_{\textrm{SSM}_N})\prod_{j=1}^{N-1} r_j \right) \\
+    &\leq \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - P(t \mid U, \Theta_{\textrm{SSM}_N})\left(A_{N-1} \prod_{j=1}^{N-1} r_j \right) \tag{$0 \leq A_{N-1} \leq 1$ and all factors non-negative}\\
+	&= (1-P(t \mid U, \Theta_{\textrm{SSM}_N})) \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) \\
+	&\leq (1-P(t \mid U, \Theta_{\textrm{SSM}_N})) (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1}))
+    \prod_{j=2}^{N-1} (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \tag{Inductive hypothesis} \\
+	&= (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1})) \prod_{j=2}^{N} (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))
+\end{align*}
+which is the RHS, deriving the upper bound as desired.
+
+Thus in all cases, $P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS}) \leq \max(0, (P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})))$.
+
+We now show $P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{NS}) \geq P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS})$. Note that $P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{NS}) \geq 0$ always, so we only need to compare against $(P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))$ for the cases where $P(t \mid U, \Theta_{\textrm{SSM}_k}) < A_{k-1}$ for all $k$; in all other cases $P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS}) = 0$ and the inequality is trivially true. In the cases we are interested in, $P(t \mid U, \Theta_{\textrm{SSM}_1}) < A_0 = P(t \mid U, \Theta_{LLM})$. Then,
+\begin{align*}
+    &P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{NS}) \\
+    &= P(t \mid U, \Theta_{LLM})\prod_{j=1}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \\
+    &= (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{LLM})P(t \mid U, \Theta_{\textrm{SSM}_1}))
+    \prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \\
+    &\geq (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \tag{$P(t \mid U, \Theta_{LLM}) \leq 1$ and all factors non-negative} \\
+    &\geq P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS})
+\end{align*}
+Since the inequality holds for all $t$ in the vocabulary, by the law of total probability, we have $P(\textrm{reject}\mid \textrm{MSS}) \leq P(\textrm{reject}\mid\textrm{NS})$.
+\end{proof}
 
 Note that prior work has introduced single-step speculative sampling for sequence-based speculative inference~\cite{leviathan2022fast,chen2023accelerating}. Different from these approaches, \SpecInfer leverages token trees for improving speculative performance, which requires a different verification algorithm. As a result, \SpecInfer performs multi-step verification (see \textproc{VerifyStochastic} in \Cref{specinfer:alg2}) across all branches of a token to maximize the success rate while preserving equivalence as incremental decoding.
 The proposed MSS algorithm not only works for the merge-based method with multiple SSMs, but also supports the expansion-based method with one SSM and top-$k$ sampling.
@@ -514,7 +590,14 @@ By opportunistically verifying multiple tokens, \SpecInfer can reduce the number
 
 \paragraph{LLMs.} To compare the runtime performance of \SpecInfer with existing LLM serving systems, we evaluate these systems using two publicly available LLM families: OPT~\cite{zhang2022opt} and LLaMA~\cite{touvron2023llama}.
 More specifically, we select LLaMA-7B, OPT-13B, OPT-30B, and LLaMA-65B as the LLMs, and LLaMA-68M and OPT-125M as the SSMs.
-The pre-trained model parameters for the LLMs and SSMs were obtained from their HuggingFace repositories~\cite{huggingface}, and we describe how \SpecInfer collectively boost-tunes multiple SSMs in \Cref{specinfer:sec:cbt_method}.
+The pre-trained model parameters for the LLMs and SSMs were obtained from their HuggingFace repositories~\cite{huggingface}.
+
+\paragraph{Collective boost-tuning.}
+\label{specinfer:sec:cbt_method}
+We did not find a publicly available pre-trained version of small LLaMA models, and therefore trained a LLaMA-68M from scratch for one epoch using the Wikipedia dataset~\cite{wikidump} and part of the C4 dataset~\cite{2019t5}, which took approximately 275 hours on a single NVIDIA A100 GPU.
+We also used the OpenWebText Corpus~\cite{Gokaslan2019OpenWeb} to collectively boost-tune multiple SSMs for speculative inference.
+Note that we only need to pre-train and collectively boost-tune SSMs once for each LLM model family before serving.
+For both the OPT and LLaMA experiments, we fine-tuned four SSMs over the OpenWebText Corpus using collective boost-tuning on top of the pre-trained OPT-125M and LLaMA-160M models, which provides a collection of five SSMs (including the base SSM).
 
 \paragraph{Datasets.} We evaluate \SpecInfer on five datasets: Chatbot Instruction Prompts (CIP)~\cite{chatbot2023}, ChatGPT Prompts (CP)~\cite{mohamed2023chatgpt}, WebQA~\cite{berant-etal-2013-semantic}, Alpaca~\cite{alpaca,peng2023instruction}, and PIQA~\cite{Bisk2020}.
 We only use the prompts/questions from these datasets to form our input prompts to simulate real-world conversation traces.
@@ -654,43 +737,6 @@ We use naive sampling as a baseline where \SpecInfer directly samples the next t
 Since different sampling algorithms involve identical speculation and verification overheads, we focus on the average number of tokens that can be verified in each stochastic decoding step in this experiment.
 \Cref{specinfer:tab:eval_msss} shows the results. Compared to naive sampling, MSS can consistently improve the number of verified tokens by 1.2-1.3$\times$ on average across a variety of prompt datasets, while guaranteeing the same output distribution with the LLM.
 
-\section{Related Work}
-\label{specinfer:sec:related}
-
-Transformer-based LLMs have demonstrated significant potential in numerous human-level language modeling tasks by continuously increasing their sizes~\cite{vaswani,rae2021scaling,smith2022using,du2022glam,chowdhery2022palm}.
-As GPT-3 becomes the first model to surpass 100B parameters~\cite{brown2020language}, multiple LLMs ($>$100B) have been released, including OPT-175B~\cite{zhang2022opt}, Bloom-176B~\cite{scao2022bloom}, and PaLM~\cite{chowdhery2022palm}.
-Recent work has proposed a variety of approaches to accelerating generative LLM inference, which can be categorized into two classes.
-
-\paragraph{Lossless acceleration.}
-Prior work has explored the idea of using an LLM as a verifier instead of a decoder to boost inference.
-For example, Yang et al.~\cite{yang2023inference} introduced {\em inference with reference}, which leverages the overlap between an LLM's output and the references obtained by retrieving documents, and checks each reference's appropriateness by examining the decoding results of the LLM.
-Motivated by the idea of speculative execution in processor optimizations~\cite{burton1985speculative,hennessy2011computer}, recent work proposed {\em speculative decoding}, which uses a small language model to produce a sequence of tokens and examines the correctness of these tokens using an LLM~\cite{leviathan2022fast,xiaspeculative,stern2018blockwise,chen2023accelerating,gante2023assisted}.
-There are two key differences between \SpecInfer and these prior works.
-First, instead of only considering a single sequence of tokens, \SpecInfer generates and verifies a token tree, whose nodes each represent a unique token sequence. \SpecInfer performs tree attention to compute the attention output of these token sequences in parallel and uses a novel tree-based decoding algorithm to reuse intermediate results shared across these sequences.
-Second, prior attempts generally consider a single small language model for speculation, which cannot align well with an LLM due to the model capacity gap between them.
-\SpecInfer introduces two novel speculation methods, including 1) expanding from a single SSM and 2) merging from multiple fine-tuned SSMs, and the generated token tree largely increases the coverage of the LLM's output.
-
-Prior work has also introduced a variety of techniques to optimize ML computations on modern hardware platforms.
-For example, TVM~\cite{chen2018tvm} and Ansor~\cite{zheng2020ansor} automatically generate kernels for a given tensor program. TASO~\cite{jia2019taso} and PET~\cite{wang2021pet} automatically discover graph-level transformations to optimize the computation graph of a DNN.
-\SpecInfer's techniques are orthogonal and can be combined with these systems to accelerate generative LLM computation, which we believe is a promising avenue for future work.
-
-\paragraph{Lossy acceleration.}
-BiLD~\cite{biglittletransformer} is a speculative decoding framework that uses a single SSM to accelerate LLM decoding. Unlike the systems mentioned above, the acceleration is lossy: speed comes at the cost of a possible degradation in the generated tokens.
-Another line of research leverages model compression to reduce LLM inference latency while compromising the predictive performance of the LLM.
-For example, prior work proposed to leverage weight/activation quantization of LLMs to reduce the memory and computation requirements of serving these LLMs~\cite{xiao2022smoothquant,frantar2023gptq,park2022nuqmm,yao2022zeroquant,dettmers2022gpt3}.
-Recent work further explores a variety of structured pruning techniques for accelerating Transformer-based architectures~\cite{frantar2023sparsegpt,wang2021spatten,hubara2021accelerated}.
-A key difference between \SpecInfer and these prior works is that \SpecInfer does not directly reduce the computation requirement for performing LLM inference, but instead reorganizes LLM inference computation in a more parallelizable way, which reduces memory accesses and inference latency at the cost of manageable memory and computation overheads.
-
-\paragraph{Tree-structured attention.}
-Nguyen et al.~\cite{Nguyen2020} introduced {\em tree-structured attention}, a technique that lets a Transformer model capture the hierarchical composition of input text by running the model on the text's parse tree. To process with attention, it uses a one-on-one mapping to encode and decode the tree.
-There are two key differences from \SpecInfer's tree-based decoding. First, \SpecInfer uses a tree to combine candidate sequences to condense prefixes, whereas Nguyen et al. represent a single sequence with its parse tree. \SpecInfer does not incorporate parse trees into the LLM, but accelerates inference by verifying decoded sequences in parallel. Second, \SpecInfer's attention outputs a token sequence, not a tree.
-
-\paragraph{Multi-sample decoding techniques.}
-Like tree-based speculative inference, \textit{beam search}, \textit{top-k sampling}, and \textit{top-p sampling} consider multiple candidate token sequences at each step and can prune low-probability options. However, tree-based decoding in \SpecInfer speculatively predicts and verifies multiple candidates in parallel against an LLM to reduce decoding iterations and latency, leveraging small speculative models (SSMs). In contrast, beam search and top-k/top-p sampling are decoding strategies applied directly to the LLM's output probabilities to generate high-probability sequences without reducing decoding steps. \SpecInfer supports beam search, top-k sampling, and top-p sampling. These techniques are orthogonal decoding optimizations and can be combined with tree-based speculative decoding.
-
-\section{Additional Details}
-\label{specinfer:sec:additional}
-
 \subsection{Comparing Tree Construction Methods}
 \label{specinfer:sec:eval_tree_construction_methods}
 
@@ -743,95 +789,40 @@ Therefore, our evaluation focuses on the speculative performance of the two meth
 When the tree width (and the number of SSMs) is equal to 1, the two methods generate identical speculated token trees (i.e., a sequence of tokens) and achieve the same speculative performance.
 For larger speculation budgets, the expansion-based method achieves slightly worse performance than the merge-based one for the Alpaca dataset and largely outperforms it for all other datasets in our evaluation.
 
-\subsection{Collective Boost-tuning Methodology}
-\label{specinfer:sec:cbt_method}
-We did not find a publicly available pre-trained version of small LLaMA models, and therefore trained a LLaMA-68M from scratch for one epoch using the Wikipedia dataset~\cite{wikidump} and part of the C4 dataset~\cite{2019t5}, which took approximately 275 hours on a single NVIDIA A100 GPU.
-We also used the OpenWebText Corpus~\cite{Gokaslan2019OpenWeb} to collectively boost-tune multiple SSMs for speculative inference.
-Note that we only need to pre-train and collectively boost-tune SSMs once for each LLM model family before serving.
-For both the OPT and LLaMA experiments, we fine-tuned four SSMs over the OpenWebText Corpus using collective boost-tuning on top of the pre-trained OPT-125M and LLaMA-160M models, which provides a collection of five SSMs (including the base SSM).
 
-\subsection{Proofs of the Theorems}
-\label{specinfer:sec:proofs}
+\section{Related Work}
+\label{specinfer:sec:related}
 
-\begin{proof}[Proof of \Cref{specinfer:thm:stochastic_sampling}]
-It suffices to prove the equivalency for a single decoding step.
-Let $u_{i-1}$ be the last token we have verified in the speculated token tree $\mathcal{N}$, $m$ be the number of $u_{i-1}$'s child nodes. In multi-step speculative sampling, \SpecInfer iteratively verifies each child node and its SSM against the LLM.
-We define $r_j=\sum_i \max\big(0, P(u_i \mid U, \Theta_{\textrm{SSM}_j})-P(u_i \mid U, \Theta_{\textrm{LLM}})\big), \forall j \in [m]$ as the rejection probability at round $j$, $T_0 = P(u \mid U, \Theta_{\textrm{LLM}})$ and $T_{j}=\frac{T_{j-1}-P(u \mid U, \Theta_{\textrm{SSM}_j})}{r_j}, \forall j \in [m]$.
-We further define $$A_m = \max(0, T_m),$$ $$A_{j-1} = \min(P(u \mid U, \Theta_{\textrm{SSM}_j}), \max(T_{j-1}, 0))+r_{j}A_j, \forall j \in [m]$$
-Then following the \textproc{VerifyStochastic} sampling procedure stated in~\Cref{specinfer:alg2}, the probability of sampling $u_i$ is:
-$$P_{\mathrm{SpecInfer}}(u_i \mid U; \Theta_{LLM}, \{\Theta_{SSM_j}\}) = A_0$$
-Next, we will show that $A_j = \max(0, T_j), \forall j \in [m]$ by backward induction.
-For the base case $j=m$, we have $A_m = \max(0, T_m)$ by definition. Suppose $A_j = \max(0, T_j)$ for $j=n$, we then have:
-\begin{align*}
-    A_{n-1} &= \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))+r_{n}A_n \\
-    &= \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))+r_{n}\max(0, T_n) \\
-    &= \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))+\max(0, T_{n-1}-P(u \mid U, \Theta_{\textrm{SSM}_n})) \\
-    &= \max(0, T_{n-1})
-\end{align*}
-Thus, we have $A_j = \max(0, T_j), \forall j \in [m]$.
-Combining previous results, we have $P_{\mathrm{SpecInfer}}(u_i \mid U; \Theta_{LLM}, \{\Theta_{SSM_j}\}) = A_0 = \max(0, T_0) = P(u_i \mid U; \Theta_{LLM})$, which concludes our proof. Notice that the overall rejection probability is $\prod_{j=1}^m r_j$.
-\end{proof}
+Transformer-based LLMs have demonstrated significant potential in numerous human-level language modeling tasks by continuously increasing their sizes~\cite{vaswani,rae2021scaling,smith2022using,du2022glam,chowdhery2022palm}.
+As GPT-3 becomes the first model to surpass 100B parameters~\cite{brown2020language}, multiple LLMs ($>$100B) have been released, including OPT-175B~\cite{zhang2022opt}, Bloom-176B~\cite{scao2022bloom}, and PaLM~\cite{chowdhery2022palm}.
+Recent work has proposed a variety of approaches to accelerating generative LLM inference, which can be categorized into two classes.
 
-\begin{proof}[Proof of \Cref{specinfer:theorem:MSS}]
-As before, we only need to prove the inequality for a single step as this suffices for proving over multiple steps. By the law of total probability, it suffices to show
-$$P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{NS}) \geq P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS})$$
-for all tokens $t$. Here $\mathcal{O}(u)$ denotes the token selected by the according algorithm. Without loss of generality, we can fix token $t$. Let $m$ be the number of child nodes.
+\paragraph{Lossless acceleration.}
+Prior work has explored the idea of using an LLM as a verifier instead of a decoder to boost inference.
+For example, Yang et al.~\cite{yang2023inference} introduced {\em inference with reference}, which leverages the overlap between an LLM's output and the references obtained by retrieving documents, and checks each reference's appropriateness by examining the decoding results of the LLM.
+Motivated by the idea of speculative execution in processor optimizations~\cite{burton1985speculative,hennessy2011computer}, recent work proposed {\em speculative decoding}, which uses a small language model to produce a sequence of tokens and examines the correctness of these tokens using an LLM~\cite{leviathan2022fast,xiaspeculative,stern2018blockwise,chen2023accelerating,gante2023assisted}.
+There are two key differences between \SpecInfer and these prior works.
+First, instead of only considering a single sequence of tokens, \SpecInfer generates and verifies a token tree, whose nodes each represent a unique token sequence. \SpecInfer performs tree attention to compute the attention output of these token sequences in parallel and uses a novel tree-based decoding algorithm to reuse intermediate results shared across these sequences.
+Second, prior attempts generally consider a single small language model for speculation, which cannot align well with an LLM due to the model capacity gap between them.
+\SpecInfer introduces two novel speculation methods, including 1) expanding from a single SSM and 2) merging from multiple fine-tuned SSMs, and the generated token tree largely increases the coverage of the LLM's output.
 
-NS rejects the speculation while selecting token $t$ with probability $P(t \mid U, \Theta_{\textrm{LLM}})\prod_{j=1}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))$ as this occurs when the LLM selects token $t$, but none of the $m$ children do.
+Prior work has also introduced a variety of techniques to optimize ML computations on modern hardware platforms.
+For example, TVM~\cite{chen2018tvm} and Ansor~\cite{zheng2020ansor} automatically generate kernels for a given tensor program. TASO~\cite{jia2019taso} and PET~\cite{wang2021pet} automatically discover graph-level transformations to optimize the computation graph of a DNN.
+\SpecInfer's techniques are orthogonal and can be combined with these systems to accelerate generative LLM computation, which we believe is a promising avenue for future work.
 
-As for MSS, denote $r_j$ as the rejection probability at round $j$. With intermediate results from \Cref{specinfer:thm:stochastic_sampling}, we may equivalently define $A_0 = P(t \mid U, \Theta_{\textrm{LLM}})$ and
-$$A_{j} = \frac{A_{j-1} - \min(P(t \mid U, \Theta_{\textrm{SSM}_j}),A_{j-1})}{r_j} = \max\left(0, \frac{A_{j-1}-P(t \mid U, \Theta_{\textrm{SSM}_j})}{r_j}\right), \forall j \in [m].$$
-Note that for $j \in [m]$, $A_j$ is the probability of sampling $t$ for the normalized residual distribution at the end of round $j$, and $A_{m}$ is the probability of sampling $t$ if the procedure rejects the speculation.
+\paragraph{Lossy acceleration.}
+BiLD~\cite{biglittletransformer} is a speculative decoding framework that uses a single SSM to accelerate LLM decoding. Unlike the systems mentioned above, the acceleration is lossy: speed comes at the cost of a possible degradation in the generated tokens.
+Another line of research leverages model compression to reduce LLM inference latency while compromising the predictive performance of the LLM.
+For example, prior work proposed to leverage weight/activation quantization of LLMs to reduce the memory and computation requirements of serving these LLMs~\cite{xiao2022smoothquant,frantar2023gptq,park2022nuqmm,yao2022zeroquant,dettmers2022gpt3}.
+Recent work further explores a variety of structured pruning techniques for accelerating Transformer-based architectures~\cite{frantar2023sparsegpt,wang2021spatten,hubara2021accelerated}.
+A key difference between \SpecInfer and these prior works is that \SpecInfer does not directly reduce the computation requirement for performing LLM inference, but instead reorganizes LLM inference computation in a more parallelizable way, which reduces memory accesses and inference latency at the cost of manageable memory and computation overheads.
 
-Thus, MSS rejects the speculation while selecting token $t$ with probability $A_{m}\prod_{j=1}^m r_j$. We claim that this is upper bounded by $\max(0, (P(t \mid U, \Theta_{\textrm{LLM}})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})))$.
-We now case on whether there exists round $k$ such that $P(t \mid U, \Theta_{\textrm{SSM}_k}) \geq A_{k-1}$.
+\paragraph{Tree-structured attention.}
+Nguyen et al.~\cite{Nguyen2020} introduced {\em tree-structured attention}, a technique that lets a Transformer model capture the hierarchical composition of input text by running the model on the text's parse tree. To process with attention, it uses a one-on-one mapping to encode and decode the tree.
+There are two key differences from \SpecInfer's tree-based decoding. First, \SpecInfer uses a tree to combine candidate sequences to condense prefixes, whereas Nguyen et al. represent a single sequence with its parse tree. \SpecInfer does not incorporate parse trees into the LLM, but accelerates inference by verifying decoded sequences in parallel. Second, \SpecInfer's attention outputs a token sequence, not a tree.
 
-\textbf{Case 1:} $P(t \mid U, \Theta_{\textrm{SSM}_k}) \geq A_{k-1}$ for some $k$. Then $A_{\ell} = 0$ for all $\ell \geq k$, and $A_{m}\prod_{j=1}^m r_j = 0$, and our upper bound holds.
-
-\textbf{Case 2:} $P(t \mid U, \Theta_{\textrm{SSM}_k}) < A_{k-1}$ for all rounds $k$. Then $A_{j} = \frac{A_{j-1}-P(t \mid U, \Theta_{\textrm{SSM}_j})}{r_j}, \forall j \in [m]$. A lower bound for $r_j$ is $A_{j-1} - P(t \mid U, \Theta_{\textrm{SSM}_j})$. We show
-$$
-A_{m}\prod_{j=1}^m r_j \leq (P(t \mid U, \Theta_{LLM}) -P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})).
-$$
-To do this, we prove the stronger claim that
-$$
- A_{n} \prod_{j=1}^n r_j \leq (P(t \mid U, \Theta_{LLM}) -P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^n (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))
-$$
-for all $n \leq m$ through induction.
-
-\textbf{Base case:} $n=1$. As $A_1 = \frac{A_0 - P(t \mid U, \Theta_{\textrm{SSM}_1})}{r_1} = \frac{P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1})}{r_1}$, the LHS is $P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1})$, which is equal to the RHS.
-
-\textbf{Inductive hypothesis:} Assume the upper bound holds for all $n < N$.
-
-\textbf{Inductive step:} Consider the case where $n = N$. Then
-\[
-A_{N} = \frac{A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})}{r_N}
-\]
-The LHS is
-\begin{align*}
-    &\frac{A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})}{r_N}\prod_{j=1}^N r_j \\
-	&= (A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})) \prod_{j=1}^{N-1} r_j \\
-	&= \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - \left(P(t \mid U, \Theta_{\textrm{SSM}_N})\prod_{j=1}^{N-1} r_j \right) \\
-    &\leq \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - P(t \mid U, \Theta_{\textrm{SSM}_N})\left(A_{N-1} \prod_{j=1}^{N-1} r_j \right) \tag{$0 \leq A_{N-1} \leq 1$ and all factors non-negative}\\
-	&= (1-P(t \mid U, \Theta_{\textrm{SSM}_N})) \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) \\
-	&\leq (1-P(t \mid U, \Theta_{\textrm{SSM}_N})) (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1}))
-    \prod_{j=2}^{N-1} (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \tag{Inductive hypothesis} \\
-	&= (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1})) \prod_{j=2}^{N} (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))
-\end{align*}
-which is the RHS, deriving the upper bound as desired.
-
-Thus in all cases, $P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS}) \leq \max(0, (P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})))$.
-
-We now show $P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{NS}) \geq P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS})$. Note that $P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{NS}) \geq 0$ always, so we only need to compare against $(P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))$ for the cases where $P(t \mid U, \Theta_{\textrm{SSM}_k}) < A_{k-1}$ for all $k$; in all other cases $P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS}) = 0$ and the inequality is trivially true. In the cases we are interested in, $P(t \mid U, \Theta_{\textrm{SSM}_1}) < A_0 = P(t \mid U, \Theta_{LLM})$. Then,
-\begin{align*}
-    &P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{NS}) \\
-    &= P(t \mid U, \Theta_{LLM})\prod_{j=1}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \\
-    &= (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{LLM})P(t \mid U, \Theta_{\textrm{SSM}_1}))
-    \prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \\
-    &\geq (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \tag{$P(t \mid U, \Theta_{LLM}) \leq 1$ and all factors non-negative} \\
-    &\geq P(\textrm{reject} \cap \mathcal{O}(u)=t \mid \textrm{MSS})
-\end{align*}
-Since the inequality holds for all $t$ in the vocabulary, by the law of total probability, we have $P(\textrm{reject}\mid \textrm{MSS}) \leq P(\textrm{reject}\mid\textrm{NS})$.
-\end{proof}
+\paragraph{Multi-sample decoding techniques.}
+Like tree-based speculative inference, \textit{beam search}, \textit{top-k sampling}, and \textit{top-p sampling} consider multiple candidate token sequences at each step and can prune low-probability options. However, tree-based decoding in \SpecInfer speculatively predicts and verifies multiple candidates in parallel against an LLM to reduce decoding iterations and latency, leveraging small speculative models (SSMs). In contrast, beam search and top-k/top-p sampling are decoding strategies applied directly to the LLM's output probabilities to generate high-probability sequences without reducing decoding steps. \SpecInfer supports beam search, top-k sampling, and top-p sampling. These techniques are orthogonal decoding optimizations and can be combined with tree-based speculative decoding.
 
 \section{Summary}
 \label{specinfer:sec:summary}
