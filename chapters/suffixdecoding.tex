@@ -35,36 +35,7 @@ At each inference step, \SuffixDecoding adaptively limits its number of draft to
 
 We evaluate \SuffixDecoding on two practical agent-driven workloads: SWE-Bench, an LLM-based software engineering benchmark, and AgenticSQL, a proprietary multi-agent pipeline application for SQL generation. We compare with state-of-the-art model-based and model-free speculative decoding methods using Spec-Bench~\citep{xia2024unlockingefficiencylargelanguage}, showing up to 2.8$\times$ faster decoding than EAGLE-2/3~\citep{li2025eagle3scalinginferenceacceleration}, and 1.9$\times$ faster decoding than Token Recycling~\citep{luo2024turningtrashtreasureaccelerating}. For SWE-Bench, we also measured the comprehensive, end-to-end task completion time---including prompt prefilling, token generation, and execution of external actions---and demonstrate speculative speedups of up to 4.5$\times$. These results highlight that \SuffixDecoding substantially reduces latency for real-world agentic applications, addressing a critical bottleneck in practical inference scenarios.
 
-The rest of this chapter is organized as follows. \Cref{suffixdecoding:sec:background} reviews the background on LLM inference, speculative decoding, and agentic algorithms. \Cref{suffixdecoding:sec:method} presents the design of \SuffixDecoding, and \Cref{suffixdecoding:sec:evaluation} evaluates it against state-of-the-art baselines, including end-to-end experiments in vLLM, ablation studies, scalability measurements, and detailed per-task results. \Cref{suffixdecoding:sec:discussion} discusses limitations and extensions, \Cref{suffixdecoding:sec:related} surveys related work, and \Cref{suffixdecoding:sec:summary} concludes the chapter.
-
-\section{Background}
-\label{suffixdecoding:sec:background}
-
-\paragraph{LLM Inference.}
-
-LLM inference involves two stages: given a prompt $x_{\text{prompt}} = (x_1, x_2, \dots, x_m)$, the LLM first processes the prompt in parallel (prefill), then sequentially generates new tokens (decode), with each token $x_{t>m}$ conditioned on previously generated tokens:
-\[
-x_{t+1} = \mathrm{Sample}(x \mid x_{1, \ldots, t}).
-\]
-In greedy sampling, the highest-probability token is selected iteratively until a stopping condition. Since each token depends on preceding outputs, generation is inherently sequential, requiring a separate forward pass per token, limiting throughput and underutilizing parallel hardware accelerators.
-
-\paragraph{Speculative Decoding.}
-
-Speculative decoding~\citep{leviathan2022fast} accelerates inference by generating multiple candidate tokens quickly using a lightweight model, which can then be verified in parallel by the primary LLM. The basic method has two core steps:
-
-\begin{enumerate}
-\item \emph{Speculation}: Based on the existing token prefix $x_{<t}$, a smaller ``draft'' model rapidly produces a sequence of speculative tokens $x_{\text{spec}} = (x_{t+1}, \dots, x_{t+n})$.
-
-\item \emph{Verification}: The LLM verifies the draft tokens in parallel, accepting tokens up to the first discrepancy and discarding the rest.
-\end{enumerate}
-
-This shifts computation from sequential generation to parallel verification. However, draft models still require compute resources and add orchestration complexity. Model-based methods include Medusa~\citep{cai2024medusasimplellminference}, \SpecInfer~\citep{specinfer} (which introduced tree-based speculation, see \Cref{ch:specinfer}), multi-token prediction~\citep{gloeckle2024multitoken}, and blockwise parallel decoding~\citep{stern2018blockwise,kim2024accelerating}.
-
-Recent \emph{model-free} methods include Prompt Lookup Decoding~\citep{saxena2023prompt}, Token Recycling~\citep{luo2024turningtrashtreasureaccelerating}, LLMA~\citep{yang2023inference}, and ANPD~\citep{ou2024losslessaccelerationlargelanguage}. These rely on small reference texts and lack adaptive speculation. \SuffixDecoding is uniquely designed for agentic applications with long repetitive sequences.
-
-\paragraph{Agentic AI Algorithms.}
-
-Agentic applications structure tasks as multiple LLM calls, generating long repetitive token sequences. \emph{Self-consistency}~\citep{wang2023selfconsistencyimproveschainthought} samples multiple reasoning paths from the same prompt, sharing similar chain-of-thought steps. \emph{Self-refinement}~\citep{madaan2023selfrefine} iteratively fixes errors, revising small portions while preserving surrounding content. \emph{Multi-agent workflows}~\citep{khot2023decomposedpromptingmodularapproach} use specialized agents with narrow functions, producing repetitive outputs. These patterns create opportunities for exploiting long repeated sequences.
+The rest of this chapter is organized as follows. Background on LLM inference, speculative decoding, and agentic workloads is covered in \Cref{ch:background}. \Cref{suffixdecoding:sec:method} presents the design of \SuffixDecoding, and \Cref{suffixdecoding:sec:evaluation} evaluates it against state-of-the-art baselines, including end-to-end experiments in vLLM, ablation studies, scalability measurements, and detailed per-task results. \Cref{suffixdecoding:sec:discussion} discusses limitations and extensions, \Cref{suffixdecoding:sec:related} surveys related work, and \Cref{suffixdecoding:sec:summary} concludes the chapter.
 
 \section{\SuffixDecoding}
 \label{suffixdecoding:sec:method}

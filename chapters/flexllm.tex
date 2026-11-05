@@ -35,31 +35,9 @@ Overall, this chapter makes the following key contributions:
 \item We achieve 1.9$-$4.8$\times$ finetuning throughput improvements under heavy loads and 2.5$-$6.8$\times$ under light loads.
 \end{itemize}
 
-\section{Background and Challenges}
-\label{flexllm:sec:background}
-\subsection{Parameter-Efficient Finetuning}
-\label{flexllm:subsec:peft}
-Finetuning enables LLMs to adapt to specific domains and downstream tasks~\cite{devlin2018bert,radford2019language,brown2020language}. However, full finetuning introduces significant computational and memory overheads. To address this, {\em parameter-efficient finetuning} (PEFT) methods~\cite{ding2023parameter} have been proposed.
-%
-These include prompt embeddings~\cite{liu2023gpt,li2021prefix,lester2021power}, adapter modules, low-rank decomposition (LoRA)~\cite{hu2021lora}, and (IA)$^3$ \cite{liu2022few} scaling of the pre-trained weights. Recent unified approaches also combine various PEFT methods using heuristics \cite{he2021towards} or neural architecture search \cite{zhou2023autopeft,zoph2016neural,mao2021unipelt}. While PEFT approaches minimize trainable parameters, reducing parameter count is sometimes not enough to reduce the memory footprint.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\linewidth]{figures/flexllm/baseline7.pdf}
-    \caption{Comparing different resource sharing approaches for serving finetuning and inference. For spatial sharing and co-serving, the height of rounded rectangles illustrates the splitting ratio of GPU resources (e.g., streaming multi-processors).}
-    \label{flexllm:fig:baseline}
-\end{figure}
-
-\subsection{PEFT-based LLM Inference}
-\label{flexllm:subsec:llm_serving}
-
-LLM inference is increasingly essential in research and industrial applications. Recent systems serve multiple PEFT-based LLMs simultaneously. For example, PetS~\cite{zhou2022pets} decouples linear layers into shared and task-specific operations, optimizing scheduling for improved throughput.
-%
-More recent works focus on optimizations that are specific to generative decoding models. Punica~\cite{chen2023punica} introduces specialized CUDA kernels for multi-tenant LoRA serving. S-LoRA~\cite{sheng2023s} proposes unified paging and heterogeneous batching for thousands of LoRA components. dLoRA~\cite{wu2024dlora} improves efficiency through dynamic batching adjustments.
-
-\subsection{Challenges in Co-serving Inference and Finetuning}
-\label{flexllm:subsec:challenges}
-Co-serving inference and finetuning tasks within a single system, as envisioned by \FlexLLM, presents significant challenges due to their differing workload characteristics. \FlexLLM must address three key challenges.
+\section{Challenges in Co-serving Inference and Finetuning}
+\label{flexllm:sec:challenges}
+Background on parameter-efficient finetuning (PEFT) and multi-adapter LLM serving is given in \Cref{ch:background}. Co-serving inference and finetuning tasks within a single system, as envisioned by \FlexLLM, presents significant challenges due to their differing workload characteristics. \FlexLLM must address three key challenges.
 
 First, \emph{how can inference and finetuning tasks be co-located while minimizing the memory footprint}?
 Traditional multi-tenancy ML scheduling systems share resources across tasks and models~\cite{xiao2018gandiva}, but suffer from the high memory demands associated with LLMs.
@@ -81,6 +59,13 @@ To achieve this, \FlexLLM introduces a {\em hybrid token scheduler} (\Cref{flexl
 
 \section{Co-serving LLM Inference and PEFT}
 \label{flexllm:sec:coserving}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/flexllm/baseline7.pdf}
+    \caption{Comparing different resource sharing approaches for serving finetuning and inference. For spatial sharing and co-serving, the height of rounded rectangles illustrates the splitting ratio of GPU resources (e.g., streaming multi-processors).}
+    \label{flexllm:fig:baseline}
+\end{figure}
 
 Previous studies have proposed different methods for scheduling heterogeneous workloads (in our case, inference and PEFT) on shared GPU resources. These methods can be classified into three categories: \textit{resource isolation}, \textit{temporal sharing}, and \textit{spatial sharing}.
 %
