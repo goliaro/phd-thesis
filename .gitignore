@@ -1,10 +1,10 @@
+# LaTeX build artifacts
 .cm
 *~
 *.ps
 *.dvi
 *.log
 *.aux
-*.pdf
 *.bbl
 *.blg
 *.snm
@@ -15,7 +15,17 @@
 *.out
 *.tui
 *.top
-*mpgraph.mp
-*.synctex.gz*.brf
-test-*
+*.brf
+*.fls
+*.fdb_latexmk
 *.synctex.gz
+*.synctex.gz*
+*mpgraph.mp
+test-*
+
+# Build output only; figure PDFs elsewhere must be tracked
+/main.pdf
+
+# Department emails kept local
+/instructions.pdf
+/phd-citations.pdf
