@@ -1,0 +1,970 @@
+@inproceedings {258862,
+author = {Arpan Gujarati and Reza Karimi and Safya Alzayat and Wei Hao and Antoine Kaufmann and Ymir Vigfusson and Jonathan Mace},
+title = {Serving {DNNs} like Clockwork: Performance Predictability from the Bottom Up},
+booktitle = {14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)},
+year = {2020},
+isbn = {978-1-939133-19-9},
+pages = {443--462},
+url = {https://www.usenix.org/conference/osdi20/presentation/gujarati},
+publisher = {USENIX Association},
+month = nov,
+}
+
+@inproceedings {285173,
+author = {Hong Zhang and Yupeng Tang and Anurag Khandelwal and Ion Stoica},
+title = {{SHEPHERD}: Serving {DNNs} in the Wild},
+booktitle = {20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23)},
+year = {2023},
+isbn = {978-1-939133-33-5},
+address = {Boston, MA},
+pages = {787--808},
+url = {https://www.usenix.org/conference/nsdi23/presentation/zhang-hong},
+publisher = {USENIX Association},
+month = apr,
+}
+
+@misc{adaserve,
+      title={AdaServe: Accelerating Multi-SLO LLM Serving with SLO-Customized Speculative Decoding}, 
+      author={Zikun Li and Zhuofu Chen and Remi Delacourt and Gabriele Oliaro and Zeyu Wang and Qinghan Chen and Shuhuai Lin and April Yang and Zhihao Zhang and Zhuoming Chen and Sean Lai and Xinhao Cheng and Xupeng Miao and Zhihao Jia},
+      year={2025},
+      eprint={2501.12162},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2501.12162}, 
+}
+
+@article{agrawal2023sarathi,
+  title={Sarathi: Efficient llm inference by piggybacking decodes with chunked prefills},
+  author={Agrawal, Amey and Panwar, Ashish and Mohan, Jayashree and Kwatra, Nipun and Gulavani, Bhargav S and Ramjee, Ramachandran},
+  journal={arXiv preprint arXiv:2308.16369},
+  year={2023}
+}
+
+@inproceedings{agrawal2024taming,
+  title={Taming $\{$Throughput-Latency$\}$ tradeoff in $\{$LLM$\}$ inference with $\{$Sarathi-Serve$\}$},
+  author={Agrawal, Amey and Kedia, Nitin and Panwar, Ashish and Mohan, Jayashree and Kwatra, Nipun and Gulavani, Bhargav and Tumanov, Alexey and Ramjee, Ramachandran},
+  booktitle={18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)},
+  pages={117--134},
+  year={2024}
+}
+
+@article{ali2022optimizing,
+  title={Optimizing inference serving on serverless platforms},
+  author={Ali, Ahsan and Pinciroli, Riccardo and Yan, Feng and Smirni, Evgenia},
+  journal={Proceedings of the VLDB Endowment},
+  volume={15},
+  number={10},
+  year={2022}
+}
+
+@misc{aqua2024,
+      title={AQUA: Network-Accelerated Memory Offloading for LLMs in Scale-Up GPU Domains}, 
+      author={Abhishek Vijaya Kumar and Gianni Antichi and Rachee Singh},
+      year={2025},
+      eprint={2407.21255},
+      archivePrefix={arXiv},
+      primaryClass={cs.DC},
+      url={https://arxiv.org/abs/2407.21255}, 
+}
+
+@inproceedings{bai2020pipeswitch,
+  title={$\{$PipeSwitch$\}$: Fast pipelined context switching for deep learning applications},
+  author={Bai, Zhihao and Zhang, Zhen and Zhu, Yibo and Jin, Xin},
+  booktitle={14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)},
+  pages={499--514},
+  year={2020}
+}
+
+@article{barham2022pathways,
+  title={Pathways: Asynchronous distributed dataflow for ml},
+  author={Barham, Paul and Chowdhery, Aakanksha and Dean, Jeff and Ghemawat, Sanjay and Hand, Steven and Hurt, Daniel and Isard, Michael and Lim, Hyeontaek and Pang, Ruoming and Roy, Sudip and others},
+  journal={Proceedings of Machine Learning and Systems},
+  volume={4},
+  pages={430--449},
+  year={2022}
+}
+
+@article{brown2020language,
+  title={Language models are few-shot learners},
+  author={Brown, Tom and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared D and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and others},
+  journal={Advances in neural information processing systems},
+  volume={33},
+  pages={1877--1901},
+  year={2020}
+}
+
+@misc{burstgpt,
+      title={BurstGPT: A Real-world Workload Dataset to Optimize LLM Serving Systems}, 
+      author={Yuxin Wang and Yuhan Chen and Zeyu Li and Xueze Kang and Zhenheng Tang and Xin He and Rui Guo and Xin Wang and Qiang Wang and Amelie Chi Zhou and Xiaowen Chu},
+      year={2024},
+      eprint={2401.17644},
+      archivePrefix={arXiv},
+      primaryClass={cs.DC},
+      url={https://arxiv.org/abs/2401.17644}, 
+}
+
+@incollection{checkmate,
+ author = {Jain, Paras and Jain, Ajay and Nrusimha, Aniruddha and Gholami, Amir and Abbeel, Pieter and Gonzalez, Joseph and Keutzer, Kurt and Stoica, Ion},
+ booktitle = {Proceedings of Machine Learning and Systems 2020},
+ pages = {497--511},
+ title = {Checkmate: Breaking the Memory Wall with Optimal Tensor Rematerialization},
+ year = {2020}
+}
+
+@article{chen2023deepboot,
+  title={DeepBoot: Dynamic Scheduling System for Training and Inference Deep Learning Tasks in GPU Cluster},
+  author={Chen, Zhenqian and Zhao, Xinkui and Zhi, Chen and Yin, Jianwei},
+  journal={IEEE Transactions on Parallel and Distributed Systems},
+  year={2023},
+  publisher={IEEE}
+}
+
+@article{chen2023punica,
+  title={Punica: Multi-tenant lora serving},
+  author={Chen, Lequn and Ye, Zihao and Wu, Yongji and Zhuo, Danyang and Ceze, Luis and Krishnamurthy, Arvind},
+  journal={Proceedings of Machine Learning and Systems},
+  volume={6},
+  pages={1--13},
+  year={2024}
+}
+
+@inproceedings{choi2020prema,
+  title={Prema: A predictive multi-task scheduling algorithm for preemptible neural processing units},
+  author={Choi, Yujeong and Rhu, Minsoo},
+  booktitle={2020 IEEE International Symposium on High Performance Computer Architecture (HPCA)},
+  pages={220--233},
+  year={2020},
+  organization={IEEE}
+}
+
+@inproceedings{choi2022serving,
+  title={Serving heterogeneous machine learning models on $\{$Multi-GPU$\}$ servers with $\{$Spatio-Temporal$\}$ sharing},
+  author={Choi, Seungbeom and Lee, Sunho and Kim, Yeonjae and Park, Jongse and Kwon, Youngjin and Huh, Jaehyuk},
+  booktitle={2022 USENIX Annual Technical Conference (USENIX ATC 22)},
+  pages={199--216},
+  year={2022}
+}
+
+@inproceedings{crankshaw2017clipper,
+  title={Clipper: A $\{$Low-Latency$\}$ online prediction serving system},
+  author={Crankshaw, Daniel and Wang, Xin and Zhou, Guilio and Franklin, Michael J and Gonzalez, Joseph E and Stoica, Ion},
+  booktitle={14th USENIX Symposium on Networked Systems Design and Implementation (NSDI 17)},
+  pages={613--627},
+  year={2017}
+}
+
+@misc{DAPO,
+      title={DAPO: An Open-Source LLM Reinforcement Learning System at Scale}, 
+      author={Qiying Yu and Zheng Zhang and Ruofei Zhu and Yufeng Yuan and Xiaochen Zuo and Yu Yue and Tiantian Fan and Gaohong Liu and Lingjun Liu and Xin Liu and Haibin Lin and Zhiqi Lin and Bole Ma and Guangming Sheng and Yuxuan Tong and Chi Zhang and Mofan Zhang and Wang Zhang and Hang Zhu and Jinhua Zhu and Jiaze Chen and Jiangjie Chen and Chengyi Wang and Hongli Yu and Weinan Dai and Yuxuan Song and Xiangpeng Wei and Hao Zhou and Jingjing Liu and Wei-Ying Ma and Ya-Qin Zhang and Lin Yan and Mu Qiao and Yonghui Wu and Mingxuan Wang},
+      year={2025},
+      eprint={2503.14476},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2503.14476}, 
+}
+
+@Misc{databricksfinetuning,
+    title = {Finetuning API in Databricks Mosaic AI Training},
+    author = {Databricks},
+    year = {2024},
+    howpublished = {\url{https://docs.mosaicml.com/projects/mcli/en/latest/finetuning/finetuning.html}},
+    lastaccessed = {2024-12}
+}
+
+@misc{deepspeed-mii,
+  author = {{DeepSpeed Team}},
+  title = {{DeepSpeed-MII}},
+  year = {2022},
+  url = {https://github.com/microsoft/DeepSpeed-MII},
+  note = {GitHub repository}
+}
+@misc{deepspeed-ulysses,
+      title={DeepSpeed Ulysses: System Optimizations for Enabling Training of Extreme Long Sequence Transformer Models}, 
+      author={Sam Ade Jacobs and Masahiro Tanaka and Chengming Zhang and Minjia Zhang and Shuaiwen Leon Song and Samyam Rajbhandari and Yuxiong He},
+      year={2023},
+      eprint={2309.14509},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2309.14509}, 
+}
+
+@article{devlin2018bert,
+  title={Bert: Pre-training of deep bidirectional transformers for language understanding},
+  author={Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  journal={arXiv preprint arXiv:1810.04805},
+  year={2018}
+}
+
+@inproceedings{dhakal2020gslice,
+  title={Gslice: controlled spatial sharing of gpus for a scalable inference platform},
+  author={Dhakal, Aditya and Kulkarni, Sameer G and Ramakrishnan, KK},
+  booktitle={Proceedings of the 11th ACM Symposium on Cloud Computing},
+  pages={492--506},
+  year={2020}
+}
+
+@article{ding2023parameter,
+  title={Parameter-efficient fine-tuning of large-scale pre-trained language models},
+  author={Ding, Ning and Qin, Yujia and Yang, Guang and Wei, Fuchao and Yang, Zonghan and Su, Yusheng and Hu, Shengding and Chen, Yulin and Chan, Chi-Min and Chen, Weize and others},
+  journal={Nature Machine Intelligence},
+  volume={5},
+  number={3},
+  pages={220--235},
+  year={2023},
+  publisher={Nature Publishing Group UK London}
+}
+
+@article{dosovitskiy2020image,
+  title={An image is worth 16x16 words: Transformers for image recognition at scale},
+  author={Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and others},
+  journal={arXiv preprint arXiv:2010.11929},
+  year={2020}
+}
+
+@article{falcon40b,
+  title={{Falcon-40B}: an open large language model with state-of-the-art performance},
+  author={Almazrouei, Ebtesam and Alobeidli, Hamza and Alshamsi, Abdulaziz and Cappelli, Alessandro and Cojocaru, Ruxandra and Debbah, Merouane and Goffinet, Etienne and Heslow, Daniel and Launay, Julien and Malartic, Quentin and Noune, Badreddine and Pannier, Baptiste and Penedo, Guilherme},
+  year={2023}
+}
+
+@article{gao2022deep,
+  title={Deep learning workload scheduling in gpu datacenters: Taxonomy, challenges and vision},
+  author={Gao, Wei and Hu, Qinghao and Ye, Zhisheng and Sun, Peng and Wang, Xiaolin and Luo, Yingwei and Zhang, Tianwei and Wen, Yonggang},
+  journal={arXiv preprint arXiv:2205.11913},
+  year={2022}
+}
+
+@inproceedings{gao2023unified,
+  title={A unified continual learning framework with general parameter-efficient tuning},
+  author={Gao, Qiankun and Zhao, Chen and Sun, Yifan and Xi, Teng and Zhang, Gang and Ghanem, Bernard and Zhang, Jian},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={11483--11493},
+  year={2023}
+}
+
+@Misc{googlefinetuning,
+    title = {Fine-tuning with the Gemini API},
+    author = {Google},
+    year = {2024},
+    howpublished = {\url{https://ai.google.dev/gemini-api/docs/model-tuning}},
+    lastaccessed = {2024-12}
+}
+
+@techreport{gpt5,
+  title={GPT-5 System Card},
+  author={{OpenAI}},
+  year={2025},
+  month={August},
+  day={13},
+  institution={OpenAI},
+  type={Technical Report},
+  url={https://cdn.openai.com/gpt-5-system-card.pdf},
+  note={Accessed: September 2025}
+}
+
+@inproceedings{gunasekaran2022cocktail,
+  title={Cocktail: A multidimensional optimization for model serving in cloud},
+  author={Gunasekaran, Jashwant Raj and Mishra, Cyan Subhra and Thinakaran, Prashanth and Sharma, Bikash and Kandemir, Mahmut Taylan and Das, Chita R},
+  booktitle={19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22)},
+  pages={1041--1057},
+  year={2022}
+}
+
+@article{guo2025deepseek,
+  title={Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning},
+  author={Guo, Daya and Yang, Dejian and Zhang, Haowei and Song, Junxiao and Zhang, Ruoyu and Xu, Runxin and Zhu, Qihao and Ma, Shirong and Wang, Peiyi and Bi, Xiao and others},
+  journal={arXiv preprint arXiv:2501.12948},
+  year={2025}
+}
+
+@article{he2021towards,
+  title={Towards a unified view of parameter-efficient transfer learning},
+  author={He, Junxian and Zhou, Chunting and Ma, Xuezhe and Berg-Kirkpatrick, Taylor and Neubig, Graham},
+  journal={arXiv preprint arXiv:2110.04366},
+  year={2021}
+}
+
+@article{hogan2014fast,
+  title={Fast reverse-mode automatic differentiation using expression templates in C++},
+  author={Hogan, Robin J},
+  journal={ACM Transactions on Mathematical Software (TOMS)},
+  volume={40},
+  number={4},
+  pages={1--16},
+  year={2014},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{houlsby2019parameter,
+  title={Parameter-efficient transfer learning for NLP},
+  author={Houlsby, Neil and Giurgiu, Andrei and Jastrzebski, Stanislaw and Morrone, Bruna and De Laroussilhe, Quentin and Gesmundo, Andrea and Attariyan, Mona and Gelly, Sylvain},
+  booktitle={International Conference on Machine Learning},
+  pages={2790--2799},
+  year={2019},
+  organization={PMLR}
+}
+
+@article{hu2021lora,
+  title={Lora: Low-rank adaptation of large language models},
+  author={Hu, Edward J and Shen, Yelong and Wallis, Phillip and Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Wang, Lu and Chen, Weizhu},
+  journal={arXiv preprint arXiv:2106.09685},
+  year={2021}
+}
+
+@misc{huggingfacemodels,
+  key = {Hugging Face},
+Howpublished={\url{https://huggingface.co/models}},
+Title = {{Huggingface Models}},
+year={2023}
+}
+
+@article{iliakopoulou2024chameleon,
+  title={Chameleon: Adaptive Caching and Scheduling for Many-Adapter LLM Inference Environments},
+  author={Iliakopoulou, Nikoleta and Stojkovic, Jovan and Alverti, Chloe and Xu, Tianyin and Franke, Hubertus and Torrellas, Josep},
+  journal={arXiv preprint arXiv:2411.17741},
+  year={2024}
+}
+
+@article{kingma2014adam,
+  title={Adam: A method for stochastic optimization},
+  author={Kingma, Diederik P and Ba, Jimmy},
+  journal={arXiv preprint arXiv:1412.6980},
+  year={2014}
+}
+
+@inproceedings{lee2018pretzel,
+  title={$\{$PRETZEL$\}$: Opening the black box of machine learning prediction serving systems},
+  author={Lee, Yunseong and Scolari, Alberto and Chun, Byung-Gon and Santambrogio, Marco Domenico and Weimer, Markus and Interlandi, Matteo},
+  booktitle={13th USENIX Symposium on Operating Systems Design and Implementation (OSDI 18)},
+  pages={611--626},
+  year={2018}
+}
+
+@article{lester2021power,
+  title={The power of scale for parameter-efficient prompt tuning},
+  author={Lester, Brian and Al-Rfou, Rami and Constant, Noah},
+  journal={arXiv preprint arXiv:2104.08691},
+  year={2021}
+}
+
+@article{li2021prefix,
+  title={Prefix-tuning: Optimizing continuous prompts for generation},
+  author={Li, Xiang Lisa and Liang, Percy},
+  journal={arXiv preprint arXiv:2101.00190},
+  year={2021}
+}
+
+@inproceedings{li2023alpaserve,
+  title={$\{$AlpaServe$\}$: Statistical Multiplexing with Model Parallelism for Deep Learning Serving},
+  author={Li, Zhuohan and Zheng, Lianmin and Zhong, Yinmin and Liu, Vincent and Sheng, Ying and Jin, Xin and Huang, Yanping and Chen, Zhifeng and Zhang, Hao and Gonzalez, Joseph E and others},
+  booktitle={17th USENIX Symposium on Operating Systems Design and Implementation (OSDI 23)},
+  pages={663--679},
+  year={2023}
+}
+
+@inproceedings{li2023lyra,
+  title={Lyra: Elastic scheduling for deep learning clusters},
+  author={Li, Jiamin and Xu, Hong and Zhu, Yibo and Liu, Zherui and Guo, Chuanxiong and Wang, Cong},
+  booktitle={Proceedings of the Eighteenth European Conference on Computer Systems},
+  pages={835--850},
+  year={2023}
+}
+
+@misc{lithos2025,
+      title={LithOS: An Operating System for Efficient Machine Learning on GPUs}, 
+      author={Patrick H. Coppock and Brian Zhang and Eliot H. Solomon and Vasilis Kypriotis and Leon Yang and Bikash Sharma and Dan Schatzberg and Todd C. Mowry and Dimitrios Skarlatos},
+      year={2025},
+      eprint={2504.15465},
+      archivePrefix={arXiv},
+      primaryClass={cs.OS},
+      url={https://arxiv.org/abs/2504.15465}, 
+}
+
+@article{liu2021makes,
+  title={What Makes Good In-Context Examples for GPT-$3 $?},
+  author={Liu, Jiachang and Shen, Dinghan and Zhang, Yizhe and Dolan, Bill and Carin, Lawrence and Chen, Weizhu},
+  journal={arXiv preprint arXiv:2101.06804},
+  year={2021}
+}
+
+@article{liu2022few,
+  title={Few-shot parameter-efficient fine-tuning is better and cheaper than in-context learning},
+  author={Liu, Haokun and Tam, Derek and Muqeeth, Mohammed and Mohta, Jay and Huang, Tenghao and Bansal, Mohit and Raffel, Colin A},
+  journal={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={1950--1965},
+  year={2022}
+}
+
+@article{liu2023gpt,
+  title={GPT understands, too},
+  author={Liu, Xiao and Zheng, Yanan and Du, Zhengxiao and Ding, Ming and Qian, Yujie and Yang, Zhilin and Tang, Jie},
+  journal={AI Open},
+  year={2023},
+  publisher={Elsevier}
+}
+
+@inproceedings{liu2024customizing,
+  title={Customizing Large Language Model Generation Style using Parameter-Efficient Finetuning},
+  author={Liu, Xinyue and Diddee, Harshita and Ippolito, Daphne},
+  booktitle={Proceedings of the 17th International Natural Language Generation Conference},
+  pages={412--426},
+  year={2024}
+}
+
+@misc{llama2,
+      title={Llama 2: Open Foundation and Fine-Tuned Chat Models}, 
+      author={Hugo Touvron and Louis Martin and Kevin Stone and Peter Albert and Amjad Almahairi and Yasmine Babaei and Nikolay Bashlykov and Soumya Batra and Prajjwal Bhargava and Shruti Bhosale and others},
+      year={2023},
+      eprint={2307.09288},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+
+@misc{llama3,
+      title={The Llama 3 Herd of Models}, 
+      author={Aaron Grattafiori and others},
+      year={2024},
+      eprint={2407.21783},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2407.21783}, 
+}
+
+@misc{llama4,
+  title={The Llama 4 Herd: Natively Multimodal AI Innovation},
+  author={{Meta AI}},
+  year={2025},
+  month={April},
+  url={https://ai.meta.com/blog/llama-4-multimodal-intelligence/},
+  note={Accessed: September 2025}
+}
+
+@inproceedings{llamafactory,
+  title={LlamaFactory: Unified Efficient Fine-Tuning of 100+ Language Models},
+  author={Yaowei Zheng and Richong Zhang and Junhao Zhang and Yanhan Ye and Zheyan Luo and Zhangchi Feng and Yongqiang Ma},
+  booktitle={Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 3: System Demonstrations)},
+  address={Bangkok, Thailand},
+  publisher={Association for Computational Linguistics},
+  year={2024},
+  url={http://arxiv.org/abs/2403.13372}
+}
+
+@article{mao2021unipelt,
+  title={Unipelt: A unified framework for parameter-efficient language model tuning},
+  author={Mao, Yuning and Mathias, Lambert and Hou, Rui and Almahairi, Amjad and Ma, Hao and Han, Jiawei and Yih, Wen-tau and Khabsa, Madian},
+  journal={arXiv preprint arXiv:2110.07577},
+  year={2021}
+}
+
+@inproceedings{medusa,
+author = {Zeng, Shaoxun and Xie, Minhui and Gao, Shiwei and Chen, Youmin and Lu, Youyou},
+title = {Medusa: Accelerating Serverless LLM Inference with Materialization},
+year = {2025},
+isbn = {9798400706981},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3669940.3707285},
+doi = {10.1145/3669940.3707285},
+booktitle = {Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 1},
+pages = {653–668},
+numpages = {16},
+keywords = {llm, machine learning system, serverless computing},
+location = {Rotterdam, Netherlands},
+series = {ASPLOS '25}
+}
+
+@misc{megatron-sp,
+      title={Reducing Activation Recomputation in Large Transformer Models}, 
+      author={Vijay Korthikanti and Jared Casper and Sangkug Lym and Lawrence McAfee and Michael Andersch and Mohammad Shoeybi and Bryan Catanzaro},
+      year={2022},
+      eprint={2205.05198},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2205.05198}, 
+}
+
+@article{miao2023spotserve,
+  title={SpotServe: Serving Generative Large Language Models on Preemptible Instances},
+  author={Miao, Xupeng and Shi, Chunan and Duan, Jiangfei and Xi, Xiaoli and Lin, Dahua and Cui, Bin and Jia, Zhihao},
+  journal={ASPLOS},
+  year={2024}
+}
+
+@misc{mig,
+  key = {NVIDIA MIG},
+Howpublished={\url{https://www.nvidia.com/en-us/technologies/multi-instance-gpu/}},
+Title = {{NVIDIA Multi-Instance GPU (MIG)}},
+year={2023}
+}
+
+@misc{migpartition,
+  key = {NVIDIA MIG},
+Howpublished={\url{https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html##partitioning}},
+Title = {{NVIDIA MIG Partitioning Limitations and Resetting}},
+year={2023}
+}
+
+@misc{MosaicML2023Introducing,
+    author    = {MosaicML NLP Team},
+    title     = {Introducing MPT-7B: A New Standard for Open-Source,
+    Commercially Usable LLMs},
+    year      = {2023},
+    url       = {www.mosaicml.com/blog/mpt-7b},
+    note      = {Accessed: 2023-05-05},
+    urldate   = {2023-05-05}
+}
+
+@misc{mps,
+  key = {NVIDIA MPS},
+Howpublished={\url{https://docs.nvidia.com/deploy/mps/index.html}},
+Title = {{NVIDIA Multi-Process Service (MPS)}},
+year={2023}
+}
+
+@misc{MultiObjGRPO,
+      title={Optimizing Safe and Aligned Language Generation: A Multi-Objective GRPO Approach}, 
+      author={Xuying Li and Zhuo Li and Yuji Kosuga and Victor Bian},
+      year={2025},
+      eprint={2503.21819},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2503.21819}, 
+}
+
+@misc{nanoflow,
+      title={NanoFlow: Towards Optimal Large Language Model Serving Throughput}, 
+      author={Kan Zhu and Yilong Zhao and Liangyu Zhao and Gefei Zuo and Yile Gu and Dedong Xie and Yufei Gao and Qinyu Xu and Tian Tang and Zihao Ye and Keisuke Kamahori and Chien-Yu Lin and Stephanie Wang and Arvind Krishnamurthy and Baris Kasikci},
+      year={2024},
+      eprint={2408.12757},
+      archivePrefix={arXiv},
+      primaryClass={cs.DC},
+      url={https://arxiv.org/abs/2408.12757}, 
+}
+
+@inproceedings{narayanan2023cheaply,
+  title={Cheaply Estimating Inference Efficiency Metrics for Autoregressive Transformer Models},
+  author={Narayanan, Deepak and Santhanam, Keshav and Henderson, Peter and Bommasani, Rishi and Lee, Tony and Liang, Percy},
+  booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+  year={2023}
+}
+
+@article{nie2023angel,
+  title={Angel-PTM: A Scalable and Economical Large-Scale Pre-Training System in Tencent},
+  author={Nie, Xiaonan and Liu, Yi and Fu, Fangcheng and Xue, Jinbao and Jiao, Dian and Miao, Xupeng and Tao, Yangyu and Cui, Bin},
+  journal={Proceedings of the VLDB Endowment},
+  volume={16},
+  number={12},
+  pages={3781--3794},
+  year={2023},
+  publisher={VLDB Endowment}
+}
+
+@misc{novasky2025dataset,
+  title={{Sky-T1\_data\_17k}},
+  author={NovaSky-AI},
+  year={2025},
+  publisher={Hugging Face},
+  journal={Hugging Face repository},
+  howpublished={\url{https://huggingface.co/datasets/NovaSky-AI/Sky-T1_data_17k}}
+}
+
+@misc{novasky2025model,
+  title={{Sky-T1-32B-Preview}},
+  author={NovaSky-AI},
+  year={2025},
+  publisher={Hugging Face},
+  journal={Hugging Face repository},
+  howpublished={\url{https://huggingface.co/NovaSky-AI/Sky-T1-32B-Preview}}
+}
+
+@misc{o1-preview,
+  title={Learning to Reason with LLMs},
+  author={OpenAI},
+  year={2024},
+  url={https://openai.com/index/learning-to-reason-with-llms/},
+  note={Accessed: 2024-09-12}
+}
+
+@article{openai2023gpt4,
+  author       = {OpenAI},
+  title        = {{GPT-4} Technical Report},
+  journal      = {CoRR},
+  volume       = {abs/2303.08774},
+  year         = {2023},
+  url          = {https://doi.org/10.48550/arXiv.2303.08774},
+  doi          = {10.48550/arXiv.2303.08774},
+  eprinttype    = {arXiv},
+  eprint       = {2303.08774},
+}
+
+@Misc{openaifinetuning,
+    title = {Fine-tuning now available for GPT-4o},
+    author = {OpenAI},
+    year = {2024},
+    howpublished = {\url{https://openai.com/index/gpt-4o-fine-tuning/}},
+    lastaccessed = {2024-08}
+}
+
+@Misc{peft,
+  title =        {PEFT: State-of-the-art Parameter-Efficient Fine-Tuning methods},
+  author =       {Sourab Mangrulkar and Sylvain Gugger and Lysandre Debut and Younes Belkada and Sayak Paul and Benjamin Bossan},
+  howpublished = {\url{https://github.com/huggingface/peft}},
+  year =         {2022}
+}
+
+@misc{perlmutter,
+  key = {NERSC},
+  title = {Perlmutter supercomputer},
+  howpublished = {\url{https://docs.nersc.gov/systems/perlmutter/architecture/}},
+  year = {2023},
+}
+
+@article{pfeiffer2020adapterfusion,
+  title={AdapterFusion: Non-destructive task composition for transfer learning},
+  author={Pfeiffer, Jonas and Kamath, Aishwarya and R{\"u}ckl{\'e}, Andreas and Cho, Kyunghyun and Gurevych, Iryna},
+  journal={arXiv preprint arXiv:2005.00247},
+  year={2020}
+}
+
+@inproceedings{pipellm,
+author = {Tan, Yifan and Tan, Cheng and Mi, Zeyu and Chen, Haibo},
+title = {PipeLLM: Fast and Confidential Large Language Model Services with Speculative Pipelined Encryption},
+year = {2025},
+isbn = {9798400706981},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3669940.3707224},
+doi = {10.1145/3669940.3707224},
+booktitle = {Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 1},
+pages = {843–857},
+numpages = {15},
+keywords = {confidential virtual machine, large language model, nvidia confidential computing},
+location = {Rotterdam, Netherlands},
+series = {ASPLOS '25}
+}
+
+@misc{qwen2025qwen25technicalreport,
+      title={Qwen2.5 Technical Report}, 
+      author={An Yang and others},
+      year={2025},
+      eprint={2412.15115},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2412.15115}, 
+}
+
+@article{radford2019language,
+  title={Language models are unsupervised multitask learners},
+  author={Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya and others},
+  journal={OpenAI blog},
+  volume={1},
+  number={8},
+  pages={9},
+  year={2019}
+}
+
+@inproceedings{romero2021infaas,
+  title={$\{$INFaaS$\}$: Automated model-less inference serving},
+  author={Romero, Francisco and Li, Qian and Yadwadkar, Neeraja J and Kozyrakis, Christos},
+  booktitle={2021 USENIX Annual Technical Conference (USENIX ATC 21)},
+  pages={397--411},
+  year={2021}
+}
+
+@misc{sharegpt,
+url={https://sharegpt.com/},
+author={ShareGPT Team},
+year={2023}
+}
+
+@inproceedings{shen2019nexus,
+  title={Nexus: A GPU cluster engine for accelerating DNN-based video analysis},
+  author={Shen, Haichen and Chen, Lequn and Jin, Yuchen and Zhao, Liangyu and Kong, Bingyu and Philipose, Matthai and Krishnamurthy, Arvind and Sundaram, Ravi},
+  booktitle={Proceedings of the 27th ACM Symposium on Operating Systems Principles},
+  pages={322--337},
+  year={2019}
+}
+
+@article{sheng2023s,
+  title={SLoRA: Scalable Serving of Thousands of LoRA Adapters},
+  author={Sheng, Ying and Cao, Shiyi and Li, Dacheng and Hooper, Coleman and Lee, Nicholas and Yang, Shuo and Chou, Christopher and Zhu, Banghua and Zheng, Lianmin and Keutzer, Kurt and others},
+  journal={Proceedings of Machine Learning and Systems},
+  volume={6},
+  pages={296--311},
+  year={2024}
+}
+
+@misc{sheng2024fairness,
+      title={Fairness in Serving Large Language Models}, 
+      author={Ying Sheng and Shiyi Cao and Dacheng Li and Banghua Zhu and Zhuohan Li and Danyang Zhuo and Joseph E. Gonzalez and Ion Stoica},
+      year={2024},
+      eprint={2401.00588},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2401.00588}, 
+}
+
+@article{sheng2024hybridflow,
+  title={Hybridflow: A flexible and efficient rlhf framework},
+  author={Sheng, Guangming and Zhang, Chi and Ye, Zilingfeng and Wu, Xibin and Zhang, Wang and Zhang, Ru and Peng, Yanghua and Lin, Haibin and Wu, Chuan},
+  booktitle = {Proceedings of the Twentieth European Conference on Computer Systems (EuroSys)},
+  pages = {1279–1297}, numpages = {19},
+  year={2025}
+}
+
+
+
+@misc{Stiennon2020,
+      title={Learning to summarize from human feedback}, 
+      author={Nisan Stiennon and Long Ouyang and Jeff Wu and Daniel M. Ziegler and Ryan Lowe and Chelsea Voss and Alec Radford and Dario Amodei and Paul Christiano},
+      year={2022},
+      eprint={2009.01325},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2009.01325}, 
+}
+
+@article{stiennon2020learning,
+  title={Learning to summarize with human feedback},
+  author={Stiennon, Nisan and Ouyang, Long and Wu, Jeffrey and Ziegler, Daniel and Lowe, Ryan and Voss, Chelsea and Radford, Alec and Amodei, Dario and Christiano, Paul F},
+  journal={Advances in Neural Information Processing Systems},
+  volume={33},
+  pages={3008--3021},
+  year={2020}
+}
+
+@article{tan2024democratizing,
+  title={Democratizing large language models via personalized parameter-efficient fine-tuning},
+  author={Tan, Zhaoxuan and Zeng, Qingkai and Tian, Yijun and Liu, Zheyuan and Yin, Bing and Jiang, Meng},
+  journal={arXiv preprint arXiv:2402.04401},
+  year={2024}
+}
+
+@misc{tensorrt-llm,
+  author = {{NVIDIA Corporation}},
+  title = {{TensorRT-LLM}},
+  year = {2023},
+  url = {https://github.com/NVIDIA/TensorRT-LLM},
+  note = {GitHub repository}
+}
+
+@article{touvron2023llama,
+  title={Llama: Open and efficient foundation language models},
+  author={Touvron, Hugo and Lavril, Thibaut and Izacard, Gautier and Martinet, Xavier and Lachaux, Marie-Anne and Lacroix, Timoth{\'e}e and Rozi{\`e}re, Baptiste and Goyal, Naman and Hambro, Eric and Azhar, Faisal and others},
+  journal={arXiv preprint arXiv:2302.13971},
+  year={2023}
+}
+
+@Misc{transformers,
+    title = {Transformers: State-of-the-art Machine Learning for Pytorch, TensorFlow, and JAX.},
+    author = {Thomas Wolf and Lysandre Debut and Victor Sanh and Julien Chaumond and Clement Delangue and Anthony Moi and Pierric Cistac and Tim Rault and Rémi Louf and Morgan Funtowicz and Joe Davison and Sam Shleifer and Patrick von Platen and Clara Ma and Yacine Jernite and Julien Plu and Canwen Xu and Teven Le Scao and Sylvain Gugger and Mariama Drame and Quentin Lhoest and Alexander M. Rush},
+    howpublished = {\url{https://github.com/huggingface/transformers}},
+  year =         {2022}
+}
+
+@misc{turbospec,
+      title={TurboSpec: Closed-loop Speculation Control System for Optimizing LLM Serving Goodput}, 
+      author={Xiaoxuan Liu and Jongseok Park and Langxiang Hu and Woosuk Kwon and Zhuohan Li and Chen Zhang and Kuntai Du and Xiangxi Mo and Kaichao You and Alvin Cheung and Zhijie Deng and Ion Stoica and Hao Zhang},
+      year={2025},
+      eprint={2406.14066},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2406.14066}, 
+}
+
+@inproceedings{unger2022unity,
+  author    = {Colin Unger and
+               Zhihao Jia and
+               Wei Wu and
+               Sina Lin and
+               Mandeep Baines and
+               Carlos Efrain Quintero Narvaez and
+               Vinay Ramakrishnaiah and
+               Nirmal Prajapati and
+               Patrick S. McCormick and
+               Jamaludin Mohd{-}Yusof and
+               Xi Luo and
+               Dheevatsa Mudigere and
+               Jongsoo Park and
+               Misha Smelyanskiy and
+               Alex Aiken},
+  title     = {Unity: Accelerating {DNN} Training Through Joint Optimization of Algebraic
+               Transformations and Parallelization},
+  booktitle = {16th {USENIX} Symposium on Operating Systems Design and Implementation,
+               {OSDI} 2022, Carlsbad, CA, USA, July 11-13, 2022},
+  pages     = {267--284},
+  publisher = {{USENIX} Association},
+  year      = {2022},
+  url       = {https://www.usenix.org/conference/osdi22/presentation/unger},
+  timestamp = {Tue, 11 Oct 2022 16:51:12 +0200},
+  biburl    = {https://dblp.org/rec/conf/osdi/UngerJ0LBNRPMML22.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{wang2024towards,
+  title={Towards Efficient and Reliable LLM Serving: A Real-World Workload Study},
+  author={Wang, Yuxin and Chen, Yuhan and Li, Zeyu and Tang, Zhenheng and Guo, Rui and Wang, Xin and Wang, Qiang and Zhou, Amelie Chi and Chu, Xiaowen},
+  journal={arXiv preprint arXiv:2401.17644},
+  year={2024}
+}
+
+@inproceedings{weng2022mlaas,
+  title={$\{$MLaaS$\}$ in the wild: Workload analysis and scheduling in $\{$Large-Scale$\}$ heterogeneous $\{$GPU$\}$ clusters},
+  author={Weng, Qizhen and Xiao, Wencong and Yu, Yinghao and Wang, Wei and Wang, Cheng and He, Jian and Li, Yong and Zhang, Liping and Lin, Wei and Ding, Yu},
+  booktitle={19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22)},
+  pages={945--960},
+  year={2022}
+}
+
+@inproceedings{wu2024dlora,
+  title={$\{$dLoRA$\}$: Dynamically Orchestrating Requests and Adapters for $\{$LoRA$\}$$\{$LLM$\}$ Serving},
+  author={Wu, Bingyang and Zhu, Ruidong and Zhang, Zili and Sun, Peng and Liu, Xuanzhe and Jin, Xin},
+  booktitle={18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)},
+  pages={911--927},
+  year={2024}
+}
+
+@inproceedings{xiao2018gandiva,
+  title={Gandiva: Introspective cluster scheduling for deep learning},
+  author={Xiao, Wencong and Bhardwaj, Romil and Ramjee, Ramachandran and Sivathanu, Muthian and Kwatra, Nipun and Han, Zhenhua and Patel, Pratyush and Peng, Xuan and Zhao, Hanyu and Zhang, Quanlu and others},
+  booktitle={13th USENIX Symposium on Operating Systems Design and Implementation (OSDI 18)},
+  pages={595--610},
+  year={2018}
+}
+
+@inproceedings{xiao2020antman,
+  title={$\{$AntMan$\}$: Dynamic scaling on $\{$GPU$\}$ clusters for deep learning},
+  author={Xiao, Wencong and Ren, Shiru and Li, Yong and Zhang, Yang and Hou, Pengyang and Li, Zhi and Feng, Yihui and Lin, Wei and Jia, Yangqing},
+  booktitle={14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)},
+  pages={533--548},
+  year={2020}
+}
+
+@misc{yang2025qwen3technicalreport,
+      title={Qwen3 Technical Report}, 
+      author={An Yang and others},
+      year={2025},
+      eprint={2505.09388},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2505.09388}, 
+}
+
+@inproceedings{yu2022orca,
+  title={Orca: A distributed serving system for $\{$Transformer-Based$\}$ generative models},
+  author={Yu, Gyeong-In and Jeong, Joo Seong and Kim, Geon-Woo and Kim, Soojeong and Chun, Byung-Gon},
+  booktitle={16th USENIX Symposium on Operating Systems Design and Implementation (OSDI 22)},
+  pages={521--538},
+  year={2022}
+}
+
+@article{yu2022survey,
+  title={A survey of multi-tenant deep learning inference on gpu},
+  author={Yu, Fuxun and Wang, Di and Shangguan, Longfei and Zhang, Minjia and Liu, Chenchen and Chen, Xiang},
+  journal={arXiv preprint arXiv:2203.09040},
+  year={2022}
+}
+
+@inproceedings{zhang2019mark,
+  title={$\{$MArk$\}$: Exploiting Cloud Services for $\{$Cost-Effective$\}$,$\{$SLO-Aware$\}$ Machine Learning Inference Serving},
+  author={Zhang, Chengliang and Yu, Minchen and Wang, Wei and Yan, Feng},
+  booktitle={2019 USENIX Annual Technical Conference (USENIX ATC 19)},
+  pages={1049--1062},
+  year={2019}
+}
+
+@misc{zhang2019pretraining,
+      title={Pretraining-Based Natural Language Generation for Text Summarization}, 
+      author={Haoyu Zhang and Jianjun Xu and Ji Wang},
+      year={2019},
+      eprint={1902.09243},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/1902.09243}, 
+}
+
+@inproceedings{zhang2021share,
+  title={Share or Not? Learning to Schedule Language-Specific Capacity for Multilingual Translation},
+  author={Zhang, Biao and Bapna, Ankur and Sennrich, Rico and Firat, Orhan},
+  booktitle={Ninth International Conference on Learning Representations 2021},
+  year={2021}
+}
+
+@article{zhang2022opt,
+  title={Opt: Open pre-trained transformer language models},
+  author={Zhang, Susan and Roller, Stephen and Goyal, Naman and Artetxe, Mikel and Chen, Moya and Chen, Shuohui and Dewan, Christopher and Diab, Mona and Li, Xian and Lin, Xi Victoria and others},
+  journal={arXiv preprint arXiv:2205.01068},
+  year={2022}
+}
+
+@article{zhao2023muxflow,
+  title={MuxFlow: Efficient and Safe GPU Sharing in Large-Scale Production Deep Learning Clusters},
+  author={Zhao, Yihao and Liu, Xin and Liu, Shufan and Li, Xiang and Zhu, Yibo and Huang, Gang and Liu, Xuanzhe and Jin, Xin},
+  journal={arXiv preprint arXiv:2303.13803},
+  year={2023}
+}
+
+@article{zhao2024lora,
+  title={LoRA Land: 310 Fine-tuned LLMs that Rival GPT-4, A Technical Report},
+  author={Zhao, Justin and Wang, Timothy and Abid, Wael and Angus, Geoffrey and Garg, Arnav and Kinnison, Jeffery and Sherstinsky, Alex and Molino, Piero and Addair, Travis and Rishi, Devvret},
+  journal={arXiv preprint arXiv:2405.00732},
+  year={2024}
+}
+
+@article{zheng22-alpa,
+  author    = {Lianmin Zheng and
+               Zhuohan Li and
+               Hao Zhang and
+               Yonghao Zhuang and
+               Zhifeng Chen and
+               Yanping Huang and
+               Yida Wang and
+               Yuanzhong Xu and
+               Danyang Zhuo and
+               Joseph E. Gonzalez and
+               Ion Stoica},
+  title     = {Alpa: Automating Inter- and Intra-Operator Parallelism for Distributed
+               Deep Learning},
+  journal   = {CoRR},
+  volume    = {abs/2201.12023},
+  year      = {2022},
+  url       = {https://arxiv.org/abs/2201.12023},
+  eprinttype = {arXiv},
+  eprint    = {2201.12023},
+  timestamp = {Wed, 02 Feb 2022 15:00:01 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2201-12023.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@misc{zhong2024distserve,
+      title={DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving}, 
+      author={Yinmin Zhong and Shengyu Liu and Junda Chen and Jianbo Hu and Yibo Zhu and Xuanzhe Liu and Xin Jin and Hao Zhang},
+      year={2024},
+      eprint={2401.09670},
+      archivePrefix={arXiv},
+      primaryClass={cs.DC}
+}
+
+@inproceedings{zhou2022pets,
+  title={$\{$PetS$\}$: A Unified Framework for $\{$Parameter-Efficient$\}$ Transformers Serving},
+  author={Zhou, Zhe and Wei, Xuechao and Zhang, Jiejing and Sun, Guangyu},
+  booktitle={2022 USENIX Annual Technical Conference (USENIX ATC 22)},
+  pages={489--504},
+  year={2022}
+}
+
+@article{zhou2023autopeft,
+  title={AutoPEFT: Automatic Configuration Search for Parameter-Efficient Fine-Tuning},
+  author={Zhou, Han and Wan, Xingchen and Vuli{\'c}, Ivan and Korhonen, Anna},
+  journal={arXiv preprint arXiv:2301.12132},
+  year={2023}
+}
+
+@article{zoph2016neural,
+  title={Neural architecture search with reinforcement learning},
+  author={Zoph, Barret and Le, Quoc V},
+  journal={arXiv preprint arXiv:1611.01578},
+  year={2016}
+}
+

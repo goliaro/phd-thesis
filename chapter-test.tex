@@ -1,0 +1,13 @@
+% Standalone wrapper for test-compiling a single chapter.
+% Usage (from the repo root):
+%   latexmk -pdf -interaction=nonstopmode -jobname=test-CHAPTER -usepretex='\def\testchapter{CHAPTER}' chapter-test.tex
+\documentclass[12pt,openany]{cmuthesis}
+\input{preamble}
+\begin{document}
+\mainmatter
+\include{chapters/\testchapter}
+\backmatter
+\renewcommand{\bibsection}{\chapter{\bibname}}
+\bibliographystyle{plainnat}
+\bibliography{references,bib/\testchapter}
+\end{document}

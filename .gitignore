@@ -17,3 +17,5 @@
 *.top
 *mpgraph.mp
 *.synctex.gz*.brf
+test-*
+*.synctex.gz
