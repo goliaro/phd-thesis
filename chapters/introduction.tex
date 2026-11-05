@@ -19,7 +19,7 @@ Kernel engineers wrote and tuned each operator for each GPU generation, and the 
 This arrangement worked while the pieces stood still.
 They no longer do.
 
-\paragraph{The stack changes faster than experts can tune it.}
+\paragraph{Rapid change at every layer.}
 Model architectures change every few months: mixture-of-experts routing, linear attention, state-space scans, multi-token prediction heads, low-bit quantization, and multimodal fusion each introduce operators that have no mature kernels on the day they appear.
 Hardware changes just as fast, and each generation reshuffles the tradeoffs among memory bandwidth, tensor-core throughput, on-chip memory, and communication; a kernel that was excellent on one GPU is often mediocre on the next.
 Applications change fastest of all.
