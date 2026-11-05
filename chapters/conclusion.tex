@@ -1,4 +1,114 @@
 \chapter{Conclusion and Future Directions}
 \label{ch:conclusion}
 
-% TODO: summary of contributions, lessons learned, future work
+This dissertation set out from a simple observation: the decisions that determine how efficiently a large language model is served, which tokens to compute next, how to share GPUs between workloads, and how to write the kernels, were being made statically or by hand, and the models, hardware, and applications around them were changing faster than hand-made decisions could follow.
+It argued that these decisions should instead be made by the serving stack itself, at runtime, from cheap sources of information such as smaller models, workload history, and coding agents, and that automated proposals become deployable only when they are paired with verification that preserves correctness and service guarantees.
+The preceding chapters developed this argument at three layers of the stack.
+This chapter summarizes what was built, draws out the lessons that cut across the five systems, is explicit about what the thesis does not establish, and describes the directions it opens.
+
+\section{Summary of Contributions}
+\label{conclusion:sec:summary}
+
+At the decoding layer, \SpecInfer (\Cref{ch:specinfer}) showed that the serial decode loop can be broken by speculation without changing what the model generates.
+Its contribution was to recognize that the uncertainty in future tokens is better represented as a tree than as a sequence, and to build the verifier, tree attention and tree-based parallel decoding, that makes verifying an entire tree cost no more than one forward pass.
+Multi-step speculative sampling extended the guarantee from greedy to stochastic decoding with a proof that the LLM's output distribution is preserved.
+The resulting speedups of 1.5--2.8$\times$ for distributed inference and 2.6--3.5$\times$ for offloading-based inference came with no loss in generation quality, and tree-based speculation has since become a standard primitive in production serving systems.
+
+\SuffixDecoding (\Cref{ch:suffixdecoding}) showed that in agentic workloads the cheapest useful speculator is the workload's own history.
+Suffix trees over prior and ongoing outputs, queried on the CPU in tens of microseconds per token, draft speculation trees whose depth adapts to the confidence of the match, and the same tree verification accepts them.
+It decoded up to 2.8$\times$ faster than model-based speculators and cut end-to-end task completion time on software-engineering agent workloads by up to 4.5$\times$, with no draft model, no GPU overhead, and no training.
+
+At the scheduling layer, \FlexLLM (\Cref{ch:flexllm}) showed that inference and parameter-efficient finetuning of the same base model can share GPUs without sacrificing inference latency, provided the sharing decision is made at the granularity of tokens rather than jobs.
+Dependent parallelization and graph pruning shrank the memory footprint of finetuning by up to 80\% so that it could coexist with inference, and the hybrid token scheduler filled each iteration with inference tokens first and finetuning tokens only as capacity allowed.
+Finetuning throughput improved by 1.9--4.8$\times$ under heavy inference load and 2.5--6.8$\times$ under light load while inference SLOs held at up to 20 requests per second.
+
+At the kernel layer, \FastKernels (\Cref{ch:fastkernels}) supplied the verifier that LLM kernel agents had been missing.
+Its 384 tasks are derived from 47 real architectures, carry production module interfaces, run on inputs captured from real executions, and are scored end to end inside the models they came from against the kernels those models ship with.
+Its seed evaluation of five agents over 6{,}900 agent-hours showed kernel-level speedups of up to 6.6$\times$ shrinking to at most 1.25$\times$ end to end, 37\% of layer-level winners breaking once their own lower-level kernels were active, and kernel-level scores mis-ranking agents.
+The benchmark that evaluates an agent determines what the agent learns to do, and a benchmark that does not look like production produces agents that do not help production.
+
+\KernelSeek (\Cref{ch:kernelseek}) showed that what a kernel agent needs on a deep target is direction rather than equipment.
+A general-purpose coding agent with a minimal harness and a short question at each decision point, first from a human and then from a bank it applies to itself, reached 1.13$\times$ FlashAttention-3 where a tool-rich autonomous agent plateaued at 0.50$\times$, and went on to produce dependency-free attention kernels at 1.16$\times$ FlashAttention-3 on Hopper and 1.46$\times$ FlashAttention-4 on Blackwell, correct on all 182 scenarios per architecture.
+Across the traces, every large gain followed a question that moved the agent to a different layer of the system or rejected a limit it had claimed.
+
+\section{Lessons}
+\label{conclusion:sec:lessons}
+
+Five systems at three layers share more than a thesis statement.
+The following lessons recur across them and are, we believe, the durable content of this dissertation.
+
+\paragraph{Cheap proposals plus exact verification is a general pattern.}
+Each system separates the work of \emph{proposing} an optimization from the work of \emph{checking} it, and spends freely on the first because the second is cheap and exact.
+Small models and suffix trees propose tokens; a single LLM forward pass verifies them.
+A scheduler proposes finetuning tokens; an SLO check admits them.
+A coding agent proposes kernels; captured inputs, end-to-end execution, and production baselines verify them.
+The pattern works because verification is almost always cheaper than generation, and because an exact verifier makes the quality of the proposer a matter of performance rather than correctness.
+That is what allows the proposer to be as cheap, as approximate, or as unconventional as a suffix tree or a language model.
+
+\paragraph{The right granularity is usually finer than the one the system was built around.}
+\FlexLLM's gains came from scheduling tokens where previous systems scheduled jobs.
+\SpecInfer's came from verifying trees where previous systems verified sequences.
+\SuffixDecoding's came from adapting speculation length per request where previous methods fixed it.
+In each case the coarse granularity was an artifact of how the system had been engineered, not a requirement of the problem, and moving to the finer one exposed slack that had been invisible.
+
+\paragraph{Workload history is a systems resource.}
+Serving systems log what they generate and then discard it.
+\SuffixDecoding treats those outputs as an execution cache, and \FastKernels treats captured production tensors as the only inputs worth benchmarking on.
+Both exploit the fact that LLM workloads are far more repetitive and far more data-dependent than synthetic benchmarks suggest.
+We expect this resource to grow in importance as agentic workloads, which repeat by construction, come to dominate serving traffic.
+
+\paragraph{Benchmarks are specifications for agents.}
+An agent optimizes whatever it is scored on.
+When the score came from isolated kernels on synthetic inputs against weak baselines, agents learned to win there and lost in production.
+When the score came from captured inputs inside full models against shipped kernels, the same agents looked very different, and the rankings among them changed.
+For automation driven by learning or search, the evaluation harness is not a measurement instrument after the fact; it is the specification of the problem, and it deserves the same engineering care as the system it evaluates.
+
+\paragraph{For hard targets, direction beats equipment.}
+The prevailing response to a stalled agent is to give it more: profilers, disassembly, retrieval, stored lessons.
+\KernelSeek's traces show that the breakthroughs on deep kernel targets came from questions that changed where the agent was looking, not from information handed to it.
+A capable model already knows most of what a tool would tell it; what it lacks at a plateau is a hypothesis about where the remaining gap is.
+This suggests that the scarce ingredient in agent-driven systems optimization is not tooling but the judgment to redirect, and that this judgment can be captured, as a question bank was, and handed back to the agent.
+
+\section{Limitations}
+\label{conclusion:sec:limitations}
+
+The thesis demonstrates its argument at three layers but does not integrate them into a single self-optimizing stack; the title's ``toward'' is deliberate.
+The five systems were built and evaluated independently, and the interactions among them, such as how an agent-written attention kernel changes the cost model that a speculation tree is tuned against, remain unexplored.
+
+Each system also has limits of its own, discussed in its chapter.
+Speculation helps only when draft tokens are accepted: \SpecInfer depends on small models aligned with the target, and \SuffixDecoding on repetition in the workload, so neither accelerates novel, high-entropy generation, and the global suffix tree raises questions of memory growth and of privacy across tenants.
+\FlexLLM assumes that inference and finetuning share a base model and that finetuning is parameter-efficient; full-parameter training does not fit its memory budget.
+\FastKernels measures what today's production frameworks ship, and those baselines drift with every release, so its scores are meaningful only as of a pinned version.
+\KernelSeek's strongest results were obtained with a human asking the questions, and although the question bank transferred the behavior to the agent itself, its evaluation covers attention on two GPU generations rather than the breadth of operators that production serving requires.
+
+\section{Future Directions}
+\label{conclusion:sec:future}
+
+\paragraph{Closing the loop.}
+The most direct continuation is to connect the layers.
+A serving system that observes its own workload could decide, per request class, whether to speculate with a model or with history and how deep; it could hand the operators that dominate its profile to a kernel agent, verify the result in a \FastKernels-style harness, and deploy it; and it could re-tune its scheduler as the resulting kernels change the cost of each token.
+Each of these pieces exists in this thesis.
+What does not yet exist is the control loop that runs them continuously, and the study of whether such a loop is stable.
+
+\paragraph{Profiling-guided kernel agents.}
+\KernelSeek showed that questions supply direction.
+Hardware profiles could supply it too: a stall breakdown, achieved bandwidth, or tensor-core utilization is a hypothesis about where the gap is, in the same sense that a question is.
+An agent that turns profiler output into questions it asks itself, and that spends expensive profiling only when cheap timing and compiler feedback stop discriminating between candidates, could extend \KernelSeek's results from attention to the operators where production kernels are least mature: linear attention, state-space scans, mixture-of-experts dispatch, speculative verification kernels, low-bit GEMMs, and multi-GPU collectives.
+
+\paragraph{Verification as the bottleneck.}
+As proposers get cheaper, verification becomes the dominant cost.
+Verifying a token tree is one forward pass, but verifying a kernel end to end inside a model is hours of GPU time, and the composition effects that \FastKernels exposed mean that a kernel verified in isolation is not verified at all.
+Making verification cheap and compositional, so that a change to one kernel can be checked against the layers above it without re-running every model, is a prerequisite for agents that optimize production systems continuously rather than offline.
+
+\paragraph{Beyond serving.}
+The pattern of this thesis is not specific to inference.
+Training stacks make the same kinds of hand-made decisions, about parallelization strategies, communication schedules, and kernels, under the same churn.
+Non-NVIDIA accelerators face the kernel problem in a more acute form, since their libraries are younger and their expert communities smaller, and an agent that can target them from a production-faithful harness would change which hardware is practical to deploy.
+
+\section{Closing Remarks}
+\label{conclusion:sec:closing}
+
+The efficiency of LLM serving used to be a question of how much expert attention could be brought to bear on each layer of the stack.
+This thesis has argued, and demonstrated at the decoding, scheduling, and kernel layers, that it can instead be a question of how well the stack proposes optimizations for itself and how rigorously it checks them.
+Models speculating for larger models, histories speculating for agents, schedulers filling the slack between bursts, and agents writing the kernels that run it all are, in the end, the same idea: let the system make the decision, and verify it.
+We believe this is the shape that self-optimizing serving will take, and that the systems presented here are early instances of it.
