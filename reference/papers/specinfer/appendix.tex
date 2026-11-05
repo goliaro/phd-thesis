@@ -1,0 +1,361 @@
+\section{Appendix}
+
+\begin{table}[h]
+\begin{center}
+\caption{\rev{Average number of tokens verified by \sys in a greedy decoding step with the merge- and expansion-based token tree construction methods. We used \llama-7B and \llama-68M as the LLM and SSM, respectively. Each speculated token tree has a depth of 8.
+%\ZX {Why the depth is 8? In our experiments, I think it is 16.} \ZJ{I used 8 for all the other experiments and thought it's also 8 for yours.}.
+}}
+%\caption{\textcolor{blue}{Llama 68M improved sample (this caption and table label need to be modified).}
+\label{tab:eval_tree_construction_methods}
+%\resizebox{\linewidth}{!}{%
+\begin{tabular}{cc|ccc}
+\toprule
+{\bf Dataset} & {\bf Tree Width} & {\bf Merge}  & {\bf Expansion} & {\bf Diff.} \\ 
+ & {\bf / \# SSMs} & & & \\ \midrule
+%& {\bf Sampling} & {\bf Spec. Sampling} & \\ \midrule
+\multirow{5}{*}{Alpaca}  & 1  & 2.95     & 2.95    & 0\\
+  & 2  & 3.21     & 3.07    & $\downarrow$ 0.14\\
+  & 3  & 3.31     & 3.27    & $\downarrow$ 0.04\\
+  & 4  & 3.41     & 3.33    & $\downarrow$ 0.08\\
+  & 5  & 3.51     & 3.43    & $\downarrow$ 0.08\\
+\midrule
+\multirow{5}{*}{CP}  & 1  & 2.58     & 2.58    & 0\\
+  & 2  & 3.05     & 3.24    & $\uparrow$ 0.19\\
+  & 3  & 3.16     & 3.46    & $\uparrow$ 0.30\\
+  & 4  & 3.22     & 3.59    & $\uparrow$ 0.37\\
+  & 5  & 3.31     & 3.69    & $\uparrow$ 0.38\\
+\midrule
+\multirow{5}{*}{WebQA}  & 1  & 2.27     & 2.27    & 0\\
+  & 2  & 2.42     & 2.69    & $\uparrow$ 0.27\\
+  & 3  & 2.58     & 2.86    & $\uparrow$ 0.28\\
+  & 4  & 2.65     & 2.98    & $\uparrow$ 0.33\\
+  & 5  & 2.74     & 3.07    & $\uparrow$ 0.33\\
+\midrule
+\multirow{5}{*}{CIP}  & 1  & 2.73     & 2.73    & 0\\
+  & 2  & 3.12     & 3.40    & $\uparrow$ 0.28\\
+  & 3  & 3.24     & 3.62    & $\uparrow$ 0.28\\
+  & 4  & 3.41     & 3.79    & $\uparrow$ 0.38\\
+  & 5  & 3.52     & 3.91    & $\uparrow$ 0.39\\
+\midrule
+\multirow{5}{*}{PIQA}  & 1  & 2.18     & 2.18    & 0\\
+  & 2  & 2.44     & 2.80    & $\uparrow$ 0.36\\
+  & 3  & 2.54     & 2.97    & $\uparrow$ 0.37\\
+  & 4  & 2.62     & 3.10    & $\uparrow$ 0.48\\
+  & 5  & 2.73     & 3.21    & $\uparrow$ 0.48\\
+\bottomrule
+\end{tabular}%
+%}
+\end{center}
+\end{table}
+
+\subsection{Comparing Tree Construction Methods}
+\label{sec:eval_tree_construction_methods}
+
+\rev{This section compares the expansion- and merged-based tree construction methods used in \Sys.
+%
+Since the two methods use the same approach to generating speculative tokens from SSMs and verifying a token tree using an LLM, their performance difference only comes from using different methods for constructing token trees.
+%
+Therefore, our evaluation focuses on the speculative performance of the two methods under the same speculation budget, which is quantified by the tree width for the expansion-based method and the number of SSMs for the merge-based method.
+%
+\Cref{tab:eval_tree_construction_methods} shows the results. 
+When the tree width (and the number of SSMs) is equal to 1, the two methods generate identical speculated token trees (i.e., a sequence of tokens) and achieve the same speculative performance.
+%
+For larger speculation budgets, the expansion-based method achieves slightly worse performance than the merge-based one for the Alpaca dataset and largely outperforms it for all other datasets in our evaluation.
+}
+
+\subsection{Collective Boost-tuning Methodology}
+\label{sec:cbt_method}
+We didn't find a publicly available pre-trained version of small \llama models, and therefore trained a \llama-68M from scratch for one epoch using the Wikipedia dataset~\cite{wikidump} and part of the C4 dataset~\cite{2019t5}, which took approximately 275 hours on a single NVIDIA A100 GPU.
+%%%
+We also used the OpenWebText Corpus~\cite{Gokaslan2019OpenWeb} to collectively boost-tune multiple SSMs for speculative inference.
+Note that we only need to pre-train and collectively boost-tune SSMs once for each LLM model family before serving. 
+For both the OPT and \llama experiments, we fine-tuned four SSMs over the OpenWebText Corpus using collective boost-tuning on top of the pre-trained OPT-125M and \llama-160M models, which provides a collection of five SSMs (including the base SSM).
+%\XM{Thinking to move boost-tuning to appendix}
+
+
+
+\subsection{Proof of the Theorems}
+\label{sec:appendix}
+\begin{theorem}
+%\label{thm:stochastic_sampling}
+For a given $LLM$ and $m$ SSMs (i.e., $SSM_1$,...,$SSM_m$, let $P(u_i | U; \Theta_{LLM})$ be the probability distribution of sampling a token using stochastic sampling, where $U = u_0,...,u_{i-1}$ are previously generated tokens, $u_i$ is the next token to generate, $\Theta_{LLM}$ represents the parameterized LLM. Let $P_{rm{\Sys}}(u_i | U; \Theta_{LLM}, \{\Theta_{SSM_j}\})$ be the probability distribution of sampling token $u_i$ using \Sys's multi-step speculative sampling (see the $\textproc{VerifyStochastic}$ function in \Cref{alg2}), where $\Theta_{SSM_j}$ is the $j$-th parameterized SSM. Then $ \forall U, u_i, \Theta_{LLM}, \Theta_{SSM_j}$ we have
+\begin{eqnarray}
+P(u_i \mid U; \Theta_{LLM}) = P_{\rm{\Sys}}(u_i \mid U; \Theta_{LLM}, \{\Theta_{SSM_j}\})
+\end{eqnarray}
+\end{theorem}
+
+%we design a generalized speculative sampling procedure that guarantees the equivalency of the sampling distribution of LLM while maximizing the number of generated tokens per verification step, as shown in~\Cref{alg:gss}. We further present the equivalency proof below.
+%%%
+\begin{proof}
+It suffices to prove the equivalency for a single decoding step.
+Let $u_{i-1}$ be the last token we have verified in the speculated token tree $\m{N}$, $m$ be the number of $u_{i-1}$'s child nodes. In multi-step speculative sampling, \Sys iteratively verifies each child node and its SSM against the LLM.
+%Recall that $P(u_i \mid U ; \Theta_{LLM})$ and $P(u_i \mid U ; \Theta_{SSM_j})$ be the sampling distribution of the LLM and the $j$-th SSM.
+%%%
+We define $r_j=\sum_i \max\big(0, P(u_i \mid U, \Theta_{\textrm{SSM}_j})-P(u_i \mid U, \Theta_{\textrm{LLM}})\big), \forall j \in [m]$ as the rejection probability at round $j$, $T_0 = P(u \mid U, \Theta_{\textrm{LLM}})$ and $T_{j}=\frac{T_{j-1}-P(u \mid U, \Theta_{\textrm{SSM}_j})}{r_j}, \forall j \in [m]$.
+We further define $$A_m = \max(0, T_m),$$ $$A_{j-1} = \min(P(u \mid U, \Theta_{\textrm{SSM}_j}), \max(T_{j-1}, 0))+r_{j}A_j, \forall j \in [m]$$
+Then following the \textproc{VerifyStochastic} sampling procedure stated in~\Cref{alg2}, the probability of sampling $u_i$ is:
+$$P_{\rm{\Sys}}(u_i \mid U; \Theta_{LLM}, \{\Theta_{SSM_j}\}) = A_0$$
+Next, we will show that $A_j = \max(0, T_j), \forall j \in [m]$ by backward induction.
+For the base case $j=m$, we have $A_m = \max(0, T_m)$ by definition. Suppose $A_j = \max(0, T_j)$ for $j=n$, we then have:
+\begin{eqnarray*}
+    A_{n-1} &=& \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))+r_{n}A_n \\
+    &=& \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))+r_{n}\max(0, T_n) \\ 
+    &=& \min(P(u \mid U, \Theta_{\textrm{SSM}_n}), \max(T_{n-1}, 0))\\&+&\max(0, T_{n-1}-P(u \mid U, \Theta_{\textrm{SSM}_n})) \\ 
+    &=& \max(0, T_{n-1}) \\ 
+\end{eqnarray*}
+Thus, we have $A_j = \max(0, T_j), \forall j \in [m]$.
+%%%
+Combining previous results, we have $P_{\rm{\Sys}}(u_i \mid U; \Theta_{LLM}, \{\Theta_{SSM_j}\}) = A_0 = \max(0, T_0) = P(u_i \mid U; \Theta_{LLM})$, which concludes our proof. Notice that the overall rejection probability is $\prod_{j=1}^m r_j$.
+\end{proof}
+
+\if 0
+Additionally, our generalized speculative sampling procedure has a lower overall rejection probability than a naive method which simply samples from the sampling distribution of the LLM and searches for an SSM sample matching the LLM sample. The proof is presented below.
+\fi
+
+
+\begin{theorem}
+%\label{theorem:MSS}
+    Let $P\left(\textrm{reject} \mid \textrm{MSS}, U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\} \right)$ denote the probability of rejecting speculation following multi-step speculative sampling with abbreviation $P(\textrm{reject}\mid \textrm{MSS})$, and $P\left(\textrm{reject} \mid \textrm{NS}, U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\}\right)$ the probability of rejecting speculation following Naive Sampling (NS) with abbreviation $P(\textrm{reject}\mid\textrm{NS})$. Then $\forall U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\}$, we have $$P(\textrm{reject}\mid \textrm{MSS}) \leq P(\textrm{reject}\mid\textrm{NS})$$
+\end{theorem}
+
+We present the proof of~\Cref{theorem:MSS} is presented below:
+
+\begin{proof}
+As before, we only need to prove the inequality for a single step as this suffices for proving over multiple steps. By the law of total probability, it suffices to show 
+% \begin{align*}
+%     &P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{NS}) \\
+%     &\geq P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{MSS})
+% \end{align*}
+$$P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{NS}) \geq P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{MSS})$$
+for all tokens $t$. Here $\m{O}(u)$ denotes the token selected by the according algorithm. Without loss of generality, we can fix token $t$. Let $m$ be the number of child nodes. 
+% Let $q_i(t)$ be the sampling probability of token $t$ by child $i$. Let $P(t \mid U, \Theta_{LLM})$ be the sampling probability of token $t$ by the LLM.
+
+NS rejects the speculation while selecting token $t$ with probability $P(t \mid U, \Theta_{\textrm{LLM}})\prod_{j=1}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))$ as this occurs when the LLM selects token $t$, but none of the $m$ children do.
+
+As for MSS, denote $r_j$ as the rejection probability at round $j$. With intermediate results from Theorem \ref{thm:stochastic_sampling}, we may equivalently define $A_0 = P(t \mid U, \Theta_{\textrm{LLM}})$ and $A_{j} = \frac{A_{j-1} - \min(P(t \mid U, \Theta_{\textrm{SSM}_j}),A_{j-1})}{r_j} = \max(0, \frac{A_{j-1}-P(t \mid U, \Theta_{\textrm{SSM}_j})}{r_j}), \forall j \in [m]$. Note that for $j \in [m]$, $A_j$ is the probability of sampling $t$ for the normalized residual distribution at the end of round $j$, and $A_{m}$ is the probability of sampling $t$ if the procedure rejects the speculation.
+
+Thus, MSS rejects the speculation while selecting token $t$ with probability $A_{m}\prod_{j=1}^m r_j$. We claim that this is upper bounded by $\max(0, (P(t \mid U, \Theta_{\textrm{LLM}})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})))$.
+We now case on whether there exists round $k$ such that $P(t \mid U, \Theta_{\textrm{SSM}_k}) \geq A_{k-1}$.
+% Note that this suffices in showing the desired inequality.
+
+%%% j -> k, k -> m, i -> j, m -> n
+
+\iffalse % sketch
+The bound of $0$ exists for those cases where it is impossible for MSS to reject the speculation while selecting token $t$, i.e. if $P(t \mid U, \Theta_{\textrm{SSM}_k}) \geq A_k$ for some $k$. For all other cases, it is possible to show
+\[
+A_{n+1}\prod_{j=1}^n r_j \leq (P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^n (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))
+\] for all $n \leq m$ through induction. The full induction proof, which is omitted for space, makes use of $A_k - P(t \mid U, \Theta_{\textrm{SSM}_k})$ as a lower bound for $r_k$ in the induction step.
+
+Having shown that MSS has a lower rejection probability than NS for an arbitrary token $t$, we have $P(\textrm{reject}\mid \textrm{MSS}) \leq P(\textrm{reject}\mid\textrm{NS})$, as desired.
+\fi
+
+\textbf{Case 1:} $P(t \mid U, \Theta_{\textrm{SSM}_k}) \geq A_{k-1}$ for some $k$. Then $A_{\ell} = 0$ for all $\ell \geq k$, and $A_{m}\prod_{j=1}^m r_j = 0$, and our upper bound holds.
+
+\textbf{Case 2:} $P(t \mid U, \Theta_{\textrm{SSM}_k}) < A_{k-1}$ for all rounds $k$. Then $A_{j} = \frac{A_{j-1}-P(t \mid U, \Theta_{\textrm{SSM}_j})}{r_j}, \forall j \in [m]$. A lower bound for $r_j$ is $A_{j-1} - P(t \mid U, \Theta_{\textrm{SSM}_j})$. We show 
+
+$
+A_{m}\prod_{j=1}^m r_j \leq (P(t \mid U, \Theta_{LLM}) -P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))   
+$
+
+To do this, we prove the stronger claim that 
+
+$
+ A_{n} \prod_{j=1}^n r_j \leq (P(t \mid U, \Theta_{LLM}) -P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^n (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))
+$
+
+for all $n \leq m$ through induction.
+
+\textbf{BC:} $n=1$. As $A_1 = \frac{A_0 - P(t \mid U, \Theta_{\textrm{SSM}_1})}{r_1} = \frac{P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1})}{r_1}$, the LHS is $p(t|u) - P(t \mid U, \Theta_{\textrm{SSM}_1})$, which is equal to the RHS.
+
+\textbf{IH:} Assume the upper bound holds for all $n < N$.
+
+\textbf{IS:} Consider the case where $n = N$. Then
+\[
+A_{N} = \frac{A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})}{r_N}
+\]
+
+The LHS is
+\begin{align*}
+    &\frac{A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})}{r_N}\prod_{j=1}^N r_j \\
+	&= (A_{N-1} - P(t \mid U, \Theta_{\textrm{SSM}_N})) \prod_{j=1}^{N-1} r_j \\
+	&= \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - \left(P(t \mid U, \Theta_{\textrm{SSM}_N})\prod_{j=1}^{N-1} r_j \right) \\
+    &\leq \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - P(t \mid U, \Theta_{\textrm{SSM}_N})\left(A_{N-1} \prod_{j=1}^{N-1} r_j \right) \tag{$0 \leq A_{N-1} \leq 1$ and all factors non-negative}\\
+	% &\leq \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - \left(P(t \mid U, \Theta_{\textrm{SSM}_N}) \\ & (A_{N-2} - P(t \mid U, \Theta_{\textrm{SSM}_{N-1}})) \prod_{j=1}^{N-2} r_j \right) \tag{Lower bound for $r_{N-1}$} \\
+	% &= \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - \left(P(t \mid U, \Theta_{\textrm{SSM}_N}) \\ & \frac{A_{N-2} - P(t \mid U, \Theta_{\textrm{SSM}_{N-1}})}{r_{N-1}} \prod_{j=1}^{N-1} r_j \right) \\
+	% &= \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) - P(t \mid U, \Theta_{\textrm{SSM}_N})\left(A_{N-1} \prod_{j=1}^{N-1} r_j \right) \tag{$A_{N-1} = \frac{A_{N-2}-P(t \mid U, \Theta_{\textrm{SSM}_{N-1}})}{r_{N-1}}$}\\
+	&= (1-P(t \mid U, \Theta_{\textrm{SSM}_N})) \left(A_{N-1}\prod_{j=1}^{N-1} r_j \right) \\
+	&\leq (1-P(t \mid U, \Theta_{\textrm{SSM}_N})) (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1})) \\
+    &\qquad \prod_{j=1}^{N-1} (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \tag{IH} \\
+	&= (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1})) \prod_{j=1}^{N} (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))
+\end{align*}
+which is the RHS, deriving the upper bound as desired.
+
+Thus in all cases, $P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{MSS}) \leq \max(0, (P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{i=2}^k (1-q_i(t)))$.\\
+
+We now show $P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{NS}) \geq P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{MSS})$. Note that $P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{NS}) \geq 0$ always, so we only need to compare against $(P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j}))$ for the cases where $P(t \mid U, \Theta_{\textrm{SSM}_k}) < A_{k-1}$ for all $k$; in all other cases $P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{MSS}) = 0$ and the inequality is trivially true. In the cases we are interested in, $P(t \mid U, \Theta_{\textrm{SSM}_1}) < A_0 = P(t \mid U, \Theta_{LLM})$. Then,
+\begin{align*}
+    &P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{NS}) \\
+    &= P(t \mid U, \Theta_{LLM})\prod_{j=1}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \\
+    &= (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{LLM})P(t \mid U, \Theta_{\textrm{SSM}_1}))\\
+    &\qquad \prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \\
+    &\geq (P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{j=2}^m (1-P(t \mid U, \Theta_{\textrm{SSM}_j})) \tag{$P(t \mid U, \Theta_{LLM}) \leq 1$ and all factors non-negative} \\
+    &\geq P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{MSS})
+\end{align*}
+Since the inequality holds for all $t$ in the vocabulary, by the law of total probability, we have $P(\textrm{reject}\mid \textrm{MSS}) \leq P(\textrm{reject}\mid\textrm{NS})$.
+
+% \begin{align*}
+% 	&\frac{P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{NS})}{P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{MSS})} \\
+% 	&\geq \frac{P(t \mid U, \Theta_{LLM})\prod_{j=1}^k (1-q_i(t))}{(P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{i=2}^k (1-q_i(t))} \\
+% 	&= \frac{(P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{LLM})P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{i=2}^k (1-q_i(t))}{(P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1}))\prod_{i=2}^k (1-q_i(t))} \\
+% 	&= \frac{P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{LLM})P(t \mid U, \Theta_{\textrm{SSM}_1})}{P(t \mid U, \Theta_{LLM})-P(t \mid U, \Theta_{\textrm{SSM}_1})} \geq 1\\
+% \end{align*}
+% as $P(t \mid U, \Theta_{LLM}) - P(t \mid U, \Theta_{\textrm{SSM}_1}) > 0$ and $P(t \mid U, \Theta_{LLM}) \leq 1$. Thus
+% $$P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{MSS}) \leq P(\textrm{reject} \cap \m{O}(u)=t \mid \textrm{NS})$$
+% in all cases.
+\end{proof}
+
+% \pagebreak
+\section{Artifact Appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Abstract}
+
+% {\em Obligatory}
+The artifact contains the code to run \sys, as well as the datasets and scripts that can be used to reproduce the experiments in the paper. 
+\subsection{Artifact check-list (meta-information)}
+
+% {\em Obligatory. Use just a few informal keywords in all fields applicable to your artifacts
+% and remove the rest. This information is needed to find appropriate reviewers and gradually 
+% unify artifact meta information in Digital Libraries.}
+
+{\small
+\begin{itemize}
+  \item {\bf Algorithm: } Tree-based Speculative Inference
+  \item {\bf Program: } spec\_infer.cc, incr\_decoding.cc
+  \item {\bf Compilation: } CMake
+  % \item {\bf Transformations: }
+  % \item {\bf Binary: }
+  % \item {\bf Model: }
+  % \item {\bf Data set: } LLAMA, OPT models
+  \item {\bf Run-time environment: } CUDA, NCCL, MPI, UCX, Python3.
+  \item {\bf Hardware: }  Two AWS g5.12xlarge instances, each with 4 NVIDIA A10 24GB GPUs, 48 CPU cores, and 192 GB DRAM.
+  % \item {\bf Run-time state: }
+  % \item {\bf Execution: }
+  \item {\bf Metrics: } End to-end average latency
+  \item {\bf Output: } End-to-end latency
+  \item {\bf Experiments: } Server-grade GPU inference, Offloading-based inference
+  \item {\bf How much disk space required (approximately)?: } 350GB per node
+  \item {\bf How much time is needed to prepare workflow (approximately)?: } 2h
+  \item {\bf How much time is needed to complete experiments (approximately)?: } 6h
+  \item {\bf Publicly available?: } Yes
+  \item {\bf Code licenses (if publicly available)?: } Apache License v2.0
+  \item {\bf Data licenses (if publicly available)?: } LLAMA is under the GNU license and OPT is under a Non-commercial license%, see \url{https://github.com/facebookresearch/metaseq/blob/main/projects/OPT/MODEL_LICENSE.md}
+  \item {\bf Archived (provide DOI)?: }\url{https://doi.org/10.5281/zenodo.10854410}.
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Description}
+
+\subsubsection{How to access}
+% {\em Obligatory}
+The artifact is released on Github: \url{https://github.com/goliaro/specinfer-ae}. The repository contains \sys's source code, and the instructions to build the framework. We also provide scripts to reproduce the experiments from the paper. To clone the repository, use the following command (make sure to pass the \texttt{--recursive} flag):
+\begin{lstlisting}[language=sh]
+git clone --recursive \
+https://github.com/goliaro/specinfer-ae.git
+\end{lstlisting}
+
+\subsubsection{Hardware dependencies}
+We run out experiments on two AWS g5.12xlarge instances, each with 4 NVIDIA A10 24GB GPUs, 48 CPU cores, and 192 GB DRAM. We provide instructions to create and setup the instances. 
+%We will also give the reviewers login access to two pre-configured instances in our own AWS EC2 account. 
+
+\subsubsection{Software dependencies}
+The following software is required: CUDA 12.1, NCCL, Rust, CMake and Python3. Further, UCX and MPI are required for the multinode experiments. Additional Python dependencies are listed here: \url{https://github.com/flexflow/FlexFlow/blob/inference/requirements.txt}. We recommend using the \texttt{Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.1.0 (Ubuntu 20.04)} AMI, and provide scripts and a conda environment to install all the remaining dependencies.
+
+% \subsubsection{Data sets}
+
+\subsubsection{Models}
+We use the following LLM/SSM models for our experiments (for each model, we specify in parentheses the corresponding HuggingFace repository): LLaMA-68M (JackFram/llama-68m), LLaMA-7B (huggyllama/llama-7b), LLaMA-65B (huggyllama/llama-65b), OPT-125M (facebook/opt-125m), OPT-13B (facebook/opt-13b), OPT-125M (facebook/opt-30b). You can download all these models with the script: 
+\begin{lstlisting}[language=sh]
+./download_models.sh
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Installation}
+
+% {\em Obligatory}
+
+To reproduce the experiments, you will need access to two AWS g5.12xlarge instances (or other machines with the same GPU/CPU/network specs). If you are using the preconfigured instances we provided, you can skip this step. 
+\paragraph{Launching the instances}
+Launch two AWS g5.12xlarge instances using the \texttt{Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.1.0 (Ubuntu 20.04)} AMI. Make sure to place the instances in a \href{https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html}{placement group} that utilizes the cluster strategy to achieve low-latency network performance. Attach the same security group to all instances and add an inbound rule in the security group to allow all incoming traffic from the same security group. For example, you can add the following rule: Type: All TCP, Source: Anywhere-IPv4.
+
+\paragraph{Installing the prerequisites}
+After gaining access to the AWS instances, install the prerequisites by following the steps below. First, activate the conda shell support by running \texttt{conda init bash}, and then restarting the shell session.
+Next, create the conda environment with all the required dependencies by running:
+\begin{lstlisting}[language=sh]
+conda env create -f FlexFlow/conda/flexflow.yml
+conda activate flexflow
+\end{lstlisting}
+
+\paragraph{Multinode setup}
+Download and build UCX by running the \texttt{install\_ucx.sh} script. Next, if you are running \sys on two AWS instances, you will need to configure MPI so that the two instances are mutually accessible. Pick a main node, and create a SSH key pair with:
+\begin{lstlisting}[language=sh]
+    ssh-keygen -t ed25519
+\end{lstlisting}
+Append the contents of the public key (\texttt{\textasciitilde/.ssh/id\_ed25519.pub}) to the \texttt{\textasciitilde/.ssh/authorized\_keys} file on BOTH the main and secondary machine. Note that if the \texttt{.ssh} folder or the \texttt{authorized\_keys} file do not exist, you will need to create them manually. 
+Finally, create a file at the path \texttt{\textasciitilde/hostfile} with the following contents:
+\begin{lstlisting}[language=sh]
+<main_node_private_ip> slots=4
+<secondary_node_private_ip> slots=4
+\end{lstlisting}
+replacing <main\_node\_private\_ip> and <secondary\_node\_private\_ip> with the private IP addresses of the two machines, and the number of slots with the number of GPUs available (if you are using the recommended AWS instances, you will use a value of 4). You can find each machine's private IP address by running the command (and use the first IP value that is printed):
+\begin{lstlisting}[language=sh]
+    hostname -I
+\end{lstlisting}
+
+\paragraph{Install \sys}
+
+To install \sys, run the script: 
+\begin{lstlisting}[language=sh]
+./install_specinfer.sh
+\end{lstlisting}
+
+\subsection{Basic Test}
+To ensure that \sys is installed correctly and is functional, run the \texttt{basic\_test.sh} script. This script will test the basic incremental decoding and speculative inference functionalities, on both single and multi nodes. It will also test the support for offloading. The test passes if it prints the "Test passed!" message. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment workflow}
+The artifact comes with scripts to gather the data that can be used to reproduce the results from the paper. It also comes with scripts that can be used to convert the output data into CSV format for plotting. 
+
+\paragraph{Running Experiments}
+We run the following two experiments to evaluate \sys under different hardware setups. The output data will be saved to the \texttt{FlexFlow/inference/output} path. 
+
+\begin{itemize}
+    \item \textbf{Server-grade GPU evaluation.} This experiment tests the performance of \sys on server-grade GPUs. The LLMs and SSMs are loaded in GPU memory, and we measure the end-to-end inference latency using 1 node, and 2 nodes. In the single node case, we measure the performance using 1 GPU, or 4 GPUs. In the multinode case, we use 4GPUs per node. The experiments use LLAMA-7B, OPT-30B and LLAMA-65B as the LLMs, and LLAMA-68M and OPT-125M as SSMs. The experiment runs \sys in three different modes: incremental decoding, sequence-based speculative decoding, and tree-based speculative decoding. The former two are used to obtain data for the ablation study, and the latter is the novel inference mode proposed by \sys, and will be deployed by the user. To run the server-grade GPU evaluation, run:
+\begin{lstlisting}[language=sh]
+./server_gpu_experiments.sh
+\end{lstlisting}
+\item \textbf{Offloading evaluation.} This experiment tests the performance of \sys when loading only a subset of parameters in GPU memory, while offloading the remaining ones on CPU DRAM. This technique is used to perform inference when the target model is larger than the available GPU memory. In the experiment, \sys uses a single GPU and swaps the model's weights to and from the CPU. To run the offloading evaluation, run: 
+\begin{lstlisting}[language=sh]
+./offloading_experiments.sh
+\end{lstlisting}
+\end{itemize}
+
+\paragraph{Third-party frameworks}
+Please follow the vLLM, FasterTransformer, and HuggingFace TGI, and FlexGen official documentation to reproduce the performance of the third-party frameworks under the experiment scenarios.
+
+\paragraph{Output data}
+The scripts above will generate data at the \texttt{FlexFlow/inference/output} path. For each scenario, a \texttt{.txt} file contains the generated output for each prompt, and a \texttt{.out} file contains the stdout logs. The quality of the generated output can be evaluated visually and compared with the output from third-party inference frameworks.
+We provide scripts to parse the raw output data and generate CSV files that can be used to generate the paper's figures. The README provides all details on the scripts and the mapping between CSV files and figures.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Evaluation and expected results}
+The data from the CSV files should show similar performance to the figures from the paper. Some variability is to be expected, but overall, \sys should behave according to Figures 7-11 from the paper. 
+% {\em Obligatory}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment customization}
+Users can edit the configuration parameters from the evaluation scripts to change various parameters, such as the number of GPUs/CPUs, GPU/CPU memory, batch size, LLM/SSM models used, prompt dataset, full vs. half-precision, and the maximum number of tokens to generate.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \subsection{Notes}

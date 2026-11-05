@@ -1,0 +1,33 @@
+% \if 0
+% \begin{table}[H]
+% \caption{\XM{TODO: add a caption}}
+% \label{tab:lss-opt}
+% \begin{center}
+% \begin{tabular}{ccccccccccc}
+% \hline
+%         & \multicolumn{2}{c}{CIP} & \multicolumn{2}{c}{CP} & \multicolumn{2}{c}{WebQA} & \multicolumn{2}{c}{Alpaca} & \multicolumn{2}{c}{PIQA} \\ \cline{2-11} 
+%         & w/ oracle  & w/o oracle & w/ oracle & w/o oracle & w/ oracle   & w/o oracle  & w/ oracle   & w/o oracle   & w/ oracle  & w/o oracle  \\ \hline
+% LLM Run & 8812       & 8449       & 3625      & 3462       & 12624       & 12080       & 11123       & 10684        & 12625      & 11560       \\
+% SSM Run & 56401      & 135184     & 23172     & 55392      & 74953       & 193280      & 72863       & 170944       & 74548      & 184960      \\ \hline
+% \end{tabular}
+% \end{center}
+
+% \end{table}
+
+\begin{table}
+\caption{The number of LLM runs and SSM runs with or without the presence of the matching length predictor. When there is no predictor, we use a fixed speculation length of 16 for all the SSMs in this experiment. LLM: OPT-13B, SSMs: OPT-125M}
+\label{tab:lss-opt}
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+       & \multicolumn{2}{c}{LLM run} & \multicolumn{2}{c}{SSM run} \\ \cmidrule{2-5} 
+       & w/ predictor    & w/o predictor   & w/ predictor    & w/o predictor   \\ \midrule
+CIP    & 8812         & 8449         & 56401        & 135184       \\
+CP     & 3625         & 3462         & 23172        & 55392        \\
+WebQA  & 12624        & 12080        & 74953        & 193280       \\
+ Alpaca & 11123        & 10684        & 72863        & 170944       \\
+PIQA   & 12625        & 11560        & 74548        & 184960       \\ \bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+% \fi 

@@ -1,0 +1,123 @@
+{
+ "kernels_requested": [
+  "L1:dense_attention",
+  "L1:gelu",
+  "L1:layer_norm",
+  "L2:encoder_mlp"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:dense_attention",
+    "L1:gelu",
+    "L1:layer_norm",
+    "L2:encoder_mlp"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:dense_attention",
+    "L1:gelu",
+    "L1:layer_norm",
+    "L2:encoder_mlp"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "bge-m3-mldr-docs": 1.137,
+    "single-request": 1.0701,
+    "fixed-batch-32": 0.9835
+   },
+   "mean_d": 0.015816874999999998
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:dense_attention",
+   "L1:gelu",
+   "L1:layer_norm",
+   "L2:encoder_mlp"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:dense_attention",
+   "L1:gelu",
+   "L1:layer_norm",
+   "L2:encoder_mlp"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "bge-m3-mldr-docs": 1.137,
+   "single-request": 1.0701,
+   "fixed-batch-32": 0.9835
+  },
+  "mean_d": 0.015816874999999998
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:dense_attention",
+  "L1:gelu",
+  "L1:layer_norm",
+  "L2:encoder_mlp"
+ ],
+ "timings": {
+  "bge-m3-mldr-docs": {
+   "kind": "throughput",
+   "unit": "doc/s",
+   "value": 466.17
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.0112139052425007
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.19318759532282664
+  }
+ },
+ "speedups": {
+  "bge-m3-mldr-docs": 1.137,
+  "single-request": 1.0701,
+  "fixed-batch-32": 0.9835
+ },
+ "correctness": {
+  "per_sample": [
+   0.00399,
+   0.00176,
+   0.00214,
+   0.00204,
+   0.003,
+   0.00037,
+   0.00294,
+   0.00011,
+   0.00058,
+   0.22768,
+   0.0031,
+   0.00075,
+   0.00027,
+   0.00322,
+   0.00077,
+   0.00035
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.984183125
+  }
+ },
+ "mean_d": 0.015816874999999998,
+ "model": "BAAI/bge-m3",
+ "set": "kda-ind"
+}

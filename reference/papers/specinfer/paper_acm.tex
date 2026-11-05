@@ -1,0 +1,109 @@
+\documentclass[sigplan,10pt]{acmart}
+
+
+\usepackage[normalem]{ulem}
+
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+%\usepackage{listings}
+%\usepackage{pifont}
+%\usepackage{tikz}
+\usepackage{subfig}
+\usepackage{multirow}
+%\usepackage{pgfplots}
+\usepackage{booktabs}
+%\usepackage{dcolumn}
+%\usepackage{cancel}
+%\usepackage{ifmtarg}
+%\usepackage{verbatim}
+\usepackage{graphicx}
+%\usepackage{chngpage}
+\usepackage{xspace}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{balance}
+\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{times}
+%\usepackage{fullpage}
+%\usepackage{footnote}
+%\usepackage[symbol]{footmisc}
+\usepackage{threeparttable}
+%\usepackage[small,compact]{titlesec}
+%\usepackage{tabularx}
+%\usepackage{titling}
+%\usepackage{authblk}
+%\makesavenoteenv{tabular}
+%\makesavenoteenv{table}
+\usepackage{cleveref}
+\usepackage{mathtools}
+
+
+\newcommand{\Sys}{SpecInfer\xspace}
+\newcommand{\sys}{SpecInfer\xspace}
+\newcommand{\llama}{LLaMA\xspace}
+\newcommand{\m}{\mathcal}
+\newcommand{\Continue}{\State {\bf continue}}
+\newcommand{\ZJ}[1]{\textcolor{red}{ZJ: #1}}
+\newcommand{\XM}[1]{\textcolor{blue}{XM: #1}}
+\newcommand{\ZZ}[1]{\textcolor{violet}{ZZ: #1}}
+\algnewcommand{\LeftComment}[1]{\Statex \(\triangleright\) #1}
+\algnewcommand{\LineComment}[1]{\State \textcolor{violet}{\(\triangleright\) #1}}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+% Use the default mathcal font
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+
+\begin{document}
+
+\title{
+\Sys: Accelerating Generative Large Language Model Serving with\\Speculative Inference and Token Tree Verification}
+
+\date{}
+%\textit{}
+%\thispagestyle{empty}
+
+\input{abstract}
+\maketitle
+
+% \pagestyle{plain}
+
+\input{intro}
+%\input{background}
+\input{overview}
+\input{speculation}
+\input{verification}
+\input{system}
+%\input{discussion}
+\input{eval}
+\input{related}
+\input{conclusion}
+
+\bibliographystyle{plain}
+\bibliography{reference} 
+
+
+\end{document}

@@ -1,0 +1,46 @@
+{
+ "model": "openai/gpt-oss-120b",
+ "status": "ok",
+ "error": null,
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5084.04
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2093.7
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.0723488602576814
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.352987889616835
+  }
+ },
+ "speedups": {
+  "mixed": 0.9777,
+  "long-context": 0.997,
+  "single-request": 1.009,
+  "fixed-batch-32": 1.0074
+ },
+ "correctness": {
+  "per_sample": [
+   0.001,
+   0.001,
+   0.001,
+   0.001
+  ],
+  "summary": {
+   "n": 4,
+   "top1_agreement": 0.999
+  }
+ },
+ "mean_d": 0.001
+}

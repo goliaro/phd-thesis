@@ -1,0 +1,28 @@
+{
+ "model": "Etched/oasis-500m",
+ "tp": 1,
+ "status": "ok",
+ "candidates": false,
+ "candidate_dir": null,
+ "adapter": "world",
+ "timings": {
+  "short-bs4-16f-4ddim": {
+   "kind": "throughput",
+   "unit": "frame/s",
+   "value": 55.0
+  },
+  "medium-bs8-24f-4ddim": {
+   "kind": "throughput",
+   "unit": "frame/s",
+   "value": 71.0
+  },
+  "latency-bs1-8f-4ddim": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.36
+  }
+ },
+ "t_run_s": 900.0,
+ "t_total_s": 1010.0,
+ "_dir": "/out/runs/10_Etched_oasis-500m/baseline"
+}

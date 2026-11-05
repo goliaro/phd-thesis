@@ -1,0 +1,22 @@
+\section{Benchmarking Stack}
+\label{sec:benchmarking_tooling}
+
+\fastkernels{} exposes one evaluation stack through two tiers, \emph{kernel-level} (\texttt{fastkernels bench}) and \emph{end-to-end} (\texttt{fastkernels eval}), each usable as a diagnostic tool or in leaderboard mode.
+
+\paragraph{Scenario sets.}
+A scenario fixes a checkpoint, TP degree, dtype, and workloads from public datasets for its modality (e.g., WildChat for LLMs, Parti-prompts for diffusion, COCO for detection).
+The \emph{full} set has one scenario per architecture (47 scenarios, 184 workloads, TP 1--8) and is used to validate the benchmark (Section~\ref{sec:eval-results}).
+The \emph{default} set is the 11-model subset on which agents are scored, because a single long-horizon agent already spends up to 2{,}500 agent-hours on it: it spans all 8 categories, TP 1--4, and BF16/FP16/FP8/MXFP4 (48 workloads), and its models run 133 distinct L1--L3 tasks (Appendix~\ref{app:scenarios}).
+
+\paragraph{Workload capture.}
+\texttt{fastkernels capture} runs each scenario end to end and records, for every task module, a reconstructable constructor recipe and the shape, dtype, and stride of every \texttt{forward} argument.
+Identical calls merge into one variant with a call count; the kernel tier then merges variants across workloads and benchmarks up to five per operator (smallest, median, and largest problem, then the most frequent): on the default B200 capture, 12.4M calls reduce to 87.7K distinct cases and 582 benchmarked ones (Appendix~\ref{app:capture}).
+
+\paragraph{Kernel-level tier.}
+The kernel tier rebuilds each candidate next to its baseline from the recipe, shares weights, and compares outputs and runtimes on the selected cases, one operator per isolated process with reward-hack checks.
+Values are synthesized from the captured shapes, with offsets, indices, and cache slots kept consistent with the call; for data-dependent operators such as MoE dispatch, \fastkernels{} additionally replays golden inputs captured from real end-to-end executions, ensuring that both correctness and performance are measured on the actual tensors encountered by the model (Appendix~\ref{sec:eval-input-capture}).
+
+\paragraph{End-to-end tier.}
+The end-to-end tier swaps a candidate set into full model executions on the production path and real requests, next to a baseline run and a noise run that calibrates correctness thresholds, and produces the \textsc{MacroEval} metrics (Section~\ref{sec:metrics}).
+The kernel tier gives agents fast feedback; the end-to-end tier is the ground truth that the leaderboard reports.
+Both tiers integrate with profilers, NVIDIA Nsight Compute (NCU) for kernel-level analysis and Nsight Systems (NSYS) for end-to-end traces, with LLM-based extraction of the main bottlenecks, and with MLflow for tracking kernel lineage across agent runs.

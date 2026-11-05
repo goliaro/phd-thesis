@@ -1,0 +1,114 @@
+\textbf{AgenticSQL: Mean accepted tokens (tokens/step)}
+\begin{table}[H]
+\begin{adjustbox}{width=\linewidth}
+\centering
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{System} & Classify & Extract & Enrich & Combine & SQL1 & SQL2 & SQL3 & \textbf{Overall} \\
+\midrule
+hybrid (tree) & 4.180 & 14.813 & 15.081 & 6.448 & 3.983 & 3.932 & 4.006 & 7.500 \\
+hybrid (linear) & 4.008 & 13.473 & 15.304 & 6.362 & 3.876 & 3.842 & 3.913 & 7.262 \\
+suffix (linear) & 3.577 & 11.833 & 12.395 & 5.924 & 3.665 & 3.005 & 4.005 & 6.349 \\
+suffix (tree) & 3.470 & 11.724 & 12.137 & 5.834 & 3.633 & 2.914 & 3.904 & 6.236 \\
+eagle2 & 3.156 & 5.173 & 3.249 & 3.534 & 3.066 & 3.761 & 3.057 & 3.572 \\
+recycling & 2.915 & 4.125 & 3.125 & 3.138 & 2.951 & 2.929 & 2.994 & 3.169 \\
+eagle3 & 2.529 & 3.374 & 4.198 & 3.179 & 2.142 & 4.622 & 2.056 & 3.160 \\
+eagle & 2.305 & 4.062 & 2.877 & 3.127 & 2.166 & 3.295 & 2.109 & 2.851 \\
+pld & 1.427 & 4.134 & 1.455 & 3.914 & 2.074 & 1.452 & 2.151 & 2.373 \\
+vanilla & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\textbf{AgenticSQL: Mean Acceptance Rate}
+\begin{table}[H]
+\begin{adjustbox}{width=\linewidth}
+\centering
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{System} & Classify & Extract & Enrich & Combine & SQL1 & SQL2 & SQL3 & \textbf{Overall} \\
+\midrule
+vanilla & - & - & - & - & - & - & - & - \\
+suffix (linear) & 0.212 & 0.628 & 0.740 & 0.428 & 0.318 & 0.245 & 0.330 & 0.415 \\
+suffix (tree) & 0.189 & 0.605 & 0.614 & 0.397 & 0.294 & 0.225 & 0.298 & 0.375 \\
+hybrid (tree) & 0.131 & 0.642 & 0.683 & 0.249 & 0.138 & 0.143 & 0.140 & 0.304 \\
+hybrid (linear) & 0.124 & 0.595 & 0.750 & 0.242 & 0.130 & 0.139 & 0.133 & 0.302 \\
+pld & 0.061 & 0.365 & 0.069 & 0.355 & 0.137 & 0.076 & 0.144 & 0.173 \\
+eagle & 0.052 & 0.122 & 0.075 & 0.085 & 0.047 & 0.092 & 0.044 & 0.074 \\
+eagle2 & 0.036 & 0.070 & 0.037 & 0.042 & 0.034 & 0.046 & 0.034 & 0.043 \\
+eagle3 & 0.025 & 0.040 & 0.053 & 0.036 & 0.019 & 0.060 & 0.018 & 0.036 \\
+recycling & 0.025 & 0.041 & 0.028 & 0.027 & 0.025 & 0.024 & 0.026 & 0.028 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\textbf{AgenticSQL: Time per output token (ms)}
+\begin{table}[H]
+\begin{adjustbox}{width=\linewidth}
+\centering
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{System} & Classify & Extract & Enrich & Combine & SQL1 & SQL2 & SQL3 & \textbf{Overall} \\
+\midrule
+suffix (linear) & 9.552 & 2.687 & 3.007 & 6.023 & 9.559 & 10.588 & 9.767 & 7.306 \\
+suffix (tree) & 9.594 & 2.876 & 3.188 & 6.164 & 10.339 & 10.935 & 10.090 & 7.592 \\
+hybrid (tree) & 11.975 & 3.491 & 3.633 & 7.883 & 14.329 & 11.600 & 14.399 & 9.604 \\
+recycling & 10.316 & 7.314 & 9.470 & 9.724 & 10.981 & 9.981 & 10.702 & 9.782 \\
+hybrid (linear) & 12.563 & 3.681 & 3.762 & 8.603 & 14.827 & 11.639 & 21.219 & 10.874 \\
+eagle2 & 16.814 & 9.210 & 15.078 & 13.877 & 17.967 & 12.312 & 17.531 & 14.677 \\
+pld & 20.146 & 7.735 & 20.321 & 8.173 & 14.605 & 20.546 & 14.646 & 15.169 \\
+eagle & 21.221 & 11.308 & 15.760 & 15.688 & 23.353 & 13.396 & 24.595 & 17.887 \\
+eagle3 & 23.334 & 14.729 & 12.513 & 16.863 & 26.997 & 10.747 & 27.728 & 18.966 \\
+vanilla & 26.578 & 25.292 & 25.032 & 25.406 & 27.011 & 25.851 & 26.307 & 25.924 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\textbf{AgenticSQL: Speculation time per generated token (ms)}
+\begin{table}[H]
+\begin{adjustbox}{width=\linewidth}
+\centering
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{System} & Classify & Extract & Enrich & Combine & SQL1 & SQL2 & SQL3 & \textbf{Overall} \\
+\midrule
+vanilla & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+suffix (linear) & 0.060 & 0.015 & 0.015 & 0.033 & 0.059 & 0.058 & 0.061 & 0.043 \\
+suffix (tree) & 0.064 & 0.017 & 0.020 & 0.035 & 0.064 & 0.062 & 0.064 & 0.047 \\
+pld & 0.419 & 0.124 & 0.422 & 0.130 & 0.281 & 0.434 & 0.276 & 0.298 \\
+recycling & 0.762 & 0.303 & 0.399 & 0.577 & 0.928 & 0.260 & 0.922 & 0.592 \\
+hybrid (tree) & 1.728 & 0.249 & 0.376 & 1.112 & 2.350 & 0.927 & 2.372 & 1.299 \\
+hybrid (linear) & 1.776 & 0.256 & 0.358 & 1.177 & 2.387 & 0.930 & 4.389 & 1.604 \\
+eagle & 3.189 & 1.693 & 2.423 & 2.372 & 3.423 & 2.197 & 3.616 & 2.700 \\
+eagle2 & 4.118 & 2.006 & 3.292 & 3.308 & 4.599 & 2.597 & 4.509 & 3.487 \\
+eagle3 & 6.092 & 3.526 & 3.021 & 4.350 & 7.156 & 2.543 & 7.332 & 4.854 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\textbf{AgenticSQL: Speedup over vanilla decoding}
+\begin{table}[H]
+\begin{adjustbox}{width=\linewidth}
+\centering
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{System} & Classify & Extract & Enrich & Combine & SQL1 & SQL2 & SQL3 & \textbf{Overall} \\
+\midrule
+suffix (linear) & 3.016 & 9.854 & 10.406 & 4.848 & 3.205 & 2.839 & 3.211 & 5.345 \\
+suffix (tree) & 2.998 & 9.545 & 10.009 & 4.765 & 3.008 & 2.733 & 3.133 & 5.175 \\
+hybrid (tree) & 2.338 & 7.672 & 8.191 & 3.613 & 2.057 & 2.496 & 2.077 & 4.068 \\
+hybrid (linear) & 2.243 & 7.137 & 7.965 & 3.327 & 1.993 & 2.483 & 1.405 & 3.799 \\
+recycling & 2.588 & 3.472 & 2.672 & 2.640 & 2.502 & 2.604 & 2.492 & 2.710 \\
+pld & 1.330 & 3.695 & 1.255 & 3.298 & 1.936 & 1.311 & 1.905 & 2.105 \\
+eagle2 & 1.591 & 2.751 & 1.673 & 1.855 & 1.527 & 2.119 & 1.527 & 1.864 \\
+eagle3 & 1.328 & 1.720 & 2.025 & 1.619 & 1.108 & 2.496 & 1.056 & 1.623 \\
+eagle & 1.324 & 2.246 & 1.598 & 1.669 & 1.229 & 1.955 & 1.138 & 1.595 \\
+vanilla & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}

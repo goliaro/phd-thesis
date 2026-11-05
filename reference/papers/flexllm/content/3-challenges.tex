@@ -1,0 +1,37 @@
+\section{Co-serving LLM Inference and PEFT}
+\label{sec:coserving}
+
+Previous studies have proposed different methods for scheduling heterogeneous workloads (in our case, inference and \peft) on shared GPU resources. These methods can be classified into three categories: \textit{resource isolation}, \textit{temporal sharing}, and \textit{spatial sharing}.
+%
+This section discusses the limitations inherent to these conventional approaches when applied to co-serving LLM inference and \peft. It also highlights the fundamental distinctions between \sys's co-serving solution and previous work.
+\Cref{fig:baseline} depicts the GPU execution timelines associated with different scheduling approaches for managing inference and finetuning tasks.
+
+\paragraph{Resource isolation.}
+A common approach to support both inference and finetuning tasks is \textit{resource isolation}, which partitions the available GPUs into two distinct groups, each dedicated to handling one type of workload (see Figure~\ref{fig:baseline}(a)).
+This approach ensures that throughput-intensive finetuning tasks do not interfere with latency-critical inference tasks. 
+When finetuning an LLM, a dataset of requests is provided to train the \peft layers, with all requests submitted to \sys simultaneously, making it easier to build larger batches that can be processed sequentially. In contrast, inference requests are submitted independently by users who expect timely processing within predetermined SLOs, with the arrival times of these requests unpredictable.
+
+Resource isolation can introduce significant GPU under-utilization, particularly in scenarios with variable request arrival rates. This is because finetuning and inference requests cannot be batched together if the number of pending requests of either type is insufficient to fully utilize a batch. With fewer GPUs available to parallelize inference computations, it may not be possible to serve requests fast enough to meet their SLO (e.g., request $r_3$ in Figure~\ref{fig:baseline}(a)).
+
+\paragraph{Temporal sharing.}
+Compared to resource isolation, \textit{temporal sharing}~\cite{xiao2018gandiva,xiao2020antman} improves GPU utilization by allowing different tasks to share GPU resources through time slices of different lengths depending on various parameters. 
+This method allows both inference and finetuning requests to access all GPUs within the cluster in turns, as shown in Figure~\ref{fig:baseline}(b). By using all GPUs to parallelize computation (e.g., with data parallelism or tensor model parallelism), the latency for each request can be significantly reduced, thus aiding in meeting inference SLOs. For example, while inference request $r_3$ fails to complete in the scenario illustrated in Figure~\ref{fig:baseline}(a) due to resource limitations, it successfully executes in Figure~\ref{fig:baseline}(b) by leveraging more resources. However, the arrangement of time slices can also be harmful because of the unpredictable arrival times of inference requests, which may have a stringent latency requirement that cannot be met (e.g., $r_4$ has been delayed in Figure~\ref{fig:baseline}(b) by pre-scheduled finetuning requests).
+
+\paragraph{Spatial sharing.}
+%
+\textit{Spatial sharing} offers an alternative by enabling simultaneous execution of different tasks at the kernel level, where each task utilizes a specific portion of the GPU resources (i.e., streaming multi-processors)
+%
+This can be implemented on NVIDIA GPUs through multi-stream programming or by utilizing the Multi-Process Service (MPS)~\cite{mps}. Furthermore, on the latest Hopper and Ampere architectures, spatial sharing benefits from the Multi-Instance GPU (MIG)~\cite{mig}, which allows for dynamic adjustments of GPU partition configurations.
+% 
+However, these adjustments often lack the flexibility and efficiency required to handle dynamic inference workloads effectively~\cite{dhakal2020gslice,yu2022survey,migpartition}. Figures~\ref{fig:baseline}(c) and (d) show two scenarios where a substantial portion of GPU resources is allocated to either finetuning or inference tasks. 
+% 
+While over-provisioning for inference tasks may appear to provide better SLO guarantees, it still falls short during peak demand periods such as the unexpected urgent request $r_3$. Additionally, over-provisioning wastes resources and significantly slows down the finetuning process. 
+Therefore, relying solely on spatial sharing to manage finetuning and inference tasks often results in suboptimal performance ~\cite{choi2022serving,zhao2023muxflow}.
+
+\paragraph{\sys's co-serving approach.}
+As shown in Figure~\ref{fig:baseline}(e), \sys employs a co-serving approach that uses a fine-grained scheduling mechanism to adaptively manage both inference and finetuning requests.
+
+Unlike temporal or spatial sharing approaches, which schedule GPU kernels of existing systems independently, \sys integrates inference and finetuning kernels. This integration reduces the overhead associated with kernel launches and minimizes accesses to GPU device memory to retrive model weights.
+%
+In each iteration, \sys dynamically adjusts the allocation of inference and finetuning tokens, strategically balancing the need to meet the SLOs of inference requests with the goal of maximizing GPU utilization. This adaptive approach ensures that \sys adheres to the requirements of inference requests while optimizing the use of available GPU resources.
+

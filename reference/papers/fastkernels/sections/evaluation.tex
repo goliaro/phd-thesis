@@ -1,0 +1,73 @@
+\section{Evaluation}
+\label{sec:evaluation}
+
+The evaluation has two parts: Section~\ref{sec:eval-results} evaluates the \emph{benchmark itself}, checking that its baselines match each family's production framework so that speedups over them are meaningful; Sections~\ref{sec:eval-agents} and~\ref{sec:eval-e2e} evaluate \emph{kernel agents} on the default set, at the kernel level and end to end.
+
+\subsection{Benchmark Validation: Baselines vs.\ Production Frameworks}
+\label{sec:eval-results}
+
+On the full set, we benchmark every architecture's end-to-end performance (throughput and latency on real workloads) and the correctness of each L1--L4 task against the state-of-the-art production framework for its family (e.g., vLLM for LLMs, SGLang for serving, diffusers for SDXL, FLA for linear-attention recurrences, timm for vision encoders).
+Figure~\ref{fig:eval-e2e} reports the category-level geometric means: gains concentrate in linear attention ($1.45\times$ throughput) and recommendation ($1.51\times$), and the other categories sit near parity; Appendix~\ref{app:reference_perf} breaks the results down by architecture and GPU (Blackwell vs.\ Hopper).
+References are pinned per release and GPU (vLLM~0.26.0 here); a daily CI job tracks their drift, 1--9\% for the median model over the four months before our pin (Appendix~\ref{app:drift}).
+
+
+\subsection{Agent Evaluation: Kernel-Level Results}
+\label{sec:eval-agents}
+
+\paragraph{Agents.}
+We evaluate Dr.~Kernel~\citep{drkernel}, an RL-trained model and one of the most recent KernelBench-ecosystem agents (others did not reproduce their results in our setting, e.g.\ KernelAgent~\citep{kernelagent}, or assume KernelBench's single-file tasks); KDA~\citep{kda} and AKO~\citep{ako} (adapted by the GEMM People entry), long-horizon harnesses behind winning MLSys 2026 FlashInfer contest entries~\citep{mlsys26contest}: KDA placed in all three full-agent tracks and GEMM People second on MoE; and Claude Code and Codex~\citep{codex}, the coding agents these harnesses build on.
+Their campaigns total 6{,}900 agent-hours and 42B tokens, with Claude Code, KDA, and AKO spending a median of 6--12 hours per operator (Appendix~\ref{app:agents}).
+We therefore evaluate fewer agents than single-turn leaderboards: the agents practitioners deploy iterate for hours per kernel (contest teams had 13 weeks for five kernels).
+We omit evolutionary search, which multiplies this cost by population size and generation count and whose strongest systems~\citep{alphaevolve,kernelevolve} are not public.
+Each agent optimizes every L1--L3 operator captured from the default set on B200 (47 L1, 64 L2, and 21 L3 targets) against the human-expert kernels that production frameworks ship.
+L4 tasks are full models, so benchmarking them is the end-to-end evaluation of Section~\ref{sec:eval-e2e}.
+We bench L1--L3 in three modes:
+\emph{independent} (each operator generated and benched in isolation, over production lower-level kernels),
+\emph{composed} (the independent winners---correct, geomean speedup $\geq 1\times$---activated together, so higher-level kernels run on the agent's own lower-level winners), and
+\emph{sequential} (L2 and L3 regenerated on top of the frozen lower-level winners, benched composed).
+Four agents reach geomean speedups of $1.6$--$6.6\times$ over the production kernels (Table~\ref{tab:kernel-levels}), but composition erodes them (Appendix Table~\ref{tab:kernel-composition}): once their children are also agent-generated, 26 of the agents' 71 L3 winners (37\%) fail correctness (13 of 18 for Codex), the surviving L3 winners of KDA and AKO lose 12--14\% of their speedup, and individual modules lose up to 76\% (Claude Code's \texttt{yolov10\_backbone}, $30.3\times \to 7.2\times$).
+Sequential generation makes this an optimization target: it yields 80 correct L3 winners across agents instead of 45 composed, and the sequential L3 kernels of AKO and Codex are $1.48\times$ and $1.35\times$ faster than their composed independent ones.
+
+\begin{table}[t]
+  \centering
+  \caption{\textbf{Kernel agents on \fastkernels{} (B200, default set).}
+  \emph{Corr.}: operators correct on every benchmarked case; \emph{Geo.}: geomean speedup over correct operators; fast$_p$: correct and more than $p\times$ faster than production (Appendix~\ref{app:fastp}).
+  Composed and sequential rows contain winners only.}
+  \label{tab:kernel-levels}
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \resizebox{\linewidth}{!}{\input{tables/kernel_levels.tex}}
+\end{table}
+
+\subsection{Agent Evaluation: End-to-End Leaderboard}
+\label{sec:eval-e2e}
+
+We deploy each agent's independent and sequential winner sets into the 11 default models (each receiving the kernels it instantiates) and run their real workloads on the production path, next to a baseline run and a noise run (Section~\ref{sec:metrics}).
+If a set crashes the model or grossly corrupts its outputs, the offending kernel (named in the traceback, else found by bisection) is dropped and the model re-run; the first subset that runs correctly is the agent's \emph{deployable subset}, timed on the full workloads.
+Table~\ref{tab:e2e-macroeval} scores both the full winner sets as-is (\emph{all winners}) and the deployable subsets (per model: Appendix~\ref{app:e2e}).
+
+\begin{table}[t]
+  \centering
+  \caption{\textbf{End-to-end \textsc{MacroEval} leaderboard on the default set (B200).} \emph{Rank}: position of each agent--mode entry by Score (10 entries).
+  \emph{Valid}: models with $C_i \geq \tau$; macro metrics as in Section~\ref{sec:metrics}; \emph{Thr.}/\emph{Lat.}: $\lambda{=}1$/$\lambda{=}0$.
+  \emph{Deployable subset}: after dropping the kernels that crash or break the model; \emph{All winners}: every kernel-level winner as-is.}
+  \label{tab:e2e-macroeval}
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \resizebox{\linewidth}{!}{\input{tables/e2e_macroeval.tex}}
+\end{table}
+
+
+\paragraph{Kernel-level winners rarely survive deployment as-is.}
+Swapped in unchanged, only 22 of the 110 winner-set deployments run correctly (13--58\% of model families per agent).
+Compilation-stack conflicts (e.g.\ embedding kernels calling raw C++ extensions that \texttt{torch.compile} cannot trace, rotary kernels that specialize dynamic batch shapes) and crashes on engine shapes the kernel bench never produced account for 86\% of the drops with an identified cause (Appendix Table~\ref{tab:e2e-drops}), all invisible to an isolated kernel check.
+Other sets pass every kernel check yet corrupt the model (texture-only FLUX images, NaNs on Oasis), which only the end-to-end check flags.
+
+\paragraph{Deployable end-to-end gains are small.}
+Even after dropping the failing kernels, end-to-end speedups are modest ($S_{\mathrm{macro}}$ of $0.96$--$1.25\times$) despite kernel-level speedups of up to $6.6\times$: gains concentrate where the rewritten kernels dominate runtime (up to $2.2\times$ on YOLOv10, $1.7\times$ on OpenFold3, $1.5\times$ on GLA), while LLM serving stays within 6\% of the production kernels.
+Sequential sets raise AKO and Codex from $1.15\times$ and $0.96\times$ to $1.25\times$ and $1.10\times$.
+
+\paragraph{Kernel-level scores mis-rank agents.}
+In isolation, Claude Code matches or beats KDA on correctness and speedup at every level (L3: 20 vs.\ 20 correct, $4.74\times$ vs.\ $3.05\times$), yet KDA's \textsc{MacroEval} score is $3\times$ higher ($1.11$ vs.\ $0.35$), the best of all agents even with halved or doubled thresholds (Appendix~\ref{app:e2e}).
+The gap is deployability, not speed ($1.13\times$ vs.\ $1.09\times$): all 11 of KDA's models are valid versus 6 of Claude Code's. KDA wraps the same Claude model in a planning and review harness, which a kernel-level leaderboard cannot credit.
+

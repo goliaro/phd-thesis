@@ -1,0 +1,22 @@
+% MLSys'27 CFP: mandatory "AI Usage Disclosure" section after the references; not counted toward the
+% page limit.
+\section*{AI Usage Disclosure}
+
+AI coding agents are the subject of this paper, and they produced most of its artifacts. The two
+kernels, \fathree and \fafour, were written entirely by the agents described in \S\ref{sec:workflow}
+(Claude Opus models, \texttt{claude-opus-4-8} and \texttt{claude-opus-5}, run through Claude Code
+and Cursor) under human steering; no author wrote or edited kernel code. The baseline agent of
+\S\ref{sec:baseline} was itself built by Claude Code from a written specification, and its runs used
+\texttt{claude-opus-4-8}. The evaluator, the search scripts, and the PTX probes were written by the
+same agents under the same steering. The complete traces of every session are released.
+
+The trace analysis of \S\ref{sec:eval} used AI assistance to parse the session logs, classify tool
+calls by target, and aggregate counts; the human-message labels were assigned by an author. The
+figures were produced by scripts written with AI assistance from the released data. All reported
+numbers were re-derived by the authors from the released artifacts.
+
+The question bank of Appendix~\ref{app:questions} was drafted with AI assistance from the traces and
+from the public sources it cites, and edited by the authors. The manuscript was drafted and revised
+with AI writing assistance under the authors' direction; the authors specified the argument,
+structure, and claims, reviewed and rewrote the text, verified every number against the artifacts,
+and take responsibility for all content.

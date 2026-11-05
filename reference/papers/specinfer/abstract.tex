@@ -1,0 +1,18 @@
+\begin{abstract}
+%\blfootnote{$^\spadesuit$ Contributed equally.}
+%The high computational and memory requirements of generative large language models (LLMs) make it challenging to serve them quickly and cheaply. \GO{change this sentence since it is now identical to SpotServe's first sentence}
+
+This paper introduces \sys, a system that accelerates generative large language model (LLM) serving with \rev{{\em tree-based} speculative inference and verification}.
+The key idea behind \Sys is leveraging small speculative models to predict the LLM’s outputs; the predictions are organized as a token tree, whose nodes each represent a candidate token sequence.
+%%%
+The correctness of all candidate token sequences represented by a token tree is verified against the LLM in parallel using a novel tree-based parallel decoding mechanism.
+\Sys uses an LLM as a token tree verifier instead of an incremental decoder, which significantly reduces the end-to-end latency and computational requirement for serving generative LLMs while provably preserving model quality. 
+Our evaluation shows that \sys outperforms existing LLM serving systems by 1.5-2.8$\times$ for distributed LLM inference and by 2.6-3.5$\times$ for offloading-based LLM inference, while preserving the same generative performance.
+%Across over 1000 prompts from five publicly-available prompt datasets, \Sys reduces the inference latency by up to 2.7$\times$ times over the state of the art while generating the exact same sequence of tokens as incremental decoding for all prompts. %Redacted for anonymization: 
+%\iffinal
+\Sys is publicly available at \url{https://github.com/flexflow/FlexFlow/}
+%\else
+%\rev{We will make \Sys publicly available after the ASPLOS review period.}
+%\fi
+
+\end{abstract}

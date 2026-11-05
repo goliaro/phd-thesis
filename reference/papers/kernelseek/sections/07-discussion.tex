@@ -1,0 +1,39 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Did a human expert do the work?} The human wrote no kernel code, and the messages name
+measurements, layers, and process rather than mechanisms: of the 63 interrogative ones, 17 mention an
+attention concept and none prescribes a CUDA construct (\S\ref{sec:eval-auto}). The human did have systems
+expertise and used it to decide which measurement to demand and when; we claim only that the
+questions, once asked, are short, generic, and now written down. The agent wrote all 13.8K lines of
+the two kernels.
+Whether the bank can replace the human is the experiment this paper does not contain. Its design is
+fixed: start from the released Blackwell kernel on one of its remaining gaps (dense long context or
+head dimension 96), hold the model and budget constant, and compare four arms: the equipped loop,
+the bare agent with the harness alone, the bare agent with a questioner that draws from the bank at
+plateaus and claimed limits, and a human questioner.
+
+\paragraph{Does \sys need a reference implementation?} The method does not: the harness checks
+correctness against the seed and an fp32 reference, the goal is a predicate over the seed, and the
+bank phrases every bound as a roofline or a cycle budget. The case study had one, and used it in two
+roles. As a yardstick it set the goal and scored the result. As a bound it let a question overturn a
+claimed ceiling, and this role is the one that mattered; it is filled without a reference by a
+roofline, a speed-of-light estimate \cite{lin2026solexecbench}, a launcher-only A/B, or a kernel for
+a neighboring shape, each of which the bank asks for by name. A reference buys a cheaper and sharper
+bound, and no more: the equipped agent had far more of it in its prompt and gained nothing. The
+no-reference campaign, where the seed is the fastest kernel known, is the setting the released agent
+targets and the one we have not yet run.
+
+\paragraph{Threats to validity.} The head-to-head is a single run per arm, with different
+front-ends and a steered arm against an unsteered one; we control the task, evaluator, hardware,
+baseline, and correctness gate, and count the human turns in the steered arm's budget. The case
+study is one operator family where a strong upstream existed. Wall-clock speedups include dispatch
+overhead, which inflates the \texttt{edge} sets (Appendix~\ref{app:kernels}). The kernels were built
+before the traces were analyzed, and one author labeled the messages, so the taxonomy may fit the
+sessions we had; every trace is released so the labeling can be checked.
+
+\paragraph{Limitations and future work.} The Hopper kernel loses on fp8 dense prefill and
+softcapped prefill, and the Blackwell kernel does not yet build fp8 inputs or dense head dimensions
+of 192 and above; neither covers the backward pass. The next targets are other deep kernels (latent-attention decode, grouped GEMMs for
+mixture-of-experts layers, fused collectives, persistent megakernels \cite{jin2026eventtensor}) and
+end-to-end evaluation on the production path \cite{oliaro2026fastkernels}.

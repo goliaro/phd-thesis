@@ -1,0 +1,46 @@
+{
+ "model": "meta-llama/Llama-3.1-8B-Instruct",
+ "status": "ok",
+ "error": null,
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5186.48
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2110.71
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.107146436804651
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.419901695255292
+  }
+ },
+ "speedups": {
+  "mixed": 0.9974,
+  "long-context": 1.0051,
+  "single-request": 0.9977,
+  "fixed-batch-32": 0.9969
+ },
+ "correctness": {
+  "per_sample": [
+   0.0,
+   0.0,
+   0.002,
+   0.004
+  ],
+  "summary": {
+   "n": 4,
+   "top1_agreement": 0.9985
+  }
+ },
+ "mean_d": 0.0015
+}

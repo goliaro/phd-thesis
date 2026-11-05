@@ -1,0 +1,146 @@
+{
+ "kernels_requested": [
+  "L1:kda_chunk",
+  "L1:rms_norm",
+  "L1:short_conv",
+  "L2:mla_attention",
+  "L2:moe_router"
+ ],
+ "dropped": [
+  {
+   "kernel": "L2:mla_attention",
+   "category": "import",
+   "attempt": 1,
+   "reason": "candidate failed to import / define its class"
+  }
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:kda_chunk",
+    "L1:rms_norm",
+    "L1:short_conv",
+    "L2:mla_attention",
+    "L2:moe_router"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:kda_chunk",
+    "L1:rms_norm",
+    "L1:short_conv",
+    "L2:moe_router"
+   ],
+   "not_swapped": [
+    "L2:mla_attention"
+   ],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0738,
+    "long-context": 0.9881,
+    "single-request": 1.0837,
+    "fixed-batch-32": 0.9883
+   },
+   "mean_d": 0.002159375
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:kda_chunk",
+   "L1:rms_norm",
+   "L1:short_conv",
+   "L2:mla_attention",
+   "L2:moe_router"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:kda_chunk",
+   "L1:rms_norm",
+   "L1:short_conv",
+   "L2:moe_router"
+  ],
+  "not_swapped": [
+   "L2:mla_attention"
+  ],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 1.0738,
+   "long-context": 0.9881,
+   "single-request": 1.0837,
+   "fixed-batch-32": 0.9883
+  },
+  "mean_d": 0.002159375
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:kda_chunk",
+  "L1:rms_norm",
+  "L1:short_conv",
+  "L2:mla_attention",
+  "L2:moe_router"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5583.76
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2075.0099999999998
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.860570268524499
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.47576646767176
+  }
+ },
+ "speedups": {
+  "mixed": 1.0738,
+  "long-context": 0.9881,
+  "single-request": 1.0837,
+  "fixed-batch-32": 0.9883
+ },
+ "correctness": {
+  "per_sample": [
+   0.0002,
+   0.00031,
+   0.00129,
+   0.00449,
+   0.00136,
+   0.00308,
+   0.00358,
+   0.00138,
+   0.00378,
+   0.00317,
+   0.00012,
+   0.00238,
+   0.00477,
+   0.00126,
+   0.00247,
+   0.00091
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.997840625
+  }
+ },
+ "mean_d": 0.002159375,
+ "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+ "set": "claude-seq"
+}

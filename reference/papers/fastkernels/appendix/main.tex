@@ -1,0 +1,760 @@
+
+\section{Benchmark Composition}
+\label{app:architectures}
+
+Table~\ref{tab:arch_detail} reports the per-architecture composition of \fastkernels{}: the reference HuggingFace checkpoint, default inference dtype, and the number of L1 (primitive), L2 (fused/composite), L3 (layer/block) and L4 (end-to-end) tasks each architecture uses.
+
+\paragraph{Counting rule.}
+A task is one module file under \texttt{tasks/baseline/L$n$/} that defines at least one benchmarkable \texttt{nn.Module} and is reachable, through the import graph, from at least one of the 47 L4 architectures; it is counted once even when it ships a CUDA sidecar (17 tasks do) or defines several module classes.
+Twelve function-only helper kernels (e.g., Triton attention-merge and causal-convolution kernels) are called from inside other tasks and are optimized through them, so they are not counted separately.
+This yields 108 L1, 155 L2, and 74 L3 tasks plus 47 L4 models, 384 in total.
+L4 counts one task per end-to-end architecture: the encoder sub-models that some pipelines import (the CLIP and T5 text encoders, the Qwen2.5-VL vision encoder) are part of those pipelines' L4 tasks, and the L1--L3 set is identical with or without DeepSeek-V3.2, whose modules GLM-5.2 builds on.
+Because tasks are shared, the per-architecture columns of Table~\ref{tab:arch_detail} sum to more than these totals.
+
+\begin{table}[H]
+  \centering
+  \caption{Full architecture composition of \fastkernels{}. L1--L4 report the number of primitive, fused/composite, layer/block-level, and end-to-end tasks each architecture uses, under the counting rule above (L4 is always 1 by construction). \emph{Reference} is the HuggingFace checkpoint or upstream repository the L4 pipeline tracks; \emph{dtype} is the default inference dtype.}
+  \label{tab:arch_detail}
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}ll>{\raggedright\arraybackslash}p{4.5cm}lcccc@{}}
+  \toprule
+  \textbf{Category} & \textbf{Architecture} & \textbf{Reference} & \textbf{dtype} & \textbf{L1} & \textbf{L2} & \textbf{L3} & \textbf{L4} \\
+  \midrule
+  \multirow{7}{*}{Dense \& MoE LLMs}
+   & Llama-3.1          & \texttt{meta-llama/\allowbreak Llama-3.1-8B-Instruct}    & BF16 & 13 & 6 & 1 & 1 \\
+   & GLM-5.2            & \texttt{nvidia/\allowbreak GLM-5.2-NVFP4}                & NVFP4 & 31 & 11 & 1 & 1 \\
+   & Mixtral            & \texttt{mistralai/\allowbreak Mixtral-8x7B-Instruct-v0.1} & BF16 & 19 & 8 & 1 & 1 \\
+   & BitNet 1.58b       & \texttt{microsoft/\allowbreak bitnet-b1.58-2B-4T}        & W1.58/BF16 & 13 & 5 & 1 & 1 \\
+   & GPT-OSS (MXFP4)    & \texttt{openai/\allowbreak gpt-oss-120b}                 & MXFP4 & 13 & 8 & 1 & 1 \\
+   & EAGLE-3            & \texttt{jamesliu1/\allowbreak sglang-EAGLE3-Llama-3.1-Instruct-8B} & BF16 & 13 & 4 & 0 & 1 \\
+   & Gemma-4            & \texttt{google/\allowbreak gemma-4-26B-A4B-it}           & BF16 & 20 & 8 & 1 & 1 \\
+  \midrule
+  \multirow{9}{*}{\makecell[l]{Linear Attention\\\& New Archs}}
+   & Mamba              & \texttt{state-spaces/\allowbreak mamba-2.8b-hf}          & BF16 & 7  & 3 & 1 & 1 \\
+   & Mamba2             & \texttt{mistralai/\allowbreak Mamba-Codestral-7B-v0.1}   & BF16 & 9  & 3 & 1 & 1 \\
+   & RWKV-7             & \texttt{fla-hub/\allowbreak rwkv7-2.9B-g1}               & BF16 & 11 & 2 & 1 & 1 \\
+   & GLA                & \texttt{fla-hub/\allowbreak gla-2.7B-100B}               & BF16 & 11 & 2 & 1 & 1 \\
+   & RetNet             & \texttt{fla-hub/\allowbreak retnet-2.7B-100B}            & BF16 & 11 & 2 & 1 & 1 \\
+   & Qwen-3-Next        & \texttt{Qwen/\allowbreak Qwen3-Next-80B-A3B-Instruct}    & BF16 & 22 & 7 & 1 & 1 \\
+   & Kimi-Linear        & \texttt{moonshotai/\allowbreak Kimi-Linear-48B-A3B-Instruct} & BF16 & 25 & 9 & 1 & 1 \\
+   & TTT-E2E            & \texttt{test-time-training/e2e}                          & BF16 & 8  & 3 & 1 & 1 \\
+   & Jamba              & \texttt{ai21labs/\allowbreak AI21-Jamba-Mini-1.7}        & BF16 & 20 & 8 & 1 & 1 \\
+  \midrule
+  \multirow{6}{*}{\makecell[l]{Vision / Video /\\Audio}}
+   & FLUX.1-Dev         & \texttt{black-forest-labs/\allowbreak FLUX.1-dev}        & BF16 & 16 & 10 & 3 & 1 \\
+   & HunyuanVideo-1.5   & \texttt{hunyuanvideo-community/\allowbreak HunyuanVideo-1.5} & BF16 & 24 & 15 & 4 & 1 \\
+   & SDXL               & \texttt{stabilityai/\allowbreak stable-diffusion-xl-base-1.0} & FP16 & 8  & 8  & 3 & 1 \\
+   & SAM3.1             & \texttt{facebook/\allowbreak sam3.1}                     & BF16 & 8  & 6  & 8 & 1 \\
+   & Whisper            & \texttt{openai/\allowbreak whisper-large-v3}             & FP16 & 13 & 6  & 2 & 1 \\
+   & CosyVoice3         & \texttt{FunAudioLLM/\allowbreak Fun-CosyVoice3-0.5B-2512} & BF16 & 14 & 9  & 2 & 1 \\
+  \midrule
+  \multirow{7}{*}{\makecell[l]{Multimodal \&\\Encoders}}
+   & Qwen2-VL           & \texttt{Qwen/\allowbreak Qwen2-VL-7B-Instruct}           & BF16 & 20 & 10 & 2 & 1 \\
+   & Qwen3-VL-8B        & \texttt{Qwen/\allowbreak Qwen3-VL-8B-Instruct}           & BF16 & 27 & 13 & 3 & 1 \\
+   & Qwen3-VL-235B      & \texttt{Qwen/\allowbreak Qwen3-VL-235B-A22B-Instruct-FP8} & FP8  & 27 & 13 & 3 & 1 \\
+   & Qwen-2.5-Omni      & \texttt{Qwen/\allowbreak Qwen2.5-Omni-7B}                & BF16 & 20 & 10 & 2 & 1 \\
+   & SigLIP-2           & \texttt{google/\allowbreak siglip2-so400m-patch16-naflex} & BF16 & 3  & 3  & 1 & 1 \\
+   & DINOv3             & \texttt{facebook/\allowbreak dinov3-vit7b16-pretrain-lvd1689m} & BF16 & 4  & 2  & 1 & 1 \\
+   & SwinV2             & \texttt{timm/\allowbreak swinv2\_large\_window12\_192.ms\_in22k} & FP32 & 4 & 3 & 2 & 1 \\
+  \midrule
+  \multirow{5}{*}{\makecell[l]{Edge \&\\Detection}}
+   & MobileNetV4        & \texttt{timm/\allowbreak mobilenetv4\_conv\_medium.\allowbreak e500\_r256\_in1k} & FP32 & 5  & 2  & 1 & 1 \\
+   & ConvNeXtV2         & \texttt{facebook/\allowbreak convnextv2-base-22k-384}    & FP32 & 7  & 1  & 1 & 1 \\
+   & EfficientNetV2     & \texttt{timm/\allowbreak efficientnetv2\_rw\_m.agc\_in1k} & FP32 & 6  & 3  & 1 & 1 \\
+   & YOLOv10            & \texttt{jameslahm/\allowbreak yolov10n}                  & FP16 & 8  & 11 & 3 & 1 \\
+   & RTDetrV2           & \texttt{PekingU/\allowbreak rtdetr\_v2\_r101vd}          & FP32 & 16 & 8  & 4 & 1 \\
+  \midrule
+  \multirow{6}{*}{\makecell[l]{3D / Robotics /\\Science}}
+   & 3DGS               & \texttt{nerfstudioteam/\allowbreak datasets} (mip-NeRF~360) & FP32 & 3  & 1  & 0 & 1 \\
+   & InstantNGP         & \texttt{nerfstudioteam/\allowbreak datasets} (fox)       & FP16 & 0  & 0  & 1 & 1 \\
+   & PointTransformerV3 & \texttt{Pointcept/\allowbreak PointTransformerV3}        & FP32 & 3  & 1  & 0 & 1 \\
+   & OpenFold3          & \texttt{OpenFold/\allowbreak OpenFold3}                  & BF16 & 7  & 14 & 5 & 1 \\
+   & Pi0                & \texttt{openpi/\allowbreak pi0\_aloha\_pen\_uncap}       & BF16 & 13 & 5  & 2 & 1 \\
+   & DP3                & \texttt{3d-diffusion-policy.\allowbreak github.io}       & FP32 & 8  & 3  & 1 & 1 \\
+  \midrule
+  \multirow{5}{*}{\makecell[l]{Recommendation\\\& Specialized}}
+   & DLRMv2             & criteo (1\,TB click logs)                                 & FP32 & 3  & 3  & 0 & 1 \\
+   & LightGCN           & MovieLens / Gowalla / Amazon-Book                         & FP32 & 2  & 1  & 0 & 1 \\
+   & BGE-M3             & \texttt{BAAI/\allowbreak bge-m3}                          & FP16 & 8  & 3  & 3 & 1 \\
+   & ColBERTv2          & \texttt{colbert-ir/\allowbreak colbertv2.0}               & FP16 & 7  & 4  & 3 & 1 \\
+   & LLaDA              & \texttt{GSAI-ML/\allowbreak LLaDA-8B-Instruct}            & BF16 & 6  & 3  & 1 & 1 \\
+  \midrule
+  \multirow{2}{*}{World Models}
+   & Oasis              & \texttt{Etched/\allowbreak oasis-500m}                   & BF16 & 7  & 7  & 5 & 1 \\
+   & V-JEPA 2           & \texttt{facebook/\allowbreak vjepa2-vitl-fpc64-256}      & BF16 & 4  & 3  & 3 & 1 \\
+  % \midrule
+  % \multirow{3}{*}{\makecell[l]{Quantized\\Configs}}
+  %  & DeepSeek-V3.2 FP8  & \texttt{deepseek-ai/\allowbreak DeepSeek-V3.2-Exp}       & FP8   & 26 & 9  & 1 & 1 \\
+  %  & Qwen3-VL FP8       & \texttt{Qwen/\allowbreak Qwen3-VL-235B-A22B-Instruct-FP8} & FP8   & 26 & 12 & 3 & 1 \\
+  %  & GPT-OSS MXFP4      & \texttt{openai/\allowbreak gpt-oss-120b}                 & MXFP4 & 14 & 5  & 1 & 1 \\
+  \bottomrule
+  \end{tabular}
+
+  \vspace{4pt}
+  {\small \textit{Note:} A value of 0 indicates that the current implementation does not expose a benchmark task at that level. Quantized configurations reuse the same high-level task graph as their underlying architecture while activating distinct quantized kernels and execution paths.}
+\end{table}
+
+
+\section{Interface Compatibility Examples}
+\label{app:interface}
+
+To illustrate the interface-compatible design, we show side-by-side comparisons of \fastkernels{} module interfaces with their corresponding vLLM modules.
+
+  \medskip
+  \noindent\textbf{Example: Mamba-2 mixer.}
+
+  \noindent
+  \begin{minipage}[t]{0.48\linewidth}
+  \vspace{0pt}
+  \textbf{\fastkernels{} interface:}
+  \begin{lstlisting}
+  class Mamba2Mixer(nn.Module):
+    def __init__(self,
+        hidden_size,
+        ssm_state_size,
+        conv_kernel_size,
+        intermediate_size,
+        use_conv_bias,
+        use_bias,
+        n_groups=1,
+        num_heads=128,
+        head_dim=64,
+        rms_norm_eps=1e-5,
+        activation="silu",
+        use_rms_norm=True,
+        ...):
+      ...
+
+    def forward(self, hidden_states):
+      ...
+  \end{lstlisting}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+  \vspace{0pt}
+  \textbf{vLLM interface:}
+  \begin{lstlisting}
+  class MambaMixer2(nn.Module):
+    def __init__(self,
+        hidden_size,
+        ssm_state_size,
+        conv_kernel_size,
+        intermediate_size,
+        use_conv_bias,
+        use_bias,
+        n_groups=1,
+        num_heads=128,
+        head_dim=64,
+        rms_norm_eps=1e-5,
+        activation="silu",
+        use_rms_norm=True,
+        ...):
+      ...
+
+    def forward(self, hidden_states):
+      ...
+  \end{lstlisting}
+  \end{minipage}
+
+  \medskip
+
+
+  \noindent\textbf{Example: Mamba-2 gated RMSNorm.}
+
+  \noindent
+  \begin{minipage}[t]{0.48\linewidth}
+  \vspace{0pt}
+  \textbf{\fastkernels{} interface:}
+  \begin{lstlisting}
+  class Mixer2RMSNormGated(
+      nn.Module):
+    def __init__(self,
+                 full_hidden_size,
+                 full_n_groups,
+                 use_rms_norm=True,
+                 eps=1e-6):
+      ...
+
+    def forward(self, x, gate):
+      ...
+  \end{lstlisting}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+  \vspace{0pt}
+  \textbf{vLLM interface:}
+  \begin{lstlisting}
+  class Mixer2RMSNormGated(
+      nn.Module):
+    def __init__(self,
+                 full_hidden_size,
+                 full_n_groups,
+                 use_rms_norm=True,
+                 eps=1e-6):
+      ...
+
+    def forward(self, x, gate):
+      ...
+  \end{lstlisting}
+  \end{minipage}
+
+  \medskip
+
+  The shared \texttt{\_\_init\_\_} and \texttt{forward} arguments make substitution a file swap: call sites need not change, and any residual differences are optional framework kwargs rather than a different compute interface.
+
+\section{Scenario Sets}
+\label{app:scenarios}
+
+Scenario sets are YAML tables shipped with \fastkernels{}.
+Each row fixes a checkpoint, tensor-parallel degree, dtype, and the workloads to run; per-workload datasets, request counts, and sequence lengths are defined once in a workload registry, so every tier and every run of a set sees identical inputs.
+Four sets ship with the benchmark:
+\begin{itemize}[leftmargin=*, itemsep=1pt, topsep=2pt]
+\item \textbf{full}: one scenario per architecture (47 scenarios, 184 workloads, TP 1--8, BF16/FP16/FP32/FP8/MXFP4/NVFP4), and therefore every task. It is the set on which we validate the baselines against production references (Section~\ref{sec:eval-results}, Appendix~\ref{app:reference_perf}).
+\item \textbf{default}: the 11 scenarios of Table~\ref{tab:default_scenarios} (48 workloads), on which all agent results are reported. It contains at least one model per category, which \textsc{MacroEval}'s per-family averaging requires, spans TP 1, 2, and 4 and BF16, FP16, FP8, and MXFP4 execution, and pairs throughput workloads (batched request mixes) with latency workloads (single requests or small fixed batches) for every model. Its B200 capture exercises 133 L1--L3 tasks (47 L1, 64 L2, 22 L3), which are the agents' targets; \texttt{oasis\_rollout}, a whole-model rollout driver rather than a kernel, is excluded from scoring, leaving 21 L3 targets.
+\item \textbf{minimal}: Llama-3.1-8B with two workloads, a smoke test for the capture-to-bench pipeline.
+\item \textbf{vllm\_only}: the 16 architectures whose reference is vLLM, used to compare vLLM releases for drift tracking (Appendix~\ref{app:drift}).
+\end{itemize}
+Agents are scored on the default set rather than the full set because of cost: the long-horizon agents of Section~\ref{sec:eval-agents} spend 1{,}763--2{,}512 agent-hours each on the default set's 133 operators (Appendix~\ref{app:agents}), and the full set's architectures use more than twice as many L1--L3 tasks (337 versus 159 under the counting rule of Appendix~\ref{app:architectures}, of which the default workloads invoke 133 on B200).
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{The default scenario set.} Workloads are listed by name; their datasets and sizes are defined in the workload registry (Appendix~\ref{app:experimental}).}
+  \label{tab:default_scenarios}
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}llcl>{\raggedright\arraybackslash}p{5.6cm}@{}}
+  \toprule
+  \textbf{Model} & \textbf{Category} & \textbf{TP} & \textbf{dtype} & \textbf{Workloads} \\
+  \midrule
+  Llama-3.1-8B-Instruct & Dense \& MoE LLMs & 1 & BF16 & mixed, long-context, single request, fixed batch 32 \\
+  gpt-oss-120b & Dense \& MoE LLMs & 2 & MXFP4 & mixed, long-context, single request, fixed batch 32 \\
+  Qwen3-Next-80B-A3B-Instruct & Linear Attention & 2 & BF16 & mixed, long-context, single request, fixed batch 32 \\
+  Kimi-Linear-48B-A3B-Instruct & Linear Attention & 2 & BF16 & mixed, long-context, single request, fixed batch 32 \\
+  GLA-2.7B & Linear Attention & 1 & BF16 & mixed, long-context, single request, fixed batch 32 \\
+  FLUX.1-dev & Vision / Video / Audio & 1 & BF16 & 512 and 1024 px, batched and single image \\
+  Qwen3-VL-235B-A22B-Instruct-FP8 & Multimodal & 4 & FP8 & text only, image, video, single image, single video \\
+  YOLOv10n & Edge \& Detection & 1 & FP16 & COCO val, single image, batch 4 \\
+  OpenFold3 & 3D / Robotics / Science & 1 & BF16 & four length buckets, batched and single \\
+  BGE-M3 & Recommendation & 1 & FP16 & MLDR documents, single request, fixed batch 32 \\
+  Oasis-500M & World Models & 1 & FP16 & four rollout / denoising settings, batch-1 latency \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Workload Capture and Case Selection}
+\label{app:capture}
+
+\paragraph{Instrumentation.}
+\texttt{fastkernels capture <set>} loads each scenario into its own engine process (a TP-$N$ scenario claims $N$ GPUs; scenarios are packed onto the GPU pool and isolated so that a crash in one does not affect the others) and runs every listed workload on its real inputs.
+Before the model is built, it wraps the constructor and \texttt{forward} of every \texttt{nn.Module} class under \texttt{tasks/baseline}.
+A constructor call is recorded as a reconstructable \emph{recipe}: configuration dataclasses and enums with their field values, dtypes, tensor shapes, and references to other captured operators (e.g., the linear layers inside an attention block); runtime handles such as process groups are marked opaque.
+A forward call is recorded as the shape, dtype, and, for non-contiguous tensors, stride of every tensor argument, together with the values of scalar arguments.
+Shape capture stores no weights or activation values; golden inputs for data-dependent operators are recorded separately (below).
+
+\paragraph{Deduplication.}
+Each call is keyed by the canonical serialization of its record, and identical keys are merged into one \emph{variant} that keeps a call count.
+Each forward variant also records which constructor variants built the instances it ran on, so the benchmark can rebuild exactly the module configuration that produced each shape.
+Since every layer of a model and every decode step with the same batch composition produce the same key, the 12.4M L1--L3 forward calls of the default B200 capture reduce to 93.3K variants across its 48 per-workload reports, and to 87.7K distinct (constructor, forward) cases once merged across reports.
+The distribution is long-tailed: half of the operators have at most seven distinct cases, while operators whose shapes follow the per-step token count (decode attention, RMSNorm, linear layers, embeddings) reach thousands.
+For the few operators that read the global inference context inside \texttt{forward} (MLA attention), a coarse context summary (prefill or decode, and a power-of-two bucket of the number of prefill sequences) is folded into the key, which is enough to rebuild the code path without defeating deduplication.
+
+\paragraph{Verification.}
+Two independent checks run after every workload.
+First, a forward pre-hook, registered separately from the wrappers, re-observes every operator call; its per-operator keys and counts must match the wrapper records.
+Second, a mock continuous-batching and chunked-prefill scheduler, driven only by each request's real prompt and generated lengths, the engine's token and sequence budgets, and its KV-block pool, replays the serving schedule and predicts the per-step batch composition; the captured leading dimensions (token counts, sequence counts, batch sizes) must agree with it.
+The replay does not model speculative decoding, so only the first check applies to EAGLE-3.
+
+\paragraph{Case selection.}
+\texttt{fastkernels bench} loads every report of a capture and deduplicates cases across reports by (constructor recipe, forward record).
+When an operator has more than five distinct cases (the default budget), it keeps the smallest, median, and largest by total input elements and fills the remaining slots with the most frequently called cases, so the selection covers the size range rather than only the hot decode shape.
+On the default B200 capture this yields 582 benchmarked cases over the 154 operator classes defined in the 133 target tasks.
+
+\paragraph{Input materialization.}
+Floating-point inputs are drawn from a standard normal (FP8 inputs are clamped normals cast to FP8) and masks are all ones.
+Integer tensors are made valid for the call: cumulative sequence-length vectors are rebuilt as partitions consistent with the query and key token counts, token and position indices are bounded by the vocabulary size and maximum position, expert indices by the expert count, and slot mappings and block tables by the cache they index.
+Captured non-contiguous layouts are reproduced with the recorded strides.
+Baseline and candidate share randomly initialized weights; quantized weights (block-scaled FP8, NVFP4, MXFP4) are produced with the model's own quantization and weight-preparation routines, so kernels see the layouts they would see after checkpoint loading.
+For data-dependent operators such as MoE dispatch, whose control flow depends on input values (Appendix~\ref{sec:eval-input-capture}), the kernel tier can instead replay golden inputs captured from real end-to-end executions, so that correctness and performance are measured on the tensors the model actually produces.
+Cases whose inputs the baseline rejects, or whose baseline output is all zeros (so that a stub would pass), are skipped.
+The all-reduce and row-parallel linear run in an NCCL group spawned with world size equal to the capture's TP degree, with every rank executing the same seeded cases.
+
+\paragraph{Correctness and timing.}
+Each case runs three rounds of fresh inputs, and an output passes when at least 99\% of its elements are within per-dtype tolerances ($\mathrm{atol},\mathrm{rtol}$ of $10^{-5},10^{-3}$ for FP32; $10^{-2},10^{-2}$ for FP16 and BF16; $0.125,0.125$ for FP8).
+Timing uses CUDA events with 10 warm-up and 50 timed iterations, flushing the L2 cache and rotating input buffers between iterations, and reports the median.
+Each operator runs in its own process, where the harness checks the identity of the timing primitive and of its own critical functions, background-thread counts, and output types, and reports any tampering as a reward hack.
+
+\section{Case Study: Captured Inputs Matter for Data-Dependent Ops}
+\label{sec:eval-input-capture}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/moe_input_capture.pdf}
+\caption{\textbf{Input capture changes data-dependent execution.} First MoE layer of Qwen3-VL-30B-A3B-Instruct-FP8 (128 experts, top-8 routing) under three inputs: real WildChat requests, random token IDs (matched lengths), and random tensors injected at the gate. Random tensors look near-uniform; random tokens skew differently from real requests, with only 4 of the top-16 hot experts in common.}
+\label{fig:moe-input-capture}
+\end{figure}
+
+Many production operators have data-dependent control flow---which experts, sparse blocks, cache slots, or communication paths execute is determined by the input.
+We isolate this effect on a well-known case: the first MoE gate of Qwen3-VL-30B-A3B-Instruct-FP8 (Figure~\ref{fig:moe-input-capture}). Random tensors yield a near-uniform gate (Gini $0.232$); random token IDs over-concentrate load and identify different hot experts from real WildChat requests (Gini $0.480$ vs.\ $0.339$; only $4 / 16$ shared hot experts).
+\fastkernels{}'s capture-and-replay path therefore rewards data-dependent kernels on the tensors production requests actually create, rather than on synthetic control flow: the kernel tier can replay golden inputs captured from real end-to-end executions (Appendix~\ref{app:capture}), and the end-to-end tier runs real requests.
+
+\section{Experimental Details}
+\label{app:experimental}
+
+\paragraph{Hardware.}
+End-to-end L4 validate results in Section~\ref{sec:eval-results} and Tables~\ref{tab:bench_detail}--\ref{tab:bench_detail_b} are measured on a NVIDIA DGX B200 box with 8x NVIDIA B200 SXM GPUs, 180 GB HBM3e each (1.44 TB total), interconnected via 5th-gen NVLink/NVSwitch.
+Single-GPU experiments use one GPU; multi-GPU experiments use up to $8\times$B200 (tensor-parallel degree matching the production reference: e.g. TP=2 Mixtral/GPT-OSS, TP=8 GLM-5.2).
+L1--L3 agent captures in Section~\ref{sec:eval-agents} use the same B200 nodes.
+The Hopper results in Appendix~\ref{app:reference_perf_h200} repeat the same L4 scenario table on a node with 8x NVIDIA H200 SXM GPUs, 141 GB HBM3e each, using the same tensor-parallel degrees; GLM-5.2 is not run there because its NVFP4 kernels require Blackwell.
+
+\paragraph{Serving benchmark.}
+Autoregressive L4 throughput uses a mixed-length request mix and a long-context mix against the production server (vLLM, SGLang, or FLA); latency uses single-request (batch 1) and fixed-batch-32 decoding.
+Each latency measurement is the median of 5 iterations.
+Non-AR models use family-specific public workloads (Parti-prompts, SEED-TTS-Eval, LibriSpeech, COCO val, Food101, MS MARCO, ALOHA, etc.) as listed in Tables~\ref{tab:bench_detail} and \ref{tab:bench_detail_b}.
+
+
+\clearpage
+\section{Reference Performance and Correctness Details}
+\label{app:reference_perf}
+
+Table~\ref{tab:bench_detail} and Table~\ref{tab:bench_detail_b} report the B200 L4 validate run for every architecture; Appendix~\ref{app:reference_perf_h200} repeats it on H200.
+Figures~\ref{fig:eval-thr-breakdown} and~\ref{fig:eval-lat-breakdown} plot the per-architecture B200 speedups; Figures~\ref{fig:eval-e2e-h200}--\ref{fig:eval-lat-breakdown-h200} are the H200 counterparts (the category-level B200 bars are Figure~\ref{fig:eval-e2e} in the main text).
+For each row we list the production reference, the public workload mix, the geometric mean of throughput and latency speedups over that mix, and the alignment metric against the reference.
+Autoregressive rows summarize mean prefix-match length and exact-match rate across throughput scenarios; cosine, top-1, box/label, NLL, and pass flags are reported as published by the corresponding harness.
+If a model has no latency workload, Lat.\ is ``---''.
+Per-row geometric means match the aggregator used in \textsc{MacroEval} (Section~\ref{sec:metrics}) and in Section~\ref{sec:eval-results}.
+
+\subsection{Blackwell (B200) Results}
+\label{app:reference_perf_b200}
+
+\begin{table}[H]
+      \centering
+      \caption{End-to-end B200 validate results for \fastkernels{} architectures (Part I).
+      \emph{Thr.} and \emph{Lat.} are geometric-mean speedups versus the named production reference.
+      \emph{Correctness} is the harness alignment summary (prefix-match length and exact-match rate for autoregressive models; cosine, top-1, or pass flags otherwise).}
+      \label{tab:bench_detail}
+      \scriptsize
+      \setlength{\tabcolsep}{2.5pt}
+      \resizebox{\linewidth}{!}{%
+      \begin{tabular}{@{}ll>{\raggedright\arraybackslash}p{1.55cm}>{\raggedright\arraybackslash}p{2.6cm}cc>{\raggedright\arraybackslash}p{2.35cm}@{}}
+      \toprule
+      \textbf{Category} & \textbf{Architecture} & \textbf{Reference} & \textbf{Workload} & \textbf{Thr.} & \textbf{Lat.} & \textbf{Correctness} \\
+      \midrule
+      \multirow{7}{*}{Dense \& MoE LLMs}
+       & Llama-3.1 & \texttt{vLLM} & WildChat mixed / long-context & $0.95\times$ & $1.02\times$ & prefix 136.3 / EM 28.6\% \\
+       & Mixtral & \texttt{vLLM} & WildChat mixed / long-context & $1.06\times$ & $1.00\times$ & prefix 86.3 / EM 12.2\% \\
+       & GLM-5.2 (NVFP4) & \texttt{vLLM} & WildChat mixed / long-context & $1.41\times$ & $0.94\times$ & prefix 33.5 / EM 8.9\% \\
+       & BitNet 1.58b & \makecell[l]{Microsoft \\ BitNet GPU} & WildChat mixed / long-context & $1.10\times$ & $1.20\times$ & prefix 122.1 / EM 11.0\% \\
+       & GPT-OSS (MXFP4) & \texttt{vLLM} & WildChat mixed / long-context & $0.95\times$ & $0.95\times$ & prefix 53.8 / EM 8.2\% \\
+       & EAGLE-3 & \texttt{SGLang} & WildChat EAGLE-3 speculative decoding & $0.93\times$ & $1.04\times$ & prefix 160.6 / EM 37.5\% \\
+       & Gemma-4 & \texttt{vLLM} & WildChat mixed / long-context & $1.00\times$ & $1.09\times$ & prefix 70.0 / EM 9.6\% \\
+      \midrule
+      \multirow{9}{*}{\makecell[l]{Linear Attention\\\& New Archs}}
+       & Mamba & \texttt{vLLM} & WildChat mixed / long-context & $2.10\times$ & $2.02\times$ & prefix 129.5 / EM 31.9\% \\
+       & Mamba2 & \texttt{vLLM} & WildChat mixed / long-context & $0.96\times$ & $0.95\times$ & prefix 203.1 / EM 54.6\% \\
+       & RWKV-7 & \texttt{FLA} & mixed / long-context serving & $1.22\times$ & $1.26\times$ & prefix 100.7 / EM 14.8\% \\
+       & GLA & \texttt{FLA} & mixed / long-context serving & $1.44\times$ & $1.75\times$ & prefix 262.1 / EM 70.9\% \\
+       & RetNet & \texttt{FLA} & mixed / long-context serving & $3.40\times$ & $1.73\times$ & prefix 94.4 / EM 29.9\% \\
+       & Qwen-3-Next & \texttt{vLLM} & mixed / long-context serving & $1.21\times$ & $0.99\times$ & prefix 11.7 / EM 1.4\% \\
+       & Kimi-Linear & \texttt{vLLM} & mixed / long-context serving & $1.21\times$ & $1.04\times$ & prefix 63.8 / EM 9.2\% \\
+       & TTT-E2E & JAX ref. & pretrain + meta forward & $1.95\times$ & $1.95\times$ & token NLL $\Delta$ 0.022 \\
+       & Jamba & \texttt{vLLM} & mixed / long-context serving & $0.84\times$ & $1.10\times$ & prefix 91.4 / EM 15.6\% \\
+      \midrule
+      \multirow{6}{*}{\makecell[l]{Vision / Video /\\Audio}}
+       & FLUX.1-Dev & \texttt{vllm-omni} & Parti-prompts; 512 / 1024 & $1.31\times$ & $1.10\times$ & min cos 0.949 \\
+       & HunyuanVideo-1.5 & \texttt{vllm-omni} & 480p short / medium T2V & $1.01\times$ & $1.11\times$ & min cos 0.959 \\
+       & SDXL & \texttt{diffusers} & Parti-prompts; 512 / 1024 & $1.03\times$ & $1.02\times$ & min cos 0.919 \\
+       & SAM3.1 & \texttt{sam3} & image pipeline + video frames & $1.04\times$ & $1.06\times$ & pass / min cos 0.871 \\
+       & Whisper & \texttt{vLLM} & LibriSpeech test.clean & $1.07\times$ & $1.03\times$ & prefix 385.9 / EM 63.5\% \\
+       & CosyVoice3 & \texttt{vllm-omni} & SEED-TTS-Eval; short / medium / long & $2.30\times$ & $2.34\times$ & mel cos 0.991 \\
+      \midrule
+      \multirow{7}{*}{\makecell[l]{Multimodal \&\\Encoders}}
+       & Qwen2-VL & \texttt{vLLM} & text / image / video & $1.24\times$ & $1.01\times$ & prefix 246.0 / EM 43.9\% \\
+       & Qwen3-VL-8B & \texttt{vLLM} & text / image / video & $1.26\times$ & $1.05\times$ & prefix 141.1 / EM 20.2\% \\
+       & Qwen3-VL-235B (FP8) & \texttt{vLLM} & text / image / video & $1.59\times$ & $0.95\times$ & prefix 40.1 / EM 2.9\% \\
+       & Qwen-2.5-Omni & \texttt{vLLM} & text / image / video / audio & $1.38\times$ & $1.07\times$ & prefix 161.4 / EM 26.9\% \\
+       & SigLIP-2 & \texttt{timm} & default-res + high-res & $1.01\times$ & $1.06\times$ & min cos 1.000 \\
+       & DINOv3 & \texttt{timm} & default-res + high-res & $0.94\times$ & $0.94\times$ & min cos 1.000 \\
+       & SwinV2 & \texttt{timm} & default-res + high-res & $0.94\times$ & $0.91\times$ & min cos 1.000 \\
+      \bottomrule
+      \end{tabular}%
+      }
+  \end{table}
+
+  \begin{table}[H]
+      \centering
+      \caption{End-to-end B200 validate results for \fastkernels{} architectures (Part II).}
+      \label{tab:bench_detail_b}
+      \scriptsize
+      \setlength{\tabcolsep}{2.5pt}
+      \resizebox{\linewidth}{!}{%
+      \begin{tabular}{@{}ll>{\raggedright\arraybackslash}p{1.55cm}>{\raggedright\arraybackslash}p{2.6cm}cc>{\raggedright\arraybackslash}p{2.35cm}@{}}
+      \toprule
+      \textbf{Category} & \textbf{Architecture} & \textbf{Reference} & \textbf{Workload} & \textbf{Thr.} & \textbf{Lat.} & \textbf{Correctness} \\
+      \midrule
+      \multirow{5}{*}{\makecell[l]{Edge \&\\Detection}}
+       & MobileNetV4 & \texttt{timm} & default-res + high-res & $1.03\times$ & $1.04\times$ & min cos 1.000 \\
+       & ConvNeXtV2 & \texttt{transformers} & Food101 validation & $1.00\times$ & $1.04\times$ & top-1 1.000 \\
+       & EfficientNetV2 & \texttt{timm} & Food101 validation & $1.04\times$ & $1.09\times$ & top-1 1.000 \\
+       & YOLOv10 & \makecell[l]{THU-MIG/ \\ yolov10} & COCO val detection & $1.14\times$ & $0.94\times$ & box 0.997 / score 1.000 / lbl 100\% \\
+       & RTDetrV2 & \texttt{transformers} & COCO val detection & $0.97\times$ & $0.90\times$ & box 0.928 / score 1.000 / lbl 73.4\% \\
+      \midrule
+      \multirow{6}{*}{\makecell[l]{3D / Robotics /\\Science}}
+       & 3DGS & \texttt{gsplat} & deterministic orbit render & $1.00\times$ & $0.99\times$ & pass / RGB cos 1.000 \\
+       & InstantNGP & \texttt{pyngp} & fox render & $0.98\times$ & $0.98\times$ & pass / RGBA cos 1.000 \\
+       & PointTransformerV3 & PTv3 ref. & ScanObjectNN + batch-8 & $0.98\times$ & $0.99\times$ & feat.\ cos 0.986 (fail) \\
+       & OpenFold3 & OpenFold3 ref. & 4 length buckets & $1.01\times$ & $1.02\times$ & align 100\% \\
+       & Pi0 & \texttt{OpenPI} & ALOHA 3-cam / 1-cam & $3.09\times$ & $4.17\times$ & pass / action cos 1.000 \\
+       & DP3 & \makecell[l]{3D-Diffusion- \\ Policy} & 1-env + batch-8 & $1.13\times$ & $1.13\times$ & min cos 1.000 \\
+      \midrule
+      \multirow{5}{*}{\makecell[l]{Recommendation\\\& Specialized}}
+       & DLRMv2 & \texttt{TorchRec} & Adult Census CTR batch & $1.10\times$ & $1.37\times$ & cosine undefined \\
+       & LightGCN & \texttt{PyG} & recommend-batch & $1.02\times$ & $1.04\times$ & pass / cos 1.000 \\
+       & BGE-M3 & \texttt{vLLM} & MLDR documents & $2.35\times$ & $0.97\times$ & pass / cos 0.999 \\
+       & ColBERTv2 & \texttt{vLLM} & MS MARCO passages & $3.13\times$ & $1.33\times$ & pass / cos 1.000 \\
+       & LLaDA & \texttt{Fast-dLLM} & HumanEval Fast-dLLM dual & $0.96\times$ & $0.96\times$ & prefix 168.6 / EM 56.1\% \\
+      \midrule
+      \multirow{2}{*}{World Models}
+       & Oasis & \texttt{open-oasis} & Minecraft clips; 4 DDIM settings & $1.17\times$ & $1.16\times$ & pass / min cos 0.997 \\
+       & V-JEPA 2 & \texttt{transformers} & predictor / encoder & $0.97\times$ & $0.98\times$ & pass / cos 1.000 \\
+      \bottomrule
+      \end{tabular}%
+      }
+
+      \vspace{4pt}
+      {\small \textit{Note:} Speedup values are geometric means over all validate scenarios for that row; values below $1$ indicate slower execution than the reference.
+      CosyVoice3 e2e correctness is the overall median mel-spectrogram cosine from the run log (the compact markdown table left this field blank).
+      DLRMv2 reports \texttt{pass=False} with NaN cosine against TorchRec on this checkpoint; PointTransformerV3 reports \texttt{pass=False} at feature cosine $0.986$.
+      RetNet's $3.40\times$ throughput geomean still mixes a $6.83\times$ mixed scenario (prefix 21.2) with $1.69\times$ long-context (prefix 167.6).}
+  \end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/eval_speedup_breakdown_b200.pdf}
+  \caption{\textbf{Per-architecture throughput speedup on B200}, grouped by category. Bars taller than the axis are clipped and labeled with their value; the dashed line marks parity.}
+  \label{fig:eval-thr-breakdown}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/eval_latency_breakdown_b200.pdf}
+  \caption{\textbf{Per-architecture latency speedup on B200}, drawn as in Figure~\ref{fig:eval-thr-breakdown}.}
+  \label{fig:eval-lat-breakdown}
+\end{figure}
+
+\subsection{Hopper (H200) Results}
+\label{app:reference_perf_h200}
+
+Tables~\ref{tab:bench_detail_h200} and~\ref{tab:bench_detail_h200_b} repeat the L4 validate run on $8\times$H200 (Appendix~\ref{app:experimental}) with the same scenario table, workloads, references, and aggregation as the B200 tables above.
+Figure~\ref{fig:eval-e2e-h200} is the H200 counterpart of Figure~\ref{fig:eval-e2e}, and Figures~\ref{fig:eval-thr-breakdown-h200} and~\ref{fig:eval-lat-breakdown-h200} are the H200 counterparts of Figures~\ref{fig:eval-thr-breakdown} and~\ref{fig:eval-lat-breakdown}.
+Over the 46 architectures that run on both GPUs, the throughput geomean is $1.19\times$ on H200 versus $1.22\times$ on B200, and the latency geomean is $1.15\times$ on both.
+The four largest H200 throughput gains (ColBERTv2, RetNet, Pi0, CosyVoice3) are also among the five largest on B200, and dense and MoE LLM serving stays at parity ($0.99\times$); the largest drops relative to B200 are Mamba ($2.10\times \to 1.08\times$) and BGE-M3 ($2.35\times \to 1.37\times$).
+
+\begin{table}[H]
+      \centering
+      \caption{End-to-end H200 validate results for \fastkernels{} architectures (Part I). Columns as in Table~\ref{tab:bench_detail}.
+      $^\dagger$Re-run serially on a second $8\times$H200 node (see the note under Table~\ref{tab:bench_detail_h200_b}).}
+      \label{tab:bench_detail_h200}
+      \scriptsize
+      \setlength{\tabcolsep}{2.5pt}
+      \resizebox{\linewidth}{!}{%
+      \begin{tabular}{@{}ll>{\raggedright\arraybackslash}p{1.55cm}>{\raggedright\arraybackslash}p{2.6cm}cc>{\raggedright\arraybackslash}p{2.35cm}@{}}
+      \toprule
+      \textbf{Category} & \textbf{Architecture} & \textbf{Reference} & \textbf{Workload} & \textbf{Thr.} & \textbf{Lat.} & \textbf{Correctness} \\
+      \midrule
+      \multirow{7}{*}{Dense \& MoE LLMs}
+       & Llama-3.1 & \texttt{vLLM} & WildChat mixed / long-context & $0.97\times$ & $1.00\times$ & prefix 140.3 / EM 28.5\% \\
+       & Mixtral & \texttt{vLLM} & WildChat mixed / long-context & $1.02\times$ & $1.01\times$ & prefix 72.9 / EM 9.7\% \\
+       & GLM-5.2 (NVFP4) & \texttt{vLLM} & WildChat mixed / long-context & --- & --- & not run (NVFP4 is Blackwell-only) \\
+       & BitNet 1.58b & \makecell[l]{Microsoft \\ BitNet GPU} & WildChat mixed / long-context & $1.01\times$ & $1.10\times$ & prefix 108.2 / EM 7.8\% \\
+       & GPT-OSS (MXFP4) & \texttt{vLLM} & WildChat mixed / long-context & $1.04\times$ & $0.92\times$ & prefix 63.0 / EM 8.8\% \\
+       & EAGLE-3$^\dagger$ & \texttt{SGLang} & WildChat EAGLE-3 speculative decoding & $0.96\times$ & $1.04\times$ & prefix 179.2 / EM 50.0\% \\
+       & Gemma-4 & \texttt{vLLM} & WildChat mixed / long-context & $0.92\times$ & $1.03\times$ & prefix 72.3 / EM 7.3\% \\
+      \midrule
+      \multirow{9}{*}{\makecell[l]{Linear Attention\\\& New Archs}}
+       & Mamba & \texttt{vLLM} & WildChat mixed / long-context & $1.08\times$ & $1.03\times$ & prefix 147.7 / EM 36.9\% \\
+       & Mamba2 & \texttt{vLLM} & WildChat mixed / long-context & $0.99\times$ & $0.96\times$ & prefix 207.1 / EM 53.5\% \\
+       & RWKV-7 & \texttt{FLA} & mixed / long-context serving & $1.34\times$ & $1.29\times$ & prefix 99.8 / EM 12.7\% \\
+       & GLA & \texttt{FLA} & mixed / long-context serving & $1.34\times$ & $1.67\times$ & prefix 264.1 / EM 71.1\% \\
+       & RetNet & \texttt{FLA} & mixed / long-context serving & $3.05\times$ & $1.75\times$ & prefix 98.8 / EM 32.2\% \\
+       & Qwen-3-Next & \texttt{vLLM} & mixed / long-context serving & $1.02\times$ & $0.99\times$ & prefix 11.4 / EM 1.3\% \\
+       & Kimi-Linear & \texttt{vLLM} & mixed / long-context serving & $1.07\times$ & $0.89\times$ & prefix 18.3 / EM 4.0\% \\
+       & TTT-E2E & JAX ref. & pretrain + meta forward & $1.75\times$ & $1.75\times$ & token NLL $\Delta$ 0.022 \\
+       & Jamba$^\dagger$ & \texttt{vLLM} & mixed / long-context serving & $0.96\times$ & $1.06\times$ & prefix 98.3 / EM 16.4\% \\
+      \midrule
+      \multirow{6}{*}{\makecell[l]{Vision / Video /\\Audio}}
+       & FLUX.1-Dev & \texttt{vllm-omni} & Parti-prompts; 512 / 1024 & $1.11\times$ & $1.02\times$ & min cos 0.981 \\
+       & HunyuanVideo-1.5 & \texttt{vllm-omni} & 480p short / medium T2V & $1.00\times$ & $1.10\times$ & min cos 0.943 \\
+       & SDXL & \texttt{diffusers} & Parti-prompts; 512 / 1024 & $1.01\times$ & $1.02\times$ & min cos 0.923 \\
+       & SAM3.1 & \texttt{sam3} & image pipeline + video frames & $1.13\times$ & $1.10\times$ & pass / min cos 0.871 \\
+       & Whisper & \texttt{vLLM} & LibriSpeech test.clean & $1.04\times$ & $0.95\times$ & prefix 386.1 / EM 63.6\% \\
+       & CosyVoice3 & \texttt{vllm-omni} & SEED-TTS-Eval; short / medium / long & $2.85\times$ & $2.05\times$ & mel cos 0.991 \\
+      \midrule
+      \multirow{7}{*}{\makecell[l]{Multimodal \&\\Encoders}}
+       & Qwen2-VL & \texttt{vLLM} & text / image / video & $1.13\times$ & $0.99\times$ & prefix 248.2 / EM 44.8\% \\
+       & Qwen3-VL-8B & \texttt{vLLM} & text / image / video & $1.21\times$ & $1.02\times$ & prefix 139.5 / EM 19.9\% \\
+       & Qwen3-VL-235B (FP8) & \texttt{vLLM} & text / image / video & $1.56\times$ & $0.98\times$ & prefix 41.9 / EM 2.8\% \\
+       & Qwen-2.5-Omni & \texttt{vLLM} & text / image / video / audio & $1.43\times$ & $1.01\times$ & prefix 158.9 / EM 25.0\% \\
+       & SigLIP-2$^\dagger$ & \texttt{timm} & default-res + high-res & $1.00\times$ & $1.06\times$ & min cos 0.986 \\
+       & DINOv3$^\dagger$ & \texttt{timm} & default-res + high-res & $0.94\times$ & $0.89\times$ & min cos 1.000 \\
+       & SwinV2$^\dagger$ & \texttt{timm} & default-res + high-res & $1.00\times$ & $1.04\times$ & min cos 1.000 \\
+      \bottomrule
+      \end{tabular}%
+      }
+  \end{table}
+
+  \begin{table}[H]
+      \centering
+      \caption{End-to-end H200 validate results for \fastkernels{} architectures (Part II).}
+      \label{tab:bench_detail_h200_b}
+      \scriptsize
+      \setlength{\tabcolsep}{2.5pt}
+      \resizebox{\linewidth}{!}{%
+      \begin{tabular}{@{}ll>{\raggedright\arraybackslash}p{1.55cm}>{\raggedright\arraybackslash}p{2.6cm}cc>{\raggedright\arraybackslash}p{2.35cm}@{}}
+      \toprule
+      \textbf{Category} & \textbf{Architecture} & \textbf{Reference} & \textbf{Workload} & \textbf{Thr.} & \textbf{Lat.} & \textbf{Correctness} \\
+      \midrule
+      \multirow{5}{*}{\makecell[l]{Edge \&\\Detection}}
+       & MobileNetV4$^\dagger$ & \texttt{timm} & default-res + high-res & $1.04\times$ & $1.11\times$ & min cos 1.000 \\
+       & ConvNeXtV2 & \texttt{transformers} & Food101 validation & $1.00\times$ & $0.99\times$ & top-1 1.000 \\
+       & EfficientNetV2 & \texttt{timm} & Food101 validation & $1.06\times$ & $0.99\times$ & top-1 1.000 \\
+       & YOLOv10 & \makecell[l]{THU-MIG/ \\ yolov10} & COCO val detection & $1.04\times$ & $2.61\times$ & box 0.461 / score 0.549 / lbl 94.6\% (fail) \\
+       & RTDetrV2 & \texttt{transformers} & COCO val detection & $1.00\times$ & $0.85\times$ & box 0.928 / score 1.000 / lbl 73.4\% \\
+      \midrule
+      \multirow{6}{*}{\makecell[l]{3D / Robotics /\\Science}}
+       & 3DGS & \texttt{gsplat} & deterministic orbit render & $1.00\times$ & $1.00\times$ & pass / RGB cos 1.000 \\
+       & InstantNGP & \texttt{pyngp} & fox render & $0.99\times$ & $0.99\times$ & pass / RGBA cos 1.000 \\
+       & PointTransformerV3 & PTv3 ref. & ScanObjectNN + batch-8 & $1.00\times$ & $0.99\times$ & feat.\ cos 0.986 (fail) \\
+       & OpenFold3 & OpenFold3 ref. & 4 length buckets & $1.00\times$ & $0.95\times$ & align 100\% \\
+       & Pi0 & \texttt{OpenPI} & ALOHA 3-cam / 1-cam & $2.98\times$ & $3.71\times$ & pass / action cos 1.000 \\
+       & DP3 & \makecell[l]{3D-Diffusion- \\ Policy} & 1-env + batch-8 & $1.14\times$ & $1.17\times$ & min cos 1.000 \\
+      \midrule
+      \multirow{5}{*}{\makecell[l]{Recommendation\\\& Specialized}}
+       & DLRMv2 & \texttt{TorchRec} & Adult Census CTR batch & $1.07\times$ & $1.34\times$ & cosine undefined \\
+       & LightGCN & \texttt{PyG} & recommend-batch & $1.02\times$ & $1.04\times$ & pass / cos 1.000 \\
+       & BGE-M3 & \texttt{vLLM} & MLDR documents & $1.37\times$ & $1.04\times$ & pass / cos 0.997 \\
+       & ColBERTv2 & \texttt{vLLM} & MS MARCO passages & $3.77\times$ & $2.59\times$ & pass / cos 1.000 \\
+       & LLaDA & \texttt{Fast-dLLM} & HumanEval Fast-dLLM dual & $1.04\times$ & $1.05\times$ & prefix 166.2 / EM 53.7\% \\
+      \midrule
+      \multirow{2}{*}{World Models}
+       & Oasis & \texttt{open-oasis} & Minecraft clips; 4 DDIM settings & $1.17\times$ & $1.13\times$ & pass / min cos 0.996 \\
+       & V-JEPA 2 & \texttt{transformers} & predictor / encoder & $0.99\times$ & $1.00\times$ & pass / cos 1.000 \\
+      \bottomrule
+      \end{tabular}%
+      }
+
+      \vspace{4pt}
+      {\small \textit{Note:} Aggregation as in Tables~\ref{tab:bench_detail}--\ref{tab:bench_detail_b}.
+      $^\dagger$EAGLE-3, Jamba, and the four \texttt{timm} encoders failed in the parallel run for environment reasons (an SGLang~0.5.20 \texttt{ServerArgs} API change, a CUDA illegal-memory-access crash that did not reproduce, and gated ImageNet access, respectively) and were re-run serially on a second $8\times$H200 node with the same software stack; the EAGLE-3 re-run also needed a two-line compatibility fix in the SGLang harness.
+      YOLOv10 fails alignment on H200 (box cosine $0.461$ vs.\ $0.997$ on B200), so its H200 speedups, notably the $2.61\times$ latency, are not like-for-like and should not be read as gains.
+      DLRMv2 again reports a degenerate cosine ($0$ here, NaN on B200) with a maximum absolute difference of $0$; PointTransformerV3 fails at feature cosine $0.986$ as on B200.
+      RetNet's $3.05\times$ throughput geomean mixes a $5.61\times$ mixed scenario (prefix 19.1) with $1.66\times$ long-context (prefix 178.4).}
+  \end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/eval_e2e_h200.pdf}
+  \caption{\textbf{End-to-end speedup by category on H200.}
+  Counterpart of Figure~\ref{fig:eval-e2e}: each bar is the geometric mean over the architectures of that category in Tables~\ref{tab:bench_detail_h200} and~\ref{tab:bench_detail_h200_b} (GLM-5.2 is not run).
+  The edge \& detection latency bar includes YOLOv10, which fails alignment on H200; without it, that bar is $0.98\times$.}
+  \label{fig:eval-e2e-h200}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/eval_speedup_breakdown_h200.pdf}
+  \caption{\textbf{Per-architecture throughput speedup on H200}, grouped by category. Bars taller than the axis are clipped and labeled with their value; the dashed line marks parity.}
+  \label{fig:eval-thr-breakdown-h200}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/eval_latency_breakdown_h200.pdf}
+  \caption{\textbf{Per-architecture latency speedup on H200}, drawn as in Figure~\ref{fig:eval-thr-breakdown-h200}. YOLOv10's $2.61\times$ comes from a run that fails alignment (Table~\ref{tab:bench_detail_h200_b}).}
+  \label{fig:eval-lat-breakdown-h200}
+\end{figure}
+
+
+\section{Baseline Versioning and Drift}
+\label{app:drift}
+
+Production kernels are a moving target, so \fastkernels{} is versioned: each release pins the exact revision of every reference library (vLLM, FlashInfer, FLA, diffusers, \dots) per target GPU, and the results in this paper use vLLM~0.26.0 (released 2026-07-25).
+A speedup over a \fastkernels{} baseline is therefore a speedup over production at that release.
+To track drift, \fastkernels{} ships a daily CI job (\texttt{scripts/baseline\_drift.sh}): whenever a new vLLM release appears, it re-benchmarks only the reference models under that release on each pinned GPU type, in isolated environments with one job per node, and computes per-family drift coefficients (per-model geometric mean over workloads, models weighted equally within a family).
+Dividing a speedup measured against the pinned baseline by the family coefficient estimates the speedup against the newer release; when any family moves by more than 10\%, a re-release with re-pinned references is prepared.
+
+To estimate the cadence this implies, we ran the same measurement over the 127 days between vLLM~0.18.0 (2026-03-20) and 0.26.0 on 8$\times$H200 and 8$\times$B200, on the 13 reference models both releases serve, with identical workloads (Table~\ref{tab:drift}).
+The median model moved by only $1.03\times$ (throughput) and $1.01\times$ (latency) on H200, and by $1.07\times$ and $1.09\times$ on B200.
+Drift is concentrated rather than uniform: one family crossed the 10\% threshold on H200 (linear attention and SSMs, $1.15\times$ throughput) and two on B200, where the LLM family is dominated by gpt-oss-120b's MXFP4 path maturing on Blackwell ($2.8\times$, against $1.04\times$ on H200).
+Newer releases are not uniformly faster: Qwen3-VL-235B-FP8 lost throughput on both GPUs ($0.83\times$ and $0.87\times$).
+This implies a re-release at least every four months, sooner on newer hardware whose support for new number formats is still maturing---comparable to the cadence at which any benchmark that stays current must add newly released architectures.
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Reference drift from vLLM~0.18.0 to 0.26.0} (127 days), as computed by the baseline-drift CI job: speedup of the newer release (${>}1$: faster), per-model geometric mean over workloads, models weighted equally within a family.
+  Latencies are 5-iteration medians (${<}1\%$ spread); throughput is one timed pass per workload, which three repeated runs per release of Qwen3-VL-235B-FP8 place within 1.5\%.
+  On B200, six models needed \texttt{nvidia-cutlass-dsl==4.5.3} to import under vLLM~0.18.0.}
+  \label{tab:drift}
+  \small
+  \input{tables/baseline_drift.tex}
+\end{table}
+
+\section{Agent Selection, Configuration, and Cost}
+\label{app:agents}
+
+\paragraph{Selection.}
+We chose agents to cover the three lines of work that currently produce the strongest kernels.
+From the KernelBench ecosystem we run Dr.~Kernel~\citep{drkernel}, one of its most recent agents; of the others we tried, KernelAgent~\citep{kernelagent} did not reproduce its reported results in our setting, and the rest assume KernelBench's single-file tasks with a self-contained reference and cannot load production-shaped modules that require configuration objects, KV-cache wrappers, packed quantized weights, or a distributed context.
+From the MLSys 2026 FlashInfer AI Kernel Generation Contest~\citep{mlsys26contest}, whose tasks were drawn from production LLM workloads and scored against FlashInfer's expert kernels, we run KDA~\citep{kda}, whose full-agent entry placed first on MoE, second on DSA, and third on GDN, and AKO~\citep{ako} (its AKO4X harness was adapted by the GEMM People entry, which placed second on MoE), whose release reports beating the FlashInfer expert kernels on 9 of 10 operator families on B200.
+Finally, we run Claude Code and Codex~\citep{codex} directly, with no harness.
+Because KDA and AKO drive the same Claude model as our Claude Code runs (KDA adds a GPT reviewer), comparing them with Claude Code isolates the contribution of the harness.
+
+\paragraph{Configurations.}
+Table~\ref{tab:agent-config} summarizes how each agent was run.
+All agents receive the same task: the baseline module, its captured cases, and \texttt{fastkernels bench} on a GPU that is leased only while they benchmark or profile.
+A candidate becomes a \emph{winner} only if every non-skipped case passes and its geometric-mean speedup is at least $1\times$; an unchanged baseline that passes counts as correct at $1\times$ but not as a fast$_1$ win.
+The independent campaign optimizes all 133 operators in standalone mode; the sequential campaign regenerates the 86 L2 and L3 operators on top of the frozen lower-level winners.
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Agent configurations.} \emph{Cap}: hang cap on one agent session (the candidate is kept on timeout), not a target budget.}
+  \label{tab:agent-config}
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{6.2cm}l@{}}
+  \toprule
+  \textbf{Agent} & \textbf{Model(s)} & \textbf{Loop per operator} & \textbf{Cap} \\
+  \midrule
+  Dr.~Kernel & released \texttt{drkernel-14b} & 8 samples $\times$ 3 generate--execute--feedback turns (temperature 1.0, top-$p$ 0.95) & --- \\
+  Claude Code & Claude Opus 5 (1M context, high effort) & one session with the default tools & 5\,h \\
+  Codex & GPT-5.6 sol (high) & one session, same prompt as Claude Code & 5\,h \\
+  KDA & Claude Opus 5 (draft, plan, implement); GPT-5.6 sol (review) & one planning cycle, then two implement--review rounds, with KernelWiki and Nsight Compute skills & 6\,h \\
+  AKO & Claude Opus 5 (master and sub-agents) & two master-directed rounds, each a fresh sub-agent rewriting the kernel along one direction; improving kernels are archived & 5\,h/round \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Budget and the number of agents.}
+Table~\ref{tab:agent-cost} reports what each agent spent: 6{,}914 agent-hours and 41.9B tokens (266M output tokens) in total, of which Claude Code, KDA, and AKO account for 1{,}763, 2{,}512, and 2{,}234 agent-hours.
+These are the budgets at which such agents are used in practice: the MLSys 2026 contest gave teams 13 weeks, from the release of the starter kit (January 22) to the kernel deadline (April 24), to optimize five kernels~\citep{mlsys26contest}.
+A leaderboard that samples many models for a few turns per task is far cheaper per entry, but it measures a different system than the long-horizon agents practitioners deploy, and the ranking of those agents is what \fastkernels{} is meant to report.
+Each additional long-horizon agent costs about 2{,}000 agent-hours and 8--22B tokens on the default set.
+Codex is the exception worth noting: its kernel-level results are comparable to the Claude-based agents' at 321 agent-hours.
+\fastkernels{} imposes no structure on the agent, so any agent that writes candidate files can be scored with the same harness.
+
+\paragraph{Evolutionary search.}
+AlphaEvolve~\citep{alphaevolve} and KernelEvolve~\citep{kernelevolve} are not publicly available.
+OpenEvolve~\citep{openevolve} is, and was the organizers' agent baseline in the MLSys 2026 contest, but evolutionary frameworks evaluate a population of candidates in every generation, and on \fastkernels{} each evaluation compiles a kernel and benchmarks it on its production-shaped cases (for collectives, on a full tensor-parallel group); their cost per operator therefore scales with population size times the number of generations, on top of the LLM calls that produce each candidate, which puts a 133-operator campaign beyond our budget.
+The AKO authors also report that, during the contest, search-based methods performed far worse than letting a coding agent optimize kernels directly~\citep{ako}.
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Agent cost per campaign} (133 operators independently, 86 regenerated sequentially).
+  \emph{Agent-hours}: sum over operators of each operator's wall-clock generation time, including relaunches; operators run in parallel, so this is not campaign wall-clock time.
+  \emph{Tokens} as reported by each agent's CLI or API: input, output, and cached (re-read) context; output includes reasoning tokens.
+  Dr.~Kernel runs a local model without prompt caching; KDA counts both its Claude and Codex sessions.}
+  \label{tab:agent-cost}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \input{tables/agent_cost.tex}
+\end{table}
+
+\section{Additional Kernel-Level Results}
+\label{app:fastp}
+
+Figure~\ref{fig:kernel-fastp} extends the fast$_1$ and fast$_2$ columns of Table~\ref{tab:kernel-levels} to every speedup threshold $p$, for the independent mode.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/kernel_fastp.pdf}
+  \caption{\textbf{fast$_p$ by level (independent mode).} Share of targets whose kernel is correct and more than $p\times$ faster than the production baseline; the value at the left edge approaches the share of correct kernels. Dashed lines mark $p=1$ and $p=2$.}
+  \label{fig:kernel-fastp}
+\end{figure}
+
+Table~\ref{tab:kernel-composition} compares the same operators across the three kernel-bench modes (Section~\ref{sec:eval-agents}).
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Composition effect and sequential generation}, over operators correct in both modes ($n$).
+  \emph{Ratio}: geometric mean of the per-operator speedup ratio (composed / independent, or sequential / composed).
+  \emph{Broke}: independent winners that fail correctness once composed.}
+  \label{tab:kernel-composition}
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \input{tables/kernel_composition.tex}
+\end{table}
+
+\section{End-to-End Results per Model}
+\label{app:e2e}
+
+Qwen3-VL-235B uses 200 requests per throughput workload and 32 correctness samples; GLA and OpenFold3 were re-run on cloud B200 nodes after a harness fix, and Codex's sets on a separate B200 node (its Llama baseline throughput is within 0.02\% of the other node's). Every set's speedups and discrepancies are relative to the baseline measured in the same run.
+OpenFold3 runs eagerly and deterministically, so its noise run reproduces the reference bit for bit while its diffusion sampling amplifies any numerical change; its $g_i$ therefore comes from a calibration run that instead disables cuBLAS reduced-precision bf16 reductions, a benign numerical change.
+Table~\ref{tab:e2e-drops} counts the kernels each set requests and keeps across models, and why kernels were dropped; \emph{Ind.\,+\,Seq.} pools an agent's two sets.
+Table~\ref{tab:e2e-per-model} lists, for every model and agent set, the outcome of the all-winners run and of the deployable subset, the number of dropped kernels, the throughput and latency speedups and the mean correctness discrepancy $\bar d$, next to the model's noise floor ($\bar d$ of the noise run and the calibrated $g_i$).
+Table~\ref{tab:e2e-sensitivity} reports the agent ranking under $0.5\times$--$2\times$ scaling of the correctness thresholds $g_i$ and $f_i$.
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Why kernel-level winners are dropped end to end.} Kernels are counted per (model, kernel) pair.
+  Causes: \emph{Comp.}: breaks the compilation stack (not traceable by \texttt{torch.compile}, or breaks dynamic shapes); \emph{Run.}: crashes at run time on real engine shapes; \emph{T/O}: hangs; \emph{Imp.}: fails to import; \emph{Inc.}: runs but produces wrong outputs.
+  \emph{AW crash / broken}: models where the full winner set crashes / runs with wrong outputs; \emph{Not conv.}: no deployable subset found within the attempt budget.}
+  \label{tab:e2e-drops}
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \resizebox{\linewidth}{!}{\input{tables/e2e_drops.tex}}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{End-to-end results per model.} AW\,/\,Dep.: status of the all-winners run and of the deployable subset (n.c.: no deployable subset within the attempt budget); Drop: dropped kernels; $s_{\mathrm{thr}}$, $s_{\mathrm{lat}}$: throughput and latency speedup of the deployable subset over the production baseline; $\bar d$: mean per-sample discrepancy; $^\ddagger$: $g_i$ from the benign-numerics calibration run instead of the noise run.}
+  \label{tab:e2e-per-model}
+  \scriptsize
+  \setlength{\tabcolsep}{2pt}
+  \resizebox{\linewidth}{!}{\input{tables/e2e_per_model.tex}}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Sensitivity of the \textsc{MacroEval} ranking} to scaling the correctness thresholds $g_i$ and $f_i$.}
+  \label{tab:e2e-sensitivity}
+  \small
+  \input{tables/e2e_sensitivity.tex}
+\end{table}
+
+\section{Leaderboard and Submission Portal}
+\label{app:leaderboard}
+
+Figure~\ref{fig:lb-overview} shows the leaderboard (the ranking of Table~\ref{tab:e2e-macroeval}) and Figure~\ref{fig:lb-submit} the submission portal.
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/leaderboard_overview.jpg}
+  \caption{\textbf{Leaderboard.}}
+  \label{fig:lb-overview}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/leaderboard_submit.jpg}
+  \ificlrfinal
+  \caption{\textbf{Submission portal.}}
+  \else
+  \caption{\textbf{Submission portal.} Repository URL anonymized for review.}
+  \fi
+  \label{fig:lb-submit}
+\end{figure}
+
+\clearpage
+\section{HuggingFace Transformers Coverage}
+\label{app:hf_coverage}
+
+We measure coverage empirically, by implementing every architecture in HuggingFace Transformers (commit \texttt{89b6b17}) on \fastkernels{}.
+For each architecture, an agent implemented the model on top of the \fastkernels{} repository using only its existing operators: minimal patches were allowed, but no new operators or primitives.
+To check correctness, we ran a few forward passes on a fixed batch whose input sizes exercise the model's relevant computation (e.g., for models with windowed attention, a sequence longer than the window): one step for non-autoregressive, embedding, and prefill-only models, and three steps (one prefill, two decodes) for autoregressive models.
+We then compared the output of the \fastkernels{} implementation with that of native HF and consider the architecture supported if the implementation runs without errors and the relative L2 difference is within a \texttt{dtype}-dependent threshold: 0.01\% (FP32), 0.5\% (FP16), 2\% (BF16), 5\% (FP8), and 10--20\% (FP4); mixed-precision models use the threshold of their lowest-precision format.
+Architectures without a public checkpoint use the constructor defaults of their HF configuration with random weights.
+
+\input{tables/hf_coverage_summary.tex}
+
+\input{tables/hf_coverage.tex}
+

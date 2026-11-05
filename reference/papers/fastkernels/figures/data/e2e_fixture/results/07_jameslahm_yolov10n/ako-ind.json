@@ -1,0 +1,6 @@
+{
+ "status": "orchestrator_error",
+ "traceback": "Traceback (most recent call last):\n  ...\nKeyError: '_dir'\n",
+ "model": "jameslahm/yolov10n",
+ "set": "ako-ind"
+}

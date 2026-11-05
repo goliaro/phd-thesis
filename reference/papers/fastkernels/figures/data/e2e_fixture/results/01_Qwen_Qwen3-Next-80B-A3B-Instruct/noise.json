@@ -1,0 +1,58 @@
+{
+ "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+ "status": "ok",
+ "error": null,
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5266.04
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2103.36
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.1055900621118013
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.3955231338063365
+  }
+ },
+ "speedups": {
+  "mixed": 1.0127,
+  "long-context": 1.0016,
+  "single-request": 0.9982,
+  "fixed-batch-32": 1.0007
+ },
+ "correctness": {
+  "per_sample": [
+   0.00168,
+   0.00252,
+   0.00036,
+   0.00022,
+   0.00022,
+   0.00235,
+   0.00046,
+   0.00198,
+   0.00265,
+   0.00066,
+   0.00119,
+   0.00297,
+   0.00048,
+   0.00155,
+   0.00059,
+   0.00217
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.998621875
+  }
+ },
+ "mean_d": 0.001378125
+}

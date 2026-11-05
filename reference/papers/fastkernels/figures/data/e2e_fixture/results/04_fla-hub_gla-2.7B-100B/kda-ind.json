@@ -1,0 +1,131 @@
+{
+ "kernels_requested": [
+  "L1:gla_chunk",
+  "L1:rms_norm",
+  "L1:swiglu",
+  "L2:gla_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:gla_chunk",
+    "L1:rms_norm",
+    "L1:swiglu",
+    "L2:gla_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gla_chunk",
+    "L1:rms_norm",
+    "L1:swiglu",
+    "L2:gla_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0302,
+    "long-context": 1.0598,
+    "single-request": 1.0093,
+    "fixed-batch-32": 0.936
+   },
+   "mean_d": 0.018206875
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:gla_chunk",
+   "L1:rms_norm",
+   "L1:swiglu",
+   "L2:gla_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:gla_chunk",
+   "L1:rms_norm",
+   "L1:swiglu",
+   "L2:gla_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 1.0302,
+   "long-context": 1.0598,
+   "single-request": 1.0093,
+   "fixed-batch-32": 0.936
+  },
+  "mean_d": 0.018206875
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:gla_chunk",
+  "L1:rms_norm",
+  "L1:swiglu",
+  "L2:gla_attention"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5357.04
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2225.5800000000004
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.071435648469236
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.837606837606837
+  }
+ },
+ "speedups": {
+  "mixed": 1.0302,
+  "long-context": 1.0598,
+  "single-request": 1.0093,
+  "fixed-batch-32": 0.936
+ },
+ "correctness": {
+  "per_sample": [
+   0.00209,
+   0.00274,
+   0.00285,
+   0.24814,
+   0.00206,
+   0.00274,
+   0.0011,
+   0.0056,
+   0.00368,
+   0.00151,
+   0.00037,
+   0.00549,
+   0.00405,
+   0.00066,
+   0.0024,
+   0.00583
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.981793125
+  }
+ },
+ "mean_d": 0.018206875,
+ "model": "fla-hub/gla-2.7B-100B",
+ "set": "kda-ind"
+}

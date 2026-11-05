@@ -1,0 +1,82 @@
+{
+ "Dr.~Kernel|ind": {
+  "ops": 133,
+  "agent_hours": 52.57118333333333,
+  "median_hours_per_op": 0.26137777777777776,
+  "tokens_total": 33637405,
+  "tokens_output": 10358940,
+  "tokens_cached": 0
+ },
+ "Dr.~Kernel|seq": {
+  "ops": 86,
+  "agent_hours": 32.102808333333314,
+  "median_hours_per_op": 0.3449291666666666,
+  "tokens_total": 23287020,
+  "tokens_output": 7958397,
+  "tokens_cached": 0
+ },
+ "Claude Code|ind": {
+  "ops": 133,
+  "agent_hours": 1170.7130055555563,
+  "median_hours_per_op": 7.271027777777778,
+  "tokens_total": 4354090521,
+  "tokens_output": 31380043,
+  "tokens_cached": 4242086474
+ },
+ "Claude Code|seq": {
+  "ops": 86,
+  "agent_hours": 592.0648611111112,
+  "median_hours_per_op": 6.0586166666666665,
+  "tokens_total": 3577444022,
+  "tokens_output": 22451963,
+  "tokens_cached": 3481597797
+ },
+ "KDA|ind": {
+  "ops": 133,
+  "agent_hours": 1750.6067222222218,
+  "median_hours_per_op": 12.327227777777777,
+  "tokens_total": 12309628108,
+  "tokens_output": 62821722,
+  "tokens_cached": 11875237912
+ },
+ "KDA|seq": {
+  "ops": 86,
+  "agent_hours": 761.528888888889,
+  "median_hours_per_op": 8.217502777777778,
+  "tokens_total": 9477354756,
+  "tokens_output": 42154800,
+  "tokens_cached": 9166880046
+ },
+ "AKO|ind": {
+  "ops": 133,
+  "agent_hours": 1420.5569496379803,
+  "median_hours_per_op": 9.432597222222222,
+  "tokens_total": 5466371449,
+  "tokens_output": 47442291,
+  "tokens_cached": 5296912450
+ },
+ "AKO|seq": {
+  "ops": 86,
+  "agent_hours": 813.1366888888884,
+  "median_hours_per_op": 8.703480555555556,
+  "tokens_total": 4860846596,
+  "tokens_output": 35309068,
+  "tokens_cached": 4724611179
+ },
+ "Codex|ind": {
+  "ops": 133,
+  "agent_hours": 253.4856722222222,
+  "median_hours_per_op": 1.8553111111111111,
+  "tokens_total": 1023445157,
+  "tokens_output": 3983123,
+  "tokens_cached": 998700406
+ },
+ "Codex|seq": {
+  "ops": 86,
+  "agent_hours": 67.48039444444443,
+  "median_hours_per_op": 0.709251388888889,
+  "tokens_total": 735408362,
+  "tokens_output": 2421567,
+  "tokens_cached": 723486438
+ }
+}

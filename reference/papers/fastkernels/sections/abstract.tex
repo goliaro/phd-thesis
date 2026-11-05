@@ -1,0 +1,12 @@
+\begin{abstract}
+LLM-based agents for GPU kernel generation are advancing rapidly, but the benchmarks they optimize against evaluate kernels in isolation, with synthetic inputs and weak baselines, rewarding sandbox speedups that break or vanish in real inference systems.
+We introduce \fastkernels{}, a benchmark of \textbf{384 tasks} drawn from 47 representative architectures across 8 categories, whose kernels suffice to reimplement \textbf{94.6\% (472/499)} of HuggingFace Transformers architectures with outputs matching the native implementations.
+Each task mirrors the interface of the corresponding production module and is scored against the kernels production frameworks ship, and tasks form a compositional hierarchy, from primitives to full models, in which higher-level modules import lower-level ones.
+Candidates are scored at the kernel level and end to end inside the models they come from, on the production execution path, and \textsc{MacroEval} aggregates calibrated correctness, coverage, and speedup into a leaderboard.
+Seeding it with five representative agents (6{,}900 agent-hours), we find that kernel-level speedups of $1.6$--$6.6\times$ shrink to \textbf{at most $1.25\times$} end to end, \textbf{only 20\%} of winning kernel sets run correctly as-is, and kernel-level scores \textbf{mis-rank agents}: Claude Code matches or beats KDA at every level in isolation, yet KDA scores $3\times$ higher end to end.
+\ificlrfinal
+Code is available at \url{https://github.com/Snowflake-AI-Research/fastkernels}.
+\else
+Anonymized code is included in the supplementary material and will be open-sourced upon publication.
+\fi
+\end{abstract}

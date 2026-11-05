@@ -1,0 +1,33 @@
+{
+ "model": "black-forest-labs/FLUX.1-dev",
+ "tp": 1,
+ "status": "ok",
+ "candidates": false,
+ "candidate_dir": null,
+ "adapter": "diffusion",
+ "timings": {
+  "1024x1024": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 0.42
+  },
+  "512x512": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 1.6
+  },
+  "single-1024x1024": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.9
+  },
+  "single-512x512": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.8
+  }
+ },
+ "t_run_s": 900.0,
+ "t_total_s": 1010.0,
+ "_dir": "/out/runs/05_black-forest-labs_FLUX.1-dev/baseline"
+}

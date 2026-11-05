@@ -1,0 +1,100 @@
+\section{Case Study: Dependency-Free FlashAttention for Hopper and Blackwell}
+\label{sec:kernels}
+% Design details, the limit analysis, the full figure, and per-scenario numbers are in
+% Appendix~\ref{app:kernels} and Appendix~\ref{app:per-scenario}.
+
+\paragraph{Task.} We asked \sys to produce a FlashAttention forward kernel for Hopper and one for
+Blackwell, each a single CUDA file with no CUTLASS, CuTe, cuBLAS, or cuDNN, exposing the operator
+schema vLLM uses for FlashAttention-3 so that the result drops in for the upstream kernel and is
+timed against it from identical inputs. The scenario suites mirror the upstream kernels' own test
+grids and add production shapes from SOL-ExecBench \cite{lin2026solexecbench}: 182 scenarios per
+architecture spanning bf16, fp16, and fp8; paged and contiguous KV caches; MHA, GQA, and MQA; causal,
+sliding-window, softcapped, and attention-sink masking; ragged batches; prefill, chunked prefill,
+and split-KV decode; and unequal query and value head dimensions. The breadth is deliberate, since kernels scored on a few
+shapes report speedups that shrink on the production path \cite{oliaro2026fastkernels}. The goal was correctness on every scenario and at least parity with upstream in geometric mean. The seed
+in both cases was a slow but general kernel (a scalar one-warp-per-query kernel on Hopper, a
+one-warpgroup dense-only skeleton on Blackwell), and anything the fast paths did not yet cover fell
+back to it, so correctness held throughout. The upstream kernels, FA3 as shipped in vLLM and the
+CuteDSL FA4 \cite{shah2024flashattention3,zadouri2026flashattention4}, were the correctness oracle
+and the yardstick the goal was stated against. The dependency-free constraint means the layouts,
+descriptors, pipelines, and register allocation that CUTLASS and CuteDSL derive for the upstream
+kernels had to be written by hand \cite{nvidia2023cutlass}.
+
+\paragraph{What the agent built.} On Hopper, \fathree (3.6K lines) is a warp-specialized kernel in
+raw CUDA and PTX: producer and consumer warpgroups connected by a TMA and mbarrier ring,
+asynchronous \texttt{wgmma} MMAs with \texttt{setmaxnreg} register rebalancing, persistent
+scheduling with inter-warpgroup ping-pong, split-KV decode with a combine pass, and a native fp8
+path. Its one remaining limit sits where a library's allocator would otherwise be: at head dimension
+256 the hand-written swizzle composes only at a few tile widths and the output accumulator caps
+occupancy at one CTA per SM, so that scenario runs at 0.94$\times$. On Blackwell, \fafour (10.2K
+lines) is a family with host-side routing, a structure the questions pushed the agent toward after a
+single kernel had stalled (\S\ref{sec:eval-cases}): a persistent warp-specialized collective for the
+dense envelope (two stacked 128-row query halves, two softmax warpgroups in an ordered ping-pong, a
+correction warpgroup rescaling the output in tensor memory, one MMA warp driving \texttt{tcgen05}),
+variants for unequal head dimensions and paged prefill, and a two-tile kernel for small, ragged, and
+decode shapes. Several decisive gains were outside the kernel bodies: a synchronous host copy
+costing about 38~$\mu$s per call, a stale routing gate, a TMA gather issued from divergent lanes, and
+ring state the compiler had placed in local memory. fp8 inputs and dense head dimensions of 192 and
+above are not yet built on Blackwell (28 of 182 scenarios).
+
+\begin{table}[t]
+\centering\small
+\caption{Case-study results. $n$ counts the scenarios the upstream kernel also runs (paired).
+``Upstream'' is FA3 on Hopper and FA4 on Blackwell; ``open-source'' is, per scenario, the faster of
+upstream and FlashInfer; ``available'' also includes cuDNN's fused attention. Speedups are geometric
+means of wall-clock ratios from byte-identical inputs timed back to back on one GPU
+(Appendix~\ref{app:bench}).}
+\label{tab:casestudy}
+\setlength{\tabcolsep}{3pt}\footnotesize
+\begin{tabular}{lrrrrr}
+\toprule
+Set & $n$ & Correct & \multicolumn{3}{c}{Speedup vs.\ fastest \ldots} \\
+\cmidrule(lr){4-6}
+ & & & upstream & open-source & available \\
+\midrule
+\multicolumn{6}{l}{\emph{Hopper (H200), upstream = FA3}} \\
+attntest   & 64  & 64/64   & 1.22$\times$ & 1.22$\times$ & 1.14$\times$ \\
+edge       & 31  & 31/31   & 1.55$\times$ & 1.55$\times$ & 1.31$\times$ \\
+claim      & 77  & 77/77   & 1.01$\times$ & 1.01$\times$ & 0.99$\times$ \\
+real       & 10  & 10/10   & 1.10$\times$ & 1.10$\times$ & 1.08$\times$ \\
+all        & 182 & 182/182 & 1.16$\times$ & 1.16$\times$ & 1.10$\times$ \\
+\midrule
+\multicolumn{6}{l}{\emph{Blackwell (B200), upstream = FA4}} \\
+attntest   & 33  & 52/52   & 1.44$\times$ & 1.42$\times$ & 1.09$\times$ \\
+edge       & 28  & 31/31   & 2.02$\times$ & 1.93$\times$ & 1.42$\times$ \\
+claim      & 55  & 61/61   & 1.30$\times$ & 1.20$\times$ & 0.92$\times$ \\
+real       & 8   & 10/10   & 1.10$\times$ & 1.10$\times$ & 1.02$\times$ \\
+all        & 124 & 154/154 & 1.46$\times$ & 1.39$\times$ & 1.07$\times$ \\
+\bottomrule
+\end{tabular}
+\vspace{2pt}
+
+\raggedright\footnotesize ``Correct'' is over runnable scenarios. At or above parity vs.\ upstream /
+open-source / available: Hopper 135 / 135 / 121 of 182; Blackwell 98 / 94 / 63 of 124. On Hopper,
+cuDNN supports 145 scenarios and \fathree is faster on 111; FlashInfer supports 32 and \fathree is
+faster on all 32.
+\end{table}
+
+\paragraph{Results.} Table~\ref{tab:casestudy} summarizes the outcome; Appendix~\ref{app:kernels}
+plots every scenario. Both kernels are correct on every scenario they run, and both beat upstream in
+geometric mean. \fathree runs at 1.16$\times$ FA3 with 135 of 182 scenarios at or above parity; the
+wins are concentrated in ragged prefill, paged and speculative decode, and the masking grid, while
+the paper-style sweeps of the \texttt{claim} set are at parity and dense fp8 prefill is the one clear
+hole at 0.67$\times$. \fafour runs at 1.46$\times$ FA4 across the 124 scenarios FA4 also runs, with
+98 at or above parity and a worst case of 0.78$\times$. The headline shrinks as the baseline
+strengthens: cuDNN is the fastest baseline on 54 of 182 Hopper scenarios and on 92 of 124 Blackwell
+ones, where it wins dense prefill and batched decode outright, so the kernels are 1.10$\times$ and
+1.07$\times$ the fastest available implementation, and at or above it on production shapes. Three caveats are documented in Appendix~\ref{app:kernels}: the \texttt{edge}
+sets consist of short kernels, so part of their 1.5--2$\times$ is upstream dispatch overhead; the
+largest \texttt{claim} wins are fp8-KV decode shapes on which FA4 is slow, and excluding them moves
+the Blackwell all-set geomeans to 1.37, 1.32, and 1.08$\times$; and one paged-KV fast path depends on
+physically consecutive pages. Every Blackwell scenario below parity has a measured cause: dense long
+context spends identical tensor work over a third more cycles because of twice as many barrier waits
+per block, batched decode pays a cold start per CTA, and head dimension 96 runs on a padded 128-wide
+path. On Hopper the losses are fp8 dense prefill, softcapped prefill, head dimension 96, and long
+sliding windows (0.34--0.79$\times$); these have not been profiled to the same depth.
+
+\paragraph{Release.} We release both kernels under Apache~2.0 with the evaluator, the PTX probes used
+to validate each Blackwell primitive in isolation, the search scripts (\S\ref{sec:workflow-evo}),
+the question bank and skill, and the complete agent traces of both approaches. The kernels are meant as seeds, with their residual
+gaps measured, so that the next agent starts from a known frontier.

@@ -1,0 +1,536 @@
+% ---------------------------------------------------------------------------
+% NOTE: MLSys'27 requires every reference to list ALL authors.
+% Entries marked "TODO-authors" still need the full author list / venue checked.
+% ---------------------------------------------------------------------------
+
+% ----------------------------- Attention kernels ---------------------------
+@inproceedings{dao2022flashattention,
+  author    = {Tri Dao and Daniel Y. Fu and Stefano Ermon and Atri Rudra and Christopher R{\'e}},
+  title     = {{FlashAttention}: Fast and Memory-Efficient Exact Attention with {IO}-Awareness},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2022}
+}
+
+@inproceedings{dao2024flashattention2,
+  author    = {Tri Dao},
+  title     = {{FlashAttention-2}: Faster Attention with Better Parallelism and Work Partitioning},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024}
+}
+
+@inproceedings{shah2024flashattention3,
+  author    = {Jay Shah and Ganesh Bikshandi and Ying Zhang and Vijay Thakkar and Pradeep Ramani and Tri Dao},
+  title     = {{FlashAttention-3}: Fast and Accurate Attention with Asynchrony and Low-precision},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2024}
+}
+
+% TODO-authors: full author list; also appears in MLSys 2026 proceedings -- cite that version.
+@article{zadouri2026flashattention4,
+  author    = {Ted Zadouri and others},
+  title     = {{FlashAttention-4}: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling},
+  journal   = {arXiv preprint arXiv:2603.05451},
+  year      = {2026}
+}
+
+@inproceedings{ye2025flashinfer,
+  author    = {Zihao Ye and Lequn Chen and Ruihang Lai and Wuwei Lin and Yineng Zhang and Stephanie Wang and Tianqi Chen and Baris Kasikci and Vinod Grover and Arvind Krishnamurthy and Luis Ceze},
+  title     = {{FlashInfer}: Efficient and Customizable Attention Engine for {LLM} Inference Serving},
+  booktitle = {Proceedings of Machine Learning and Systems (MLSys)},
+  year      = {2025}
+}
+
+@inproceedings{spector2025thunderkittens,
+  author    = {Benjamin F. Spector and Simran Arora and Aaryan Singhal and Daniel Y. Fu and Christopher R{\'e}},
+  title     = {{ThunderKittens}: Simple, Fast, and Adorable {AI} Kernels},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2025}
+}
+
+@misc{nvidia2023cutlass,
+  author       = {Vijay Thakkar and Pradeep Ramani and Cris Cecka and Aniket Shivam and Honghao Lu and Ethan Yan and Jack Kosaian and Mark Hoemmen and Haicheng Wu and Andrew Kerr and Matt Nicely and Duane Merrill and Dustyn Blasig and Fengqi Qiao and Piotr Majcher and Paul Springer and Markus Hohnerbach and Jin Wang and Manish Gupta},
+  title        = {{CUTLASS}},
+  howpublished = {\url{https://github.com/NVIDIA/cutlass}},
+  year         = {2023}
+}
+
+@misc{nvidia2025cudnn,
+  author       = {{NVIDIA}},
+  title        = {{cuDNN}: {NVIDIA} {CUDA} Deep Neural Network Library},
+  howpublished = {\url{https://developer.nvidia.com/cudnn}},
+  year         = {2025}
+}
+
+@inproceedings{kwon2023vllm,
+  author    = {Woosuk Kwon and Zhuohan Li and Siyuan Zhuang and Ying Sheng and Lianmin Zheng and Cody Hao Yu and Joseph E. Gonzalez and Hao Zhang and Ion Stoica},
+  title     = {Efficient Memory Management for Large Language Model Serving with {PagedAttention}},
+  booktitle = {Proceedings of the 29th Symposium on Operating Systems Principles (SOSP)},
+  year      = {2023}
+}
+
+% TODO-authors: 33 authors (Edward Lin et al., NVIDIA); NeurIPS 2026.
+@article{lin2026solexecbench,
+  author    = {Edward Lin and others},
+  title     = {{SOL-ExecBench}: Speed-of-Light Benchmarking for Real-World {GPU} Kernels Against Hardware Limits},
+  journal   = {arXiv preprint arXiv:2603.19173},
+  year      = {2026}
+}
+
+@article{williams2009roofline,
+  author  = {Samuel Williams and Andrew Waterman and David Patterson},
+  title   = {Roofline: An Insightful Visual Performance Model for Multicore Architectures},
+  journal = {Communications of the ACM},
+  volume  = {52},
+  number  = {4},
+  pages   = {65--76},
+  year    = {2009}
+}
+
+% ------------------------ LLMs / agents for kernels ------------------------
+% Author lists below were taken from the arXiv listings (Oct 2026). Keys are kept stable across
+% sections; a key's year suffix does not necessarily match the final venue year.
+
+% ---- open-ended / evolutionary
+@article{chen2026avo,
+  author  = {Terry Chen and Zhifan Ye and Bing Xu and Zihao Ye and Timmy Liu and Ali Hassani and Tianqi Chen and Andrew Kerr and Haicheng Wu and Yang Xu and Yu-Jung Chen and Hanfeng Chen and Aditya Kane and Ronny Krashinsky and Ming-Yu Liu and Vinod Grover and Luis Ceze and Roger Bringmann and John Tran and Wei Liu and Fung Xie and Michael Lightstone and Humphrey Shi},
+  title   = {{AVO}: Agentic Variation Operators for Autonomous Evolutionary Search},
+  journal = {arXiv preprint arXiv:2603.24517},
+  year    = {2026}
+}
+
+@article{novikov2025alphaevolve,
+  author  = {Alexander Novikov and Ng{\^a}n V{\~u} and Marvin Eisenberger and Emilien Dupont and Po-Sen Huang and Adam Zsolt Wagner and Sergey Shirobokov and Borislav Kozlovskii and Francisco J. R. Ruiz and Abbas Mehrabian and M. Pawan Kumar and Abigail See and Swarat Chaudhuri and George Holland and Alex Davies and Sebastian Nowozin and Pushmeet Kohli and Matej Balog},
+  title   = {{AlphaEvolve}: A Coding Agent for Scientific and Algorithmic Discovery},
+  journal = {arXiv preprint arXiv:2506.13131},
+  year    = {2025}
+}
+
+@article{romeraparedes2024funsearch,
+  author  = {Bernardino Romera-Paredes and Mohammadamin Barekatain and Alexander Novikov and Matej Balog and M. Pawan Kumar and Emilien Dupont and Francisco J. R. Ruiz and Jordan S. Ellenberg and Pengming Wang and Omar Fawzi and Pushmeet Kohli and Alhussein Fawzi},
+  title   = {Mathematical Discoveries from Program Search with Large Language Models},
+  journal = {Nature},
+  volume  = {625},
+  number  = {7995},
+  pages   = {468--475},
+  year    = {2024}
+}
+
+@article{lange2025shinkaevolve,
+  author  = {Robert Tjarko Lange and Yuki Imajuku and Edoardo Cetin},
+  title   = {{ShinkaEvolve}: Towards Open-Ended and Sample-Efficient Program Evolution},
+  journal = {arXiv preprint arXiv:2509.19349},
+  year    = {2025}
+}
+
+@article{guo2025evoengineer,
+  author  = {Ping Guo and Chenyu Zhu and Siyuan Chen and Fei Liu and Xi Lin and Zhichao Lu and Qingfu Zhang},
+  title   = {{EvoEngineer}: Mastering Automated {CUDA} Kernel Code Evolution with Large Language Models},
+  journal = {arXiv preprint arXiv:2510.03760},
+  year    = {2025}
+}
+
+@inproceedings{wiedemann2026kernelfoundry,
+  author    = {Nina Wiedemann and Quentin Leboutet and Michael Paulitsch and Diana Wofk and Benjamin Ummenhofer},
+  title     = {{KernelFoundry}: Hardware-aware Evolutionary {GPU} Kernel Optimization},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2026},
+  note      = {arXiv:2603.12440}
+}
+
+@article{pelleriti2026evotrace,
+  author  = {Nico Pelleriti and Sree Harsha Nelaturu and Zhanke Zhou and Zongze Li and Max Zimmer and Bo Han and Sebastian Pokutta},
+  title   = {What Do Evolutionary Coding Agents Evolve?},
+  journal = {arXiv preprint arXiv:2605.20086},
+  year    = {2026}
+}
+
+@article{yuksekgonul2026tttdiscover,
+  author  = {Mert Yuksekgonul and Daniel Koceja and Xinhao Li and Federico Bianchi and Jed McCaleb and Xiaolong Wang and Jan Kautz and Yejin Choi and James Zou and Carlos Guestrin and Yu Sun},
+  title   = {Learning to Discover at Test Time},
+  journal = {arXiv preprint arXiv:2601.16175},
+  year    = {2026}
+}
+
+% The AI CUDA Engineer (Sakana AI, Feb 2025 tech report) was revised, after its evaluation-harness
+% exploit was found, into the arXiv paper below.
+@article{lange2025aicudaengineer,
+  author  = {Robert Tjarko Lange and Qi Sun and Aaditya Prasad and Maxence Faldor and Yujin Tang and David Ha},
+  title   = {Towards Robust Agentic {CUDA} Kernel Benchmarking, Verification, and Optimization},
+  journal = {arXiv preprint arXiv:2509.14279},
+  year    = {2025},
+  note    = {Revised version of ``The {AI} {CUDA} Engineer'' (Sakana AI, Feb.\ 2025)}
+}
+
+@article{cuco2026,
+  author  = {Yoga Sri Varshan Varadharajan and Bodun Hu and Saurabh Agarwal and Aditya Akella},
+  title   = {{CUCo}: An Agentic Framework for Compute and Communication Co-design},
+  journal = {arXiv preprint arXiv:2603.02376},
+  year    = {2026}
+}
+% ---- scripted: RL-trained generators
+@inproceedings{baronio2025kevin,
+  author    = {Carlo Baronio and Pietro Marsella and Ben Pan and Simon Guo and Silas Alberti},
+  title     = {Kevin: Multi-Turn {RL} for Generating {CUDA} Kernels},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2026},
+  note      = {arXiv:2507.11948}
+}
+
+@inproceedings{li2025cudal1,
+  author    = {Xiaoya Li and Albert Wang and Guoyin Wang and Jiwei Li and Chris Shum},
+  title     = {{CUDA-L1}: Improving {CUDA} Optimization via Contrastive Reinforcement Learning},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2026},
+  note      = {arXiv:2507.14111}
+}
+
+@article{cudaagent2026,
+  author  = {Weinan Dai and Hanlin Wu and Qiying Yu and Huan-ang Gao and Jiahao Li and Chengquan Jiang and Weiqiang Lou and Yufan Song and Hongli Yu and Jiaze Chen and Wei-Ying Ma and Ya-Qin Zhang and Jingjing Liu and Mingxuan Wang and Xin Liu and Hao Zhou},
+  title   = {{CUDA} Agent: Large-Scale Agentic {RL} for High-Performance {CUDA} Kernel Generation},
+  journal = {arXiv preprint arXiv:2602.24286},
+  year    = {2026}
+}
+
+@inproceedings{drkernel2026,
+  author    = {Wei Liu and Jiawei Xu and Yingru Li and Longtao Zheng and Tianjian Li and Qian Liu and Junxian He},
+  title     = {Dr.\ Kernel: Reinforcement Learning Done Right for {Triton} Kernel Generations},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2026},
+  note      = {arXiv:2602.05885}
+}
+
+@inproceedings{zhu2026qimengkernel,
+  author    = {Xinguo Zhu and Shaohui Peng and Jiaming Guo and Yunji Chen and Qi Guo and Yuanbo Wen and Hang Qin and Ruizhi Chen and Qirui Zhou and Ke Gao and Yanjun Wu and Chen Zhao and Ling Li},
+  title     = {{QiMeng-Kernel}: Macro-Thinking Micro-Coding Paradigm for {LLM}-Based High-Performance {GPU} Kernel Generation},
+  booktitle = {AAAI Conference on Artificial Intelligence (AAAI)},
+  year      = {2026},
+  note      = {arXiv:2511.20100}
+}
+
+% ---- scripted: fixed-pipeline / multi-agent / harness
+@article{hong2025autocomp,
+  author  = {Charles Hong and Sahil Bhatia and Alvin Cheung and Yakun Sophia Shao},
+  title   = {Autocomp: A Powerful and Portable Code Optimizer for Tensor Accelerators},
+  journal = {arXiv preprint arXiv:2505.18574},
+  year    = {2025}
+}
+
+@article{wei2025astra,
+  author  = {Anjiang Wei and Tianran Sun and Yogesh Seenichamy and Hang Song and Anne Ouyang and Azalia Mirhoseini and Ke Wang and Alex Aiken},
+  title   = {Astra: A Multi-Agent System for {GPU} Kernel Performance Optimization},
+  journal = {arXiv preprint arXiv:2509.07506},
+  year    = {2025}
+}
+
+% v1 was titled KernelSkill; v2 (Oct 2026) was retitled KernelClaw. Cite by arXiv id.
+@article{kernelskill2026,
+  author  = {Qitong Sun and Jun Han and Tianlin Li and Zhe Tang and Sheng Chen and Fei Yang and Aishan Liu and Xianglong Liu and Yang Liu},
+  title   = {{KernelSkill}: Skill-Driven Multi-Agent {CUDA} Kernel Optimization},
+  journal = {arXiv preprint arXiv:2603.10085},
+  year    = {2026}
+}
+
+@article{kernelpro2026,
+  author  = {Jiading Gai and Shuai Zhang and Kaj Bostrom and Jin Huang and Vihang Patil and Haoyang Fang and Bernie Wang and Huzefa Rangwala and George Karypis},
+  title   = {Optimizing {CUDA} Like a Human: Profiling-Guided Tree Search for Kernel Optimization},
+  journal = {arXiv preprint arXiv:2606.26453},
+  year    = {2026}
+}
+
+@article{shui2026harness,
+  author  = {Yue Shui and Chenyu Ma and Hangfei Xu and Shengzhao Wen and Yanpeng Wang},
+  title   = {Harness Engineering for {LLM}-Driven {GPU} Kernel Generation},
+  journal = {arXiv preprint arXiv:2607.17979},
+  year    = {2026}
+}
+
+@article{luo2026houmao,
+  author  = {Mao Luo and Hongbin Li and Feng Lin and Hanling Yi and Zhe Huang},
+  title   = {Agentic Kernel Optimization on {Blackwell}},
+  journal = {arXiv preprint arXiv:2608.14560},
+  year    = {2026}
+}
+
+% MIT HAN Lab's contest workflow has no paper or byline; cite the repository.
+@misc{han2026kda,
+  author       = {{MIT HAN Lab}},
+  title        = {Kernel Design Agents: Agentic Workflow for {GPU} Kernel Optimization},
+  howpublished = {GitHub repository, MLSys 2026 {FlashInfer} contest},
+  year         = {2026}
+}
+
+% ---- benchmarks
+@inproceedings{ouyang2025kernelbench,
+  author    = {Anne Ouyang and Simon Guo and Simran Arora and Alex L. Zhang and William Hu and Christopher R{\'e} and Azalia Mirhoseini},
+  title     = {{KernelBench}: Can {LLMs} Write Efficient {GPU} Kernels?},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2025},
+  note      = {arXiv:2502.10517}
+}
+
+@article{zhang2026kernelbenchverified,
+  author  = {Yunxiang Zhang and Ping Yu and Jianyu Wang and Xiangjun Fan and Julian Reed and Azalia Mirhoseini and Will Su},
+  title   = {{KernelBench-Verified}},
+  journal = {arXiv preprint arXiv:2607.16241},
+  year    = {2026}
+}
+
+@inproceedings{xing2026flashinferbench,
+  author    = {Shanli Xing and Yiyan Zhai and Alexander Jiang and Yixin Dong and Yong Wu and Zihao Ye and Charlie Ruan and Yingyi Huang and Yineng Zhang and Liangsheng Yin and Aksara Bayyapu and Luis Ceze and Tianqi Chen},
+  title     = {{FlashInfer-Bench}: Benchmarking {LLM} Serving Kernels on {Blackwell}},
+  booktitle = {Proceedings of Machine Learning and Systems (MLSys)},
+  year      = {2026},
+  note      = {arXiv:2601.00227}
+}
+
+@article{cao2026ksearch,
+  author  = {Shiyi Cao and Ziming Mao and Joseph E. Gonzalez and Ion Stoica},
+  title   = {{K-Search}},
+  journal = {arXiv preprint arXiv:2602.19128},
+  year    = {2026}
+}
+
+% --------------------------- Agents / scaffolding --------------------------
+@inproceedings{yang2024sweagent,
+  author    = {John Yang and Carlos E. Jimenez and Alexander Wettig and Kilian Lieret and Shunyu Yao and Karthik Narasimhan and Ofir Press},
+  title     = {{SWE-agent}: Agent-Computer Interfaces Enable Automated Software Engineering},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2024}
+}
+
+@article{xia2024agentless,
+  author  = {Chunqiu Steven Xia and Yinlin Deng and Soren Dunn and Lingming Zhang},
+  title   = {Agentless: Demystifying {LLM}-based Software Engineering Agents},
+  journal = {arXiv preprint arXiv:2407.01489},
+  year    = {2024}
+}
+
+@misc{anthropic2024effectiveagents,
+  author       = {Erik Schluntz and Barry Zhang},
+  title        = {Building Effective Agents},
+  howpublished = {Anthropic Engineering Blog, \url{https://www.anthropic.com/engineering/building-effective-agents}},
+  year         = {2024}
+}
+
+@misc{langchain2025toolload,
+  author       = {{LangChain}},
+  title        = {Benchmarking Single Agent Performance},
+  howpublished = {\url{https://blog.langchain.com/react-agent-benchmarking}},
+  year         = {2025}
+}
+
+@article{liu2024lost,
+  author  = {Nelson F. Liu and Kevin Lin and John Hewitt and Ashwin Paranjape and Michele Bevilacqua and Fabio Petroni and Percy Liang},
+  title   = {Lost in the Middle: How Language Models Use Long Contexts},
+  journal = {Transactions of the Association for Computational Linguistics},
+  volume  = {12},
+  pages   = {157--173},
+  year    = {2024}
+}
+
+@inproceedings{shinn2023reflexion,
+  author    = {Noah Shinn and Federico Cassano and Ashwin Gopinath and Karthik Narasimhan and Shunyu Yao},
+  title     = {Reflexion: Language Agents with Verbal Reinforcement Learning},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2023}
+}
+
+@inproceedings{madaan2023selfrefine,
+  author    = {Aman Madaan and Niket Tandon and Prakhar Gupta and Skyler Hallinan and Luyu Gao and Sarah Wiegreffe and Uri Alon and Nouha Dziri and Shrimai Prabhumoye and Yiming Yang and Shashank Gupta and Bodhisattwa Prasad Majumder and Katherine Hermann and Sean Welleck and Amir Yazdanbakhsh and Peter Clark},
+  title     = {Self-Refine: Iterative Refinement with Self-Feedback},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2023}
+}
+
+@inproceedings{huang2024cannotselfcorrect,
+  author    = {Jie Huang and Xinyun Chen and Swaroop Mishra and Huaixiu Steven Zheng and Adams Wei Yu and Xinying Song and Denny Zhou},
+  title     = {Large Language Models Cannot Self-Correct Reasoning Yet},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024}
+}
+
+@inproceedings{press2023selfask,
+  author    = {Ofir Press and Muru Zhang and Sewon Min and Ludwig Schmidt and Noah A. Smith and Mike Lewis},
+  title     = {Measuring and Narrowing the Compositionality Gap in Language Models},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP},
+  year      = {2023}
+}
+
+@inproceedings{sharma2024sycophancy,
+  author    = {Mrinank Sharma and Meg Tong and Tomasz Korbak and David Duvenaud and Amanda Askell and Samuel R. Bowman and Newton Cheng and Esin Durmus and Zac Hatfield-Dodds and Scott R. Johnston and Shauna Kravec and Timothy Maxwell and Sam McCandlish and Kamal Ndousse and Oliver Rausch and Nicholas Schiefer and Da Yan and Miranda Zhang and Ethan Perez},
+  title     = {Towards Understanding Sycophancy in Language Models},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024}
+}
+
+@book{polya1945howtosolveit,
+  author    = {George P{\'o}lya},
+  title     = {How to Solve It: A New Aspect of Mathematical Method},
+  publisher = {Princeton University Press},
+  year      = {1945}
+}
+
+% ------------------------ production-scale kernel agents ------------------------
+% TODO-authors: Gang Liao + 38 co-authors (Meta); fetch the full list from arXiv.
+@article{liao2025kernelevolve,
+  author  = {Gang Liao and others},
+  title   = {{KernelEvolve}: Agentic Kernel Coding for Heterogeneous Hardware},
+  journal = {arXiv preprint arXiv:2512.23236},
+  year    = {2025}
+}
+
+@misc{cursor2026multiagent,
+  author       = {{Cursor} and {NVIDIA}},
+  title        = {Optimizing {CUDA} Kernels with Multi-Agent Systems},
+  howpublished = {\url{https://cursor.com/blog/multi-agent-kernels}},
+  year         = {2026}
+}
+
+@inproceedings{tillet2019triton,
+  author    = {Philippe Tillet and H. T. Kung and David Cox},
+  title     = {Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations},
+  booktitle = {Proceedings of the 3rd ACM SIGPLAN International Workshop on Machine Learning and Programming Languages (MAPL)},
+  pages     = {10--19},
+  year      = {2019}
+}
+
+% ---- Evidence for the "direction, not information" paragraph in the intro (added 2026-10-29) ----
+
+@article{redko2026priorknowledge,
+  author  = {Dmitry Redko and Albert Fazlyev and Konstantin Sozykin and Maria Ivanova and Evgeny Burnaev and Egor Shvetsov},
+  title   = {Prior Knowledge or Search? {A} Study of {LLM} Agents in Hardware-Aware Code Optimization},
+  journal = {arXiv preprint arXiv:2605.19782},
+  year    = {2026}
+}
+
+@inproceedings{jones2022cognitivebiases,
+  author    = {Erik Jones and Jacob Steinhardt},
+  title     = {Capturing Failures of Large Language Models via Human Cognitive Biases},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2022}
+}
+
+@inproceedings{merouani2025compilot,
+  author    = {Massinissa Merouani and Islem Kara Bernou and Riyadh Baghdadi},
+  title     = {Agentic Auto-Scheduling: An Experimental Study of {LLM}-Guided Loop Optimization},
+  booktitle = {International Conference on Parallel Architectures and Compilation Techniques (PACT)},
+  year      = {2025},
+  note      = {arXiv:2511.00592}
+}
+
+@article{li2025tritonforge,
+  author  = {Haonan Li and Keyu Man and Partha Kanuparthy and Hanning Chen and Wei Sun and Sreen Tallam and Chenguang Zhu and Kevin Zhu and Zhiyun Qian},
+  title   = {{TritonForge}: Profiling-Guided Framework for Automated {Triton} Kernel Optimization},
+  journal = {arXiv preprint arXiv:2512.09196},
+  year    = {2025}
+}
+
+@article{dong2025stark,
+  author  = {Juncheng Dong and Yang Yang and Tao Liu and Yang Wang and Feng Qi and Vahid Tarokh and Kaushik Rangadurai and Shuang Yang},
+  title   = {{STARK}: Strategic Team of Agents for Refining Kernels},
+  journal = {arXiv preprint arXiv:2510.16996},
+  year    = {2025}
+}
+
+@inproceedings{advani2026falsesuccess,
+  author    = {Laksh Advani},
+  title     = {From Confident Closing to Silent Failure: Characterizing False Success in {LLM} Agents},
+  booktitle = {ICML Workshop on Foundations of Agentic Systems (FAGEN)},
+  year      = {2026},
+  note      = {arXiv:2606.09863}
+}
+
+@inproceedings{olausson2024selfrepair,
+  author    = {Theo X. Olausson and Jeevana Priya Inala and Chenglong Wang and Jianfeng Gao and Armando Solar-Lezama},
+  title     = {Is Self-Repair a Silver Bullet for Code Generation?},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024}
+}
+
+@inproceedings{krishnamurthy2024explore,
+  author    = {Akshay Krishnamurthy and Keegan Harris and Dylan J. Foster and Cyril Zhang and Aleksandrs Slivkins},
+  title     = {Can Large Language Models Explore In-Context?},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2024}
+}
+
+@article{javaji2025turnwise,
+  author  = {Shashidhar Reddy Javaji and Bhavul Gauri and Zining Zhu},
+  title   = {Another Turn, Better Output? {A} Turn-Wise Analysis of Iterative {LLM} Prompting},
+  journal = {arXiv preprint arXiv:2509.06770},
+  year    = {2025}
+}
+
+@inproceedings{wang2024hypothesissearch,
+  author    = {Ruocheng Wang and Eric Zelikman and Gabriel Poesia and Yewen Pu and Nick Haber and Noah D. Goodman},
+  title     = {Hypothesis Search: Inductive Reasoning with Language Models},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024}
+}
+
+@article{sun2026kernelclaw,
+  author  = {Qitong Sun and Jun Han and Tianlin Li and Zhe Tang and Sheng Chen and Fei Yang and Aishan Liu and Xianglong Liu and Yang Liu},
+  title   = {{KernelClaw}: A Multi-Agent Framework for {GPU} Kernel Optimization with Dual-Memory Mechanisms},
+  journal = {arXiv preprint arXiv:2603.10085},
+  year    = {2026}
+}
+
+% ---- Oliaro et al. (added 2026-10-30) ----
+
+@article{oliaro2026fastkernels,
+  author  = {Gabriele Oliaro and Jaeseong Lee and Yichao Fu and Zhaoyuan Su and Owen Lu and Sreeram Vennam and May Jiang and Junli Wang and Hao Zhang and Zhihao Jia and Samyam Rajbhandari},
+  title   = {{FastKernels}: Benchmarking {GPU} Kernel Generation in Production},
+  journal = {arXiv preprint arXiv:2605.23215},
+  year    = {2026}
+}
+
+@inproceedings{jin2026eventtensor,
+  author    = {Hongyi Jin and Bohan Hou and Guanjie Wang and Ruihang Lai and Jinqi Chen and Zihao Ye and Yaxing Cai and Yixin Dong and Xinhao Cheng and Zhihao Zhang and Yilong Zhao and Yingyi Huang and Lijie Yang and Jinchen Jiang and Gabriele Oliaro and Jianan Ji and Xupeng Miao and Vinod Grover and Todd C. Mowry and Zhihao Jia and Tianqi Chen},
+  title     = {Event Tensor: A Unified Abstraction for Compiling Dynamic Megakernel},
+  booktitle = {Proceedings of Machine Learning and Systems (MLSys)},
+  year      = {2026}
+}
+
+@inproceedings{hu2024korch,
+  author    = {Muyan Hu and Ashwin Venkatram and Shreyashri Biswas and Balamurugan Marimuthu and Bohan Hou and Gabriele Oliaro and Haojie Wang and Liyan Zheng and Xupeng Miao and Jidong Zhai},
+  title     = {Optimal Kernel Orchestration for Tensor Programs with {Korch}},
+  booktitle = {International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS)},
+  year      = {2024}
+}
+
+@inproceedings{miao2024specinfer,
+  author    = {Xupeng Miao and Gabriele Oliaro and Zhihao Zhang and Xinhao Cheng and Zeyu Wang and Zhengxin Zhang and Rae Ying Yee Wong and Alan Zhu and Lijie Yang and Xiaoxiang Shi and Chunan Shi and Zhuoming Chen and Daiyaan Arfeen and Reyna Abhyankar and Zhihao Jia},
+  title     = {{SpecInfer}: Accelerating Large Language Model Serving with Tree-based Speculative Inference and Verification},
+  booktitle = {International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS)},
+  year      = {2024}
+}
+
+@article{miao2025servingsurvey,
+  author  = {Xupeng Miao and Gabriele Oliaro and Zhihao Zhang and Xinhao Cheng and Hongyi Jin and Tianqi Chen and Zhihao Jia},
+  title   = {Towards Efficient Generative Large Language Model Serving: A Survey from Algorithms to Systems},
+  journal = {ACM Computing Surveys},
+  volume  = {58},
+  number  = {1},
+  year    = {2025}
+}
+
+@misc{boehm2022cudammm,
+  author       = {Simon Boehm},
+  title        = {How to Optimize a {CUDA} Matmul Kernel for {cuBLAS}-like Performance: a Worklog},
+  year         = {2022},
+  howpublished = {\url{https://siboehm.com/articles/22/CUDA-MMM}}
+}
+
+@misc{shankhdhar2024h100,
+  author       = {Pranjal Shankhdhar},
+  title        = {Outperforming {cuBLAS} on {H100}: a Worklog},
+  year         = {2024},
+  howpublished = {\url{https://cudaforfun.substack.com/p/outperforming-cublas-on-h100-a-worklog}}
+}
+
+@misc{modular2025blackwell,
+  author       = {{Modular Inc.}},
+  title        = {Matrix Multiplication on {NVIDIA} {Blackwell}, Parts 1--4},
+  year         = {2025},
+  howpublished = {\url{https://www.modular.com/blog/matrix-multiplication-on-nvidias-blackwell-part-1-introduction}}
+}

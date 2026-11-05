@@ -1,0 +1,232 @@
+\newif\iffinal
+\finaltrue
+%\finalfalse
+
+\documentclass[sigplan,screen]{acmart}
+\usepackage[normalem]{ulem}
+% enable page numbers
+%\settopmatter{printfolios=true}
+
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+%\usepackage{listings}
+%\usepackage{pifont}
+%\usepackage{tikz}
+\usepackage{subfig}
+\usepackage{multirow}
+%\usepackage{pgfplots}
+\usepackage{booktabs}
+%\usepackage{dcolumn}
+%\usepackage{cancel}
+%\usepackage{ifmtarg}
+%\usepackage{verbatim}
+\usepackage{graphicx}
+%\usepackage{chngpage}
+\usepackage{xspace}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{balance}
+\usepackage{amsmath}
+\let\Bbbk\relax
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{times}
+%\usepackage{fullpage}
+%\usepackage{footnote}
+%\usepackage[symbol]{footmisc}
+\usepackage{threeparttable}
+%\usepackage[small,compact]{titlesec}
+%\usepackage{tabularx}
+%\usepackage{titling}
+%\usepackage{authblk}
+%\makesavenoteenv{tabular}
+%\makesavenoteenv{table}
+\usepackage{cleveref}
+\usepackage{mathtools}
+
+
+\newcommand{\Sys}{SpecInfer\xspace}
+\newcommand{\sys}{SpecInfer\xspace}
+\newcommand{\llama}{LLaMA\xspace}
+\newcommand{\m}{\mathcal}
+\newcommand{\Continue}{\State {\bf continue}}
+\newcommand{\ZJ}[1]{\textcolor{red}{ZJ: #1}}
+\newcommand{\ZX}[1]{\textcolor{purple}{ZX: #1}}
+\newcommand{\XM}[1]{\textcolor{blue}{XM: #1}}
+\newcommand{\ZZ}[1]{\textcolor{violet}{ZZ: #1}}
+\newcommand{\GO}[1]{\textcolor{blue}{GO: #1}}
+\algnewcommand{\LeftComment}[1]{\Statex \(\triangleright\) #1}
+\algnewcommand{\LineComment}[1]{\State \textcolor{violet}{\(\triangleright\) #1}}
+%\newcommand{\rev}[1]{{\textcolor{magenta}{#1}}}
+\newcommand{\rev}[1]{{#1}}
+\iffinal
+% do nothing
+\else 
+%\renewcommand{\paragraph}[1]{\textbf{\textit{#1}}}
+\fi
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+% Use the default mathcal font
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\usepackage{listings}
+\definecolor{mygray}{RGB}{230,230,230}
+\lstset{basicstyle=\small\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{red},
+  keywordstyle=\color{blue},
+  backgroundcolor = \color{mygray},
+  frame=ltb,
+  framerule=0pt,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\copyrightyear{2024} 
+\acmYear{2024} 
+\setcopyright{rightsretained} 
+\acmConference[ASPLOS '24]{29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3}{April 27-May 1, 2024}{La Jolla, CA, USA}
+\acmBooktitle{29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3 (ASPLOS '24), April 27-May 1, 2024, La Jolla, CA, USA}
+\acmDOI{10.1145/3620666.3651335}
+\acmISBN{979-8-4007-0386-7/24/04}
+
+\begin{document}
+
+\title[\Sys]{
+\Sys: Accelerating Large Language Model Serving with Tree-based Speculative Inference and Verification}
+
+\author{Xupeng Miao}\authornote{Equal contribution.} %
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0000-0002-9371-8358}
+\email{xupeng@cmu.edu}
+
+\author{Gabriele Oliaro}\authornotemark[1]
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0000-0001-5406-0736}
+\email{goliaro@cs.cmu.edu}
+
+\author{Zhihao Zhang}\authornotemark[1]
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0009-0002-8409-2717}
+\email{zhihaoz3@andrew.cmu.edu}
+
+\author{Xinhao Cheng}\authornotemark[1]
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0009-0009-3375-497X}
+\email{xinhaoc@andrew.cmu.edu}
+
+\author{Zeyu Wang}
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0009-0002-5756-2744}
+\email{zeyuwang@alumni.cmu.edu}
+
+\author{Zhengxin Zhang}
+\affiliation{\institution{Tsinghua University}\city{Beijing}\country{China}}
+\orcid{0000-0003-1578-2597}
+\email{zhang-zx21@mails.tsinghua.edu.cn}
+
+\author{Rae Ying Yee Wong}
+\affiliation{\institution{Stanford University}\city{Stanford}\state{CA}\country{USA}}
+\orcid{0009-0008-2677-0659}
+\email{raewong@stanford.edu}
+
+\author{Alan Zhu}
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0009-0001-8694-9246}
+\email{aczhu@andrew.cmu.edu}
+
+\author{Lijie Yang}
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0009-0004-7909-5416}
+\email{lijiey@andrew.cmu.edu}
+
+\author{Xiaoxiang Shi}
+\affiliation{\institution{Shanghai Jiao Tong University}\city{Shanghai}\country{China}}
+\orcid{0009-0000-6840-4691}
+\email{lambda7shi@sjtu.edu.cn}
+
+\author{Chunan Shi}
+\affiliation{\institution{Peking University}\city{Beijing}\country{China}}
+\orcid{0009-0009-7197-4965}
+\email{spirited_away@pku.edu.cn}
+
+\author{Zhuoming Chen}
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0009-0006-7797-573X}
+\email{zhuominc@andrew.cmu.edu}
+
+\author{Daiyaan Arfeen}
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0009-0009-5626-4551}
+\email{marfeen@andrew.cmu.edu}
+
+\author{Reyna Abhyankar}
+\affiliation{\institution{University of California, San Diego}\city{San Diego}\state{CA}\country{USA}}
+\orcid{0009-0005-6763-0108}
+\email{vabhyank@ucsd.edu}
+
+\author{Zhihao Jia}
+\affiliation{\institution{Carnegie Mellon University}\city{Pittsburgh}\state{PA}\country{USA}}
+\orcid{0000-0002-1270-5185}
+\email{zhihao@cmu.edu}
+
+\renewcommand{\shortauthors}{Miao$^*$, Oliaro$^*$, Zhang$^*$, Cheng$^*$ et al.}
+
+\date{}
+
+\input{abstract}
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{large language model serving, speculative decoding, token tree verification}
+
+\maketitle
+%\textit{}
+%\thispagestyle{empty}
+
+\pagestyle{plain}
+
+\input{intro}
+%\input{background}
+\input{overview}
+\input{speculation}
+\input{verification}
+\input{system}
+%\input{discussion}
+\input{eval}
+\input{related}
+\input{conclusion}
+
+\appendix
+\input{ae-appendix}
+% \input{appendix}
+
+\balance
+\bibliographystyle{plain}
+\bibliography{reference} 
+
+% \newpage
+
+% \input{ae}
+\end{document}
+

@@ -1,0 +1,137 @@
+{
+ "kernels_requested": [
+  "L1:gated_delta_rule",
+  "L1:linear",
+  "L1:rms_norm",
+  "L1:silu_and_mul",
+  "L3:decoder_layer"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:gated_delta_rule",
+    "L1:linear",
+    "L1:rms_norm",
+    "L1:silu_and_mul",
+    "L3:decoder_layer"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gated_delta_rule",
+    "L1:linear",
+    "L1:rms_norm",
+    "L1:silu_and_mul",
+    "L3:decoder_layer"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0371,
+    "long-context": 1.1018,
+    "single-request": 1.0377,
+    "fixed-batch-32": 1.0915
+   },
+   "mean_d": 0.00251875
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:gated_delta_rule",
+   "L1:linear",
+   "L1:rms_norm",
+   "L1:silu_and_mul",
+   "L3:decoder_layer"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:gated_delta_rule",
+   "L1:linear",
+   "L1:rms_norm",
+   "L1:silu_and_mul",
+   "L3:decoder_layer"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 1.0371,
+   "long-context": 1.1018,
+   "single-request": 1.0377,
+   "fixed-batch-32": 1.0915
+  },
+  "mean_d": 0.00251875
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:gated_delta_rule",
+  "L1:linear",
+  "L1:rms_norm",
+  "L1:silu_and_mul",
+  "L3:decoder_layer"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5392.919999999999
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2313.7799999999997
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.987375927532042
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 5.863490609253322
+  }
+ },
+ "speedups": {
+  "mixed": 1.0371,
+  "long-context": 1.1018,
+  "single-request": 1.0377,
+  "fixed-batch-32": 1.0915
+ },
+ "correctness": {
+  "per_sample": [
+   0.00507,
+   0.00546,
+   0.00028,
+   0.00119,
+   0.00199,
+   0.00416,
+   0.0008,
+   0.00291,
+   0.0006,
+   0.00294,
+   0.00171,
+   0.0046,
+   0.00329,
+   0.00052,
+   0.00174,
+   0.00304
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99748125
+  }
+ },
+ "mean_d": 0.00251875,
+ "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+ "set": "kda-ind"
+}

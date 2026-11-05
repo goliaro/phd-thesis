@@ -1,0 +1,10 @@
+\section{Conclusion}
+This paper introduces \Sys, a system that accelerates generative LLM inference with tree-based speculative inference and verification.
+A key insight behind \Sys is to simultaneously consider a diversity of speculation candidates to efficiently predict the LLM’s outputs, which are organized as a token tree and verified against the LLM in parallel using a tree-based parallel decoding mechanism.
+% A key insight behind \Sys is to combine multiple small speculative models to efficiently predict the LLM’s outputs, which are organized as a token tree and verified against the LLM in parallel using a tree-based parallel decoding mechanism.
+\Sys significantly reduces the memory accesses to the LLM's parameters and the end-to-end LLM inference latency for both distributed and offloading-based LLM inference.
+
+\iffinal
+\section*{Acknowledgement}
+We thank Tianqi Chen, Bohan Hou, Hongyi Jin, the anonymous ASPLOS reviewers, and our shepherd Shan Lu for their feedback on this work. This research is partially supported by NSF awards CNS-2147909, CNS-2211882, and CNS-2239351, and research awards from Amazon, Cisco, Google, Meta, Oracle, Qualcomm, and Samsung. 
+\fi 

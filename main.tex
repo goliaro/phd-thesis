@@ -2,32 +2,16 @@
 %starting all chapters on odd numbered pages
 \documentclass[12pt]{cmuthesis}
 
-% This is a template for a CMU thesis.  It is 18 pages without any content :-)
-% The source for this is pulled from a variety of sources and people.
-% Here's a partial list of people who may or may have not contributed:
-%
-%        bnoble   = Brian Noble
-%        caruana  = Rich Caruana
-%        colohan  = Chris Colohan
-%        comar    = Cyrus Omar
-%        jab      = Justin Boyan
-%        josullvn = Joseph O'Sullivan
-%        jrs      = Jonathan Shewchuk
-%        kosak    = Corey Kosak
-%        mjz      = Matt Zekauskas (mattz@cs)
-%        pdinda   = Peter Dinda
-%        pfr      = Patrick Riley
-%        dkoes = David Koes (me)
-
-% My main contribution is putting everything into a single class files and small
-% template since I prefer this to some complicated sprawling directory tree with
-% makefiles.
+% CMU thesis class by David Koes (dkoes), based on contributions from
+% bnoble, caruana, colohan, comar, jab, josullvn, jrs, kosak, mjz, pdinda, pfr.
 
 % some useful packages
 \usepackage{times}
 \usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{xspace}
 \usepackage[numbers,sort]{natbib}
 \usepackage[backref,pageanchor=true,plainpages=false, pdfpagelabels, bookmarks,bookmarksnumbered,
 %pdfborder=0 0 0,  %removes outlines around hyper links in online display
@@ -39,57 +23,60 @@
 %for general printing (not binding)
 \usepackage[letterpaper,twoside,vscale=.8,hscale=.75,nomarginpar,hmarginratio=1:1]{geometry}
 
-% Provides a draft mark at the top of the document. 
+% System names
+\newcommand{\SpecInfer}{SpecInfer\xspace}
+\newcommand{\FlexLLM}{FlexLLM\xspace}
+\newcommand{\SuffixDecoding}{SuffixDecoding\xspace}
+\newcommand{\FastKernels}{FastKernels\xspace}
+\newcommand{\KernelSeek}{KernelSeek\xspace}
+
+% Provides a draft mark at the top of the document.
 \draftstamp{\today}{DRAFT}
 
-\begin {document} 
+\begin {document}
 \frontmatter
 
 %initialize page style, so contents come out right (see bot) -mjz
 \pagestyle{empty}
 
-\title{ %% {\it \huge Thesis Proposal}\\
-{\bf Awesome Work in Computer Science}}
-\author{Me}
-\date{January 3006}
-\Year{3006}
-\trnumber{}
+\title{{\bf Rethinking the AI Stack:\\
+Systems for Agents and Agents for Systems}}
+\author{Gabriele Oliaro}
+\date{May 2027}  % TODO: update to the actual defense/submission date
+\Year{2027}
+\trnumber{CMU-CS-27-XXX}  % TODO: assigned by the department
 
 \committee{
-Nearly Divine Personage, Chair \\
-Someone else \\
-Yet another person \\
-Someone from a strange and faraway land
+Zhihao Jia, Chair \\
+Tianqi Chen \\
+Phillip B. Gibbons \\
+Hao Zhang (University of California, San Diego)
 }
 
-\support{}
+\support{}  % TODO: funding acknowledgment (grants, fellowships, industry support)
 \disclaimer{}
 
 % copyright notice generated automatically from Year and author.
 % permission added if \permission{} given.
 
-\keywords{Stuff, More Stuff}
+\keywords{Large Language Models, LLM Serving, Speculative Decoding, Finetuning,
+GPU Kernels, Coding Agents, Machine Learning Systems}
 
 \maketitle
 
 \begin{dedication}
-For my dog
+% TODO: dedication
 \end{dedication}
 
 \pagestyle{plain} % for toc, was empty
 
-%% Obviously, it's probably a good idea to break the various sections of your thesis
-%% into different files and input them into this file...
-
 \begin{abstract}
-A short summary.
+\input{chapters/abstract}
 \end{abstract}
 
 \begin{acknowledgments}
-My advisor is cool.
+% TODO: acknowledgments
 \end{acknowledgments}
-
-
 
 \tableofcontents
 \listoffigures
@@ -100,29 +87,17 @@ My advisor is cool.
 %% Double space document for easy review:
 %\renewcommand{\baselinestretch}{1.66}\normalsize
 
-% The other requirements Catherine has:
-%
-%  - avoid large margins.  She wants the thesis to use fewer pages, 
-%    especially if it requires colour printing.
-%
-%  - The thesis should be formatted for double-sided printing.  This
-%    means that all chapters, acknowledgements, table of contents, etc.
-%    should start on odd numbered (right facing) pages.
-%
-%  - You need to use the department standard tech report title page.  I
-%    have tried to ensure that the title page here conforms to this
-%    standard.
-%
-%  - Use a nice serif font, such as Times Roman.  Sans serif looks bad.
-%
-% Other than that, just make it look good...
-
-
-\chapter{Introduction}
-\chapter{Conclusion}
+\include{chapters/introduction}
+\include{chapters/background}
+\include{chapters/specinfer}
+\include{chapters/flexllm}
+\include{chapters/suffixdecoding}
+\include{chapters/fastkernels}
+\include{chapters/kernelseek}
+\include{chapters/conclusion}
 
 %\appendix
-%\include{appendix}
+%\include{chapters/appendix}
 
 \backmatter
 
@@ -131,9 +106,7 @@ My advisor is cool.
 % By default \bibsection is \chapter*, but we really want this to show
 % up in the table of contents and pdf bookmarks.
 \renewcommand{\bibsection}{\chapter{\bibname}}
-%\renewcommand{\bibpreamble}{This text goes between the ``Bibliography''
-%  header and the actual list of references}
 \bibliographystyle{plainnat}
-\bibliography{register} %your bib file
+\bibliography{references}
 
 \end{document}

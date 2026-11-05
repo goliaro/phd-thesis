@@ -1,0 +1,186 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{times}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{amsmath}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=blue!50!black,
+  urlcolor=blue!50!black
+}
+
+\newcommand{\SpecInfer}{SpecInfer}
+\newcommand{\FlexLLM}{FlexLLM}
+\newcommand{\SuffixDecoding}{SuffixDecoding}
+\newcommand{\FastKernels}{FastKernels}
+
+\newcommand{\makeproposalheader}{%
+\begin{center}
+\vspace*{1.0cm}
+{\LARGE\bfseries Rethinking the AI Stack:\\
+Systems for Agents and Agents for Systems\par}
+\vspace{0.5em}
+{\large\bfseries Thesis Proposal\par}
+\vspace{2.2em}
+{\large Gabriele Oliaro\par}
+Computer Science Department\\
+Carnegie Mellon University\\
+\texttt{goliaro@cs.cmu.edu}
+\vspace{1.2em}
+
+\begin{tabular}{r@{\quad}p{4.8in}}
+Committee: & Zhihao Jia (Chair), Tianqi Chen, Phillip Gibbons, Hao Zhang (UC San Diego)
+\end{tabular}
+
+\vspace{1.6em}
+May 12, 2026
+
+\vspace{2.6em}
+{\bfseries Abstract}
+\vspace{0.6em}
+
+\begin{minipage}{0.84\textwidth}
+\small
+\input{thesis_proposal_abstract}
+\end{minipage}
+\end{center}
+\vspace{1.8em}
+}
+
+\begin{document}
+\makeproposalheader
+
+\section{Thesis Statement}
+
+As AI models become larger and more capable, running them efficiently remains a central systems challenge. Bigger models are often more useful but slower and more expensive to serve. GPUs remain scarce and costly. More sophisticated AI applications, especially agents and multi-step workflows, require tight latency and service-level objectives to be practical. At the same time, high-performance inference increasingly depends on specialized systems expertise: scheduling requests under bursty load, managing memory and communication, selecting the right parallelization strategy, and writing architecture-specific GPU kernels.
+
+This thesis argues that:
+
+\begin{quote}
+\emph{The systems optimizations needed for efficient LLM serving should be increasingly automated with the help of models, agents, and feedback-driven runtimes. This automation is necessary because model architectures, hardware platforms, and application requirements are evolving faster than expert-only optimization workflows can scale.}
+\end{quote}
+
+The completed work supports this thesis across several layers of LLM serving. \SpecInfer{}~\cite{specinfer} uses smaller language models to speculate on the outputs of larger models, reducing the cost of autoregressive decoding. \SuffixDecoding{}~\cite{suffixdecoding} uses cached generation patterns to provide lightweight speculation for agentic workloads. \FlexLLM{}~\cite{flexllm} automates fine-grained scheduling between inference and parameter-efficient finetuning so shared GPUs can satisfy latency objectives while improving utilization. The proposed final work extends this direction to the compiler and kernel layer: \FastKernels{}~\cite{fastkernels} builds a production-faithful benchmark for GPU kernel agents, and the follow-on kernel agent will use feedback from compilation, correctness testing, profiling, and runtime measurement to generate kernels for emerging model operators.
+
+\section{Motivation}
+
+LLMs have moved from standalone chat systems into the inner loop of software engineering, data analysis, robotics, retrieval, multimodal generation, and multi-agent workflows. This shift increases the pressure on inference systems. Agents may issue many dependent model calls before completing a user-visible task, so small per-call delays accumulate into unacceptable end-to-end latency. Multimodal and tool-using applications introduce more heterogeneous operators and execution paths. Commercial platforms increasingly provide both inference and finetuning services, forcing clusters to balance bursty interactive demand with long-running customization jobs.
+
+The difficulty is that inference optimization has become too broad and fast-moving for purely manual expert engineering. Modern model families introduce mixture-of-experts routing, linear attention, state-space scans, low-bit quantization, speculative decoding primitives, and multimodal fusion. Modern hardware evolves just as quickly: each GPU generation changes the performance tradeoffs among memory bandwidth, tensor cores, communication, occupancy, and compiler behavior. A kernel or scheduling strategy that is excellent on one model and GPU can be ineffective on the next. Production systems therefore need optimization workflows that can adapt quickly, preserve correctness, and reason about real deployment constraints.
+
+The common theme in this thesis is to automate systems-side optimization using models, agents, and runtime feedback. In decoding, smaller models or cached histories can help predict useful future work. In serving, a runtime scheduler can automatically decide how to share GPUs between latency-sensitive and throughput-oriented tasks. In kernel generation, an agent can use compiler errors, correctness tests, runtime measurements, and hardware profiles to search the optimization space that would otherwise require specialized CUDA expertise.
+
+\section{Completed Work}
+
+\subsection{\SpecInfer: Tree-Based Speculative Inference}
+
+Autoregressive LLM serving is expensive because each generated token requires a large-model forward pass conditioned on all previously generated tokens. Speculative decoding reduces this cost by using a smaller model to propose draft tokens that the large model verifies in parallel. Prior sequence-based methods draft a single path, which limits acceptance when the draft model and target model disagree.
+
+\SpecInfer{} introduces tree-based speculative inference and verification. Instead of proposing one draft sequence, it constructs a token tree whose branches represent diverse candidate continuations. A tree-based parallel decoding mechanism verifies all candidates against the target LLM in a single step while preserving the same output distribution as standard decoding. This design converts uncertainty in future tokens into useful parallelism: the system spends one large-model pass to verify many plausible futures rather than committing to a single draft path.
+
+\SpecInfer{} showed that tree structure materially improves serving efficiency. It outperformed existing LLM serving systems by 1.5--2.8$\times$ for distributed inference and by 2.6--3.5$\times$ for offloading-based inference, while preserving model quality. The key lesson for this thesis is that speculative execution becomes a systems primitive when the verifier, data structure, and decoding algorithm are co-designed.
+
+\subsection{\FlexLLM: Co-Serving Inference and Finetuning}
+
+LLM platforms increasingly provide both inference and finetuning APIs. The common deployment pattern uses separate GPU clusters for latency-critical inference and throughput-oriented finetuning. This separation wastes resources because inference clusters must be provisioned for bursts, leaving idle capacity during normal load that finetuning could otherwise consume.
+
+\FlexLLM{} introduces co-serving: executing inference and parameter-efficient finetuning on shared GPUs while preserving inference service-level objectives. The central insight is that inference and PEFT finetuning over the same base model share frozen parameters and can be fused at token granularity. \FlexLLM{} combines static compilation optimizations, including dependent parallelization and graph pruning, with a runtime token-level scheduler that interleaves inference and training tokens inside each co-serving iteration.
+
+On LLaMA-3.1-8B, Qwen-2.5-14B, and Qwen-2.5-32B, \FlexLLM{} reduced activation memory by up to 80\%, maintained inference SLO compliance at up to 20 requests/s, and improved finetuning throughput by 1.9--4.8$\times$ under heavy inference load and 2.5--6.8$\times$ under light load. The broader lesson is that cluster efficiency improves when systems can reallocate capacity at the granularity where demand actually changes: tokens, not jobs.
+
+\subsection{\SuffixDecoding: Repetition-Aware Agentic Inference}
+
+Agentic AI applications repeatedly call LLMs while solving related subtasks. Software engineering agents, SQL-generation pipelines, self-refinement loops, and multi-agent workflows often regenerate long overlapping token sequences. Existing speculative decoding systems do not fully exploit this pattern: model-based draft methods can add GPU overhead, while model-free prompt-lookup methods are fast but often speculate a fixed length regardless of acceptance likelihood.
+
+\SuffixDecoding{} is a model-free speculative decoding method specialized for repetitive agentic workloads. It maintains suffix trees over prior outputs and ongoing request context, uses fast CPU-side pattern matching to find likely continuations, and builds a compact speculation tree using frequency-derived scores. It adapts speculation length to match confidence: long pattern matches justify aggressive speculation, while weak matches trigger conservative drafting or fallback to a model-based speculator.
+
+\SuffixDecoding{} generates draft tokens in roughly tens of microseconds per token without GPU overhead. It achieved up to 2.8$\times$ faster decoding than strong model-based speculative methods on benchmarked decoding workloads and up to 4.5$\times$ end-to-end task-completion speedup on SWE-Bench-style agentic workloads. The lesson is that workload history is a first-class systems resource; in agentic settings, previous outputs are not just logs, but an execution cache for future inference.
+
+\section{Proposed Work}
+
+\subsection{\FastKernels: Benchmarking Kernel Agents in Production Context}
+
+LLM-based agents can now write CUDA or Triton kernels that compile, run, and sometimes outperform simple baselines. However, existing kernel benchmarks are poorly aligned with production inference systems. They often evaluate single kernels on one GPU, use synthetic inputs, simplify interfaces, and compare against weak or non-production baselines. As a result, agents can learn optimizations that score well in a sandbox but fail to transfer into vLLM~\cite{vllm}, SGLang~\cite{sglang}, FlashAttention-style libraries~\cite{flashattention}, or model-specific serving stacks.
+
+\FastKernels{} addresses this benchmark-production gap. It is both a benchmark and a minimal inference framework. Tasks are derived top-down from 49 real model architectures across 9 categories, including dense and MoE LLMs, linear attention and state-space models, vision, audio, video, robotics, 3D graphics, recommendation, world models, and quantized inference. Its hierarchy spans primitive operators, fused operators, full layers, and end-to-end model paths. This design lets an agent reuse optimized lower-level kernels inside higher-level modules and tests whether optimizations compose into full-model execution.
+
+\FastKernels{} has four design pillars:
+
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+\item \textbf{Production-compatible interfaces.} Each task matches the constructor and forward interface of the corresponding production module, so generated kernels can be deployed with minimal refactoring.
+\item \textbf{Realistic inputs.} The benchmark captures and replays tensors produced by real model executions, exposing data-dependent behavior such as MoE routing skew.
+\item \textbf{Production baselines.} Generated kernels are compared against the optimized kernels that the framework actually ships, not only against generic PyTorch or \texttt{torch.compile}.
+\item \textbf{End-to-end validation.} Candidate kernels are injected into full model runs, checked for numerical correctness and downstream quality, and evaluated for throughput-latency impact.
+\end{enumerate}
+
+The current milestone-1 result is intentionally sobering. A state-of-the-art kernel agent that achieves a 1.14$\times$ geometric-mean speedup and 15/24 wins over \texttt{torch.compile} on KernelBench obtains 0.45$\times$ geometric-mean speedup and 0/24 wins against \FastKernels{} production baselines, despite succeeding at generation and correctness on most reachable scenarios. This demonstrates that the next bottleneck for kernel agents is not merely code synthesis; it is production-shaped optimization.
+
+\subsection{Profiling-Guided Kernel Agent}
+
+The final project will build on \FastKernels{} by developing a kernel generation agent that uses detailed profiling feedback to optimize emerging operators. The agent will follow an iterative profile-analyze-plan-code-verify loop:
+
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+\item \textbf{Profile.} Run the candidate kernel under realistic \FastKernels{} scenarios and collect runtime, compiler diagnostics, memory behavior, occupancy, achieved bandwidth, tensor-core utilization, and stall breakdowns from tools such as Nsight Compute.
+\item \textbf{Analyze.} Convert raw profiles into bottleneck hypotheses: memory bandwidth saturation, poor L2 locality, low occupancy, register pressure, warp divergence, uncoalesced accesses, synchronization overhead, or missed tensor-core use.
+\item \textbf{Plan.} Select transformations matched to the bottleneck, such as tiling, vectorization, fusion, layout changes, shared-memory staging, warp specialization, persistent scheduling, quantization-aware packing, or communication-computation overlap.
+\item \textbf{Code.} Generate or edit CUDA/Triton implementations while preserving the production module interface.
+\item \textbf{Verify.} Check compilation, numerical correctness, determinism where required, end-to-end model quality, and performance against production baselines.
+\end{enumerate}
+
+The research question is whether profiling feedback can move kernel agents from blind search toward systematic optimization. The target operators are deliberately chosen where manual kernels lag model innovation: linear attention variants, state-space scans, MoE routing and dispatch, speculative decoding verification kernels, multimodal preprocessing and attention, low-bit quantized GEMMs, and multi-GPU collectives.
+
+\section{Research Plan}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}p{0.18\linewidth}X@{}}
+\toprule
+\textbf{Period} & \textbf{Goals} \\
+\midrule
+Spring 2026 & Complete the initial \FastKernels{} benchmark paper and prepare the benchmark artifacts for broader use. \\
+Summer 2026 & Develop the first version of the feedback-driven kernel agent and evaluate it against existing benchmark and production-style baselines. \\
+Fall 2026 & Broaden the benchmark and agent to cover emerging operators and more realistic serving scenarios. \\
+Winter 2026--27 & Improve the agent through training, feedback design, and ablation studies that isolate which signals are most useful. \\
+Spring 2027 & Integrate successful kernels into the framework, evaluate end-to-end serving impact, and complete the final dissertation and kernel-agent paper. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.5em}
+\textbf{Table 1:} Tentative remaining research plan.
+\end{center}
+
+\paragraph{Evaluation.}
+The agent will be evaluated along five axes. First, correctness: compilation success, numerical agreement, tolerance calibration, and downstream model-quality preservation. Second, performance: kernel latency, end-to-end throughput, tail latency, and speedup over production baselines. Third, coverage: the fraction of tasks and architectures for which the agent can produce valid deployable kernels. Fourth, transfer: whether kernels optimized inside \FastKernels{} can be moved into existing frameworks with minimal changes. Fifth, learning signal quality: whether profiling-guided planning improves over timing-only search, compiler-error-only repair, and evolutionary baselines under equal compute budgets.
+
+\paragraph{Risks and mitigations.}
+The main risk is that production baselines are already highly optimized, making speedups sparse. This is also the point of the benchmark; the agent should focus on emerging operators where production kernels are immature and on integration wins that isolated microbenchmarks miss. A second risk is that full profiling is expensive. The agent will amortize this cost by using cheap timing and compiler feedback for early filtering, then invoking detailed profiles only for promising candidates or unclear bottlenecks. A third risk is reward hacking: generated kernels may exploit benchmark assumptions or silently degrade quality. \FastKernels{} mitigates this by separating correctness and timing, using captured inputs, validating end-to-end behavior, and auditing interface adapters.
+
+\section{Expected Contributions}
+
+The dissertation is expected to make the following contributions:
+
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+\item A unifying thesis for AI-assisted systems that automate increasingly specialized LLM serving and kernel optimizations.
+\item \SpecInfer{}, demonstrating tree-based speculative inference and verification for faster LLM serving.
+\item \FlexLLM{}, demonstrating token-level co-serving of LLM inference and PEFT finetuning on shared GPUs.
+\item \SuffixDecoding{}, demonstrating model-free, repetition-aware speculative decoding for agentic workloads.
+\item \FastKernels{}, a production-faithful benchmark and lightweight inference framework for GPU kernel generation agents.
+\item A profiling-guided kernel agent for emerging model operators, evaluated against production baselines and end-to-end serving behavior.
+\end{enumerate}
+
+\section{Conclusion}
+
+The efficiency problem in modern AI systems is no longer confined to one layer of the stack. It spans decoding algorithms, serving schedulers, compiler interfaces, and GPU kernels. As models, applications, and hardware evolve, expert-only optimization workflows will struggle to keep pace. This thesis develops systems that use models, agents, and runtime feedback to automate parts of that optimization process. The completed work shows substantial gains from AI-assisted and feedback-driven techniques in LLM serving, and the proposed work brings the same direction to automated kernel generation for the rapidly changing model architectures that will define the next generation of AI systems.
+
+\bibliographystyle{plain}
+\bibliography{thesis_proposal}
+
+\end{document}

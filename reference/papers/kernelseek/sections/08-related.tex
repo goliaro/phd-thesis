@@ -1,0 +1,52 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{LLM agents for GPU kernels.} Benchmarks score single operators
+\cite{ouyang2025kernelbench,zhang2026kernelbenchverified}, serving kernels on Blackwell
+\cite{xing2026flashinferbench,cao2026ksearch}, production shapes against a speed-of-light bound
+\cite{lin2026solexecbench}, and, in FastKernels \cite{oliaro2026fastkernels}, agent-written kernels
+inside the production modules they replace, where kernel-level speedups of several times shrink to
+at most 1.25$\times$ end to end. The systems divide along the structure--freedom axis of
+\S\ref{sec:intro}. Scripted agents train a policy inside a fixed loop
+\cite{baronio2025kevin,li2025cudal1,drkernel2026,zhu2026qimengkernel,cudaagent2026}, search over a
+menu of optimizations \cite{hong2025autocomp,kernelpro2026}, or assign fixed roles to several agents
+\cite{wei2025astra,kernelskill2026,han2026kda,luo2026houmao,sun2026kernelclaw}. Open-ended agents
+make an LLM the mutation operator of an evolutionary search
+\cite{romeraparedes2024funsearch,novikov2025alphaevolve,lange2025shinkaevolve,guo2025evoengineer,wiedemann2026kernelfoundry,yuksekgonul2026tttdiscover,lange2025aicudaengineer,cuco2026}
+or, in AVO \cite{chen2026avo}, a self-directed coding agent; Meta \cite{liao2025kernelevolve} and
+Cursor with NVIDIA \cite{cursor2026multiagent} run such loops across whole kernel libraries. AVO is
+the closest work in target. The closest in spirit is the harness-engineering report of Shui et al.\
+\cite{shui2026harness}, which finds that agent-assisted optimization beats fully autonomous agents on
+every FlashInfer contest kernel but does not isolate what the human contributes. No prior work
+compares two steering strategies on the same target, evaluator, and hardware.
+
+\paragraph{LLMs as optimizers.} The failure modes we attribute to autonomous agents are each
+documented in isolation: greedy, prior-driven search
+\cite{redko2026priorknowledge,dong2025stark,li2025tritonforge}, anchoring on the solution in the
+prompt \cite{jones2022cognitivebiases}, failure to explore without intervention
+\cite{krishnamurthy2024explore}, conservatism and premature stopping \cite{merouani2025compilot},
+early lock-in under iterative refinement \cite{javaji2025turnwise}, and false completion claims
+\cite{advani2026falsesuccess}. We show them co-occurring in one well-equipped agent.
+
+\paragraph{Questions and self-correction.} Self-Ask \cite{press2023selfask}, Self-Refine
+\cite{madaan2023selfrefine}, and Reflexion \cite{shinn2023reflexion} have the model question itself,
+but intrinsic self-correction is limited \cite{huang2024cannotselfcorrect} and models defer to the
+framing they are given \cite{sharma2024sycophancy}. External feedback works where self-feedback does
+not: human feedback on a model's own code raises repair success by more than half, partly because
+humans propose the structural changes the model does not \cite{olausson2024selfrepair}, and stating
+hypotheses before writing programs improves program synthesis \cite{wang2024hypothesissearch}. These
+works use questions to improve one answer; we use them to decide what to measure next in a
+long-horizon search, in the tradition of P\'olya's heuristics \cite{polya1945howtosolveit}.
+
+\paragraph{Scaffolding, compilers, and kernels.} An agent's interface moves its performance
+\cite{yang2024sweagent}, simpler pipelines often win \cite{xia2024agentless,anthropic2024effectiveagents},
+and more tools and context have costs \cite{langchain2025toolload,liu2024lost}; \sys is a data point
+for the second camp with a twist, since it used more tools than the equipped agent, but on demand. Korch \cite{hu2024korch}
+and Event Tensor \cite{jin2026eventtensor} automate a different layer, how kernels are grouped and
+scheduled into persistent megakernels, and are complementary targets for an agent that writes
+kernel bodies. The kernels we compare against are FlashAttention and its successors
+\cite{dao2022flashattention,dao2024flashattention2,shah2024flashattention3,zadouri2026flashattention4},
+co-designed with CUTLASS \cite{nvidia2023cutlass}; FlashInfer \cite{ye2025flashinfer}; cuDNN
+\cite{nvidia2025cudnn}; and ThunderKittens \cite{spector2025thunderkittens}, on the operator surface
+vLLM defines \cite{kwon2023vllm}. To our knowledge ours are the first dependency-free FA3- and
+FA4-class kernels to match or exceed upstream across that surface.

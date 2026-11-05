@@ -1,0 +1,18 @@
+We acknowledge that a more straightforward approach to preserving the probability distribution of stochastic decoding is directly sampling the next token $x \sim P(u_i \mid U; \Theta_{LLM})$ and examining whether $x$ is a child node of $u_{i-1}$ in the speculated token tree. We call this approach {\em naive sampling} (NS) and show that \Sys's multi-step speculative sampling has a uniformly lower rejection probability than naive sampling.
+
+\begin{theorem}
+\label{theorem:MSS}
+    Let $P\left(\textrm{reject} \mid \textrm{MSS}, U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\} \right)$ denote the probability of rejecting speculation following multi-step speculative sampling with abbreviation $P(\textrm{reject}\mid \textrm{MSS})$, and $P\left(\textrm{reject} \mid \textrm{NS}, U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\}\right)$ the probability of rejecting speculation following Naive Sampling (NS) with abbreviation $P(\textrm{reject}\mid\textrm{NS})$. Then $\forall U, \Theta_{\textrm{LLM}}, \{\Theta_{\textrm{SSM}_j}\}$, we have $$P(\textrm{reject}\mid \textrm{MSS}) \leq P(\textrm{reject}\mid\textrm{NS})$$
+\end{theorem}
+
+We present a proof of~\Cref{theorem:MSS} in~\cite{miao2023specinfer}.
+%\Cref{sec:appendix}.
+
+\if 0
+\rev{Note that prior sequence-based speculative inference work has introduced the verification algorithm for a single speculative model~\cite{leviathan2022fast, chen2023accelerating} when performing stochastic sampling. Different from these approaches, \Sys leverages multiple boosted SSMs and token trees for improving speculative performance, which requires a verification algorithm that can be generalized to more than one SSM while maximizing the verification success rate. More specifically,~\cite{leviathan2022fast, chen2023accelerating} only verifies against one speculative sampling distribution per step and fails once there is a mismatch, which is not optimal when we have multiple speculative sampling distributions to verify with. As a result, \Sys presents a multi-step verification algorithm (see \textproc{VerifyStochastic} in \Cref{alg2}) that can verify against all branches of a token to maximize the success rate while preserving equivalence as incremental decoding. [5, 26]'s stochastic verification algorithms are thus a special case of \Sys's \textproc{VerifyStochastic} algorithm when there is only a single sequence of speculated tokens.  
+}
+\fi
+
+\rev{Note that prior work has introduced single-step speculative sampling for sequence-based speculative inference~\cite{leviathan2022fast, chen2023accelerating}. Different from these approaches, \Sys leverages token trees for improving speculative performance, which requires a different verification algorithm. As a result, \Sys performs multi-step verification (see \textproc{VerifyStochastic} in \Cref{alg2}) across all branches of a token to maximize the success rate while preserving equivalence as incremental decoding.
+The proposed MSS algorithm not only works for  merge-based method with multiple SSMs, but also supports expansion-based method with one SSM and top-$k$ sampling.
+}

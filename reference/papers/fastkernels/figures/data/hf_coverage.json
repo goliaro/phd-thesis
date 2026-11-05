@@ -1,0 +1,4920 @@
+{
+ "counts": {
+  "table_rows": 488,
+  "within_threshold": 468,
+  "over_threshold": 17,
+  "pinned_version": 4,
+  "supported": 472,
+  "requiring_new_operations": 5,
+  "hf_reference_issues": 6,
+  "excluded": 5,
+  "denominator": 499,
+  "coverage_pct": 94.6
+ },
+ "lists": {
+  "HF reference issues": [
+   "deepseek_v4",
+   "gemma4_assistant",
+   "granite4_vision",
+   "minicpmv4_7",
+   "nllb_moe",
+   "sam_hq"
+  ],
+  "Models requiring new operations": [
+   "autoformer",
+   "informer",
+   "rag",
+   "time_series_transformer",
+   "xlstm"
+  ],
+  "Excluded from audit": [
+   "encoder_decoder",
+   "speech_encoder_decoder",
+   "timm_backbone",
+   "vision_encoder_decoder",
+   "vision_text_dual_encoder"
+  ]
+ },
+ "entries": [
+  {
+   "arch": "afmoe",
+   "model": "arcee-ai/Trinity-Mini",
+   "dtype": "bf16",
+   "rel_l2": "1.36",
+   "rel_l2_value": 1.36,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "aimv2",
+   "model": "apple/aimv2-large-patch14-224-lit",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "albert",
+   "model": "albert/albert-base-v2",
+   "dtype": "bf16",
+   "rel_l2": "0.871",
+   "rel_l2_value": 0.871,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "align",
+   "model": "kakaobrain/align-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "altclip",
+   "model": "BAAI/AltCLIP",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "apertus",
+   "model": "swiss-ai/Apertus-8B-Instruct-2509",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "arcee",
+   "model": "arcee-ai/AFM-4.5B",
+   "dtype": "bf16",
+   "rel_l2": "0.832",
+   "rel_l2_value": 0.832,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "aria",
+   "model": "Rhymes-AI/Aria",
+   "dtype": "bf16",
+   "rel_l2": "0.518",
+   "rel_l2_value": 0.518,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "audio_spectrogram_transformer",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "audioflamingo3",
+   "model": "nvidia/audio-flamingo-3-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.639",
+   "rel_l2_value": 0.639,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "axk1",
+   "model": "skt/A.X-K1",
+   "dtype": "bf16",
+   "rel_l2": "0.395",
+   "rel_l2_value": 0.395,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "axk2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.171",
+   "rel_l2_value": 0.171,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "aya_vision",
+   "model": "unsloth/aya-vision-8b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bamba",
+   "model": "ibm-ai-platform/Bamba-9B-v2",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bark",
+   "model": "suno/bark",
+   "dtype": "bf16",
+   "rel_l2": "0.913",
+   "rel_l2_value": 0.913,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bart",
+   "model": "facebook/bart-large-cnn",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "beit",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bert",
+   "model": "google-bert/bert-base-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bert_generation",
+   "model": "google/bert_for_seq_generation_L-24_bbc_encoder",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "big_bird",
+   "model": "google/bigbird-roberta-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bigbird_pegasus",
+   "model": "google/bigbird-pegasus-large-arxiv",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "biogpt",
+   "model": "microsoft/biogpt",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bit",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bitnet",
+   "model": "microsoft/bitnet-b1.58-2B-4T",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "blenderbot",
+   "model": "facebook/blenderbot-400M-distill",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "blenderbot_small",
+   "model": "facebook/blenderbot_small-90M",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "blip",
+   "model": "Salesforce/blip-image-captioning-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "blip_2",
+   "model": "Salesforce/blip2-opt-2.7b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "blip_text",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bloom",
+   "model": "bigscience/bloom",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "blt",
+   "model": "itazap/blt-1b-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bridgetower",
+   "model": "BridgeTower/bridgetower-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "bros",
+   "model": "jinho8345/bros-base-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "camembert",
+   "model": "almanach/camembert-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "canary",
+   "model": "nvidia/canary-1b-v2",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "canine",
+   "model": "Constructor defaults",
+   "dtype": "fp32",
+   "rel_l2": "$1.95\\!\\times\\!10^{-4}$",
+   "rel_l2_value": 0.000195,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "chameleon",
+   "model": "nopperl/chameleon-7b-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.465",
+   "rel_l2_value": 0.465,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "chinese_clip",
+   "model": "OFA-Sys/chinese-clip-vit-base-patch16",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "chmv2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "$6.32\\!\\times\\!10^{-6}$",
+   "rel_l2_value": 6.32e-06,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "clap",
+   "model": "laion/clap-htsat-unfused",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "clip",
+   "model": "openai/clip-vit-base-patch32",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "clipseg",
+   "model": "CIDAS/clipseg-rd64-refined",
+   "dtype": "bf16",
+   "rel_l2": "1.35",
+   "rel_l2_value": 1.35,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "clvp",
+   "model": "susnato/clvp_dev",
+   "dtype": "fp32",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "codegen",
+   "model": "Salesforce/codegen-350M-mono",
+   "dtype": "fp16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cohere",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cohere2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cohere2_moe",
+   "model": "CohereLabs/command-a-plus-05-2026",
+   "dtype": "bf16",
+   "rel_l2": "0.528",
+   "rel_l2_value": 0.528,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cohere2_vision",
+   "model": "mlx-community/command-a-vision-07-2025-4bit",
+   "dtype": "bf16",
+   "rel_l2": "0.638",
+   "rel_l2_value": 0.638,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cohere_asr",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cohere_compass",
+   "model": "CohereLabs/North-Micro-Vision-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0.789",
+   "rel_l2_value": 0.789,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "colmodernvbert",
+   "model": "ModernVBERT/colmodernvbert-merged + ColModernVBertConfig wrapper",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "colpali",
+   "model": "vidore/colpaligemma-3b-pt-448-base + ColPaliConfig wrapper",
+   "dtype": "bf16",
+   "rel_l2": "1.01",
+   "rel_l2_value": 1.01,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "colqwen2",
+   "model": "vidore/colqwen2-v1.0-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.829",
+   "rel_l2_value": 0.829,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "conditional_detr",
+   "model": "microsoft/conditional-detr-resnet-50",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "convbert",
+   "model": "YituTech/conv-bert-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "convnext",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "convnextv2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cosmos3_edge",
+   "model": "nvidia/Cosmos3-Edge",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cosmos3_omni",
+   "model": "nvidia/Cosmos3-Nano",
+   "dtype": "bf16",
+   "rel_l2": "1.2",
+   "rel_l2_value": 1.2,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cpmant",
+   "model": "openbmb/cpm-ant-10b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "csm",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.00206",
+   "rel_l2_value": 0.00206,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ctrl",
+   "model": "Salesforce/ctrl",
+   "dtype": "bf16",
+   "rel_l2": "0.366",
+   "rel_l2_value": 0.366,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cvt",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "cwm",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.884",
+   "rel_l2_value": 0.884,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "d_fine",
+   "model": "ustc-community/dfine-xlarge-coco",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dab_detr",
+   "model": "IDEA-Research/dab-detr-resnet-50",
+   "dtype": "fp32",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dac",
+   "model": "descript/dac_16khz",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "data2vec_audio",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "data2vec_text",
+   "model": "facebook/data2vec-text-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "data2vec_vision",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dbrx",
+   "model": "alpindale/dbrx-instruct (mirror)",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deberta",
+   "model": "microsoft/deberta-base",
+   "dtype": "fp32",
+   "rel_l2": "$1.64\\!\\times\\!10^{-4}$",
+   "rel_l2_value": 0.000164,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deberta_v2",
+   "model": "microsoft/deberta-v2-xlarge",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "decision_transformer",
+   "model": "edbeeching/decision-transformer-gym-hopper-medium",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deepseek_ocr2",
+   "model": "deepseek-community/DeepSeek-OCR-2",
+   "dtype": "bf16",
+   "rel_l2": "1.77",
+   "rel_l2_value": 1.77,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deepseek_v2",
+   "model": "deepseek-ai/DeepSeek-V2-Lite",
+   "dtype": "bf16",
+   "rel_l2": "1",
+   "rel_l2_value": 1.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deepseek_v3",
+   "model": "deepseek-ai/DeepSeek-V3",
+   "dtype": "fp8/bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 5.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deepseek_v32",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "1.64",
+   "rel_l2_value": 1.64,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deepseek_vl",
+   "model": "deepseek-community/deepseek-vl-1.3b-chat",
+   "dtype": "fp16",
+   "rel_l2": "0.0769",
+   "rel_l2_value": 0.0769,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deepseek_vl_hybrid",
+   "model": "deepseek-community/deepseek-vl-7b-chat",
+   "dtype": "fp16",
+   "rel_l2": "0.0693",
+   "rel_l2_value": 0.0693,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deformable_detr",
+   "model": "SenseTime/deformable-detr",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deimv2",
+   "model": "harshaljanjani/DEIMv2_HGNetv2_N_COCO_Transformers",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "deit",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "depth_anything",
+   "model": "LiheYoung/depth-anything-small-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.141",
+   "rel_l2_value": 0.141,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "depth_pro",
+   "model": "apple/DepthPro-hf",
+   "dtype": "fp16",
+   "rel_l2": "0.121",
+   "rel_l2_value": 0.121,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "detr",
+   "model": "facebook/detr-resnet-50-panoptic",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dia",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.537",
+   "rel_l2_value": 0.537,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "diffllama",
+   "model": "kajuma/DiffLlama-0.3B-handcut",
+   "dtype": "bf16",
+   "rel_l2": "0.746",
+   "rel_l2_value": 0.746,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "diffusion_gemma",
+   "model": "google/diffusiongemma-26B-A4B-it",
+   "dtype": "bf16",
+   "rel_l2": "81",
+   "rel_l2_value": 81.0,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "dinat",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dinov2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dinov2_with_registers",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dinov3_convnext",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dinov3_vit",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "distilbert",
+   "model": "distilbert/distilbert-base-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0.855",
+   "rel_l2_value": 0.855,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "doge",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "donut_swin",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dots1",
+   "model": "rednote-hilab/dots.llm1.base",
+   "dtype": "bf16",
+   "rel_l2": "0.239",
+   "rel_l2_value": 0.239,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dpr",
+   "model": "facebook/dpr-question_encoder-single-nq-base",
+   "dtype": "bf16",
+   "rel_l2": "0.972",
+   "rel_l2_value": 0.972,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "dpt",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "edgetam",
+   "model": "yonigozlan/EdgeTAM-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "edgetam_video",
+   "model": "yonigozlan/EdgeTAM-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "efficientloftr",
+   "model": "zju-community/efficientloftr",
+   "dtype": "bf16",
+   "rel_l2": "0.0292",
+   "rel_l2_value": 0.0292,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "efficientnet",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "electra",
+   "model": "google/electra-small-generator",
+   "dtype": "bf16",
+   "rel_l2": "0.885",
+   "rel_l2_value": 0.885,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "emu3",
+   "model": "BAAI/Emu3-Chat-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "encodec",
+   "model": "facebook/encodec_24khz",
+   "dtype": "bf16",
+   "rel_l2": "0.0579",
+   "rel_l2_value": 0.0579,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "eomt",
+   "model": "tue-mps/coco_panoptic_eomt_large_640",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "eomt_dinov3",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ernie",
+   "model": "nghuyong/ernie-1.0-base-zh",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ernie4_5",
+   "model": "baidu/ERNIE-4.5-0.3B-PT",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ernie4_5_moe",
+   "model": "baidu/ERNIE-4.5-21B-A3B-PT",
+   "dtype": "bf16",
+   "rel_l2": "0.542",
+   "rel_l2_value": 0.542,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ernie4_5_vl_moe",
+   "model": "baidu/ERNIE-4.5-VL-28B-A3B-PT",
+   "dtype": "bf16",
+   "rel_l2": "0.42",
+   "rel_l2_value": 0.42,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "esm",
+   "model": "facebook/esm-1b",
+   "dtype": "bf16",
+   "rel_l2": "1.73",
+   "rel_l2_value": 1.73,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "esmc",
+   "model": "biohub/ESMC-6B-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "esmfold",
+   "model": "facebook/esmfold_v1",
+   "dtype": "bf16",
+   "rel_l2": "$4.80\\!\\times\\!10^{-6}$",
+   "rel_l2_value": 4.8e-06,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "esmfold2",
+   "model": "biohub/ESMFold2-hf",
+   "dtype": "fp32",
+   "rel_l2": "$2.37\\!\\times\\!10^{-5}$",
+   "rel_l2_value": 2.3700000000000003e-05,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "eurobert",
+   "model": "EuroBERT/EuroBERT-210m",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "evolla",
+   "model": "westlake-repl/Evolla-10B-DPO-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "exaone4",
+   "model": "LGAI-EXAONE/EXAONE-4.0-32B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "exaone4_5",
+   "model": "LGAI-EXAONE/EXAONE-4.5-33B",
+   "dtype": "bf16",
+   "rel_l2": "1.27",
+   "rel_l2_value": 1.27,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "exaone_moe",
+   "model": "LGAI-EXAONE/K-EXAONE-236B-A23B",
+   "dtype": "bf16",
+   "rel_l2": "1.65",
+   "rel_l2_value": 1.65,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "falcon",
+   "model": "tiiuae/falcon-7b-instruct",
+   "dtype": "bf16",
+   "rel_l2": "1.45",
+   "rel_l2_value": 1.45,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "falcon_h1",
+   "model": "tiiuae/Falcon-H1-7B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "1.25",
+   "rel_l2_value": 1.25,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "falcon_mamba",
+   "model": "tiiuae/falcon-mamba-7b-instruct",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "fast_vlm",
+   "model": "KamilaMila/FastVLM-0.5B",
+   "dtype": "bf16",
+   "rel_l2": "0.69",
+   "rel_l2_value": 0.69,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "fastspeech2_conformer",
+   "model": "espnet/fastspeech2_conformer_with_hifigan",
+   "dtype": "fp32",
+   "rel_l2": "$1.91\\!\\times\\!10^{-4}$",
+   "rel_l2_value": 0.000191,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "flaubert",
+   "model": "flaubert/flaubert_base_uncased",
+   "dtype": "bf16",
+   "rel_l2": "1.09",
+   "rel_l2_value": 1.09,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "flava",
+   "model": "facebook/flava-full",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "flex_olmo",
+   "model": "allenai/FlexOlmo-7x7B-1T",
+   "dtype": "bf16",
+   "rel_l2": "0.86",
+   "rel_l2_value": 0.86,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "florence2",
+   "model": "florence-community/Florence-2-large",
+   "dtype": "fp16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "fnet",
+   "model": "google/fnet-base",
+   "dtype": "fp32",
+   "rel_l2": "$1.70\\!\\times\\!10^{-4}$",
+   "rel_l2_value": 0.00017,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "focalnet",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "fsmt",
+   "model": "facebook/wmt19-ru-en",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "fun_asr_nano",
+   "model": "FunAudioLLM/Fun-ASR-Nano-2512-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "funnel",
+   "model": "funnel-transformer/small",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "fuyu",
+   "model": "adept/fuyu-8b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gemma",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.451",
+   "rel_l2_value": 0.451,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gemma2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.389",
+   "rel_l2_value": 0.389,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gemma3",
+   "model": "Pinned Gemma3 4B recipe",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gemma3n",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gemma4",
+   "model": "google/gemma-4-e2b-it",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gemma4_unified",
+   "model": "google/gemma-4-12B-it",
+   "dtype": "bf16",
+   "rel_l2": "5.88",
+   "rel_l2_value": 5.88,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "gemma4_unified_assistant",
+   "model": "google/gemma-4-e2b-it-assistant",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "git",
+   "model": "microsoft/git-base-coco",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm",
+   "model": "THUDM/glm-4-9b-chat",
+   "dtype": "bf16",
+   "rel_l2": "0.905",
+   "rel_l2_value": 0.905,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm4",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.761",
+   "rel_l2_value": 0.761,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm46v",
+   "model": "zai-org/GLM-4.1V-9B-Thinking",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm4_moe",
+   "model": "zai-org/GLM-4.5",
+   "dtype": "bf16",
+   "rel_l2": "0.212",
+   "rel_l2_value": 0.212,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm4_moe_lite",
+   "model": "zai-org/GLM-4.7-Flash",
+   "dtype": "bf16",
+   "rel_l2": "0.99",
+   "rel_l2_value": 0.99,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm4v",
+   "model": "zai-org/GLM-4.1V-9B-Thinking",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm4v_moe",
+   "model": "zai-org/GLM-4.5V",
+   "dtype": "bf16",
+   "rel_l2": "0.143",
+   "rel_l2_value": 0.143,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm5_next",
+   "model": "zai-org/GLM-5.3-Flash",
+   "dtype": "fp8/bf16",
+   "rel_l2": "19.5",
+   "rel_l2_value": 19.5,
+   "threshold": 5.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm_image",
+   "model": "zai-org/GLM-Image",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm_moe_dsa",
+   "model": "zai-org/GLM-5",
+   "dtype": "bf16",
+   "rel_l2": "1.92",
+   "rel_l2_value": 1.92,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glm_ocr",
+   "model": "zai-org/GLM-OCR",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glmasr",
+   "model": "zai-org/GLM-ASR-Nano-2512",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "glpn",
+   "model": "vinvino02/glpn-kitti",
+   "dtype": "bf16",
+   "rel_l2": "0.062",
+   "rel_l2_value": 0.062,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "got_ocr2",
+   "model": "stepfun-ai/GOT-OCR-2.0-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gpt2",
+   "model": "openai-community/gpt2",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gpt_bigcode",
+   "model": "bigcode/gpt_bigcode-santacoder",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gpt_neo",
+   "model": "EleutherAI/gpt-neo-1.3B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gpt_neox",
+   "model": "EleutherAI/gpt-neox-20b",
+   "dtype": "fp16",
+   "rel_l2": "0.0522",
+   "rel_l2_value": 0.0522,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gpt_neox_japanese",
+   "model": "abeja/gpt-neox-japanese-2.7b",
+   "dtype": "bf16",
+   "rel_l2": "0.687",
+   "rel_l2_value": 0.687,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gpt_oss",
+   "model": "openai/gpt-oss-20b",
+   "dtype": "mxfp4/bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 20.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "gptj",
+   "model": "EleutherAI/gpt-j-6B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "granite",
+   "model": "ibm-granite/granite-3.0-8b-base",
+   "dtype": "bf16",
+   "rel_l2": "0.275",
+   "rel_l2_value": 0.275,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "granite_speech",
+   "model": "ibm-granite/granite-speech-3.3-2b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "granite_speech5",
+   "model": "ibm-granite/granite-speech-5.0-470m-turboctc",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "granite_speech_plus",
+   "model": "ibm-granite/granite-speech-4.1-2b-plus",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "granite_swa",
+   "model": "ibm-granite/granite-swash-2b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "granitemoe",
+   "model": "ibm/PowerMoE-3b",
+   "dtype": "bf16",
+   "rel_l2": "1.69",
+   "rel_l2_value": 1.69,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "granitemoe_swa",
+   "model": "ibm-granite/granite-swash-3b-a600m",
+   "dtype": "bf16",
+   "rel_l2": "9.34",
+   "rel_l2_value": 9.34,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "granitemoehybrid",
+   "model": "ibm-granite/granite-4.0-h-tiny",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "granitemoeshared",
+   "model": "ibm-research/moe-7b-1b-active-shared-experts",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "grounding_dino",
+   "model": "IDEA-Research/grounding-dino-tiny",
+   "dtype": "fp32",
+   "rel_l2": "$6.4\\!\\times\\!10^{-5}$",
+   "rel_l2_value": 6.400000000000001e-05,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "groupvit",
+   "model": "nvidia/groupvit-gcc-yfcc",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "helium",
+   "model": "kyutai/helium-1-preview",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hgnet_v2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hiera",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "higgs_audio_v2",
+   "model": "eustlb/higgs-audio-v2-generation-3B-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "higgs_audio_v2_tokenizer",
+   "model": "eustlb/higgs-audio-v2-tokenizer",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hrm_text",
+   "model": "sapientinc/HRM-Text-1B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hubert",
+   "model": "facebook/hubert-large-ls960-ft",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hunyuan_v1_dense",
+   "model": "tencent/Hunyuan-0.5B-Pretrain",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hunyuan_v1_moe",
+   "model": "tencent/Hunyuan-A13B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hunyuan_vl",
+   "model": "tencent/HunyuanOCR",
+   "dtype": "bf16",
+   "rel_l2": "0.724",
+   "rel_l2_value": 0.724,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hy_v3",
+   "model": "tencent/Hy3-preview",
+   "dtype": "bf16",
+   "rel_l2": "0.712",
+   "rel_l2_value": 0.712,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hy_v4",
+   "model": "tencent/Hy4-preview",
+   "dtype": "bf16",
+   "rel_l2": "2.55",
+   "rel_l2_value": 2.55,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "hyperclovax",
+   "model": "naver-hyperclovax/HyperCLOVAX-SEED-Think-14B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "hyperclovax_vision_v2",
+   "model": "naver-hyperclovax/HyperCLOVAX-SEED-Think-32B",
+   "dtype": "bf16",
+   "rel_l2": "0.78",
+   "rel_l2_value": 0.78,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ibert",
+   "model": "kssteven/ibert-roberta-base",
+   "dtype": "bf16",
+   "rel_l2": "1.33",
+   "rel_l2_value": 1.33,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "idefics",
+   "model": "HuggingFaceM4/idefics-9b",
+   "dtype": "bf16",
+   "rel_l2": "0.651",
+   "rel_l2_value": 0.651,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "idefics2",
+   "model": "HuggingFaceM4/idefics2-8b-base",
+   "dtype": "bf16",
+   "rel_l2": "0.749",
+   "rel_l2_value": 0.749,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "idefics3",
+   "model": "HuggingFaceM4/Idefics3-8B-Llama3",
+   "dtype": "bf16",
+   "rel_l2": "1.12",
+   "rel_l2_value": 1.12,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ijepa",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "imagegpt",
+   "model": "openai/imagegpt-small",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "inkling",
+   "model": "thinkingmachines/Inkling",
+   "dtype": "bf16",
+   "rel_l2": "4.15",
+   "rel_l2_value": 4.15,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "instructblip",
+   "model": "Salesforce/instructblip-vicuna-7b",
+   "dtype": "bf16",
+   "rel_l2": "0.539",
+   "rel_l2_value": 0.539,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "instructblipvideo",
+   "model": "Salesforce/instructblip-vicuna-7b",
+   "dtype": "bf16",
+   "rel_l2": "0.483",
+   "rel_l2_value": 0.483,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "internvl",
+   "model": "OpenGVLab/InternVL3-1B-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "jais2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "jamba",
+   "model": "ai21labs/Jamba-v0.1",
+   "dtype": "bf16",
+   "rel_l2": "1.02",
+   "rel_l2_value": 1.02,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "janus",
+   "model": "deepseek-community/Janus-Pro-1B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "jetmoe",
+   "model": "jetmoe/jetmoe-8b",
+   "dtype": "bf16",
+   "rel_l2": "0.341",
+   "rel_l2_value": 0.341,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "jina_embeddings_v3",
+   "model": "jinaai/jina-embeddings-v3-hf",
+   "dtype": "bf16",
+   "rel_l2": "1.5",
+   "rel_l2_value": 1.5,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "kimi_k25",
+   "model": "moonshotai/Kimi-K2.6",
+   "dtype": "int4/bf16",
+   "rel_l2": "7.61",
+   "rel_l2_value": 7.61,
+   "threshold": 20.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "kimi_linear",
+   "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "16.9",
+   "rel_l2_value": 16.9,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": true
+  },
+  {
+   "arch": "kosmos2",
+   "model": "microsoft/kosmos-2-patch14-224",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "kosmos2_5",
+   "model": "microsoft/kosmos-2.5",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "kyutai_speech_to_text",
+   "model": "kyutai/stt-2.6b-en-trfs",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "laguna",
+   "model": "poolside/laguna-XS.2",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lasr",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.727",
+   "rel_l2_value": 0.727,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "layoutlm",
+   "model": "microsoft/layoutlm-base-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "layoutlmv2",
+   "model": "microsoft/layoutlmv2-base-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "layoutlmv3",
+   "model": "microsoft/layoutlmv3-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "led",
+   "model": "allenai/led-large-16384-arxiv",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "levit",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lfm2",
+   "model": "LiquidAI/LFM2-1.2B",
+   "dtype": "bf16",
+   "rel_l2": "1.83",
+   "rel_l2_value": 1.83,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lfm2_moe",
+   "model": "LiquidAI/LFM2-8B-A1B",
+   "dtype": "bf16",
+   "rel_l2": "1.45",
+   "rel_l2_value": 1.45,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lfm2_vl",
+   "model": "LiquidAI/LFM2-VL-1.6B",
+   "dtype": "bf16",
+   "rel_l2": "0.787",
+   "rel_l2_value": 0.787,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lightglue",
+   "model": "ETH-CVG/lightglue_superpoint",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lighton_ocr",
+   "model": "lightonai/LightOnOCR-1B-1025",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lilt",
+   "model": "SCUT-DLVCLab/lilt-roberta-en-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "llama",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.746",
+   "rel_l2_value": 0.746,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "llama4",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "llava",
+   "model": "llava-hf/llava-1.5-7b-hf",
+   "dtype": "fp16",
+   "rel_l2": "0.0932",
+   "rel_l2_value": 0.0932,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "llava_next",
+   "model": "llava-hf/llava-v1.6-mistral-7b-hf",
+   "dtype": "fp16",
+   "rel_l2": "0.0961",
+   "rel_l2_value": 0.0961,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "llava_next_video",
+   "model": "llava-hf/LLaVA-NeXT-Video-7B-hf",
+   "dtype": "bf16",
+   "rel_l2": "1.34",
+   "rel_l2_value": 1.34,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "llava_onevision",
+   "model": "llava-hf/llava-onevision-qwen2-7b-ov-hf",
+   "dtype": "fp16",
+   "rel_l2": "0.0756",
+   "rel_l2_value": 0.0756,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "longcat_flash",
+   "model": "meituan-longcat/LongCat-Flash-Chat",
+   "dtype": "bf16",
+   "rel_l2": "0.725",
+   "rel_l2_value": 0.725,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "longformer",
+   "model": "allenai/longformer-base-4096",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "longt5",
+   "model": "Stancld/longt5-tglobal-large-16384-pubmed-3k_steps",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "luke",
+   "model": "studio-ousia/luke-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lw_detr",
+   "model": "AnnaZhang/lwdetr_small_60e_coco",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "lxmert",
+   "model": "unc-nlp/lxmert-base-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "m2m_100",
+   "model": "facebook/m2m100_418M",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mamba",
+   "model": "state-spaces/mamba-130m-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mamba2",
+   "model": "mistralai/Mamba-Codestral-7B-v0.1",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "marian",
+   "model": "Helsinki-NLP/opus-mt-en-de",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "markuplm",
+   "model": "microsoft/markuplm-base",
+   "dtype": "fp16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mask2former",
+   "model": "facebook/mask2former-swin-small-coco-instance",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "maskformer",
+   "model": "facebook/maskformer-swin-base-ade",
+   "dtype": "fp32",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "maskformer_swin",
+   "model": "Constructor defaults",
+   "dtype": "fp32",
+   "rel_l2": "$2.82\\!\\times\\!10^{-5}$",
+   "rel_l2_value": 2.82e-05,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mbart",
+   "model": "facebook/mbart-large-en-ro",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "megatron_bert",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mellum",
+   "model": "JetBrains/Mellum2-12B-A2.5B-Base",
+   "dtype": "bf16",
+   "rel_l2": "0.817",
+   "rel_l2_value": 0.817,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "metaclip_2",
+   "model": "facebook/metaclip-2-worldwide-huge-quickgelu",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mgp_str",
+   "model": "alibaba-damo/mgp-str-base",
+   "dtype": "bf16",
+   "rel_l2": "0.365",
+   "rel_l2_value": 0.365,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mimi",
+   "model": "kyutai/mimi",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mimo_v2_flash",
+   "model": "XiaomiMiMo/MiMo-V2-Flash",
+   "dtype": "fp8/bf16",
+   "rel_l2": "12.2",
+   "rel_l2_value": 12.2,
+   "threshold": 5.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "minicpm3",
+   "model": "openbmb/MiniCPM3-4B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "minicpmv4_6",
+   "model": "openbmb/MiniCPM-V-4_6",
+   "dtype": "bf16",
+   "rel_l2": "1.27",
+   "rel_l2_value": 1.27,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "minimax",
+   "model": "MiniMaxAI/MiniMax-Text-01-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.255",
+   "rel_l2_value": 0.255,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "minimax_m2",
+   "model": "MiniMaxAI/MiniMax-M2",
+   "dtype": "fp8/bf16",
+   "rel_l2": "$8.69\\!\\times\\!10^{-5}$",
+   "rel_l2_value": 8.69e-05,
+   "threshold": 5.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "minimax_m3_vl",
+   "model": "MiniMaxAI/MiniMax-M3",
+   "dtype": "bf16",
+   "rel_l2": "3.4",
+   "rel_l2_value": 3.4,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "ministral",
+   "model": "mistralai/Ministral-8B-Instruct-2410",
+   "dtype": "bf16",
+   "rel_l2": "0.768",
+   "rel_l2_value": 0.768,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ministral3",
+   "model": "mistralai/Ministral-3-8B-Base-2512",
+   "dtype": "bf16",
+   "rel_l2": "0.649",
+   "rel_l2_value": 0.649,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mistral",
+   "model": "mistralai/Mistral-7B-v0.1",
+   "dtype": "bf16",
+   "rel_l2": "0.81",
+   "rel_l2_value": 0.81,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mistral3",
+   "model": "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mistral4",
+   "model": "mistralai/Mistral-Small-4-119B-2603",
+   "dtype": "fp8/bf16/fp32",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 5.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mixtral",
+   "model": "mistralai/Mixtral-8x7B-v0.1",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mlcd",
+   "model": "DeepGlint-AI/mlcd-vit-bigG-patch14-448",
+   "dtype": "bf16",
+   "rel_l2": "1.24",
+   "rel_l2_value": 1.24,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mllama",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mm_grounding_dino",
+   "model": "openmmlab-community/mm_grounding_dino_tiny_o365v1_goldg_v3det",
+   "dtype": "fp32",
+   "rel_l2": "$4.4\\!\\times\\!10^{-5}$",
+   "rel_l2_value": 4.4000000000000006e-05,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mobilebert",
+   "model": "google/mobilebert-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mobilenet_v1",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mobilenet_v2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mobilevit",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mobilevitv2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.701",
+   "rel_l2_value": 0.701,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "modernbert",
+   "model": "answerdotai/ModernBERT-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "modernbert_decoder",
+   "model": "blab-jhu/test-32m-dec",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "modernvbert",
+   "model": "ModernVBERT/modernvbert",
+   "dtype": "bf16",
+   "rel_l2": "1.3",
+   "rel_l2_value": 1.3,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "moonshine",
+   "model": "UsefulSensors/moonshine-tiny",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "moonshine_streaming",
+   "model": "UsefulSensors/moonshine-streaming-tiny",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "moshi",
+   "model": "kmhf/hf-moshiko",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mpnet",
+   "model": "microsoft/mpnet-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mpt",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mra",
+   "model": "uw-madison/mra-base-512-4",
+   "dtype": "fp32",
+   "rel_l2": "$4.1\\!\\times\\!10^{-5}$",
+   "rel_l2_value": 4.1e-05,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mt5",
+   "model": "google/mt5-small",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "muse_glimmer",
+   "model": "meta-models/Muse-Glimmer-30B",
+   "dtype": "bf16",
+   "rel_l2": "12.2",
+   "rel_l2_value": 12.2,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "muse_glimmer_assistant",
+   "model": "meta-models/Muse-Glimmer-30B-assistant",
+   "dtype": "bf16",
+   "rel_l2": "0.413",
+   "rel_l2_value": 0.413,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "musicflamingo",
+   "model": "nvidia/music-flamingo-2601-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "musicgen",
+   "model": "facebook/musicgen-small",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "musicgen_melody",
+   "model": "facebook/musicgen-melody",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "mvp",
+   "model": "RUCAIBox/mvp",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "nanochat",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "nemotron",
+   "model": "nvidia/Minitron-4B-Base",
+   "dtype": "bf16",
+   "rel_l2": "0.843",
+   "rel_l2_value": 0.843,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "nemotron3_5_asr",
+   "model": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+   "dtype": "bf16",
+   "rel_l2": "0.0547",
+   "rel_l2_value": 0.0547,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "nemotron3_diarization",
+   "model": "nvidia/Nemotron-3-Diarization",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "nemotron_asr_streaming",
+   "model": "nvidia/nemotron-speech-streaming-en-0.6b",
+   "dtype": "bf16",
+   "rel_l2": "0.569",
+   "rel_l2_value": 0.569,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "nemotron_h",
+   "model": "nvidia/Nemotron-H-8B-Reasoning-128K",
+   "dtype": "bf16",
+   "rel_l2": "1.53",
+   "rel_l2_value": 1.53,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "nemotron_h_omni",
+   "model": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
+   "dtype": "bf16",
+   "rel_l2": "13.2",
+   "rel_l2_value": 13.2,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "neomme",
+   "model": "Hcompany/NeoMME-260M",
+   "dtype": "bf16",
+   "rel_l2": "0.118",
+   "rel_l2_value": 0.118,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "neucodec",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "16.1",
+   "rel_l2_value": 16.1,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "nomic_bert",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "nystromformer",
+   "model": "uw-madison/nystromformer-512",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "olmo",
+   "model": "allenai/OLMo-7B-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.711",
+   "rel_l2_value": 0.711,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "olmo2",
+   "model": "allenai/OLMo-2-0425-1B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "olmo3",
+   "model": "allenai/Olmo-3-7B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "olmo_hybrid",
+   "model": "allenai/Olmo-Hybrid-7B",
+   "dtype": "bf16",
+   "rel_l2": "0.639",
+   "rel_l2_value": 0.639,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "olmoe",
+   "model": "allenai/OLMoE-1B-7B-0924",
+   "dtype": "bf16",
+   "rel_l2": "0.557",
+   "rel_l2_value": 0.557,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "omdet_turbo",
+   "model": "omlab/omdet-turbo-swin-tiny-hf",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "oneformer",
+   "model": "shi-labs/oneformer_ade20k_swin_tiny",
+   "dtype": "bf16",
+   "rel_l2": "0.302",
+   "rel_l2_value": 0.302,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "openai",
+   "model": "openai-community/openai-gpt",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "openai_privacy_filter",
+   "model": "openai/privacy-filter",
+   "dtype": "bf16",
+   "rel_l2": "1.3",
+   "rel_l2_value": 1.3,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "opt",
+   "model": "facebook/opt-350m",
+   "dtype": "fp16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "ovis2",
+   "model": "thisisiron/Ovis2-2B-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.702",
+   "rel_l2_value": 0.702,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "owlv2",
+   "model": "google/owlv2-base-patch16-ensemble",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "owlvit",
+   "model": "google/owlvit-base-patch32",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "paddleocr_vl",
+   "model": "PaddlePaddle/PaddleOCR-VL",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "paligemma",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.0153",
+   "rel_l2_value": 0.0153,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "parakeet",
+   "model": "nvidia/parakeet-ctc-1.1b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "patchtsmixer",
+   "model": "ibm/patchtsmixer-etth1-pretrain",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "patchtst",
+   "model": "namctin/patchtst_etth1_pretrain",
+   "dtype": "bf16",
+   "rel_l2": "0.132",
+   "rel_l2_value": 0.132,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pe_audio",
+   "model": "facebook/pe-av-large",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pe_audio_video",
+   "model": "facebook/pe-av-large",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pe_video",
+   "model": "facebook/pe-av-large",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pegasus",
+   "model": "google/pegasus-xsum",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pegasus_x",
+   "model": "google/pegasus-x-large",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "perceiver",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "perception_lm",
+   "model": "facebook/Perception-LM-1B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "persimmon",
+   "model": "adept/persimmon-8b-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "phi",
+   "model": "microsoft/phi-1",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "phi3",
+   "model": "microsoft/Phi-3-mini-4k-instruct",
+   "dtype": "bf16",
+   "rel_l2": "0.929",
+   "rel_l2_value": 0.929,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "phi4_multimodal (speech)",
+   "model": "microsoft/Phi-4-multimodal-instruct",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "phimoe",
+   "model": "microsoft/Phi-3.5-MoE-instruct",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pi0",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.282",
+   "rel_l2_value": 0.282,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pix2struct",
+   "model": "google/pix2struct-textcaps-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pixio",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pixtral",
+   "model": "mistral-labs/pixtral-12b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "plbart",
+   "model": "uclanlp/plbart-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "poolformer",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pop2piano",
+   "model": "sweetcocoa/pop2piano",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_doclayout_v2",
+   "model": "PaddlePaddle/PP-DocLayoutV2_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_doclayout_v3",
+   "model": "PaddlePaddle/PP-DocLayoutV3_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_formulanet",
+   "model": "PaddlePaddle/PP-FormulaNet_plus-L_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_lcnet",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_lcnet_v3",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_lcnet_v4",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_ocrv5_mobile_det",
+   "model": "PaddlePaddle/PP-OCRv5_mobile_det_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_ocrv5_mobile_rec",
+   "model": "PaddlePaddle/PP-OCRv5_mobile_rec_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_ocrv5_server_det",
+   "model": "PaddlePaddle/PP-OCRv5_server_det_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_ocrv5_server_rec",
+   "model": "PaddlePaddle/PP-OCRv5_server_rec_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_ocrv6_medium_det",
+   "model": "PaddlePaddle/PP-OCRv6_medium_det_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_ocrv6_small_det",
+   "model": "PaddlePaddle/PP-OCRv6_small_det_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_ocrv6_small_rec",
+   "model": "PaddlePaddle/PP-OCRv6_small_rec_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pp_ocrv6_tiny_rec",
+   "model": "PaddlePaddle/PP-OCRv6_tiny_rec_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "prompt_depth_anything",
+   "model": "depth-anything/prompt-depth-anything-vits-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.0479",
+   "rel_l2_value": 0.0479,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "prophetnet",
+   "model": "microsoft/prophetnet-large-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pvt",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "pvt_v2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qianfan_ocr",
+   "model": "baidu/Qianfan-OCR",
+   "dtype": "bf16",
+   "rel_l2": "0.727",
+   "rel_l2_value": 0.727,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen2",
+   "model": "Qwen/Qwen2-7B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen2_5_omni",
+   "model": "Qwen/Qwen2.5-Omni-7B",
+   "dtype": "bf16",
+   "rel_l2": "0.005",
+   "rel_l2_value": 0.005,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen2_5_vl",
+   "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0.789",
+   "rel_l2_value": 0.789,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen2_audio",
+   "model": "Qwen/Qwen2-Audio-7B",
+   "dtype": "bf16",
+   "rel_l2": "0.683",
+   "rel_l2_value": 0.683,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen2_moe",
+   "model": "Qwen/Qwen1.5-MoE-A2.7B-Chat",
+   "dtype": "bf16",
+   "rel_l2": "0.56",
+   "rel_l2_value": 0.56,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen2_vl",
+   "model": "Qwen/Qwen2-VL-7B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0.767",
+   "rel_l2_value": 0.767,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3",
+   "model": "Qwen/Qwen3-8B",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3_5",
+   "model": "Qwen/Qwen3.5-27B",
+   "dtype": "bf16",
+   "rel_l2": "0.393",
+   "rel_l2_value": 0.393,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3_5_moe",
+   "model": "Qwen/Qwen3.5-35B-A3B",
+   "dtype": "bf16",
+   "rel_l2": "0.353",
+   "rel_l2_value": 0.353,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3_asr",
+   "model": "Qwen/Qwen3-ASR-1.7B-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.827",
+   "rel_l2_value": 0.827,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3_moe",
+   "model": "Qwen/Qwen3-30B-A3B",
+   "dtype": "bf16",
+   "rel_l2": "0.897",
+   "rel_l2_value": 0.897,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3_next",
+   "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0.758",
+   "rel_l2_value": 0.758,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3_omni_moe",
+   "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3_vl",
+   "model": "Qwen/Qwen3-VL-8B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0.994",
+   "rel_l2_value": 0.994,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen3_vl_moe",
+   "model": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0.939",
+   "rel_l2_value": 0.939,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "qwen4_exp",
+   "model": "Qwen/Qwen3.8-Flash-Next",
+   "dtype": "bf16",
+   "rel_l2": "12.7",
+   "rel_l2_value": 12.7,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "radio",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "recurrent_gemma",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.334",
+   "rel_l2_value": 0.334,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "reformer",
+   "model": "hf-internal-testing/tiny-random-reformer",
+   "dtype": "fp32",
+   "rel_l2": "$8\\!\\times\\!10^{-6}$",
+   "rel_l2_value": 8e-06,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "regnet",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "rembert",
+   "model": "google/rembert",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "resnet",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "rf_detr",
+   "model": "Roboflow/rf-detr-base",
+   "dtype": "bf16",
+   "rel_l2": "113",
+   "rel_l2_value": 113.0,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "roberta",
+   "model": "FacebookAI/roberta-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "roberta_prelayernorm",
+   "model": "andreasmadsen/efficient_mlm_m0.40",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "roc_bert",
+   "model": "weiweishi/roc-bert-base-zh",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "roformer",
+   "model": "junnyu/roformer_chinese_base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "rt_detr",
+   "model": "PekingU/rtdetr_r50vd",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "rt_detr_resnet",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "rt_detr_v2",
+   "model": "PekingU/rtdetr_v2_r18vd",
+   "dtype": "bf16",
+   "rel_l2": "0.387",
+   "rel_l2_value": 0.387,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "rwkv",
+   "model": "---",
+   "dtype": "---",
+   "rel_l2": "---",
+   "rel_l2_value": null,
+   "threshold": null,
+   "within": false,
+   "pinned_version": true
+  },
+  {
+   "arch": "sam",
+   "model": "facebook/sam-vit-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sam2",
+   "model": "danelcsb/sam2.1_hiera_tiny",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sam2_video",
+   "model": "facebook/sam2.1-hiera-tiny",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sam3",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sam3_lite_text",
+   "model": "yonigozlan/sam3-litetext-s0",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sam3_tracker",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.814",
+   "rel_l2_value": 0.814,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sam3_tracker_video",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sam3_video",
+   "model": "---",
+   "dtype": "---",
+   "rel_l2": "---",
+   "rel_l2_value": null,
+   "threshold": null,
+   "within": false,
+   "pinned_version": true
+  },
+  {
+   "arch": "sapiens2",
+   "model": "facebook/sapiens2-pretrain-0.4b",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "seamless_m4t",
+   "model": "facebook/hf-seamless-m4t-medium",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "seamless_m4t_v2",
+   "model": "facebook/seamless-m4t-v2-large",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "seed_oss",
+   "model": "ByteDance-Seed/Seed-OSS-36B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0.839",
+   "rel_l2_value": 0.839,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "segformer",
+   "model": "nvidia/segformer-b0-finetuned-ade-512-512",
+   "dtype": "bf16",
+   "rel_l2": "0.456",
+   "rel_l2_value": 0.456,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "seggpt",
+   "model": "BAAI/seggpt-vit-large",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sew",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "sew_d",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "shieldgemma2",
+   "model": "Official ShieldGemma2 converter recipe",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "siglip",
+   "model": "google/siglip-base-patch16-224",
+   "dtype": "bf16",
+   "rel_l2": "0.529",
+   "rel_l2_value": 0.529,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "siglip2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.755",
+   "rel_l2_value": 0.755,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "slanet",
+   "model": "PaddlePaddle/SLANet_plus_safetensors",
+   "dtype": "fp32",
+   "rel_l2": "$1.02\\!\\times\\!10^{-4}$",
+   "rel_l2_value": 0.00010200000000000001,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "slanext",
+   "model": "PaddlePaddle/SLANeXt_wired_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "smollm3",
+   "model": "HuggingFaceTB/SmolLM3-3B",
+   "dtype": "bf16",
+   "rel_l2": "0.85",
+   "rel_l2_value": 0.85,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "smolvlm",
+   "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "solar_open",
+   "model": "upstage/Solar-Open-100B",
+   "dtype": "bf16",
+   "rel_l2": "0.61",
+   "rel_l2_value": 0.61,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "speech_to_text",
+   "model": "facebook/s2t-small-librispeech-asr",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "speecht5",
+   "model": "microsoft/speecht5_asr",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "splinter",
+   "model": "tau/splinter-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "squeezebert",
+   "model": "squeezebert/squeezebert-uncased",
+   "dtype": "bf16",
+   "rel_l2": "0.798",
+   "rel_l2_value": 0.798,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "stablelm",
+   "model": "stabilityai/stablelm-3b-4e1t",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "starcoder2",
+   "model": "bigcode/starcoder2-7b",
+   "dtype": "bf16",
+   "rel_l2": "0.815",
+   "rel_l2_value": 0.815,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "step3p7",
+   "model": "stepfun-ai/Step-3.7-Flash",
+   "dtype": "bf16",
+   "rel_l2": "11.2",
+   "rel_l2_value": 11.2,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "superglue",
+   "model": "magic-leap-community/superglue_outdoor",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "superpoint",
+   "model": "magic-leap-community/superpoint",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "swiftformer",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "swin",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "swin2sr",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "1.16",
+   "rel_l2_value": 1.16,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "swinv2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "switch_transformers",
+   "model": "google/switch-base-8",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "t5",
+   "model": "google-t5/t5-small",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "t5gemma",
+   "model": "Author T5GemmaPreset.GEMMA2_2B_2B PREFIXLM IT recipe",
+   "dtype": "bf16",
+   "rel_l2": "0.688",
+   "rel_l2_value": 0.688,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "t5gemma2",
+   "model": "jordimas/t5gemma-2-270m-270m",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "table_transformer",
+   "model": "microsoft/table-transformer-detection",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "tapas",
+   "model": "google/tapas-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "textnet",
+   "model": "czczup/textnet-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "timesfm",
+   "model": "google/timesfm-2.0-500m-pytorch",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "timesfm2_5",
+   "model": "google/timesfm-2.5-200m-transformers",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "timesformer",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "1.21",
+   "rel_l2_value": 1.21,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "timm_wrapper",
+   "model": "---",
+   "dtype": "---",
+   "rel_l2": "---",
+   "rel_l2_value": null,
+   "threshold": null,
+   "within": false,
+   "pinned_version": true
+  },
+  {
+   "arch": "tipsv2",
+   "model": "google/tipsv2-b14",
+   "dtype": "bf16",
+   "rel_l2": "1.86",
+   "rel_l2_value": 1.86,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "tipsv2_dpt",
+   "model": "google/tipsv2-b14-dpt",
+   "dtype": "bf16",
+   "rel_l2": "2.23",
+   "rel_l2_value": 2.23,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "trocr",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "tvp",
+   "model": "Intel/tvp-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "udop",
+   "model": "microsoft/udop-large",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "umt5",
+   "model": "google/umt5-small",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "unispeech",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "unispeech_sat",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "univnet",
+   "model": "dg845/univnet-dev",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "upernet",
+   "model": "openmmlab/upernet-convnext-tiny",
+   "dtype": "bf16",
+   "rel_l2": "0.323",
+   "rel_l2_value": 0.323,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "uvdoc",
+   "model": "PaddlePaddle/UVDoc_safetensors",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vaultgemma",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0.621",
+   "rel_l2_value": 0.621,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vibevoice",
+   "model": "vibevoice/VibeVoice-1.5B-hf",
+   "dtype": "bf16",
+   "rel_l2": "1.16",
+   "rel_l2_value": 1.16,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vibevoice_acoustic_tokenizer",
+   "model": "microsoft/VibeVoice-AcousticTokenizer",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vibevoice_asr",
+   "model": "microsoft/VibeVoice-ASR-HF",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "video_llama_3",
+   "model": "lkhl/VideoLLaMA3-2B-Image-HF",
+   "dtype": "bf16",
+   "rel_l2": "0.624",
+   "rel_l2_value": 0.624,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "video_llava",
+   "model": "LanguageBind/Video-LLaVA-7B-hf",
+   "dtype": "bf16",
+   "rel_l2": "0.716",
+   "rel_l2_value": 0.716,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "videomae",
+   "model": "MCG-NJU/videomae-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "videomt",
+   "model": "tue-mps/videomt-dinov2-small-ytvis2019",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "videoprism",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vilt",
+   "model": "dandelin/vilt-b32-finetuned-coco",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vipllava",
+   "model": "llava-hf/vip-llava-7b-hf",
+   "dtype": "fp16",
+   "rel_l2": "0.0971",
+   "rel_l2_value": 0.0971,
+   "threshold": 0.5,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "visual_bert",
+   "model": "uclanlp/visualbert-vqa-coco-pre",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vit",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vit_mae",
+   "model": "facebook/vit-mae-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vit_msn",
+   "model": "facebook/vit-msn-small",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vitdet",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vitmatte",
+   "model": "hustvl/vitmatte-small-composition-1k",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vitpose",
+   "model": "usyd-community/vitpose-base-simple",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vitpose_backbone",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vits",
+   "model": "facebook/mms-tts-eng",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vivit",
+   "model": "google/vivit-b-16x2-kinetics400",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "vjepa2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "voxtral",
+   "model": "mistralai/Voxtral-Mini-3B-2507",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "voxtral_realtime",
+   "model": "mistralai/Voxtral-Mini-4B-Realtime-2602",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "wav2vec2",
+   "model": "facebook/wav2vec2-large-960h-lv60-self",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "wav2vec2_bert",
+   "model": "facebook/w2v-bert-2.0",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "wav2vec2_conformer",
+   "model": "facebook/wav2vec2-conformer-rel-pos-large",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "wavlm",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "whisper",
+   "model": "openai/whisper-tiny.en",
+   "dtype": "bf16",
+   "rel_l2": "0.795",
+   "rel_l2_value": 0.795,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "x_clip",
+   "model": "microsoft/xclip-base-patch32",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "xcodec",
+   "model": "hf-audio/xcodec-hubert-librispeech",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "xcodec2",
+   "model": "HKUSTAudio/xcodec2-hf",
+   "dtype": "bf16",
+   "rel_l2": "10.1",
+   "rel_l2_value": 10.1,
+   "threshold": 2.0,
+   "within": false,
+   "pinned_version": false
+  },
+  {
+   "arch": "xglm",
+   "model": "facebook/xglm-564M",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "xlm",
+   "model": "FacebookAI/xlm-mlm-en-2048",
+   "dtype": "bf16",
+   "rel_l2": "1.11",
+   "rel_l2_value": 1.11,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "xlm_roberta",
+   "model": "FacebookAI/xlm-roberta-base",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "xlm_roberta_xl",
+   "model": "facebook/xlm-roberta-xl",
+   "dtype": "bf16",
+   "rel_l2": "1.98",
+   "rel_l2_value": 1.98,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "xlnet",
+   "model": "Constructor defaults",
+   "dtype": "fp32",
+   "rel_l2": "$2.25\\!\\times\\!10^{-4}$",
+   "rel_l2_value": 0.00022500000000000002,
+   "threshold": 0.01,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "xmod",
+   "model": "facebook/xmod-base",
+   "dtype": "bf16",
+   "rel_l2": "1.48",
+   "rel_l2_value": 1.48,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "yolos",
+   "model": "hustvl/yolos-tiny",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "yoso",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "0",
+   "rel_l2_value": 0.0,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "youtu",
+   "model": "tencent/Youtu-LLM-2B",
+   "dtype": "bf16",
+   "rel_l2": "0.974",
+   "rel_l2_value": 0.974,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "zamba",
+   "model": "Zyphra/Zamba-7B-v1",
+   "dtype": "bf16",
+   "rel_l2": "0.512",
+   "rel_l2_value": 0.512,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "zamba2",
+   "model": "Constructor defaults",
+   "dtype": "bf16",
+   "rel_l2": "1.22",
+   "rel_l2_value": 1.22,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "zaya",
+   "model": "Zyphra/ZAYA1-8B",
+   "dtype": "bf16",
+   "rel_l2": "0.668",
+   "rel_l2_value": 0.668,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  },
+  {
+   "arch": "zoedepth",
+   "model": "Intel/zoedepth-nyu-kitti",
+   "dtype": "bf16",
+   "rel_l2": "0.00553",
+   "rel_l2_value": 0.00553,
+   "threshold": 2.0,
+   "within": true,
+   "pinned_version": false
+  }
+ ]
+}

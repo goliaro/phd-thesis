@@ -1,0 +1,14 @@
+\section{Related Work}
+\label{sec:related}
+
+
+\paragraph{GPU kernel benchmarks.}
+\textsc{KernelBench}~\citep{kernelbench} pioneered the evaluation of LLM-generated GPU kernels, drawing from an earlier generation of architectures (e.g.,~AlexNet, VGG). \textsc{robust-kbench}~\citep{robustkbench} addressed KernelBench's numerical instabilities and reward-hacking vulnerabilities. 
+\textsc{SOL-ExecBench}~\citep{solexecbench} scores subgraphs against B200 speed-of-light bounds rather than software baselines.
+\textsc{FlashInfer-Bench}~\citep{flashinferbench} integrates with an inference engine but is limited to FlashInfer LLM operators, while \textsc{CUDABench}~\citep{cudabench} and \textsc{TritonBench}~\citep{tritonbench} evaluate operators in isolation.
+Further efforts~\citep{backendbench,multikernelbench,kernelcraft,nvidia2025computeeval,kalade2025npueval} broaden backend and robustness coverage while retaining an operator-level, single-GPU scope.
+Concurrent benchmarks target multi-GPU code directly: \textsc{CommBench}~\citep{commbench} evaluates communication programs across NVLink and RDMA, and \textsc{ParallelKernelBench}~\citep{parallelkernelbench} asks agents to replace PyTorch+NCCL references with fused multi-GPU kernels; both score each program in isolation.
+\fastkernels{} is complementary and fills four gaps: it is the first kernel benchmark to (i)~organize tasks into a compositional hierarchy from primitives to full models, mirroring production assembly, and to show that this hierarchy produces measurable composition effects (Section~\ref{sec:eval-agents}). It also (ii)~measures speedup against the kernels shipped in state-of-the-art inference frameworks rather than PyTorch or theoretical bounds, (iii)~matches production module interfaces, enabling copy--paste deployment, and (iv)~scores communication kernels inside the tensor-parallel models that issue them.
+
+\paragraph{LLM-based kernel agents.}
+A parallel line develops inference-time agents combining LLM reasoning with profiler feedback or evolutionary search~\citep{robustkbench,kernelagent,kernelevolve,wei2025astra,cudaforge,wang2025geak,alphaevolve,openevolve,kda,ako}, alongside specialized models trained via RL or fine-tuning~\citep{baronio2025kevin,li2025cudal1,kernelllm2025,li2025autotriton,zhu2026qimeng}. These systems are typically developed against operator-level benchmarks, which \fastkernels{} complements.

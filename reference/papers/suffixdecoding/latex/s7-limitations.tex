@@ -1,0 +1,8 @@
+\section*{Limitations}
+
+It is important for every work to discuss its limitations. In terms of speculation performance, SuffixDecoding is limited by its context defined by the prefix sequence it uses to look up candidate tokens. Although SuffixDecoding performs well in our evaluations, there may be other datasets in which long-range dependencies are more frequent and would be detrimental to SuffixDecoding's performance.
+
+In term of risks, there may be privacy concerns in re-using previously generated outputs to speculate new outputs. 
+ We suggest two methods to mitigate this.
+ First, SuffixDecoding is an exact speculative decoding method, meaning it precisely preserves the original LLM output distribution, even if draft tokens are selected from a different request. We consider this property as a first layer of privacy protection.
+ Second, in real-world enterprise deployments, SuffixDecoding makes it easy to build and maintain disjoint suffix trees per user or customer of the LLM service. For each user, it is efficient to maintain suffix trees just for the private use of that user.

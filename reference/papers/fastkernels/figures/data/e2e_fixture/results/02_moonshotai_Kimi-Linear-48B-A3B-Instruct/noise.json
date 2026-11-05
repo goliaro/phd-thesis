@@ -1,0 +1,58 @@
+{
+ "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+ "status": "ok",
+ "error": null,
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5203.639999999999
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2115.75
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.0532847434255883
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.424412768520378
+  }
+ },
+ "speedups": {
+  "mixed": 1.0007,
+  "long-context": 1.0075,
+  "single-request": 1.0153,
+  "fixed-batch-32": 0.9962
+ },
+ "correctness": {
+  "per_sample": [
+   0.00205,
+   0.00217,
+   0.00229,
+   0.00165,
+   0.00235,
+   0.00276,
+   0.00091,
+   0.00076,
+   0.0021,
+   0.00021,
+   0.00175,
+   0.00067,
+   3e-05,
+   0.00138,
+   0.00193,
+   0.00143
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.9984725
+  }
+ },
+ "mean_d": 0.0015275
+}

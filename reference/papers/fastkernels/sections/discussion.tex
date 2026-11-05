@@ -1,0 +1,11 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We presented \fastkernels{}, a benchmark that grounds kernel-generation evaluation in production inference.
+Our seed evaluation shows that kernel-level success barely predicts deployment: speedups of up to $6.6\times$ shrink to at most $1.25\times$ end to end, only 20\% of winning kernel sets run correctly as-is, and kernel-level scores rank Claude Code above KDA, which scores $3\times$ higher.
+
+\paragraph{Limitations.}
+The $94.6\%$ HuggingFace coverage is checked on a few forward passes per architecture, some with randomly initialized weights, so it certifies functional equivalence rather than task accuracy.
+Performance is measured on locked-clock B200 SXM; rankings on other GPUs may differ.
+Our kernel-level results use synthesized inputs, so data-dependent kernels are scored faithfully only end to end; agents are scored on the default set only.
+\textsc{MacroEval}'s family weighting, $\lambda{=}0.5$ blend, and product score encode value judgments, so we also report its components.

@@ -16,4 +16,4 @@
 *.tui
 *.top
 *mpgraph.mp
-*.synctex.gz
+*.synctex.gz*.brf

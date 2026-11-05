@@ -1,0 +1,28 @@
+{
+ "model": "jameslahm/yolov10n",
+ "tp": 1,
+ "status": "ok",
+ "candidates": false,
+ "candidate_dir": null,
+ "adapter": "detection",
+ "timings": {
+  "coco-val": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 850.0
+  },
+  "single-image": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.0041
+  },
+  "batch-4": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.0093
+  }
+ },
+ "t_run_s": 900.0,
+ "t_total_s": 1010.0,
+ "_dir": "/out/runs/07_jameslahm_yolov10n/baseline"
+}

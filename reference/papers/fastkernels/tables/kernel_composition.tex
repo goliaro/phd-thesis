@@ -1,0 +1,15 @@
+\begin{tabular}{@{}l rrr rrr rr rr@{}}
+\toprule
+ & \multicolumn{6}{c}{\makecell{\textbf{Composition effect}\\(Independent $\to$ Composed)}} & \multicolumn{4}{c}{\makecell{\textbf{Sequential}\\(Composed $\to$ Seq.)}} \\
+\cmidrule(lr){2-7}\cmidrule(lr){8-11}
+ & \multicolumn{3}{c}{L2} & \multicolumn{3}{c}{L3} & \multicolumn{2}{c}{L2} & \multicolumn{2}{c}{L3} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}
+Agent & $n$ & Ratio & Broke & $n$ & Ratio & Broke & $n$ & Ratio & $n$ & Ratio \\
+\midrule
+Dr.~Kernel & 5 & 0.99$\times$ & 0 & 1 & 1.00$\times$ & 0 & 1 & 1.78$\times$ & 0 & --- \\
+Claude Code & 54 & 1.09$\times$ & 2 & 14 & 0.99$\times$ & 4 & 50 & 0.99$\times$ & 14 & 0.97$\times$ \\
+KDA & 51 & 0.98$\times$ & 10 & 11 & 0.88$\times$ & 6 & 47 & 0.90$\times$ & 11 & 1.07$\times$ \\
+AKO & 60 & 1.00$\times$ & 4 & 14 & 0.86$\times$ & 3 & 55 & 1.05$\times$ & 14 & 1.48$\times$ \\
+Codex & 47 & 0.97$\times$ & 13 & 5 & 1.04$\times$ & 13 & 43 & 0.94$\times$ & 5 & 1.35$\times$ \\
+\bottomrule
+\end{tabular}

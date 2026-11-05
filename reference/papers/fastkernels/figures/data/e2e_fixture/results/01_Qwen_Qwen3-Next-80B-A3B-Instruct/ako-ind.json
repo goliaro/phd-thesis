@@ -1,0 +1,237 @@
+{
+ "kernels_requested": [
+  "L1:gated_delta_rule",
+  "L1:linear",
+  "L1:rms_norm",
+  "L2:moe_router"
+ ],
+ "dropped": [
+  {
+   "kernel": "L1:linear",
+   "category": "incorrect",
+   "attempt": 4,
+   "reason": "found by bisection (incorrect)"
+  }
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:gated_delta_rule",
+    "L1:linear",
+    "L1:rms_norm",
+    "L2:moe_router"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gated_delta_rule",
+    "L1:linear",
+    "L1:rms_norm",
+    "L2:moe_router"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0788,
+    "long-context": 1.0222,
+    "single-request": 1.057,
+    "fixed-batch-32": 1.1012
+   },
+   "mean_d": 0.83
+  },
+  {
+   "n": 2,
+   "purpose": "bisect",
+   "only": [
+    "L1:gated_delta_rule",
+    "L1:linear"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gated_delta_rule",
+    "L1:linear"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 0.9909,
+    "long-context": 1.0579,
+    "single-request": 1.0963,
+    "fixed-batch-32": 1.0933
+   },
+   "mean_d": 0.81
+  },
+  {
+   "n": 3,
+   "purpose": "bisect",
+   "only": [
+    "L1:gated_delta_rule"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gated_delta_rule"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0746,
+    "long-context": 1.0528,
+    "single-request": 1.0504,
+    "fixed-batch-32": 0.9833
+   },
+   "mean_d": 0.002
+  },
+  {
+   "n": 4,
+   "purpose": "bisect",
+   "only": [
+    "L1:linear"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:linear"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0157,
+    "long-context": 1.0623,
+    "single-request": 1.0539,
+    "fixed-batch-32": 1.0079
+   },
+   "mean_d": 0.81
+  },
+  {
+   "n": 5,
+   "purpose": "full",
+   "only": [
+    "L1:gated_delta_rule",
+    "L1:rms_norm",
+    "L2:moe_router"
+   ],
+   "exclude": [
+    "L1:linear"
+   ],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gated_delta_rule",
+    "L1:rms_norm",
+    "L2:moe_router"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0319,
+    "long-context": 1.0525,
+    "single-request": 1.0868,
+    "fixed-batch-32": 1.1111
+   },
+   "mean_d": 0.0021662500000000006
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:gated_delta_rule",
+   "L1:linear",
+   "L1:rms_norm",
+   "L2:moe_router"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:gated_delta_rule",
+   "L1:linear",
+   "L1:rms_norm",
+   "L2:moe_router"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 1.0788,
+   "long-context": 1.0222,
+   "single-request": 1.057,
+   "fixed-batch-32": 1.1012
+  },
+  "mean_d": 0.83
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:gated_delta_rule",
+  "L1:rms_norm",
+  "L2:moe_router"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5365.88
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2210.25
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.8524107471475895
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 5.7600576005760065
+  }
+ },
+ "speedups": {
+  "mixed": 1.0319,
+  "long-context": 1.0525,
+  "single-request": 1.0868,
+  "fixed-batch-32": 1.1111
+ },
+ "correctness": {
+  "per_sample": [
+   0.00427,
+   0.00026,
+   0.00317,
+   0.00486,
+   0.00158,
+   0.00393,
+   0.00015,
+   0.002,
+   0.00277,
+   0.0004,
+   0.00205,
+   0.00069,
+   0.00243,
+   0.00275,
+   0.00207,
+   0.00128
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99783375
+  }
+ },
+ "mean_d": 0.0021662500000000006,
+ "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+ "set": "ako-ind"
+}

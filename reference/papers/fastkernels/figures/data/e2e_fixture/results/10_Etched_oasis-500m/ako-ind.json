@@ -1,0 +1,129 @@
+{
+ "kernels_requested": [
+  "L1:conv3d",
+  "L1:group_norm",
+  "L1:silu",
+  "L2:spatial_attention",
+  "L2:temporal_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:conv3d",
+    "L1:group_norm",
+    "L1:silu",
+    "L2:spatial_attention",
+    "L2:temporal_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:conv3d",
+    "L1:group_norm",
+    "L1:silu",
+    "L2:spatial_attention",
+    "L2:temporal_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "short-bs4-16f-4ddim": 1.0289,
+    "medium-bs8-24f-4ddim": 0.9431,
+    "latency-bs1-8f-4ddim": 1.0155
+   },
+   "mean_d": 0.002270625
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:conv3d",
+   "L1:group_norm",
+   "L1:silu",
+   "L2:spatial_attention",
+   "L2:temporal_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:conv3d",
+   "L1:group_norm",
+   "L1:silu",
+   "L2:spatial_attention",
+   "L2:temporal_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "short-bs4-16f-4ddim": 1.0289,
+   "medium-bs8-24f-4ddim": 0.9431,
+   "latency-bs1-8f-4ddim": 1.0155
+  },
+  "mean_d": 0.002270625
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:conv3d",
+  "L1:group_norm",
+  "L1:silu",
+  "L2:spatial_attention",
+  "L2:temporal_attention"
+ ],
+ "timings": {
+  "short-bs4-16f-4ddim": {
+   "kind": "throughput",
+   "unit": "frame/s",
+   "value": 56.589499999999994
+  },
+  "medium-bs8-24f-4ddim": {
+   "kind": "throughput",
+   "unit": "frame/s",
+   "value": 66.9601
+  },
+  "latency-bs1-8f-4ddim": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.35450516986706054
+  }
+ },
+ "speedups": {
+  "short-bs4-16f-4ddim": 1.0289,
+  "medium-bs8-24f-4ddim": 0.9431,
+  "latency-bs1-8f-4ddim": 1.0155
+ },
+ "correctness": {
+  "per_sample": [
+   0.00029,
+   0.00137,
+   0.00341,
+   0.00349,
+   0.00134,
+   0.00269,
+   0.00313,
+   0.00358,
+   0.00399,
+   0.00082,
+   0.00269,
+   0.00158,
+   0.00372,
+   0.00058,
+   0.00101,
+   0.00264
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.997729375
+  }
+ },
+ "mean_d": 0.002270625,
+ "model": "Etched/oasis-500m",
+ "set": "ako-ind"
+}

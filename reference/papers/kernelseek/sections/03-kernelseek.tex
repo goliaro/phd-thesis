@@ -1,0 +1,139 @@
+\section{\sys: A Question-Driven Kernel Agent}
+\label{sec:workflow}
+% Question counts, 162 messages, 71 tool calls per message come from paper/analysis/traces.
+
+\sys takes a working CUDA kernel, a set of scenarios, and a goal, and returns a faster kernel whose
+outputs match the seed on every scenario. It has three parts: a minimal harness that makes the goal
+verifiable, a general-purpose coding agent with no script around it, and a source of questions at the
+moments the agent is about to go wrong. The questions come from a human steerer or, once they recur,
+from a bank the agent applies to itself. Nothing in the method is specific to an operator, and
+nothing requires a faster implementation to exist.
+
+\subsection{Ask vs.\ Equip: A Common Frame}
+\label{sec:ask-vs-equip}
+\label{sec:frame}
+
+Kernel optimization by an agent is a search. A candidate is a kernel source; its fitness is a vector
+of per-scenario speedups over the seed, collapsed to zero if any scenario is incorrect; and the
+lineage is monotone, as in AVO \cite{chen2026avo}. The agent is the variation operator: it proposes
+the next candidate conditioned on a context, and everything a designer can do is a choice of what
+enters that context and when. An \emph{equipped} agent receives the task, tools whose output has
+been distilled for it (a profiler parser that names the bottleneck, a disassembly differ), knowledge
+retrieved for it (documentation sections, hints mined from reference libraries, a store of lessons),
+the lineage, and feedback on the last candidate; the designer improves it by adding tools and
+knowledge. Our baseline (\S\ref{sec:baseline}) is a serious instance. An \emph{asked} agent receives
+the task, the harness's output, the lineage, and, at decision points, a short question. It still has
+every tool a developer machine offers, the compiler, profiler, disassembler, sanitizer, and
+debugger, but nothing is pre-digested, and direction arrives as a question rather than a menu. The
+designer improves it by asking better questions.
+
+\subsection{A Minimal Harness and a Verifiable Goal}
+\label{sec:workflow-harness}
+
+The only component we build is the evaluator. One command builds a candidate, checks its outputs
+against the seed's and an fp32 reference on every scenario, and times it against the seed back to
+back on the same GPU, reporting per-scenario ratios and their geometric mean. Other kernels the user
+cares about can be added as measured comparison columns, but none is required. Constraints are
+stated once and enforced mechanically: in the case study, the ban on CUTLASS, CuTe, cuBLAS, and
+cuDNN is checked by inspecting the built binary's symbols.
+
+The goal is a predicate over the evaluator's output, enforced rather than requested. We install it
+as a Stop hook in the coding agent: whenever the agent attempts to end its turn, the hook evaluates
+the predicate and, if any clause is unmet, returns the agent to work with the unmet clauses in hand.
+A predicate such as ``at least parity with the seed on every scenario'' removes the most common
+failure of autonomous agents, declaring completion early. Two lessons shaped how we write
+predicates. They must quantify over every scenario rather than an aggregate, because an agent will
+otherwise satisfy the aggregate on the shapes it is good at. And they must not be judged by a model
+where they can be computed: the one time our hook delegated the verdict to a model judge, it
+accepted a premature claim that a human then overturned (\S\ref{sec:eval-cases}).
+
+\subsection{Questions: What They Are and When to Ask}
+\label{sec:workflow-questions}
+\label{sec:good-questions}
+\label{sec:workflow-when}
+
+
+Across the traces, the questions that preceded the largest gains share six properties. They carry
+no answer: they name a class of hypothesis and leave the derivation to the agent. They demand a
+measurement the agent can make with the tools it has, so the answer is a number rather than an
+opinion. They move across layers of the system, from the kernel to the host launch path to the
+routing logic to the benchmark itself, where an agent left alone stays at the layer it started at.
+They refuse premature closure by asking whether a claimed limit is a property of the hardware or of
+the agent's own design. They are cheap, tens of tokens against the tens of thousands that retrieved
+documentation costs \cite{liu2024lost,langchain2025toolload}. And they counteract deference: an
+agent tends to keep the structure it started from and accept the framing it is given
+\cite{sharma2024sycophancy}, and a question asks it to justify that choice with evidence.
+
+Eight categories cover the questions a human asked during the case study
+(Table~\ref{tab:qbank-human} in Appendix~\ref{app:questions}): measurement check (13 messages), bound
+differencing (10), benchmark validity (7), gap triage (7), agent process (6), challenge a limit (5),
+strategy options (5), and hypothesis check (3). The largest checks a measurement: whether a win is noise, whether a comparison is fair, whether the
+agent is timing what it thinks it is timing. The second pits the agent's claimed ceiling against an
+independent estimate of what is achievable. In the case study that estimate was often the upstream
+kernel, but the pattern does not depend on one existing: a roofline, a speed-of-light figure
+\cite{lin2026solexecbench}, or an A/B that swaps only the launcher around an identical binary serves
+the same role. Questions are asked at
+decision points, not continuously; the traces show five: at the start of a campaign, to fix the
+scope; at a plateau; when the agent claims a limit or completion; after a suspiciously large win;
+and when correctness breaks in a way the agent explains away. Between these points the agent works
+alone, about 71 tool calls per human message, where the median message is a sentence or two. The
+steerer contributes no code and no CUDA knowledge the agent lacks; it contributes doubt, at the right
+moment, about the right thing.
+
+\subsection{The Question Bank}
+\label{sec:workflow-bank}
+
+After the campaigns we distilled the recurring questions into a bank. Its first version, taken from
+the traces alone, had 48 entries, and reading it back showed the hazard of distilling from one case
+study: 21 named the upstream kernel as the comparison and 13 named attention structure. The released
+bank removes both. A question is admitted only if it carries no answer, is answerable by a
+measurement with stock tools, is phrased against a bound (a roofline or a per-tile cycle budget)
+rather than a reference, names an architecture only as a parameter, and names no operator. To cover
+the aspects a single attention campaign never exercised, we also mined three public GEMM worklogs on
+Ampere, Hopper, and Blackwell \cite{boehm2022cudammm,shankhdhar2024h100,modular2025blackwell} and
+the FlashAttention-3 and -4 papers \cite{shah2024flashattention3,zadouri2026flashattention4} for
+the diagnostic that preceded each of their optimizations, and phrased it as a question. The result
+has 101 core entries in ten groups ordered by where the gap might be (scope and triage; the bound
+and the regime; harness and measurement; host, launch, and routing; memory hierarchy; compute issue;
+occupancy and registers; asynchrony and pipelining; scheduling; low-precision numerics), five that
+apply only when another implementation is available to measure, and eighteen per-architecture
+checklist entries that bind the generic mechanisms to Ampere, Hopper, or Blackwell instructions.
+Operator structure enters through a plug-in with five slots (regimes, irregular work, non-MMA
+units, reduction splits, indirect loads); the attention plug-in fills them with prefill and decode,
+causal masks, softmax, split-KV, and paged gathers. Appendix~\ref{app:questions} lists the bank with
+provenance tags: 29 entries carry a trace tag, and the 72 from public sources alone are untested.
+
+\subsection{From Asking the Agent to the Agent Asking Itself}
+\label{sec:workflow-skill}
+
+Because the questions recur, they can be handed to the agent as part of its instructions. We codify
+them as a skill with five parts: the goal, the hard rules the harness enforces, a loop, a list of
+questions to ask itself, and the commands that run the evaluator and profiler. The loop is the bank
+in procedural form: fix the scope; measure the seed; classify each gap as host, routing, or kernel
+before touching code; bound it; form a hypothesis; rewrite; gate. At each step the agent fans out
+subagents, one per hypothesis, each returning a hypothesis and the measurement that tests it rather
+than a patch. The skill is parameterized by the seed, the scenario set, and the goal; its questions
+were reused across the Hopper and Blackwell campaigns nearly verbatim.
+
+\subsection{Composing with Evolutionary Search}
+\label{sec:workflow-evo}
+
+\sys is compatible with the evolutionary loops of the open-ended agents, because it changes the
+variation operator's direction rather than the loop around it. We wrap the same agent in an
+AVO-style search \cite{chen2026avo}: a monotone lineage, several diverse mutations per generation
+applied to isolated copies and scored by the evaluator, and a strategist that reviews the trajectory
+and writes the next generation's directives. The one change is that the directives are questions,
+hypotheses to test rather than edits to make. As \S\ref{sec:eval-evo} shows, evolution amplifies direction; it does not
+supply it.
+
+\subsection{Hypotheses}
+\label{sec:hypotheses}
+
+The evaluation tests five claims. \textbf{H1 (quality):} on the same task, evaluator, and hardware,
+the asked agent reaches higher performance at full correctness than the equipped one.
+\textbf{H2 (efficiency):} with fewer model-driven steps and GPU-hours, counting human time.
+\textbf{H3 (mechanism):} the largest gains follow questions that change the layer under
+consideration or reject a claimed limit, not questions that supply information.
+\textbf{H4 (complementarity):} evolutionary search amplifies the effect of questions and does not
+substitute for them. \textbf{H5 (generality):} the questions that moved the case study contain
+nothing specific to the operator or to a reference once the reference is replaced by a bound.

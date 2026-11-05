@@ -1,0 +1,137 @@
+{
+ "kernels_requested": [
+  "L1:embedding",
+  "L1:linear",
+  "L1:rms_norm",
+  "L1:silu_and_mul",
+  "L2:attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:embedding",
+    "L1:linear",
+    "L1:rms_norm",
+    "L1:silu_and_mul",
+    "L2:attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:embedding",
+    "L1:linear",
+    "L1:rms_norm",
+    "L1:silu_and_mul",
+    "L2:attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 0.9542,
+    "long-context": 1.0304,
+    "single-request": 1.0228,
+    "fixed-batch-32": 1.0643
+   },
+   "mean_d": 0.02043625
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:embedding",
+   "L1:linear",
+   "L1:rms_norm",
+   "L1:silu_and_mul",
+   "L2:attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:embedding",
+   "L1:linear",
+   "L1:rms_norm",
+   "L1:silu_and_mul",
+   "L2:attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 0.9542,
+   "long-context": 1.0304,
+   "single-request": 1.0228,
+   "fixed-batch-32": 1.0643
+  },
+  "mean_d": 0.02043625
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:embedding",
+  "L1:linear",
+  "L1:rms_norm",
+  "L1:silu_and_mul",
+  "L2:attention"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 4961.84
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2163.84
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.0308955807587017
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.013342102790567
+  }
+ },
+ "speedups": {
+  "mixed": 0.9542,
+  "long-context": 1.0304,
+  "single-request": 1.0228,
+  "fixed-batch-32": 1.0643
+ },
+ "correctness": {
+  "per_sample": [
+   0.00302,
+   0.00368,
+   0.00455,
+   0.00144,
+   0.00482,
+   0.00296,
+   0.00594,
+   0.00283,
+   0.00363,
+   0.00485,
+   0.0021,
+   0.00048,
+   0.00282,
+   0.0029,
+   0.00366,
+   0.2773
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.97956375
+  }
+ },
+ "mean_d": 0.02043625,
+ "model": "meta-llama/Llama-3.1-8B-Instruct",
+ "set": "kda-seq"
+}

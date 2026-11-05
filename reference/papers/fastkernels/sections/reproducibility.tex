@@ -1,0 +1,11 @@
+\subsection*{Reproducibility statement}
+
+\ificlrfinal
+The implementation of \fastkernels{} and the associated evaluation scripts are open-sourced at \url{https://github.com/Snowflake-AI-Research/fastkernels}.
+\else
+An anonymized implementation of \fastkernels{} and the associated evaluation scripts is included in the supplementary material and will be open-sourced upon publication.
+\fi
+Section~\ref{sec:benchmark} describes task construction, the compositional hierarchy, and production-matched interfaces;
+Section~\ref{sec:benchmarking_tooling} describes the evaluation stack;
+and Section~\ref{sec:metrics} defines \textsc{MacroEval}.
+Scenario sets, the capture and case-selection pipeline, and agent configurations and costs are documented in Appendices~\ref{app:scenarios}, \ref{app:capture}, and~\ref{app:agents}; hardware, serving workloads, threshold calibration, sensitivity analyses, and per-architecture coverage in Appendix~\ref{app:experimental}, Appendix~\ref{app:e2e}, and Appendix~\ref{app:reference_perf}.

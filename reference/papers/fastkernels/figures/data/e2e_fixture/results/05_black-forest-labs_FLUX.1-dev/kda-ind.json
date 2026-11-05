@@ -1,0 +1,137 @@
+{
+ "kernels_requested": [
+  "L1:gelu",
+  "L1:layer_norm",
+  "L1:rotary_emb",
+  "L2:adaln_modulation",
+  "L2:flux_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:gelu",
+    "L1:layer_norm",
+    "L1:rotary_emb",
+    "L2:adaln_modulation",
+    "L2:flux_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gelu",
+    "L1:layer_norm",
+    "L1:rotary_emb",
+    "L2:adaln_modulation",
+    "L2:flux_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "1024x1024": 1.0623,
+    "512x512": 0.9566,
+    "single-1024x1024": 1.0012,
+    "single-512x512": 1.0162
+   },
+   "mean_d": 0.00223125
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:gelu",
+   "L1:layer_norm",
+   "L1:rotary_emb",
+   "L2:adaln_modulation",
+   "L2:flux_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:gelu",
+   "L1:layer_norm",
+   "L1:rotary_emb",
+   "L2:adaln_modulation",
+   "L2:flux_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "1024x1024": 1.0623,
+   "512x512": 0.9566,
+   "single-1024x1024": 1.0012,
+   "single-512x512": 1.0162
+  },
+  "mean_d": 0.00223125
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:gelu",
+  "L1:layer_norm",
+  "L1:rotary_emb",
+  "L2:adaln_modulation",
+  "L2:flux_attention"
+ ],
+ "timings": {
+  "1024x1024": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 0.446166
+  },
+  "512x512": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 1.5305600000000001
+  },
+  "single-1024x1024": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.8965241709948057
+  },
+  "single-512x512": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.787246604999016
+  }
+ },
+ "speedups": {
+  "1024x1024": 1.0623,
+  "512x512": 0.9566,
+  "single-1024x1024": 1.0012,
+  "single-512x512": 1.0162
+ },
+ "correctness": {
+  "per_sample": [
+   0.00323,
+   0.00365,
+   0.00034,
+   0.00319,
+   0.003,
+   0.00094,
+   0.00271,
+   0.00083,
+   0.003,
+   0.00184,
+   0.00323,
+   0.00093,
+   0.00359,
+   0.00209,
+   0.00236,
+   0.00077
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99776875
+  }
+ },
+ "mean_d": 0.00223125,
+ "model": "black-forest-labs/FLUX.1-dev",
+ "set": "kda-ind"
+}

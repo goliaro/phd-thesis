@@ -1,0 +1,187 @@
+\section{Technical Appendices and Supplementary Material}
+
+
+\subsection{Details for Main Experiments}
+\label{sec:main-experiment-details}
+
+\subsubsection{Experiment setup details}
+\label{sec:experiment-setup-details}
+
+\paragraph{Setup of Spec-Bench experiments (Sec.~\ref{sec:baseline-comparisons}).}
+We conducted our Spec-Bench experiments by running the Spec-Bench codebase from the original repository with the following modifications. First, we updated the code to work with the latest version of the \texttt{transformers} library, which is required to run recent open-source LLMs such as \texttt{meta-llama/Llama-3.1}. We also added support for arbitrary datasets (such as SWE-Bench and AgenticSQL) and implemented SuffixDecoding within the framework. We ran the experiments on a 8xH100 80GB GPU cluster, with 1TB RAM. We ran each baseline using one GPU, and a batch size of 1, just like in the original SpecBench code. 
+
+\paragraph{Setup of vLLM SWE-Bench experiment (Sec.~\ref{sec:vllm-swebench-results}).}
+We conducted the end-to-end SWE-Bench experiment on a 8xH100 80GB GPU cluster, with 1TB RAM. We served the \texttt{all-hands/openhands-lm-32b-v0.1-ep3} model locally using vLLM, with a tensor parallelism degree of 4 and with prefix caching enabled. We used the flashinfer kernels for sampling. We made some minor modifications to vLLM to record the per-request and per-step statistics of interest (time-per-token latency, throughput, acceptance length, acceptance rate). We used the same settings for all baselines. We ran the OpenHands daemon on the same machine, and used the OpenAI API to interact with the vLLM server. We ran OpenHands with the CodeActAgent~\citep{wang2024executablecodeactionselicit} with \texttt{ITERATIVE\_EVAL\_MODE=true}, and a maximum of 100 iterations, as recommended by the OpenHands authors. We used a maximum of 16 concurrent workers to run the SWE-Bench tasks.
+
+\subsubsection{Detailed sub-task results}
+
+The following tables present detailed performance metrics across all evaluation benchmarks. For Spec-Bench, the 13 categories include both single-turn open-ended tasks (qa, rag, math\_reasoning, summarization, translation) and multi-turn tasks. Eight of these categories (Writing, Roleplay, Reasoning, Math, Coding, Extraction, STEM, Humanities) are from MT-Bench~\citep{mtbench}, allowing direct performance comparison on this widely-used benchmark.
+
+\include{latex/results-tables/tables_latex_swebench}
+\include{latex/results-tables/tables_latex_cortex}
+\include{latex/results-tables/tables_latex_spec_bench}
+
+
+\subsection{Additional Ablation Experiments}
+\label{sec:additional-ablation-experiments}
+
+In this appendix, we share ablation studies that reveal the impact of several design decisions in SuffixDecoding. The studies are conducted using the simulated verifier described in Sec.~\ref{sec:evaluation-methodology}.
+
+\subsubsection{Additional Dataset Details}
+\label{sec:dataset-details}
+
+We performed additional ablation experiments, which used additional datasets described below.
+
+\begin{enumerate}
+\item \emph{WildChat}~\citep{zhao2024wildchat}. We use instructions from the WildChat dataset, which consists of real-world interactions between users and the ChatGPT service. WildChat represents the most diverse and open-domain dataset used in our evaluations.
+\item \emph{Magicoder}~\citep{wei2023magicoder}. Specifically, we use instructions from the Magicoder-Evol-Instruct-110K dataset, which consists of code-related questions and instructions generated via Self-Instruct~\citep{codealpaca,wang-etal-2023-self-instruct} and further augmented for difficulty and diversity~\citep{luo2023wizardcoder} by GPT-4. 
+\item \emph{SpiderSQL}. Spider~\citep{yu-etal-2018-spider} is a dataset of manually-annotated questions and SQL responses over 200 different databases with multiple tables, covering 138 different domains. We use instructions from DAIL-SQL~\citep{10.14778/3641204.3641221}, which consists of LLM prompts with instructions to answer questions from Spider using structured SQL code.
+\end{enumerate}
+
+\subsubsection{Effect of input distribution shift}
+
+In real-world LLM serving, the input characteristics of requests may change over time, and may be out-of-distribution from the output examples that SuffixDecoding was trained on. To evaluate this scenario, we run SuffixDecoding trained on WildChat outputs, and begin to send it inputs from SpiderSQL, which represents a very sudden distribution shift.
+
+Fig.~\ref{fig:distribution-shift} shows the results. SuffixDecoding starts from having 4,000 output examples from WildChat, and begins to receive SpiderSQL inference requests. Without any adaptation, SuffixDecoding still achieves \( 1.5\times \) speedup and \( 8\% \) acceptance rate, but is far from the \( 2.6\times \) speedup and \( 20\% \) acceptance rate it would achieve if it were trained on 500 examples from SpiderSQL instead.
+
+After processing each SpiderSQL inference request, SuffixDecoding can insert its output into its global suffix tree, which means it can adapt in an online fashion to the new input distribution. As Fig.~\ref{fig:distribution-shift} shows, the performance of SuffixDecoding improves with the number of SpiderSQL inference requests processed. Perhaps surprisingly, after observing 500 SpiderSQL and adapting online, SuffixDecoding's performance is almost indistinguishable to its performance if it were trained offline on the 500 SpiderSQL examples alone. This suggests that SuffixDecoding is able to adapt to input distribution shifts quickly and at no loss in performance.
+
+\begin{figure}
+\centering
+\begin{subfigure}{0.5\columnwidth}
+\includegraphics[width=\columnwidth,trim={5 5 5 5},clip]{figures/distribution_shift_speedup.pdf}
+\end{subfigure}
+\begin{subfigure}{0.5\columnwidth}
+\includegraphics[width=\columnwidth,trim={5 5 5 5},clip]{figures/distribution_shift_acceptance.pdf}
+\end{subfigure}
+\caption{The performance of SuffixDecoding under input distribution shift. SuffixDecoding was trained on outputs from WildChat, while being evaluated on SpiderSQL. X axis: the number of SpiderSQL inputs, which are added to the global suffix tree after they are processed. Red line: the performance of SuffixDecoding if trained on 500 output examples from only SpiderSQL offline.} 
+\label{fig:distribution-shift}
+\end{figure}
+
+\subsubsection{Predicting SuffixDecoding Effectiveness}
+\label{sec:measuring-entropy}
+
+SuffixDecoding tends to perform better on more structured tasks compared to very open-ended ones (e.g., AgenticSQL vs WildChat). We can measure this "structuredness" using empirical entropy. The steps are as follows: (1) create a suffix tree from example model outputs (100 examples is typically enough), (2) calculate the entropy of each node’s output distribution by determining how often each child node is accessed, and (3) compute a weighted average of this entropy across all nodes. A low average entropy indicates that output tokens are more predictable based on their prefixes, which generally suggests that Suffix Decoding will perform better.
+
+\begin{table}[htbp]
+\caption{Measured empirical entropy of our various evaluation datasets.}
+\label{tab:entropy}
+\small
+\centering
+\begin{tabular}{lc}
+\toprule
+Dataset & Average Entropy \\
+\midrule
+AgenticSQL (Enrich)   & 0.171 \\
+AgenticSQL (Classify) & 0.738 \\
+AgenticSQL (Extract)  & 0.0862 \\
+AgenticSQL (SQL1)     & 1.52 \\
+AgenticSQL (SQL2)     & 1.49 \\
+AgenticSQL (SQL3)     & 1.51 \\
+AgenticSQL (Combine)  & 1.49 \\
+Spider                & 2.50 \\
+WildChat              & 3.43 \\
+Magicoder             & 2.95 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:entropy} shows the empirical entropy measured on samples from each of our evaluation datasets. We find that the average entropy is closely related to the intuitive understanding of the "structuredness" of each dataset. Additionally, it correlates well with the performance of SuffixDecoding on those datasets. Therefore, practitioners can calculate this value using a small number of output examples to assess whether SuffixDecoding is appropriate for their specific tasks.
+
+
+
+\section{Scalability and Memory Overhead}
+\label{sec:scalability-and-memory-overhead}
+
+The suffix trees employed by Suffix Decoding are highly time and memory efficient. Table~\ref{tab:scalability} shows the per-token lookup time, update time, and memory consumption across various tree sizes (using requests from the SWE-Bench dataset). 
+
+\begin{table}[h]
+\centering
+\caption{Performance metrics for different entry counts}
+\label{tab:scalability}
+\begin{tabular}{ccccc}
+\toprule
+Total \# entries & Total \# tokens & Memory footprint & Avg update time & Avg lookup time \\
+                 &                 & (MB)             & per token ($\mu s$)  & per speculated token ($\mu s$) \\
+\midrule
+1 K entries & 27 M & 1670 MB & 3.95 & 12.18 \\
+5 K entries & 143 M & 2980 MB & 4.06 & 10.93 \\
+10 K entries & 285 M & 4070 MB & 4.05 & 12.00 \\
+15 K entries & 429 M & 5110 MB & 4.07 & 11.62 \\
+20 K entries & 572 M & 6150 MB & 4.04 & 11.64 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Overall, the total memory consumption scales linearly with the size of the tree, and both the update and lookup times remain fast even with larger trees. Given typical server configurations, SuffixDecoding can cache many weeks of generated tokens before hitting CPU memory limits. For example, optimized inference engines running Llama-8B on an A100 GPU can typically generate $\sim 5000$ tokens per second (\citep{yin2024sglang}) or $\sim 432 M$ tokens per day. Typical A100 systems (e.g. AWS p4d.24xlarge) have 144GB of CPU memory per A100 GPU. This means that Suffix Decoding can potentially cache 31 days (see math below) of generated tokens per A100 GPU before hitting CPU memory limits. Beyond this limit, it is also straightforward to incorporate cache eviction (e.g. LRU) into Suffix Decoding to avoid out-of-memory problems.
+
+\textbf{Time to fill up GPU memory:}
+\begin{enumerate}
+    \item Memory per token: $6.15~\text{GB} \div 572\text{M tokens} = 1.075 \times 10^{-8}~\text{GB/token}$
+    \item Total token capacity: $144~\text{GB} \div (1.075 \times 10^{-8}~\text{GB/token}) = 1.34 \times 10^{10}~\text{tokens}$
+    \item Time to fill: $(1.34 \times 10^{10}~\text{tokens}) \div (5000~\text{tok/s}) = 2.68 \times 10^{6}~\text{seconds} = \mathbf{31.0~\text{days}}$
+\end{enumerate}
+
+\subsection{Hybrid Fallback Threshold Sensitivity Analysis}
+\label{sec:threshold-sensitivity}
+
+The hybrid SuffixDecoding approach uses a fallback threshold $\tau$ to determine when to use suffix-tree-based speculation versus falling back to a model-based speculator (e.g., EAGLE-3). This section analyzes the sensitivity of performance to different threshold values across both open-ended and agentic workloads.
+
+Table~\ref{tab:threshold-specbench} shows the wall-clock speedup results on Spec-Bench for various threshold values. For open-ended generation tasks, we find that setting $\tau$ close to or slightly exceeding the mean accepted tokens (MAT) of the model-based speculator yields the best performance. For instance, EAGLE-3 achieves a MAT of approximately 4.65 tokens/step on Spec-Bench. The results show that $\tau \in [5, 7]$ produces the highest overall speedups (2.5×), with performance being relatively stable across this range.
+
+\begin{table}[h]
+\centering
+\caption{Hybrid SuffixDecoding speedup on Spec-Bench across different threshold values $\tau$.}
+\label{tab:threshold-specbench}
+\small
+\begin{tabular}{lccccccc}
+\toprule
+$\tau$ & coding & qa & math & reasoning & stem & writing & Overall \\
+\midrule
+7 & 3.44 & 2.40 & 3.14 & 2.50 & 2.87 & 2.83 & 2.50 \\
+6 & 3.19 & 2.22 & 2.88 & 2.30 & 2.68 & 2.61 & 2.31 \\
+5 & 3.25 & 2.28 & 2.70 & 2.35 & 2.74 & 2.70 & 2.37 \\
+4 & 3.07 & 2.22 & 2.72 & 2.25 & 2.57 & 2.64 & 2.25 \\
+3 & 2.88 & 2.09 & 2.54 & 2.10 & 2.39 & 2.50 & 2.13 \\
+2 & 2.73 & 2.04 & 2.40 & 2.01 & 2.19 & 2.36 & 2.03 \\
+1 & 2.28 & 1.86 & 2.01 & 1.69 & 1.90 & 2.12 & 1.80 \\
+0 (suffix only) & 1.83 & 1.77 & 1.97 & 1.39 & 1.39 & 1.33 & 1.66 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Conversely, Table~\ref{tab:threshold-agenticsql} shows results for AgenticSQL, a highly repetitive agentic workload. Here, the standalone SuffixDecoding ($\tau = 0$) achieves the best overall speedup ($5.35\times$), as it can confidently speculate much longer sequences than model-based methods. Higher threshold values progressively degrade performance as the system increasingly falls back to less effective model-based speculation.
+
+\begin{table}[h]
+\centering
+\caption{Hybrid SuffixDecoding speedup on AgenticSQL across different threshold values $\tau$.}
+\label{tab:threshold-agenticsql}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+$\tau$ & Classify & Extract & Enrich & Combine & SQL & Overall \\
+\midrule
+0 (suffix only) & 3.02 & 9.85 & 10.41 & 4.85 & 3.09 & 5.35 \\
+1 & 2.31 & 7.03 & 8.37 & 3.38 & 2.17 & 3.95 \\
+2 & 2.24 & 7.14 & 7.97 & 3.33 & 2.29 & 3.80 \\
+3 & 2.22 & 5.51 & 5.68 & 3.52 & 2.20 & 3.22 \\
+7 & 2.06 & 6.79 & 7.10 & 3.44 & 2.29 & 3.66 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In summary, practitioners should set $\tau \approx \text{MAT}_{\text{fallback}}$ for mixed or open-ended workloads, where $\text{MAT}_{\text{fallback}}$ is the mean accepted tokens of the fallback model-based speculator. For highly repetitive agentic workloads, using SuffixDecoding alone ($\tau = 0$ or very low values) yields the best performance.
+
+\section{Batch-level Speculation Control}
+\label{sec:batch-speculation}
+
+For batched serving scenarios, optimizing the speculation per request in a batch is crucial for many practical online deployments. While SuffixDecoding focuses on \textit{what} tokens to speculate, it is also compatible with existing works that explore \textit{how much} to speculate per request. For example, TurboSpec~\citep{liu2024turbospec} uses a "goodput" metric to balance speculation lengths and batch size, noting that optimal speculation decreases as batch size increases. AdaServe~\citep{adaserve} formulates multi-SLO serving as a constrained 
+optimization problem and introduces SLO-customized speculative decoding that constructs speculation trees tailored to each request's latency target.
+%
+By dynamically adjusting the number of speculative tokens generated by the SuffixTree per request, SuffixDecoding can be integrated with TurboSpec to maximize the batch-wise goodput metric.
+%
+Furthermore, the statistics-based scoring used by Suffix Decoding can potentially better inform methods like TurboSpec. For example, choosing to speculate more from sequences that have a higher marginal score. 
+%
+These are interesting and important directions for future work.
+
+

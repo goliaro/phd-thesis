@@ -1,0 +1,693 @@
+@inproceedings{specinfer,
+    author = {Miao, Xupeng and Oliaro, Gabriele and Zhang, Zhihao and Cheng, Xinhao and Wang, Zeyu and Zhang, Zhengxin and Wong, Rae Ying Yee and Zhu, Alan and Yang, Lijie and Shi, Xiaoxiang and Shi, Chunan and Chen, Zhuoming and Arfeen, Daiyaan and Abhyankar, Reyna and Jia, Zhihao},
+    title = {SpecInfer: Accelerating Large Language Model Serving with Tree-based Speculative Inference and Verification},
+    year = {2024},
+    isbn = {9798400703867},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3620666.3651335},
+    doi = {10.1145/3620666.3651335},
+    booktitle = {Proceedings of the 29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3},
+    pages = {932–949},
+    numpages = {18},
+    keywords = {large language model serving, speculative decoding, token tree verification},
+    location = {La Jolla, CA, USA},
+    series = {ASPLOS '24}
+}
+
+@inproceedings{leviathan23,
+    author = {Leviathan, Yaniv and Kalman, Matan and Matias, Yossi},
+    title = {Fast inference from transformers via speculative decoding},
+    year = {2023},
+    publisher = {JMLR.org},
+    booktitle = {Proceedings of the 40th International Conference on Machine Learning},
+    articleno = {795},
+    numpages = {13},
+    location = {Honolulu, Hawaii, USA},
+    series = {ICML'23}
+}
+
+@misc{chen23,
+      title={Accelerating Large Language Model Decoding with Speculative Sampling}, 
+      author={Charlie Chen and Sebastian Borgeaud and Geoffrey Irving and Jean-Baptiste Lespiau and Laurent Sifre and John Jumper},
+      year={2023},
+      eprint={2302.01318},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2302.01318}, 
+}
+
+@misc{online_speculative_decoding,
+      title={Online Speculative Decoding}, 
+      author={Xiaoxuan Liu and Lanxiang Hu and Peter Bailis and Alvin Cheung and Zhijie Deng and Ion Stoica and Hao Zhang},
+      year={2024},
+      eprint={2310.07177},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2310.07177}, 
+}
+
+@misc{lookahead_decoding,
+      title={Break the Sequential Dependency of LLM Inference Using Lookahead Decoding}, 
+      author={Yichao Fu and Peter Bailis and Ion Stoica and Hao Zhang},
+      year={2024},
+      eprint={2402.02057},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@misc{cai2024medusasimplellminference,
+      title={Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads}, 
+      author={Tianle Cai and Yuhong Li and Zhengyang Geng and Hongwu Peng and Jason D. Lee and Deming Chen and Tri Dao},
+      year={2024},
+      eprint={2401.10774},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2401.10774}, 
+}
+
+@misc{yang2023inferencereferencelosslessacceleration,
+      title={Inference with Reference: Lossless Acceleration of Large Language Models}, 
+      author={Nan Yang and Tao Ge and Liang Wang and Binxing Jiao and Daxin Jiang and Linjun Yang and Rangan Majumder and Furu Wei},
+      year={2023},
+      eprint={2304.04487},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2304.04487}, 
+}
+
+@misc{saxena2023prompt,
+    title = {Prompt Lookup Decoding},
+    author = {Apoorv Saxena},
+    year = {2023},
+    month = {November},
+    url = {https://github.com/apoorvumang/prompt-lookup-decoding/}
+}
+
+@inproceedings{10.5555/3495724.3496517,
+author = {Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K\"{u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt\"{a}schel, Tim and Riedel, Sebastian and Kiela, Douwe},
+title = {Retrieval-augmented generation for knowledge-intensive NLP tasks},
+year = {2020},
+isbn = {9781713829546},
+publisher = {Curran Associates Inc.},
+address = {Red Hook, NY, USA},
+abstract = {Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) — models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, and another which can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state of the art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.},
+booktitle = {Proceedings of the 34th International Conference on Neural Information Processing Systems},
+articleno = {793},
+numpages = {16},
+location = {Vancouver, BC, Canada},
+series = {NIPS '20}
+}
+
+@inproceedings{10.1109/SWAT.1973.13,
+author = {Weiner, Peter},
+title = {Linear pattern matching algorithms},
+year = {1973},
+publisher = {IEEE Computer Society},
+address = {USA},
+url = {https://doi.org/10.1109/SWAT.1973.13},
+doi = {10.1109/SWAT.1973.13},
+abstract = {In 1970, Knuth, Pratt, and Morris [1] showed how to do basic pattern matching in linear time. Related problems, such as those discussed in [4], have previously been solved by efficient but sub-optimal algorithms. In this paper, we introduce an interesting data structure called a bi-tree. A linear time algorithm for obtaining a compacted version of a bi-tree associated with a given string is presented. With this construction as the basic tool, we indicate how to solve several pattern matching problems, including some from [4] in linear time.},
+booktitle = {Proceedings of the 14th Annual Symposium on Switching and Automata Theory (Swat 1973)},
+pages = {1–11},
+numpages = {11},
+series = {SWAT '73}
+}
+
+@article{10.1007/BF01206331,
+author = {Ukkonen, E.},
+title = {On-line construction of suffix trees},
+year = {1995},
+issue_date = {September 1995},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+volume = {14},
+number = {3},
+issn = {0178-4617},
+url = {https://doi.org/10.1007/BF01206331},
+doi = {10.1007/BF01206331},
+abstract = {An on-line algorithm is presented for constructing the suffix tree for a given string in time linear in the length of the string. The new algorithm has the desirable property of processing the string symbol by symbol from left to right. It always has the suffix tree for the scanned part of the string ready. The method is developed as a linear-time version of a very simple algorithm for (quadratic size) suffixtries. Regardless of its quadratic worst case this latter algorithm can be a good practical method when the string is not too long. Another variation of this method is shown to give, in a natural way, the well-known algorithms for constructing suffix automata (DAWGs).},
+journal = {Algorithmica},
+month = sep,
+pages = {249–260},
+numpages = {12},
+keywords = {DAWG, Linear-time algorithm, Suffix automaton, Suffix tree, Suffix trie}
+}
+
+@inproceedings{
+zhao2024wildchat,
+title={WildChat: 1M Chat{GPT} Interaction Logs in the Wild},
+author={Wenting Zhao and Xiang Ren and Jack Hessel and Claire Cardie and Yejin Choi and Yuntian Deng},
+booktitle={The Twelfth International Conference on Learning Representations},
+year={2024},
+url={https://openreview.net/forum?id=Bl8u7ZRlbM}
+}
+
+@misc{openai2024gpt4technicalreport,
+      title={GPT-4 Technical Report}, 
+      author={OpenAI and Achiam, Josh and Adler, Steven and Agarwal, Sandhini and Ahmad, Lama and Akkaya, Ilge and Aleman, Florencia Leoni and Almeida, Diogo and Altenschmidt, Janko and Altman, Sam and Anadkat, Shyamal and others},
+      year={2024},
+      eprint={2303.08774},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2303.08774}, 
+}
+
+@inproceedings{yu-etal-2018-spider,
+    title = "{S}pider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-{SQL} Task",
+    author = "Yu, Tao  and
+      Zhang, Rui  and
+      Yang, Kai  and
+      Yasunaga, Michihiro  and
+      Wang, Dongxu  and
+      Li, Zifan  and
+      Ma, James  and
+      Li, Irene  and
+      Yao, Qingning  and
+      Roman, Shanelle  and
+      Zhang, Zilin  and
+      Radev, Dragomir",
+    editor = "Riloff, Ellen  and
+      Chiang, David  and
+      Hockenmaier, Julia  and
+      Tsujii, Jun{'}ichi",
+    booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing",
+    month = oct # "-" # nov,
+    year = "2018",
+    address = "Brussels, Belgium",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D18-1425",
+    doi = "10.18653/v1/D18-1425",
+    pages = "3911--3921",
+    archivePrefix={arXiv},
+    eprint={1809.08887},
+    primaryClass={cs.CL},
+}
+
+@article{wei2023magicoder,
+  title={Magicoder: Source Code Is All You Need},
+  author={Wei, Yuxiang and Wang, Zhe and Liu, Jiawei and Ding, Yifeng and Zhang, Lingming},
+  journal={arXiv preprint arXiv:2312.02120},
+  year={2023}
+}
+
+@misc{luo2023wizardcoder,
+      title={WizardCoder: Empowering Code Large Language Models with Evol-Instruct}, 
+      author={Ziyang Luo and Can Xu and Pu Zhao and Qingfeng Sun and Xiubo Geng and Wenxiang Hu and Chongyang Tao and Jing Ma and Qingwei Lin and Daxin Jiang},
+      year={2023},
+}
+
+@misc{codealpaca,
+  author = {Sahil Chaudhary},
+  title = {Code Alpaca: An Instruction-following LLaMA model for code generation},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/sahil280114/codealpaca}},
+}
+
+@inproceedings{wang-etal-2023-self-instruct,
+    title = "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+    author = "Wang, Yizhong  and
+      Kordi, Yeganeh  and
+      Mishra, Swaroop  and
+      Liu, Alisa  and
+      Smith, Noah A.  and
+      Khashabi, Daniel  and
+      Hajishirzi, Hannaneh",
+    editor = "Rogers, Anna  and
+      Boyd-Graber, Jordan  and
+      Okazaki, Naoaki",
+    booktitle = "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2023",
+    address = "Toronto, Canada",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.acl-long.754",
+    doi = "10.18653/v1/2023.acl-long.754",
+    pages = "13484--13508",
+    abstract = "Large {``}instruction-tuned{''} language models (i.e., finetuned to respond to instructions) have demonstrated a remarkable ability to generalize zero-shot to new tasks. Nevertheless, they depend heavily on human-written instruction data that is often limited in quantity, diversity, and creativity, therefore hindering the generality of the tuned model. We introduce Self-Instruct, a framework for improving the instruction-following capabilities of pretrained language models by bootstrapping off their own generations. Our pipeline generates instructions, input, and output samples from a language model, then filters invalid or similar ones before using them to finetune the original model. Applying our method to the vanilla GPT3, we demonstrate a 33{\%} absolute improvement over the original model on Super-NaturalInstructions, on par with the performance of InstructGPT-001, which was trained with private user data and human annotations. For further evaluation, we curate a set of expert-written instructions for novel tasks, and show through human evaluation that tuning GPT3 with Self-Instruct outperforms using existing public instruction datasets by a large margin, leaving only a 5{\%} absolute gap behind InstructGPT-001. Self-Instruct provides an almost annotation-free method for aligning pre-trained language models with instructions, and we release our large synthetic dataset to facilitate future studies on instruction tuning.",
+}
+
+@article{10.14778/3641204.3641221,
+author = {Gao, Dawei and Wang, Haibin and Li, Yaliang and Sun, Xiuyu and Qian, Yichen and Ding, Bolin and Zhou, Jingren},
+title = {Text-to-SQL Empowered by Large Language Models: A Benchmark Evaluation},
+year = {2024},
+issue_date = {January 2024},
+publisher = {VLDB Endowment},
+volume = {17},
+number = {5},
+issn = {2150-8097},
+url = {https://doi.org/10.14778/3641204.3641221},
+doi = {10.14778/3641204.3641221},
+abstract = {Large language models (LLMs) have emerged as a new paradigm for Text-to-SQL task. However, the absence of a systematical benchmark inhibits the development of designing effective, efficient and economic LLM-based Text-to-SQL solutions. To address this challenge, in this paper, we first conduct a systematical and extensive comparison over existing prompt engineering methods, including question representation, example selection and example organization, and with these experimental results, we elaborate their pros and cons. Based on these findings, we propose a new integrated solution, named DAIL-SQL, which refreshes the Spider leaderboard with 86.6\% execution accuracy and sets a new bar.To explore the potential of open-source LLM, we investigate them in various scenarios, and further enhance their performance with supervised fine-tuning. Our explorations highlight open-source LLMs' potential in Text-to-SQL, as well as the advantages and disadvantages of the supervised fine-tuning. Additionally, towards an efficient and economic LLM-based Text-to-SQL solution, we emphasize the token efficiency in prompt engineering and compare the prior studies under this metric. We hope that our work provides a deeper understanding of Text-to-SQL with LLMs, and inspires further investigations and broad applications.},
+journal = {Proc. VLDB Endow.},
+month = may,
+pages = {1132–1145},
+numpages = {14}
+}
+
+@misc{wang2024mixtureofagentsenhanceslargelanguage,
+      title={Mixture-of-Agents Enhances Large Language Model Capabilities}, 
+      author={Junlin Wang and Jue Wang and Ben Athiwaratkun and Ce Zhang and James Zou},
+      year={2024},
+      eprint={2406.04692},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.04692}, 
+}
+
+@misc{wang2024speculativeragenhancingretrieval,
+      title={Speculative RAG: Enhancing Retrieval Augmented Generation through Drafting}, 
+      author={Zilong Wang and Zifeng Wang and Long Le and Huaixiu Steven Zheng and Swaroop Mishra and Vincent Perot and Yuwei Zhang and Anush Mattapalli and Ankur Taly and Jingbo Shang and Chen-Yu Lee and Tomas Pfister},
+      year={2024},
+      eprint={2407.08223},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2407.08223}, 
+}
+
+@misc{eagle2,
+      title={EAGLE-2: Faster Inference of Language Models with Dynamic Draft Trees}, 
+      author={Yuhui Li and Fangyun Wei and Chao Zhang and Hongyang Zhang},
+      year={2024},
+      eprint={2406.16858},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.16858}, 
+}
+
+@misc{eagle,
+      title={EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty}, 
+      author={Yuhui Li and Fangyun Wei and Chao Zhang and Hongyang Zhang},
+      year={2024},
+      eprint={2401.15077},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2401.15077}, 
+}
+
+@misc{sequoia,
+      title={Sequoia: Scalable, Robust, and Hardware-aware Speculative Decoding}, 
+      author={Zhuoming Chen and Avner May and Ruslan Svirschevski and Yuhsun Huang and Max Ryabinin and Zhihao Jia and Beidi Chen},
+      year={2024},
+      eprint={2402.12374},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2402.12374}, 
+}
+
+@misc{bita,
+      title={BiTA: Bi-Directional Tuning for Lossless Acceleration in Large Language Models}, 
+      author={Feng Lin and Hanling Yi and Hongbin Li and Yifan Yang and Xiaotian Yu and Guangming Lu and Rong Xiao},
+      year={2024},
+      eprint={2401.12522},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2401.12522}, 
+}
+
+@misc{draftverify,
+      title={Draft \& Verify: Lossless Large Language Model Acceleration via Self-Speculative Decoding}, 
+      author={Jun Zhang and Jue Wang and Huan Li and Lidan Shou and Ke Chen and Gang Chen and Sharad Mehrotra},
+      year={2024},
+      eprint={2309.08168},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2309.08168}, 
+}
+
+@misc{smartspec,
+      title={Optimizing Speculative Decoding for Serving Large Language Models Using Goodput}, 
+      author={Xiaoxuan Liu and Cade Daniel and Langxiang Hu and Woosuk Kwon and Zhuohan Li and Xiangxi Mo and Alvin Cheung and Zhijie Deng and Ion Stoica and Hao Zhang},
+      year={2024},
+      eprint={2406.14066},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2406.14066}, 
+}
+
+@misc{zhong2024evaluationopenaio1opportunities,
+      title={Evaluation of OpenAI o1: Opportunities and Challenges of AGI}, 
+      author={Tianyang Zhong and Zhengliang Liu and Yi Pan and Yutong Zhang and Yifan Zhou and Shizhe Liang and Zihao Wu and Yanjun Lyu and Peng Shu and Xiaowei Yu and Chao Cao and Hanqi Jiang and Hanxu Chen and Yiwei Li and Junhao Chen and Huawen Hu and Yihen Liu and Huaqin Zhao and Shaochen Xu and Haixing Dai and Lin Zhao and Ruidong Zhang and Wei Zhao and Zhenyuan Yang and Jingyuan Chen and Peilong Wang and Wei Ruan and Hui Wang and Huan Zhao and Jing Zhang and Yiming Ren and Shihuan Qin and Tong Chen and Jiaxi Li and Arif Hassan Zidan and Afrar Jahin and Minheng Chen and Sichen Xia and Jason Holmes and Yan Zhuang and Jiaqi Wang and Bochen Xu and Weiran Xia and Jichao Yu and Kaibo Tang and Yaxuan Yang and Bolun Sun and Tao Yang and Guoyu Lu and Xianqiao Wang and Lilong Chai and He Li and Jin Lu and Lichao Sun and Xin Zhang and Bao Ge and Xintao Hu and Lian Zhang and Hua Zhou and Lu Zhang and Shu Zhang and Ninghao Liu and Bei Jiang and Linglong Kong and Zhen Xiang and Yudan Ren and Jun Liu and Xi Jiang and Yu Bao and Wei Zhang and Xiang Li and Gang Li and Wei Liu and Dinggang Shen and Andrea Sikora and Xiaoming Zhai and Dajiang Zhu and Tianming Liu},
+      year={2024},
+      eprint={2409.18486},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2409.18486}, 
+}
+
+@misc{snell2024scalingllmtesttimecompute,
+      title={Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters}, 
+      author={Charlie Snell and Jaehoon Lee and Kelvin Xu and Aviral Kumar},
+      year={2024},
+      eprint={2408.03314},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2408.03314}, 
+}
+
+@inproceedings{10.1145/3642970.3655844,
+author = {Santhanam, Keshav and Raghavan, Deepti and Rahman, Muhammad Shahir and Venkatesh, Thejas and Kunjal, Neha and Thaker, Pratiksha and Levis, Philip and Zaharia, Matei},
+title = {ALTO: An Efficient Network Orchestrator for Compound AI Systems},
+year = {2024},
+isbn = {9798400705410},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3642970.3655844},
+doi = {10.1145/3642970.3655844},
+abstract = {We present ALTO, a network orchestrator for efficiently serving compound AI systems such as pipelines of language models. ALTO leverages an optimization opportunity specific to generative language models, which is streaming intermediate outputs from the language model to downstream stages. We highlight two challenges that emerge while serving these applications at scale: handling how some stages can be stateful across partial outputs, and handling how language models can produce variable amounts of text. To address these challenges, we motivate the need for an aggregation-aware routing interface and distributed prompt-aware scheduling. ALTO's partial output streaming increases throughput by up to 3\texttimes{} for a fixed latency target of 4 seconds / request and reduces tail latency by 1.8\texttimes{} compared to a baseline serving approach, on a complex chat bot verification pipeline.},
+booktitle = {Proceedings of the 4th Workshop on Machine Learning and Systems},
+pages = {117–125},
+numpages = {9},
+keywords = {Compound AI systems, Stream processing},
+location = {Athens, Greece},
+series = {EuroMLSys '24}
+}
+
+@misc{dubey2024llama3herdmodels,
+      title={The Llama 3 Herd of Models}, 
+      author={Abhimanyu Dubey and Abhinav Jauhri and Abhinav Pandey and Abhishek Kadian and Ahmad Al-Dahle and Aiesha Letman and Akhil Mathur and Alan Schelten and Amy Yang and Angela Fan and Anirudh Goyal and others},
+      year={2024},
+      eprint={2407.21783},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2407.21783}, 
+}
+
+@misc{flexflow,
+    title = {FlexFlow Serve: Low-Latency, High-Performance LLM Serving},
+    howpublished = {\url{https://github.com/flexflow/FlexFlow}},
+    author = {{FlexFlow Team}},
+    year = {2024},
+    month = {November},
+    url = {https://github.com/flexflow/FlexFlow},
+    note = {(Accessed on 10/31/2024)}
+}
+
+@misc{flashinfer,
+    title = {Accelerating Self-Attentions for LLM Serving with FlashInfer},
+    url = {https://flashinfer.ai/2024/02/02/introduce-flashinfer.html},
+    author = {Ye, Zihao and Chen, Lequn and Lai, Ruihang and Zhao, Yilong and Zheng, Size and Shao, Junru and Hou, Bohan and Jin, Hongyi and Zuo, Yifei and Yin, Liangsheng and Chen, Tianqi and Ceze, Luis},
+    month = {February},
+    year = {2024}
+}
+
+@misc{cudagraph,
+author = {NVIDIA},
+title = {Getting Started with CUDA Graphs | NVIDIA Technical Blog},
+howpublished = {\url{https://developer.nvidia.com/blog/cuda-graphs/}},
+month = {},
+year = {},
+note = {(Accessed on 10/31/2024)}
+}
+
+@misc{huggingface,
+    title={Hugging Face},
+    author={{HuggingFace}},
+    howpublished={\url{https://huggingface.co}},
+    year={2024}
+}
+
+@misc{cublas,
+author = {NVIDIA},
+title = {cuBLAS | NVIDIA Developer},
+howpublished = {\url{https://developer.nvidia.com/cublas}},
+month = {},
+year = {},
+note = {(Accessed on 10/31/2024)}
+}
+
+@misc{cudnn,
+author = {NVIDIA},
+title = {CUDA Deep Neural Network (cuDNN) | NVIDIA Developer},
+howpublished = {\url{https://developer.nvidia.com/cudnn}},
+month = {},
+year = {},
+note = {(Accessed on 10/31/2024)}
+}
+
+@misc{ou2024losslessaccelerationlargelanguage,
+      title={Lossless Acceleration of Large Language Model via Adaptive N-gram Parallel Decoding}, 
+      author={Jie Ou and Yueming Chen and Wenhong Tian},
+      year={2024},
+      eprint={2404.08698},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2404.08698}, 
+}
+
+@misc{wang2025openhandsopenplatformai,
+      title={OpenHands: An Open Platform for AI Software Developers as Generalist Agents}, 
+      author={Xingyao Wang and Boxuan Li and Yufan Song and Frank F. Xu and Xiangru Tang and Mingchen Zhuge and Jiayi Pan and Yueqi Song and Bowen Li and Jaskirat Singh and Hoang H. Tran and Fuqiang Li and Ren Ma and Mingzhang Zheng and Bill Qian and Yanjun Shao and Niklas Muennighoff and Yizhe Zhang and Binyuan Hui and Junyang Lin and Robert Brennan and Hao Peng and Heng Ji and Graham Neubig},
+      year={2025},
+      eprint={2407.16741},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2407.16741}, 
+}
+
+@misc{xia2024agentlessdemystifyingllmbasedsoftware,
+      title={Agentless: Demystifying LLM-based Software Engineering Agents}, 
+      author={Chunqiu Steven Xia and Yinlin Deng and Soren Dunn and Lingming Zhang},
+      year={2024},
+      eprint={2407.01489},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2407.01489}, 
+}
+
+@misc{yang2024sweagentagentcomputerinterfacesenable,
+      title={SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering}, 
+      author={John Yang and Carlos E. Jimenez and Alexander Wettig and Kilian Lieret and Shunyu Yao and Karthik Narasimhan and Ofir Press},
+      year={2024},
+      eprint={2405.15793},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2405.15793}, 
+}
+
+@misc{chen2024autoagentsframeworkautomaticagent,
+      title={AutoAgents: A Framework for Automatic Agent Generation}, 
+      author={Guangyao Chen and Siwei Dong and Yu Shu and Ge Zhang and Jaward Sesay and Börje F. Karlsson and Jie Fu and Yemin Shi},
+      year={2024},
+      eprint={2309.17288},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2309.17288}, 
+}
+
+@misc{zheng2025deepresearcherscalingdeepresearch,
+      title={DeepResearcher: Scaling Deep Research via Reinforcement Learning in Real-world Environments}, 
+      author={Yuxiang Zheng and Dayuan Fu and Xiangkun Hu and Xiaojie Cai and Lyumanshan Ye and Pengrui Lu and Pengfei Liu},
+      year={2025},
+      eprint={2504.03160},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2504.03160}, 
+}
+
+@misc{zhang2024chainagentslargelanguage,
+      title={Chain of Agents: Large Language Models Collaborating on Long-Context Tasks}, 
+      author={Yusen Zhang and Ruoxi Sun and Yanfei Chen and Tomas Pfister and Rui Zhang and Sercan Ö. Arik},
+      year={2024},
+      eprint={2406.02818},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.02818}, 
+}
+
+@misc{gao2024retrievalaugmentedgenerationlargelanguage,
+      title={Retrieval-Augmented Generation for Large Language Models: A Survey}, 
+      author={Yunfan Gao and Yun Xiong and Xinyu Gao and Kangxiang Jia and Jinliu Pan and Yuxi Bi and Yi Dai and Jiawei Sun and Meng Wang and Haofen Wang},
+      year={2024},
+      eprint={2312.10997},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2312.10997}, 
+}
+
+@misc{wang2023selfconsistencyimproveschainthought,
+      title={Self-Consistency Improves Chain of Thought Reasoning in Language Models}, 
+      author={Xuezhi Wang and Jason Wei and Dale Schuurmans and Quoc Le and Ed Chi and Sharan Narang and Aakanksha Chowdhery and Denny Zhou},
+      year={2023},
+      eprint={2203.11171},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2203.11171}, 
+}
+
+@misc{madaan2023selfrefineiterativerefinementselffeedback,
+      title={Self-Refine: Iterative Refinement with Self-Feedback}, 
+      author={Aman Madaan and Niket Tandon and Prakhar Gupta and Skyler Hallinan and Luyu Gao and Sarah Wiegreffe and Uri Alon and Nouha Dziri and Shrimai Prabhumoye and Yiming Yang and Shashank Gupta and Bodhisattwa Prasad Majumder and Katherine Hermann and Sean Welleck and Amir Yazdanbakhsh and Peter Clark},
+      year={2023},
+      eprint={2303.17651},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2303.17651}, 
+}
+
+@misc{li2025eagle3scalinginferenceacceleration,
+      title={EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test}, 
+      author={Yuhui Li and Fangyun Wei and Chao Zhang and Hongyang Zhang},
+      year={2025},
+      eprint={2503.01840},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2503.01840}, 
+}
+
+@misc{luo2024turningtrashtreasureaccelerating,
+      title={Turning Trash into Treasure: Accelerating Inference of Large Language Models with Token Recycling}, 
+      author={Xianzhen Luo and Yixuan Wang and Qingfu Zhu and Zhiming Zhang and Xuanyu Zhang and Qing Yang and Dongliang Xu and Wanxiang Che},
+      year={2024},
+      eprint={2408.08696},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2408.08696}, 
+}
+
+@misc{xia2024unlockingefficiencylargelanguage,
+      title={Unlocking Efficiency in Large Language Model Inference: A Comprehensive Survey of Speculative Decoding}, 
+      author={Heming Xia and Zhe Yang and Qingxiu Dong and Peiyi Wang and Yongqi Li and Tao Ge and Tianyu Liu and Wenjie Li and Zhifang Sui},
+      year={2024},
+      eprint={2401.07851},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2401.07851}, 
+}
+
+@misc{khot2023decomposedpromptingmodularapproach,
+      title={Decomposed Prompting: A Modular Approach for Solving Complex Tasks}, 
+      author={Tushar Khot and Harsh Trivedi and Matthew Finlayson and Yao Fu and Kyle Richardson and Peter Clark and Ashish Sabharwal},
+      year={2023},
+      eprint={2210.02406},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2210.02406}, 
+}
+
+@misc{openhands,
+      title={{OpenHands: An Open Platform for AI Software Developers as Generalist Agents}},
+      author={Xingyao Wang and Boxuan Li and Yufan Song and Frank F. Xu and Xiangru Tang and Mingchen Zhuge and Jiayi Pan and Yueqi Song and Bowen Li and Jaskirat Singh and Hoang H. Tran and Fuqiang Li and Ren Ma and Mingzhang Zheng and Bill Qian and Yanjun Shao and Niklas Muennighoff and Yizhe Zhang and Binyuan Hui and Junyang Lin and Robert Brennan and Hao Peng and Heng Ji and Graham Neubig},
+      year={2024},
+      eprint={2407.16741},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2407.16741},
+}
+
+@misc{jimenez2024swebenchlanguagemodelsresolve,
+      title={SWE-bench: Can Language Models Resolve Real-World GitHub Issues?}, 
+      author={Carlos E. Jimenez and John Yang and Alexander Wettig and Shunyu Yao and Kexin Pei and Ofir Press and Karthik Narasimhan},
+      year={2024},
+      eprint={2310.06770},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2310.06770}, 
+}
+
+@misc{wang2024executablecodeactionselicit,
+      title={Executable Code Actions Elicit Better LLM Agents}, 
+      author={Xingyao Wang and Yangyi Chen and Lifan Yuan and Yizhe Zhang and Yunzhu Li and Hao Peng and Heng Ji},
+      year={2024},
+      eprint={2402.01030},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2402.01030}, 
+}
+
+@misc{kwon2023efficientmemorymanagementlarge,
+      title={Efficient Memory Management for Large Language Model Serving with PagedAttention}, 
+      author={Woosuk Kwon and Zhuohan Li and Siyuan Zhuang and Ying Sheng and Lianmin Zheng and Cody Hao Yu and Joseph E. Gonzalez and Hao Zhang and Ion Stoica},
+      year={2023},
+      eprint={2309.06180},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2309.06180}, 
+}
+
+@misc{fu2024efficientlyservingllmreasoning,
+      title={Efficiently Serving LLM Reasoning Programs with Certaindex}, 
+      author={Yichao Fu and Junda Chen and Siqi Zhu and Zheyu Fu and Zhongdongming Dai and Aurick Qiao and Hao Zhang},
+      year={2024},
+      eprint={2412.20993},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2412.20993}, 
+}
+
+@misc{yin2024sglang,
+  author = {Yin, Liangsheng and Zhang, Yineng and Sheng, Ying and {The SGLang Team}},
+  title = {Achieving Faster Open-Source Llama3 Serving with SGLang Runtime (vs. TensorRT-LLM, vLLM)},
+  year = {2024},
+  month = jul,
+  howpublished = {\url{https://lmsys.org/blog/2024-07-25-sglang-llama3/}},
+  note = {LMSYS Org Blog},
+  url = {https://lmsys.org/blog/2024-07-25-sglang-llama3/}
+}
+
+@inproceedings{gloeckle2024multitoken,
+author = {Gloeckle, Fabian and Idrissi, Badr Youbi and Rozi\`{e}re, Baptiste and Lopez-Paz, David and Synnaeve, Gabriel},
+title = {Better \& faster large language models via multi-token prediction},
+year = {2024},
+publisher = {JMLR.org},
+abstract = {Large language models such as GPT and Llama are trained with a next-token prediction loss. In this work, we suggest that training language models to predict multiple future tokens at once results in higher sample efficiency. More specifically, at each position in the training corpus, we ask the model to predict the following n tokens using n independent output heads, operating on top of a shared model trunk. Considering multi-token prediction as an auxiliary training task, we measure improved downstream capabilities with no overhead in training time for both code and natural language models. The method is increasingly useful for larger model sizes, and keeps its appeal when training for multiple epochs. Gains are especially pronounced on generative benchmarks like coding, where our models consistently outperform strong baselines by several percentage points. Our 13B parameter models solves 12 \% more problems on HumanEval and 17 \% more on MBPP than comparable next-token models. Experiments on small algorithmic tasks demonstrate that multi-token prediction is favorable for the development of induction heads and algorithmic reasoning capabilities. As an additional benefit, models trained with 4-token prediction are up to 3\texttimes{} faster at inference, even with large batch sizes.},
+booktitle = {Proceedings of the 41st International Conference on Machine Learning},
+articleno = {629},
+numpages = {29},
+location = {Vienna, Austria},
+series = {ICML'24}
+}
+
+@inproceedings{kim2024accelerating,
+title={Accelerating Blockwise Parallel Language Models with Draft Refinement},
+author={Taehyeon Kim and Ananda Theertha Suresh and Kishore A Papineni and Michael Riley and Sanjiv Kumar and Adrian Benton},
+booktitle={The Thirty-eighth Annual Conference on Neural Information Processing Systems},
+year={2024},
+url={https://openreview.net/forum?id=KT6F5Sw0eg}
+}
+
+@inproceedings{stern2018blockwise,
+author = {Stern, Mitchell and Shazeer, Noam and Uszkoreit, Jakob},
+title = {Blockwise parallel decoding for deep autoregressive models},
+year = {2018},
+publisher = {Curran Associates Inc.},
+address = {Red Hook, NY, USA},
+abstract = {Deep autoregressive sequence-to-sequence models have demonstrated impressive performance across a wide variety of tasks in recent years. While common architecture classes such as recurrent, convolutional, and self-attention networks make different trade-offs between the amount of computation needed per layer and the length of the critical path at training time, generation still remains an inherently sequential process. To overcome this limitation, we propose a novel blockwise parallel decoding scheme in which we make predictions for multiple time steps in parallel then back off to the longest prefix validated by a scoring model. This allows for substantial theoretical improvements in generation speed when applied to architectures that can process output sequences in parallel. We verify our approach empirically through a series of experiments using state-of-the-art self-attention models for machine translation and image super-resolution, achieving iteration reductions of up to 2x over a baseline greedy decoder with no loss in quality, or up to 7x in exchange for a slight decrease in performance. In terms of wall-clock time, our fastest models exhibit real-time speedups of up to 4x over standard greedy decoding.},
+booktitle = {Proceedings of the 32nd International Conference on Neural Information Processing Systems},
+pages = {10107–10116},
+numpages = {10},
+location = {Montr\'{e}al, Canada},
+series = {NIPS'18}
+}
+
+@misc{mtbench,
+      title={Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena}, 
+      author={Lianmin Zheng and Wei-Lin Chiang and Ying Sheng and Siyuan Zhuang and Zhanghao Wu and Yonghao Zhuang and Zi Lin and Zhuohan Li and Dacheng Li and Eric P. Xing and Hao Zhang and Joseph E. Gonzalez and Ion Stoica},
+      year={2023},
+      eprint={2306.05685},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2306.05685}, 
+}
+
+@misc{liu2024turbospec,
+      title={TurboSpec: Closed-loop Speculation Control System for Optimizing LLM Serving Goodput}, 
+      author={Junda Liu and Yilong Zhao and Zheyu Shen and Yiying Zhang},
+      year={2024},
+      eprint={2406.14066},
+      archivePrefix={arXiv},
+      primaryClass={cs.DC},
+      url={https://arxiv.org/abs/2406.14066}, 
+}
+
+@misc{adaserve,
+      title={AdaServe: Accelerating Multi-SLO LLM Serving with SLO-Customized Speculative Decoding}, 
+      author={Zikun Li and Zhuofu Chen and Remi Delacourt and Gabriele Oliaro and Zeyu Wang and Qinghan Chen and Shuhuai Lin and April Yang and Zhihao Zhang and Zhuoming Chen and Sean Lai and Xinhao Cheng and Xupeng Miao and Zhihao Jia},
+      year={2025},
+      eprint={2501.12162},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2501.12162}, 
+}

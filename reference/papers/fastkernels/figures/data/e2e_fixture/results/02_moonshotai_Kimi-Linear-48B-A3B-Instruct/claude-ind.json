@@ -1,0 +1,137 @@
+{
+ "kernels_requested": [
+  "L1:kda_chunk",
+  "L1:rms_norm",
+  "L1:short_conv",
+  "L2:mla_attention",
+  "L2:moe_router"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:kda_chunk",
+    "L1:rms_norm",
+    "L1:short_conv",
+    "L2:mla_attention",
+    "L2:moe_router"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:kda_chunk",
+    "L1:rms_norm",
+    "L1:short_conv",
+    "L2:mla_attention",
+    "L2:moe_router"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.1236,
+    "long-context": 1.0005,
+    "single-request": 1.0356,
+    "fixed-batch-32": 0.916
+   },
+   "mean_d": 0.0024549999999999993
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:kda_chunk",
+   "L1:rms_norm",
+   "L1:short_conv",
+   "L2:mla_attention",
+   "L2:moe_router"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:kda_chunk",
+   "L1:rms_norm",
+   "L1:short_conv",
+   "L2:mla_attention",
+   "L2:moe_router"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 1.1236,
+   "long-context": 1.0005,
+   "single-request": 1.0356,
+   "fixed-batch-32": 0.916
+  },
+  "mean_d": 0.0024549999999999993
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:kda_chunk",
+  "L1:rms_norm",
+  "L1:short_conv",
+  "L2:mla_attention",
+  "L2:moe_router"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5842.719999999999
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2101.0499999999997
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.993433758207802
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.986899563318778
+  }
+ },
+ "speedups": {
+  "mixed": 1.1236,
+  "long-context": 1.0005,
+  "single-request": 1.0356,
+  "fixed-batch-32": 0.916
+ },
+ "correctness": {
+  "per_sample": [
+   0.00198,
+   0.00562,
+   0.00019,
+   0.00227,
+   0.00199,
+   2e-05,
+   0.00211,
+   0.00074,
+   0.00124,
+   0.00493,
+   0.00259,
+   0.00284,
+   0.00552,
+   0.00219,
+   0.00018,
+   0.00487
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.997545
+  }
+ },
+ "mean_d": 0.0024549999999999993,
+ "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+ "set": "claude-ind"
+}

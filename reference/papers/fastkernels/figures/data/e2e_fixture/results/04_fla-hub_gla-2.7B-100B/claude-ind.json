@@ -1,0 +1,131 @@
+{
+ "kernels_requested": [
+  "L1:gla_chunk",
+  "L1:rms_norm",
+  "L1:swiglu",
+  "L2:gla_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:gla_chunk",
+    "L1:rms_norm",
+    "L1:swiglu",
+    "L2:gla_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gla_chunk",
+    "L1:rms_norm",
+    "L1:swiglu",
+    "L2:gla_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 0.9905,
+    "long-context": 1.0661,
+    "single-request": 1.0499,
+    "fixed-batch-32": 1.0822
+   },
+   "mean_d": 0.003295
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:gla_chunk",
+   "L1:rms_norm",
+   "L1:swiglu",
+   "L2:gla_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:gla_chunk",
+   "L1:rms_norm",
+   "L1:swiglu",
+   "L2:gla_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 0.9905,
+   "long-context": 1.0661,
+   "single-request": 1.0499,
+   "fixed-batch-32": 1.0822
+  },
+  "mean_d": 0.003295
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:gla_chunk",
+  "L1:rms_norm",
+  "L1:swiglu",
+  "L2:gla_attention"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5150.6
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2238.81
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.9526621583007904
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 5.9138791350951765
+  }
+ },
+ "speedups": {
+  "mixed": 0.9905,
+  "long-context": 1.0661,
+  "single-request": 1.0499,
+  "fixed-batch-32": 1.0822
+ },
+ "correctness": {
+  "per_sample": [
+   0.00386,
+   0.00305,
+   0.00453,
+   0.0037,
+   0.00585,
+   0.00362,
+   0.00142,
+   0.00155,
+   0.00597,
+   0.00395,
+   0.00091,
+   0.00181,
+   0.00164,
+   0.00547,
+   0.00531,
+   8e-05
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.996705
+  }
+ },
+ "mean_d": 0.003295,
+ "model": "fla-hub/gla-2.7B-100B",
+ "set": "claude-ind"
+}

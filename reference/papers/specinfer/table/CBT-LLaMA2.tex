@@ -1,0 +1,51 @@
+% \if 0
+% \begin{table}
+% \begin{center}
+% % \caption{Average number of tokens verified by \Sys in a decoding step.  We used \llama-7B as the LLM and used different numbers of collectively boost-tuned SSMs, all of which were derived from \llama-160M. The speculation length is 16 for all SSMs.}
+% \caption{\ZX {Llama 68M Merge-based token tree (this caption and table label need to be modified).}}
+% \footnotesize
+% \label{tab:cbt-llama}
+% \begin{tabular}{ccccccc}
+% \toprule
+% \# SSMs  & 1 & 2 & 3 & 4 & 5 \\ \midrule
+% Alpaca       & 2.95     & 3.21    & 3.31     & 3.41     & \textbf{3.50}     \\
+% CP           & 2.58     & 3.05    & 3.16     & 3.22     & \textbf{3.31}     \\
+% WebQA        & 2.27     & 2.42    & 2.58     & 2.65     & \textbf{2.74}     \\
+% CIP          & 2.73     & 3.12    & 3.24     & 3.41     & \textbf{3.52}     \\
+% PIQA         & 2.18     & 2.44    & 2.54     & 2.62     & \textbf{2.73}         \\ \midrule
+% %Avg        &1.34     & 1.39     & 1.60    & 1.67     & 1.73     & \textbf{1.79}      \\ \bottomrule
+% \end{tabular}
+% \end{center}
+% \end{table}
+% \fi
+
+
+\begin{table}
+\begin{center}
+\caption{\rev{Average number of tokens verified by \sys in a decoding step. We use \llama-7B and \llama-68M as the LLM and SSM, and use different tree widths for constructing a token tree. The speculation length is 8.}}
+%\caption{\textcolor{blue}{Llama 68M improved sample (this caption and table label need to be modified).}
+%\footnotesize
+\label{tab:cbt-llama}
+
+\begin{tabular}{ll|ccccc}
+\toprule
+& & \multicolumn{5}{c}{{\bf Token tree width}} \\
+& Dataset   & 1 & 2 & 3 & 4 & 5 \\ \midrule
+\multirow{5}{*}{\rotatebox[origin=c]{90}{\parbox{2cm}{\bf \centering Greedy\\ decoding}}}
+& Alpaca     & 2.95     & 3.07    & 3.21     & 3.33     & \textbf{3.43}     \\
+& CP         & 2.58     & 3.24    & 3.46     & 3.59     & \textbf{3.69}     \\
+& WebQA      & 2.27     & 2.69    & 2.86     & 2.98     & \textbf{3.07}     \\ 
+& CIP        & 2.73     & 3.40    & 3.62     & 3.79     & \textbf{3.91}     \\
+& PIQA       & 2.18     & 2.80    & 2.97     & 3.10     & \textbf{3.21}     \\  
+\midrule
+\multirow{5}{*}{\rotatebox[origin=c]{90}{\parbox{2cm}{\bf \centering Stochastic\\ decoding}}}
+& Alpaca     & 1.79     & 2.11    & 2.26     & 2.32     & \textbf{2.38}     \\
+& CP         & 1.69     & 1.99    & 2.15     & 2.23     & \textbf{2.28}     \\
+& WebQA      & 1.64     & 1.93    & 2.08     & 2.15     & \textbf{2.21}     \\
+& CIP        & 1.72     & 2.05    & 2.19     & 2.28     & \textbf{2.29}     \\
+& PIQA       & 1.67     & 1.93    & 2.08     & 2.15     & \textbf{2.21}         \\ %\midrule
+%Avg        &1.64     & 1.70     & 2.00    & 2.15     & 2.23     & \textbf{2.28}      \\ 
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

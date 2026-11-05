@@ -1,0 +1,11 @@
+{
+ "kernels_requested": [],
+ "dropped": [],
+ "attempts": [],
+ "all_winners": null,
+ "status": "empty",
+ "kernels_final": [],
+ "note": "no deployable kernels: result equals the baseline",
+ "model": "BAAI/bge-m3",
+ "set": "drkernel-seq"
+}

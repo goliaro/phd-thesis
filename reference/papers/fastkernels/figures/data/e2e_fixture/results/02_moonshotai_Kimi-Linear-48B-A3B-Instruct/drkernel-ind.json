@@ -1,0 +1,93 @@
+{
+ "kernels_requested": [
+  "L1:rms_norm",
+  "L1:short_conv"
+ ],
+ "dropped": [
+  {
+   "kernel": "L1:short_conv",
+   "category": "compile",
+   "attempt": 1,
+   "reason": "torch._dynamo.exc.Unsupported: call_function in skip_files"
+  },
+  {
+   "kernel": "L1:rms_norm",
+   "category": "runtime",
+   "attempt": 2,
+   "reason": "RuntimeError: shape '[2, -1, 2048]' is invalid"
+  }
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:rms_norm",
+    "L1:short_conv"
+   ],
+   "exclude": [],
+   "status": "crash",
+   "error": "torch._dynamo.exc.Unsupported: call_function in skip_files",
+   "swapped": [
+    "L1:rms_norm",
+    "L1:short_conv"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "category": "compile",
+   "culprits": [
+    "L1:short_conv"
+   ]
+  },
+  {
+   "n": 2,
+   "purpose": "full",
+   "only": [
+    "L1:rms_norm"
+   ],
+   "exclude": [
+    "L1:short_conv"
+   ],
+   "status": "crash",
+   "error": "RuntimeError: shape '[2, -1, 2048]' is invalid",
+   "swapped": [
+    "L1:rms_norm"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "category": "runtime",
+   "culprits": [
+    "L1:rms_norm"
+   ]
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:rms_norm",
+   "L1:short_conv"
+  ],
+  "exclude": [],
+  "status": "crash",
+  "error": "torch._dynamo.exc.Unsupported: call_function in skip_files",
+  "swapped": [
+   "L1:rms_norm",
+   "L1:short_conv"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "category": "compile",
+  "culprits": [
+   "L1:short_conv"
+  ]
+ },
+ "status": "empty",
+ "kernels_final": [],
+ "note": "no deployable kernels: result equals the baseline",
+ "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+ "set": "drkernel-ind"
+}

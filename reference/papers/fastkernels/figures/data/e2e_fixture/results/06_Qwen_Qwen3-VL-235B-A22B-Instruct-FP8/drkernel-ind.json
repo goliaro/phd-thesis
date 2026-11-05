@@ -1,0 +1,6 @@
+{
+ "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+ "set": "drkernel-ind",
+ "status": "baseline_failed",
+ "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 GiB"
+}

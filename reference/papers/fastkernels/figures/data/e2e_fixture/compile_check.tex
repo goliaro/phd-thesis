@@ -1,0 +1,46 @@
+% Compile check for the tables written by figures/make_macroeval.py (fixture data).
+%   cd figures/data/e2e_fixture && TEXINPUTS=../../..//: pdflatex -output-directory=/tmp compile_check.tex
+% The first two tables are \input without \resizebox to check that they fit the ICLR
+% text width as-is; the per-model table is wide and meant to go through \resizebox.
+\documentclass{article}
+\usepackage{iclr2027_conference,times}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\begin{document}
+
+\begin{table}[t]
+  \centering
+  \caption{MacroEval, deployable subset vs.\ all winners (synthetic fixture).}
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \input{tables/e2e_macroeval.tex}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Drop-and-retry outcomes (synthetic fixture).}
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \input{tables/e2e_drops.tex}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Threshold sensitivity (synthetic fixture).}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \input{tables/e2e_sensitivity.tex}
+\end{table}
+
+\begin{table}[p]
+  \centering
+  \caption{Per-model results (synthetic fixture).}
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \resizebox{\linewidth}{!}{\input{tables/e2e_per_model.tex}}
+\end{table}
+
+\end{document}

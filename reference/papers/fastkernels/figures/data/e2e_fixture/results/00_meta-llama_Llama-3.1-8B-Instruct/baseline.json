@@ -1,0 +1,33 @@
+{
+ "model": "meta-llama/Llama-3.1-8B-Instruct",
+ "tp": 1,
+ "status": "ok",
+ "candidates": false,
+ "candidate_dir": null,
+ "adapter": "llm",
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5200.0
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2100.0
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.1
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.4
+  }
+ },
+ "t_run_s": 900.0,
+ "t_total_s": 1010.0,
+ "_dir": "/out/runs/00_meta-llama_Llama-3.1-8B-Instruct/baseline"
+}

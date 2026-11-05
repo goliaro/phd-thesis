@@ -1,0 +1,90 @@
+\section{\textsc{MacroEval}: Cross-Architecture Metrics}
+\label{sec:metrics}
+
+\fastkernels{} evaluates candidate kernels by substituting them into end-to-end model executions and comparing each run with a reference run that uses the production baseline kernels.
+The key challenge is that model families expose different correctness signals---tokens, embeddings, labels, rankings, trajectories, audio, or video---and different throughput--latency tradeoffs.
+\textsc{MacroEval} addresses this by calibrating architecture-specific correctness to a common $[0,1]$ scale, measuring end-to-end speedup, and macro-averaging across families so no single architecture dominates the leaderboard.
+
+\paragraph{Benchmark indexing.}
+Let $f \in \mathcal{F}$ index architecture families, such as LLMs, diffusion models, vision models, speech and audio models, retrieval and recommender models, and robotics or world models.
+For family $f$, let $i \in B_f$ index benchmark items, and let $r \in R_i$ index requests, prompts, seeds, or input instances for item $i$.
+We write $y_{\mathrm{ref},i,r}$ and $y_{\mathrm{cand},i,r}$ for the reference and candidate outputs, and $T_{\mathrm{ref},i}$ and $T_{\mathrm{cand},i}$ for their measured runtimes.
+
+\paragraph{Calibrated correctness.}
+Raw output discrepancies are inherently architecture-dependent: teacher-forced top-1 disagreement with the reference tokens for autoregressive models (free-running greedy outputs diverge even between two correct runs, e.g.\ after a fresh compile), embedding or output distance for encoders and diffusion models, IoU discrepancy for detection or segmentation, WER/CER deltas for speech, ranking disagreement for retrieval, and trajectory error for robotics.
+For each request, \fastkernels{} therefore computes a discrepancy $d_{i,r} = D_f(y_{\mathrm{cand},i,r}, y_{\mathrm{ref},i,r})$, with $D_f$ chosen for the output type of family $f$, and maps it to a calibrated correctness score in $[0,1]$:
+\begin{equation}
+C_{i,r} =
+\begin{cases}
+1, & d_{i,r} \le g_i, \\
+\frac{f_i - d_{i,r}}{f_i - g_i}, & g_i < d_{i,r} < f_i, \\
+0, & d_{i,r} \ge f_i.
+\end{cases}
+\end{equation}
+Here $g_i$ is the threshold below which the candidate is indistinguishable from the reference, and $f_i$ is the threshold above which the output is incorrect or unusable.
+Thresholds are fixed before evaluation. $g_i$ is calibrated per model from reference-vs-reference nondeterminism: a \emph{noise run} repeats the production reference in a fresh process with a cold compile cache (re-making every compilation and autotuning choice, as a candidate run does), and $g_i$ is the 95th percentile of its per-sample discrepancy against the reference (with a floor of $10^{-3}$; OpenFold3, whose noise run is bit-identical, is calibrated with a benign numerical perturbation instead, Appendix~\ref{app:e2e}).
+We set $f_i = 0.5$ for every family---a candidate at least half as far from the reference as an unrelated output receives no credit---and $\tau_i = 0.9$; Appendix~\ref{app:e2e} shows that the ranking is unchanged when $g_i$ and $f_i$ are halved or doubled.
+
+Correctness is averaged over requests, then over items within each family, then over families:
+\begin{equation}
+C_i = \frac{1}{|R_i|}\sum_{r \in R_i} C_{i,r},
+\qquad
+C_f = \frac{1}{|B_f|}\sum_{i \in B_f} C_i,
+\qquad
+C_{\mathrm{macro}} = \frac{1}{|\mathcal{F}|}\sum_{f \in \mathcal{F}} C_f.
+\end{equation}
+This macro-family weighting gives each architecture family equal influence and prevents overrepresented families, such as LLMs, from dominating the correctness axis.
+
+\paragraph{Validity and coverage.}
+Although calibrated correctness is continuous, deployment requires a hard validity decision for each benchmark item.
+We define $\operatorname{valid}_i = \mathbf{1}(C_i \ge \tau_i)$ for a pre-specified item or family threshold $\tau_i$.
+Items are invalid if they crash, hang, trigger shape or type errors, access memory illegally, produce NaNs, or fall below the correctness threshold.
+We report both item-level coverage and macro-family coverage:
+\begin{equation}
+\mathrm{Coverage} = \frac{1}{N}\sum_i \operatorname{valid}_i,
+\qquad
+\mathrm{Coverage}_{\mathrm{macro}} =
+\frac{1}{|\mathcal{F}|}\sum_{f \in \mathcal{F}}
+\frac{1}{|B_f|}\sum_{i \in B_f}\operatorname{valid}_i.
+\end{equation}
+Macro-coverage is the preferred statistic when architecture balance matters.
+
+\paragraph{Throughput--latency speedup.}
+For valid items (invalid items receive no speedup credit), performance is measured against the production reference with a geometric blend of throughput and latency speedups:
+\begin{equation}
+s_i =
+\left(s_i^{\mathrm{thr}}\right)^{\lambda}
+\left(s_i^{\mathrm{lat}}\right)^{1-\lambda},
+\qquad
+s_i^{\mathrm{thr}} =
+\frac{\mathrm{Throughput}_{\mathrm{cand},i}}
+     {\mathrm{Throughput}_{\mathrm{ref},i}},
+\qquad
+s_i^{\mathrm{lat}} =
+\frac{\mathrm{Latency}_{\mathrm{ref},i}}
+     {\mathrm{Latency}_{\mathrm{cand},i}}.
+\end{equation}
+The default $\lambda = 0.5$ is neutral: an optimization that improves throughput while equivalently degrading latency receives no net credit, since such gains are workload-dependent tradeoffs rather than universal improvements; users may pre-specify a different $\lambda$.
+Because speedups are multiplicative, \fastkernels{} aggregates the blended speedups with geometric means.
+For each family, let $B_f^{\mathrm{valid}} = \{i \in B_f : \operatorname{valid}_i = 1\}$.
+The family-level and macro-geometric speedups are
+\begin{equation}
+S_f =
+\exp\left(
+\frac{1}{|B_f^{\mathrm{valid}}|}
+\sum_{i \in B_f^{\mathrm{valid}}}\log s_i
+\right),
+\qquad
+S_{\mathrm{macro}} =
+\exp\left(
+\frac{1}{|\mathcal{F}_{\mathrm{valid}}|}
+\sum_{f \in \mathcal{F}_{\mathrm{valid}}}\log S_f
+\right),
+\end{equation}
+where $\mathcal{F}_{\mathrm{valid}}$ contains families with at least one valid item.
+A family with no valid item is excluded from speedup aggregation, so incorrect kernels earn no performance credit, and the failure is penalized through macro-coverage instead.
+
+\paragraph{Leaderboard.}
+The leaderboard reports $S_{\mathrm{macro}}$, $C_{\mathrm{macro}}$, and $\mathrm{Coverage}_{\mathrm{macro}}$ separately, so users can rank agents by whichever their deployment prioritizes.
+As the default single ranking, \fastkernels{} uses their product $\mathrm{Score}_{\mathrm{default}} = S_{\mathrm{macro}} \cdot C_{\mathrm{macro}} \cdot \mathrm{Coverage}_{\mathrm{macro}}$, which rewards agents that are simultaneously fast, correct, and broadly applicable, and it also reports throughput-only ($\lambda{=}1$) and latency-only ($\lambda{=}0$) rankings for batched and interactive deployments.
+All speedups are measured empirically against the reference, without speed-of-light or roofline bounds.

@@ -1,0 +1,144 @@
+\section{Artifact Appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Abstract}
+
+% {\em Obligatory}
+The artifact contains the code to run \sys, as well as the datasets and scripts that can be used to reproduce the experiments in the paper. 
+\subsection{Artifact check-list (meta-information)}
+
+% {\em Obligatory. Use just a few informal keywords in all fields applicable to your artifacts
+% and remove the rest. This information is needed to find appropriate reviewers and gradually 
+% unify artifact meta information in Digital Libraries.}
+
+{\small
+\begin{itemize}
+  \item {\bf Algorithm: } Tree-based Speculative Inference
+  \item {\bf Program: } spec\_infer.cc, incr\_decoding.cc
+  \item {\bf Compilation: } CMake
+  % \item {\bf Transformations: }
+  % \item {\bf Binary: }
+  % \item {\bf Model: }
+  % \item {\bf Data set: } LLAMA, OPT models
+  \item {\bf Run-time environment: } CUDA, NCCL, MPI, UCX, Python3.
+  \item {\bf Hardware: }  Two AWS g5.12xlarge instances, each with 4 NVIDIA A10 24GB GPUs, 48 CPU cores, and 192 GB DRAM.
+  % \item {\bf Run-time state: }
+  % \item {\bf Execution: }
+  \item {\bf Metrics: } End to-end average latency
+  \item {\bf Output: } End-to-end latency
+  \item {\bf Experiments: } Server-grade GPU inference, Offloading-based inference
+  \item {\bf How much disk space required (approximately)?: } 350GB per node
+  \item {\bf How much time is needed to prepare workflow (approximately)?: } 2h
+  \item {\bf How much time is needed to complete experiments (approximately)?: } 6h
+  \item {\bf Publicly available?: } Yes
+  \item {\bf Code licenses (if publicly available)?: } Apache License v2.0
+  \item {\bf Data licenses (if publicly available)?: } LLAMA is under the GNU license and OPT is under a Non-commercial license%, see \url{https://github.com/facebookresearch/metaseq/blob/main/projects/OPT/MODEL_LICENSE.md}
+  \item {\bf Archived (provide DOI)?: }\url{https://doi.org/10.5281/zenodo.10854410}.
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Description}
+
+\subsubsection{How to access}
+% {\em Obligatory}
+The artifact is released on Github: \url{https://github.com/goliaro/specinfer-ae}. The repository contains \sys's source code, and the instructions to build the framework. We also provide scripts to reproduce the experiments from the paper. To clone the repository, use the following command (make sure to pass the \texttt{--recursive} flag):
+\begin{lstlisting}[language=sh]
+git clone --recursive \
+https://github.com/goliaro/specinfer-ae.git
+\end{lstlisting}
+
+\subsubsection{Hardware dependencies}
+We run out experiments on two AWS g5.12xlarge instances, each with 4 NVIDIA A10 24GB GPUs, 48 CPU cores, and 192 GB DRAM. We provide instructions to create and setup the instances. 
+%We will also give the reviewers login access to two pre-configured instances in our own AWS EC2 account. 
+
+\subsubsection{Software dependencies}
+The following software is required: CUDA 12.1, NCCL, Rust, CMake and Python3. Further, UCX and MPI are required for the multinode experiments. Additional Python dependencies are listed here: \url{https://github.com/flexflow/FlexFlow/blob/inference/requirements.txt}. We recommend using the \texttt{Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.1.0 (Ubuntu 20.04)} AMI, and provide scripts and a conda environment to install all the remaining dependencies.
+
+% \subsubsection{Data sets}
+
+\subsubsection{Models}
+We use the following LLM/SSM models for our experiments (for each model, we specify in parentheses the corresponding HuggingFace repository): LLaMA-68M (JackFram/llama-68m), LLaMA-7B (huggyllama/llama-7b), LLaMA-65B (huggyllama/llama-65b), OPT-125M (facebook/opt-125m), OPT-13B (facebook/opt-13b), OPT-125M (facebook/opt-30b). You can download all these models with the script: 
+\begin{lstlisting}[language=sh]
+./download_models.sh
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Installation}
+
+% {\em Obligatory}
+
+To reproduce the experiments, you will need access to two AWS g5.12xlarge instances (or other machines with the same GPU/CPU/network specs). If you are using the preconfigured instances we provided, you can skip this step. 
+\paragraph{Launching the instances}
+Launch two AWS g5.12xlarge instances using the \texttt{Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.1.0 (Ubuntu 20.04)} AMI. Make sure to place the instances in a \href{https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html}{placement group} that utilizes the cluster strategy to achieve low-latency network performance. Attach the same security group to all instances and add an inbound rule in the security group to allow all incoming traffic from the same security group. For example, you can add the following rule: Type: All TCP, Source: Anywhere-IPv4.
+
+\paragraph{Installing the prerequisites}
+After gaining access to the AWS instances, install the prerequisites by following the steps below. First, activate the conda shell support by running \texttt{conda init bash}, and then restarting the shell session.
+Next, create the conda environment with all the required dependencies by running:
+\begin{lstlisting}[language=sh]
+conda env create -f FlexFlow/conda/flexflow.yml
+conda activate flexflow
+\end{lstlisting}
+
+\paragraph{Multinode setup}
+Download and build UCX by running the \texttt{install\_ucx.sh} script. Next, if you are running \sys on two AWS instances, you will need to configure MPI so that the two instances are mutually accessible. Pick a main node, and create a SSH key pair with:
+\begin{lstlisting}[language=sh]
+    ssh-keygen -t ed25519
+\end{lstlisting}
+Append the contents of the public key (\texttt{\textasciitilde/.ssh/id\_ed25519.pub}) to the \texttt{\textasciitilde/.ssh/authorized\_keys} file on BOTH the main and secondary machine. Note that if the \texttt{.ssh} folder or the \texttt{authorized\_keys} file do not exist, you will need to create them manually. 
+Finally, create a file at the path \texttt{\textasciitilde/hostfile} with the following contents:
+\begin{lstlisting}[language=sh]
+<main_node_private_ip> slots=4
+<secondary_node_private_ip> slots=4
+\end{lstlisting}
+replacing <main\_node\_private\_ip> and <secondary\_node\_private\_ip> with the private IP addresses of the two machines, and the number of slots with the number of GPUs available (if you are using the recommended AWS instances, you will use a value of 4). You can find each machine's private IP address by running the command (and use the first IP value that is printed):
+\begin{lstlisting}[language=sh]
+    hostname -I
+\end{lstlisting}
+
+\paragraph{Install \sys}
+
+To install \sys, run the script: 
+\begin{lstlisting}[language=sh]
+./install_specinfer.sh
+\end{lstlisting}
+
+\subsection{Basic Test}
+To ensure that \sys is installed correctly and is functional, run the \texttt{basic\_test.sh} script. This script will test the basic incremental decoding and speculative inference functionalities, on both single and multi nodes. It will also test the support for offloading. The test passes if it prints the "Test passed!" message. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment workflow}
+The artifact comes with scripts to gather the data that can be used to reproduce the results from the paper. It also comes with scripts that can be used to convert the output data into CSV format for plotting. 
+
+\paragraph{Running Experiments}
+We run the following two experiments to evaluate \sys under different hardware setups. The output data will be saved to the \texttt{FlexFlow/inference/output} path. 
+
+\begin{itemize}
+    \item \textbf{Server-grade GPU evaluation.} This experiment tests the performance of \sys on server-grade GPUs. The LLMs and SSMs are loaded in GPU memory, and we measure the end-to-end inference latency using 1 node, and 2 nodes. In the single node case, we measure the performance using 1 GPU, or 4 GPUs. In the multinode case, we use 4GPUs per node. The experiments use LLAMA-7B, OPT-30B and LLAMA-65B as the LLMs, and LLAMA-68M and OPT-125M as SSMs. The experiment runs \sys in three different modes: incremental decoding, sequence-based speculative decoding, and tree-based speculative decoding. The former two are used to obtain data for the ablation study, and the latter is the novel inference mode proposed by \sys, and will be deployed by the user. To run the server-grade GPU evaluation, run:
+\begin{lstlisting}[language=sh]
+./server_gpu_experiments.sh
+\end{lstlisting}
+\item \textbf{Offloading evaluation.} This experiment tests the performance of \sys when loading only a subset of parameters in GPU memory, while offloading the remaining ones on CPU DRAM. This technique is used to perform inference when the target model is larger than the available GPU memory. In the experiment, \sys uses a single GPU and swaps the model's weights to and from the CPU. To run the offloading evaluation, run: 
+\begin{lstlisting}[language=sh]
+./offloading_experiments.sh
+\end{lstlisting}
+\end{itemize}
+
+\paragraph{Third-party frameworks}
+Please follow the vLLM, FasterTransformer, and HuggingFace TGI, and FlexGen official documentation to reproduce the performance of the third-party frameworks under the experiment scenarios.
+
+\paragraph{Output data}
+The scripts above will generate data at the \texttt{FlexFlow/inference/output} path. For each scenario, a \texttt{.txt} file contains the generated output for each prompt, and a \texttt{.out} file contains the stdout logs. The quality of the generated output can be evaluated visually and compared with the output from third-party inference frameworks.
+We provide scripts to parse the raw output data and generate CSV files that can be used to generate the paper's figures. The README provides all details on the scripts and the mapping between CSV files and figures.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Evaluation and expected results}
+The data from the CSV files should show similar performance to the figures from the paper. Some variability is to be expected, but overall, \sys should behave according to Figures 7-11 from the paper. 
+% {\em Obligatory}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment customization}
+Users can edit the configuration parameters from the evaluation scripts to change various parameters, such as the number of GPUs/CPUs, GPU/CPU memory, batch size, LLM/SSM models used, prompt dataset, full vs. half-precision, and the maximum number of tokens to generate.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \subsection{Notes}

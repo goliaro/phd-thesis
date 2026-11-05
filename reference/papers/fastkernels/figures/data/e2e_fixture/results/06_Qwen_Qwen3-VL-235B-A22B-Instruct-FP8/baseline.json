@@ -1,0 +1,11 @@
+{
+ "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+ "tp": 4,
+ "status": "crash",
+ "candidates": false,
+ "candidate_dir": null,
+ "adapter": "vlm",
+ "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 GiB",
+ "t_total_s": 311.0,
+ "_dir": "/out/runs/06_Qwen_Qwen3-VL-235B-A22B-Instruct-FP8/baseline"
+}

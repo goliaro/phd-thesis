@@ -1,0 +1,152 @@
+{
+ "kernels_requested": [
+  "L1:gelu",
+  "L1:layer_norm",
+  "L2:flux_attention"
+ ],
+ "dropped": [
+  {
+   "kernel": "L2:flux_attention",
+   "category": "compile",
+   "attempt": 1,
+   "reason": "torch._inductor.exc.LoweringException: NotImplementedError"
+  }
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:gelu",
+    "L1:layer_norm",
+    "L2:flux_attention"
+   ],
+   "exclude": [],
+   "status": "crash",
+   "error": "torch._inductor.exc.LoweringException: NotImplementedError",
+   "swapped": [
+    "L1:gelu",
+    "L1:layer_norm",
+    "L2:flux_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "category": "compile",
+   "culprits": [
+    "L2:flux_attention"
+   ]
+  },
+  {
+   "n": 2,
+   "purpose": "full",
+   "only": [
+    "L1:gelu",
+    "L1:layer_norm"
+   ],
+   "exclude": [
+    "L2:flux_attention"
+   ],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gelu",
+    "L1:layer_norm"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "1024x1024": 0.9241,
+    "512x512": 0.9498,
+    "single-1024x1024": 1.0461,
+    "single-512x512": 0.9945
+   },
+   "mean_d": 0.07701999999999999
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:gelu",
+   "L1:layer_norm",
+   "L2:flux_attention"
+  ],
+  "exclude": [],
+  "status": "crash",
+  "error": "torch._inductor.exc.LoweringException: NotImplementedError",
+  "swapped": [
+   "L1:gelu",
+   "L1:layer_norm",
+   "L2:flux_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "category": "compile",
+  "culprits": [
+   "L2:flux_attention"
+  ]
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:gelu",
+  "L1:layer_norm"
+ ],
+ "timings": {
+  "1024x1024": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 0.388122
+  },
+  "512x512": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 1.5196800000000001
+  },
+  "single-1024x1024": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.772201510371857
+  },
+  "single-512x512": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.8044243338360986
+  }
+ },
+ "speedups": {
+  "1024x1024": 0.9241,
+  "512x512": 0.9498,
+  "single-1024x1024": 1.0461,
+  "single-512x512": 0.9945
+ },
+ "correctness": {
+  "per_sample": [
+   0.04763,
+   0.07952,
+   0.03318,
+   0.02481,
+   0.13883,
+   0.06795,
+   0.12225,
+   0.05354,
+   0.07483,
+   0.07599,
+   0.1414,
+   0.09378,
+   0.03545,
+   0.09479,
+   0.07804,
+   0.07033
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.92298
+  }
+ },
+ "mean_d": 0.07701999999999999,
+ "model": "black-forest-labs/FLUX.1-dev",
+ "set": "drkernel-seq"
+}

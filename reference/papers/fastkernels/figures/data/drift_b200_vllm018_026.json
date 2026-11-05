@@ -1,0 +1,103 @@
+{
+ "pinned": "/private/tmp/claude-501/-Users-goliaro-Desktop-fk/b6d93351-958b-4d14-9106-b8a8d585bf99/scratchpad/b200drift/v018",
+ "candidate": "/private/tmp/claude-501/-Users-goliaro-Desktop-fk/b6d93351-958b-4d14-9106-b8a8d585bf99/scratchpad/b200drift/v026",
+ "models": {
+  "Qwen/Qwen2-VL-7B-Instruct": {
+   "family": "Multimodal / VLM",
+   "throughput": 1.0858936483324075,
+   "latency": 1.0078686074927525
+  },
+  "Qwen/Qwen2.5-Omni-7B": {
+   "family": "Multimodal / VLM",
+   "throughput": 1.1152305798567936,
+   "latency": 0.9981700444418079
+  },
+  "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+   "family": "Linear attention / SSM / hybrid",
+   "throughput": 1.1345359723216564,
+   "latency": 1.3351437761258795
+  },
+  "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+   "family": "Multimodal / VLM",
+   "throughput": 0.8682760234555023,
+   "latency": 1.2205270016471685
+  },
+  "Qwen/Qwen3-VL-8B-Instruct": {
+   "family": "Multimodal / VLM",
+   "throughput": 1.0058396237271063,
+   "latency": 1.0772129612153574
+  },
+  "ai21labs/AI21-Jamba-Mini-1.7": {
+   "family": "Linear attention / SSM / hybrid",
+   "throughput": 1.1917195768309217,
+   "latency": 1.0658380930482003
+  },
+  "meta-llama/Llama-3.1-8B-Instruct": {
+   "family": "LLM (dense + MoE)",
+   "throughput": 1.0081720335855104,
+   "latency": 1.031146244833737
+  },
+  "mistralai/Mamba-Codestral-7B-v0.1": {
+   "family": "Linear attention / SSM / hybrid",
+   "throughput": 1.0705985192657843,
+   "latency": 1.1960657789563622
+  },
+  "mistralai/Mixtral-8x7B-Instruct-v0.1": {
+   "family": "LLM (dense + MoE)",
+   "throughput": 1.071103253353918,
+   "latency": 1.2137146487542423
+  },
+  "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+   "family": "Linear attention / SSM / hybrid",
+   "throughput": 1.2691057296877855,
+   "latency": 1.209427882352349
+  },
+  "openai/gpt-oss-120b": {
+   "family": "LLM (dense + MoE)",
+   "throughput": 2.7748232474862355,
+   "latency": 2.0359825288929767
+  },
+  "openai/whisper-large-v3": {
+   "family": "Audio",
+   "throughput": 1.0151852865346154,
+   "latency": 1.0685153346875935
+  },
+  "state-spaces/mamba-2.8b-hf": {
+   "family": "Linear attention / SSM / hybrid",
+   "throughput": 1.0655990201956602,
+   "latency": 1.0934043142118757
+  }
+ },
+ "families": {
+  "Audio": {
+   "n": 1,
+   "throughput": 1.0151852865346154,
+   "latency": 1.0685153346875935
+  },
+  "LLM (dense + MoE)": {
+   "n": 3,
+   "throughput": 1.44167412199053,
+   "latency": 1.3658519751498426
+  },
+  "Linear attention / SSM / hybrid": {
+   "n": 5,
+   "throughput": 1.1437790037551574,
+   "latency": 1.1761616634233196
+  },
+  "Multimodal / VLM": {
+   "n": 4,
+   "throughput": 1.014108978319639,
+   "latency": 1.0724186379893244
+  }
+ },
+ "median_model": {
+  "throughput": 1.071103253353918,
+  "latency": 1.0934043142118757
+ },
+ "threshold": 0.1,
+ "families_over_threshold": [
+  "LLM (dense + MoE)",
+  "Linear attention / SSM / hybrid"
+ ],
+ "rerelease_due": true
+}

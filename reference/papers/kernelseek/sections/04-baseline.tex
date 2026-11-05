@@ -1,0 +1,62 @@
+\section{Baseline: A Tool-Rich Autonomous Evolutionary Agent}
+\label{sec:baseline}
+% Facts from agent/fa3agent/ and checkpoint run_20260616_011948 (scripts in paper/analysis/baseline).
+
+Before \sys, we built the agent the prevailing recipe prescribes. \baseline is an autonomous
+evolutionary agent for the Hopper half of the case study (\S\ref{sec:kernels}), in the lineage of
+AVO, KDA, and CUCo \cite{chen2026avo,han2026kda,cuco2026}: an orchestrated loop, a profiler whose
+output is distilled for the model, retrieval over documentation and reference libraries, a typed
+knowledge store, and no human in the loop by design. Its failure is the paper's motivation, and its
+evaluator, unchanged, scored the first \sys session in the head-to-head of \S\ref{sec:eval-h2h}.
+
+\paragraph{Design.} The task was a single dependency-free CUDA file implementing vLLM's FA3 operator
+for H200, with success defined as at least parity with FA3 on 26 configurations and token-for-token
+equality with FA3 on a greedy decode in vLLM. A deterministic Python orchestrator owns the loop. Each
+step generates one candidate, builds it, checks for forbidden dependencies by inspecting the binary's
+symbols, analyzes the SASS instruction mix, verifies correctness on all 26 configurations, times it
+against FA3 interleaved across four GPUs, profiles the worst configuration with NCU, and, on
+promotion, A/B-tests it inside a live vLLM instance. It then writes a lesson to a memory file, a note
+to the knowledge store, and an entry to a lever ledger, checks for a plateau, and checkpoints. A
+Claude Opus model (\texttt{claude-opus-4-8}) running headless in Claude Code is the brain, invoked in
+a fresh session at every step. The orchestrator decides \emph{what} to try and the brain decides
+\emph{how}: sixteen hand-written levers, from tensor-core MMAs and TMA
+loads to warp specialization and persistent scheduling, are keyed to the bottleneck label the NCU parser assigns, and the
+chosen lever is placed in the prompt with the instruction to write the improved candidate. Everything
+else the brain sees is distilled by a component (Appendix~\ref{app:baseline}): a bottleneck
+diagnosis, retrieved documentation, hints extracted from DeepGEMM, ThunderKittens, and CUTLASS, and
+typed knowledge-store notes. The median step prompt was 22.6K characters, 37\% of it pre-fetched
+reference material, plus the current best kernel re-read each step. Promotion is greedy on the worst-case configuration ratio with a 3\% noise band,
+and a plateau detector opens rewrite branches. No human-authored text ever entered a step prompt.
+
+\paragraph{Outcome.} The run kept 313 steps over 4.2 days, with a further 117 discarded by three
+human rollbacks. The model was active for steps 0 to 132, about 62 hours and \$660 of API usage over
+253 sessions; from step 133 the brain's credentials had expired and the loop re-scored old kernels
+until stopped, so we report 133 model-driven steps as the budget. The best candidate reached
+0.50$\times$ FA3 in geometric mean with a worst case of 0.24$\times$; no configuration reached
+parity. All progress happened by step 35, in about 45 hours. The remaining 98 model-driven steps
+produced nothing beyond noise: the final champion, from step 112, is byte-identical to the candidate
+of step 104 and was promoted because one of 54 re-measurements of the same source landed above the
+noise band. Correctness was not the problem: 312 of 313 candidates were correct.
+
+\paragraph{Why it stalled.} The traces show the failure modes of \S\ref{sec:intro}, each with a
+number attached. \emph{Information was not the constraint}: with more than a third of every prompt
+devoted to reference material and 1.6~GB of reference code on disk, 82\% of the characters the brain
+read through its own tool calls were its own kernel, and its 92 documentation lookups over 246
+sessions mostly justified not making a change. \emph{The menu bounded the search}: 36 of the 37
+rewrite branches the plateau detector opened were seeded from the same step, and every candidate
+after step 35 was a local edit of the same design. \emph{Memory hardened conclusions, not evidence}:
+the memory file recorded one configuration as ``DEFINITIVE[ly] \ldots walled by [the] 65536-reg
+file'', a wall FA3 does not hit, and the brain's summary at step 112 was that ``the only remaining
+escape is a clean-sheet 1-blk/SM warp-spec persistent seed, which is outside this branch's mandate
+and measured to lose''; each fresh session inherited earlier verdicts without the reasoning behind
+them, and nothing in the loop was positioned to doubt them. \emph{Every diagnostic lived at one
+layer}: NCU, the SASS analyzer, and the sanitizer all examine the kernel, while the gap \sys later
+closed on this evaluator was in the host launch path (\S\ref{sec:eval-cases}). \emph{The objective
+rewarded caution}: promoting on the worst configuration inside a noise band accepted noise as
+progress and could not fund a restructuring that regresses before it pays off; 312 correct
+candidates out of 313 is the signature of a search that never took a risk.
+
+Three lessons carried into \sys: the mechanical parts of the harness were worth keeping, and
+\sys's harness is this evaluator with the orchestration removed; everything built to inform the
+brain could go, and the knowledge store was actively harmful; and the loop lacked one input, a
+reason to doubt a conclusion and a hypothesis about where else to look.

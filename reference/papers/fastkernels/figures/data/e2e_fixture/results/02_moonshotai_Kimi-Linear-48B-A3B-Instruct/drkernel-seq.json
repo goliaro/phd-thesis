@@ -1,0 +1,119 @@
+{
+ "kernels_requested": [
+  "L1:kda_chunk",
+  "L1:short_conv"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:kda_chunk",
+    "L1:short_conv"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:kda_chunk",
+    "L1:short_conv"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0582,
+    "long-context": 1.0165,
+    "single-request": 0.991,
+    "fixed-batch-32": 0.9732
+   },
+   "mean_d": 0.002778125
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:kda_chunk",
+   "L1:short_conv"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:kda_chunk",
+   "L1:short_conv"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 1.0582,
+   "long-context": 1.0165,
+   "single-request": 0.991,
+   "fixed-batch-32": 0.9732
+  },
+  "mean_d": 0.002778125
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:kda_chunk",
+  "L1:short_conv"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5502.64
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2134.65
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.1281533804238144
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.5762433210028775
+  }
+ },
+ "speedups": {
+  "mixed": 1.0582,
+  "long-context": 1.0165,
+  "single-request": 0.991,
+  "fixed-batch-32": 0.9732
+ },
+ "correctness": {
+  "per_sample": [
+   0.004,
+   0.00136,
+   0.00203,
+   0.0041,
+   0.00478,
+   0.00303,
+   0.00582,
+   0.00492,
+   0.00133,
+   0.00177,
+   0.00297,
+   0.00134,
+   0.00399,
+   0.00088,
+   0.00128,
+   0.00085
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.997221875
+  }
+ },
+ "mean_d": 0.002778125,
+ "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+ "set": "drkernel-seq"
+}

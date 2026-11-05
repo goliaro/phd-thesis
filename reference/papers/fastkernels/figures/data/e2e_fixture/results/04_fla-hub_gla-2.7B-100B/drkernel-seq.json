@@ -1,0 +1,119 @@
+{
+ "kernels_requested": [
+  "L1:rms_norm",
+  "L2:gla_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:rms_norm",
+    "L2:gla_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:rms_norm",
+    "L2:gla_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 0.9288,
+    "long-context": 0.9558,
+    "single-request": 0.9586,
+    "fixed-batch-32": 1.005
+   },
+   "mean_d": 0.0038387500000000006
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:rms_norm",
+   "L2:gla_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:rms_norm",
+   "L2:gla_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 0.9288,
+   "long-context": 0.9558,
+   "single-request": 0.9586,
+   "fixed-batch-32": 1.005
+  },
+  "mean_d": 0.0038387500000000006
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:rms_norm",
+  "L2:gla_attention"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 4829.76
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2007.18
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.23388274567077
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.368159203980101
+  }
+ },
+ "speedups": {
+  "mixed": 0.9288,
+  "long-context": 0.9558,
+  "single-request": 0.9586,
+  "fixed-batch-32": 1.005
+ },
+ "correctness": {
+  "per_sample": [
+   0.00489,
+   0.00139,
+   0.00563,
+   0.00294,
+   0.00337,
+   0.00196,
+   0.00557,
+   0.00447,
+   0.00388,
+   0.00182,
+   0.00327,
+   0.00589,
+   0.00566,
+   0.00356,
+   0.00363,
+   0.00349
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99616125
+  }
+ },
+ "mean_d": 0.0038387500000000006,
+ "model": "fla-hub/gla-2.7B-100B",
+ "set": "drkernel-seq"
+}

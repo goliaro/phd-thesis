@@ -1,0 +1,137 @@
+\documentclass{article} % For LaTeX2e
+\usepackage{iclr2027_conference,times}
+
+% Build modes:
+%   anonymous ICLR 2027 submission: comment out \iclrfinalcopy
+%   arXiv preprint:                 \iclrfinalcopy and \preprinttrue
+%   camera-ready:                   \iclrfinalcopy and \preprintfalse
+\iclrfinalcopy
+\newif\ifpreprint
+\preprinttrue
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{xurl}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usepackage{pifont}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{seqsplit}
+\usepackage{listings}
+\usepackage{hyperref}
+
+% The ICLR style sets the running header inside \maketitle; some packages
+% (caption/hyperref + fancyhdr v4) make that assignment local to the group.
+% Restore the official header so every page matches the ICLR template.
+\pagestyle{fancy}
+\fancyhead{}
+\ificlrfinal
+  \ifpreprint
+    \lhead{Preprint}
+  \else
+    \lhead{Published as a conference paper at ICLR 2027}
+  \fi
+\else
+  \lhead{Under review as a conference paper at ICLR 2027}
+\fi
+
+%better code snippets
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  showstringspaces=false,
+  frame=single,
+  aboveskip=3pt,
+  belowskip=3pt
+}
+
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, fit, backgrounds}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\fastkernels}{\textsc{FastKernels}}
+\newcommand{\yichao}[1]{\textcolor{blue}{[yichao: #1]}}
+\newcommand{\gabriele}[1]{\textcolor{red}{[gabriele: #1]}}
+\newcommand{\placeholder}[1]{\textcolor{magenta}{\textbf{[#1]}}}
+
+\title{FastKernels: Benchmarking GPU Kernel\\Generation in Production}
+
+% Shown only when \iclrfinalcopy is enabled. The ICLR style sets the author
+% block in a one-column tabular and bolds only its first row, so later rows of
+% names need their own \bf.
+\author{\ignorespaces
+  Gabriele Oliaro$^{1,2}$\thanks{Equal contribution.} \quad
+  Jaeseong Lee$^{1*}$ \quad
+  Yichao Fu$^{3*}$ \quad
+  Zhaoyuan Su$^{1}$ \\
+  \bf
+  Owen Lu$^{2}$ \quad
+  Sreeram Vennam$^{2}$ \quad
+  May Jiang$^{4}$ \quad
+  Junli Wang$^{3}$ \\
+  \bf
+  Hao Zhang$^{3}$ \quad
+  Zhihao Jia$^{2}$ \quad
+  Samyam Rajbhandari$^{1}$ \\
+  $^{1}$Snowflake AI Research \quad
+  $^{2}$CMU \quad
+  $^{3}$UCSD \quad
+  $^{4}$Independent Researcher
+}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/benchmark_design}
+\input{sections/benchmarking_tooling}
+\input{sections/metrics}
+\input{sections/evaluation}
+\input{sections/discussion}
+
+% These sections do not count toward the 9-page main-text limit.
+\input{sections/ai_use}
+% Ethics is an ICLR requirement; omit from the arXiv preprint.
+\ificlrfinal
+  \ifpreprint
+  \else
+    \input{sections/ethics}
+  \fi
+\else
+  \input{sections/ethics}
+\fi
+\input{sections/reproducibility}
+\input{sections/acknowledgements}
+
+\bibliography{references}
+\bibliographystyle{iclr2027_conference}
+
+\newpage
+\appendix
+% ICLR's \flushbottom stretches underfull appendix pages around large [H]
+% floats into mid-page white gaps; pack content to the top instead.
+\raggedbottom
+\input{appendix/main}
+
+\end{document}

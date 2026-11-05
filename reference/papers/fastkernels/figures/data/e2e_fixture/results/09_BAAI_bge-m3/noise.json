@@ -1,0 +1,52 @@
+{
+ "model": "BAAI/bge-m3",
+ "status": "ok",
+ "error": null,
+ "timings": {
+  "bge-m3-mldr-docs": {
+   "kind": "throughput",
+   "unit": "doc/s",
+   "value": 406.679
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.01196649381731153
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.19118534916482188
+  }
+ },
+ "speedups": {
+  "bge-m3-mldr-docs": 0.9919,
+  "single-request": 1.0028,
+  "fixed-batch-32": 0.9938
+ },
+ "correctness": {
+  "per_sample": [
+   0.00136,
+   0.0002,
+   0.00123,
+   0.00195,
+   0.00046,
+   0.00126,
+   0.0023,
+   0.00176,
+   0.00224,
+   0.00109,
+   0.00023,
+   0.00053,
+   0.00088,
+   0.00281,
+   0.00291,
+   0.00157
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99857625
+  }
+ },
+ "mean_d": 0.0014237499999999999
+}

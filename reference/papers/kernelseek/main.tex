@@ -1,0 +1,132 @@
+%%%%%%%% MLSys 2027 submission (uses the MLSys 2025 style, as required by the CFP) %%%%%%%%
+%
+% Version switch. \arxivtrue builds the arXiv preprint: author names and affiliations shown,
+% no "Under review ... Do not distribute" banner, no line-number ruler, real PDF metadata.
+% \arxivfalse builds the anonymous double-blind submission exactly as before.
+\newif\ifarxiv
+\arxivtrue
+%
+\documentclass{article}
+
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{xurl}
+\usepackage{hyperref}
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+\ifarxiv
+  % arXiv preprint: the [accepted] option prints authors and drops the ruler; we replace the
+  % "Appearing in MLSys 2025" notice it would print with a plain preprint line.
+  \usepackage[accepted]{mlsys2025}
+  \makeatletter
+  \renewcommand{\Notice@String}{Preprint.}
+  \makeatother
+  \hypersetup{
+    pdfauthor={Gabriele Oliaro, Jaeseong Lee, Zhaoyuan Su, Sreeram Vennam, Zhihao Jia, Samyam Rajbhandari},
+  }
+\else
+  % Initial blind submission:
+  \usepackage{mlsys2025}
+  % Camera-ready:
+  % \usepackage[accepted]{mlsys2025}
+\fi
+
+% ---------------------------------------------------------------- macros
+\newcommand{\sys}{\textsc{KernelSeek}\xspace}        % the question-driven kernel agent
+\newcommand{\baseline}{\textsc{Arsenal}\xspace}      % name of the tool-rich baseline agent
+\newcommand{\fathree}{\texttt{fa3\_hopper.cu}\xspace}
+\newcommand{\fafour}{\texttt{fa4\_blackwell.cu}\xspace}
+% Draft-only annotations; set \drafttrue -> \draftfalse to hide them before submitting.
+\newif\ifdraft \draftfalse
+\ifdraft
+  \newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
+\else
+  \newcommand{\todo}[1]{}
+\fi
+
+\mlsystitlerunning{Ask, Don't Equip: Question-Driven Agents for Kernel Optimization}
+
+\begin{document}
+
+\twocolumn[
+\mlsystitle{Ask, Don't Equip: Question-Driven Coding Agents\\for Deep Kernel Optimization}
+\ifarxiv\hypersetup{pdftitle={Ask, Don't Equip: Question-Driven Coding Agents for Deep Kernel Optimization}}\fi
+
+\ifarxiv
+\begin{mlsysauthorlist}
+\mlsysauthor{Gabriele Oliaro}{snow,cmu}
+\mlsysauthor{Jaeseong Lee}{snow}
+\mlsysauthor{Zhaoyuan Su}{snow}
+\mlsysauthor{Sreeram Vennam}{cmu}
+\mlsysauthor{Zhihao Jia}{cmu}
+\mlsysauthor{Samyam Rajbhandari}{snow}
+\end{mlsysauthorlist}
+\mlsysaffiliation{cmu}{Carnegie Mellon University}
+\mlsysaffiliation{snow}{Snowflake AI Research}
+\mlsyscorrespondingauthor{Gabriele Oliaro}{goliaro@cs.cmu.edu}
+\else
+% Author info is stripped automatically in the blind version.
+\begin{mlsysauthorlist}
+\mlsysauthor{Anonymous Authors}{anon}
+\end{mlsysauthorlist}
+\mlsysaffiliation{anon}{Anonymous Institution}
+\mlsyscorrespondingauthor{Anonymous}{anon@example.com}
+\fi
+
+\mlsyskeywords{LLM agents, GPU kernels, CUDA, performance optimization, evolutionary search}
+
+\vskip 0.3in
+
+\begin{abstract}
+LLM agents for GPU kernel optimization sit at two ends of a structure--freedom tradeoff. Scripted
+agents fix what the model does at each step, via a learned policy, an optimization menu, or fixed
+roles, and are sample-efficient where the recipe applies and stall where it does not. Open-ended
+agents let a self-directed model mutate a population of kernels and pay for the freedom in trials:
+thousands of evaluations, repeated edits, and wrong candidates. Both respond to hard targets by
+equipping the agent with more: parsed profiler output, disassembly analysis, retrieval over
+documentation and libraries, and stores of lessons. We argue that both lack direction, a hypothesis
+about where the remaining gap is, and that a short question asked at the right moment supplies it
+without narrowing what the agent may do next. We present \sys, a question-driven agent that makes an
+existing CUDA kernel faster with no operator-specific knowledge and no faster implementation to
+imitate: a general-purpose coding agent, a minimal harness that enforces a verifiable goal, and
+questions at decision points, first from a human, then from a bank the agent applies to itself. On
+the same task, evaluator, hardware, and week, a tool-rich autonomous agent built in the prevailing
+style plateaued at 0.50$\times$ FlashAttention-3 after 133 model-driven steps; \sys reached
+1.13$\times$. It then produced dependency-free FlashAttention forward kernels for Hopper and
+Blackwell, single CUDA files with no CUTLASS, CuTe, cuBLAS, or cuDNN, correct on all 182 scenarios
+per architecture and 1.16$\times$ FlashAttention-3 and 1.46$\times$ FlashAttention-4 (geometric
+mean). Across 162 human messages and 11.5K agent tool calls, every large gain followed a question
+that moved the agent to a different layer of the system or rejected a claimed limit, never one that
+supplied information. We release the kernels, harness, question bank, and all traces.
+\end{abstract}
+]
+
+\printAffiliationsAndNotice{}
+
+\input{sections/01-introduction}
+\input{sections/03-kernelseek}
+\input{sections/04-baseline}
+\input{sections/05-kernels}
+\input{sections/06-evaluation}
+\input{sections/07-discussion}
+\input{sections/08-related}
+\input{sections/09-conclusion}
+
+\bibliography{references}
+\bibliographystyle{mlsys2025}
+
+% MANDATORY for MLSys'27: placed after the references, does not count toward the 10 pages.
+\input{sections/ai-disclosure}
+
+\clearpage
+\appendix
+\input{sections/appendix}
+
+\end{document}

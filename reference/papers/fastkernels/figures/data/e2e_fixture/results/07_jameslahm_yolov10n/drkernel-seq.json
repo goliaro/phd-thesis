@@ -1,0 +1,111 @@
+{
+ "kernels_requested": [
+  "L1:conv2d",
+  "L1:silu"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:conv2d",
+    "L1:silu"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:conv2d",
+    "L1:silu"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "coco-val": 1.0183,
+    "single-image": 1.0576,
+    "batch-4": 1.055
+   },
+   "mean_d": 0.001905625
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:conv2d",
+   "L1:silu"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:conv2d",
+   "L1:silu"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "coco-val": 1.0183,
+   "single-image": 1.0576,
+   "batch-4": 1.055
+  },
+  "mean_d": 0.001905625
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:conv2d",
+  "L1:silu"
+ ],
+ "timings": {
+  "coco-val": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 865.555
+  },
+  "single-image": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.0038767019667170955
+  },
+  "batch-4": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.008815165876777251
+  }
+ },
+ "speedups": {
+  "coco-val": 1.0183,
+  "single-image": 1.0576,
+  "batch-4": 1.055
+ },
+ "correctness": {
+  "per_sample": [
+   0.00346,
+   0.00284,
+   0.00301,
+   0.00349,
+   0.00198,
+   0.00212,
+   8e-05,
+   0.00089,
+   0.00041,
+   0.00327,
+   0.00039,
+   0.00078,
+   0.0024,
+   0.00209,
+   0.00041,
+   0.00287
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.998094375
+  }
+ },
+ "mean_d": 0.001905625,
+ "model": "jameslahm/yolov10n",
+ "set": "drkernel-seq"
+}

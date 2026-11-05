@@ -1,0 +1,7505 @@
+{
+ "generated_by": "figures/make_macroeval.py",
+ "universe": {
+  "mode": "all",
+  "models": [
+   "meta-llama/Llama-3.1-8B-Instruct",
+   "Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+   "openai/gpt-oss-120b",
+   "fla-hub/gla-2.7B-100B",
+   "black-forest-labs/FLUX.1-dev",
+   "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+   "jameslahm/yolov10n",
+   "OpenFold/OpenFold3",
+   "BAAI/bge-m3",
+   "Etched/oasis-500m"
+  ],
+  "families": [
+   "Dense & MoE LLMs",
+   "Linear Attention & New Archs",
+   "Vision / Video / Audio",
+   "Multimodal & Encoders",
+   "Edge & Detection",
+   "3D / Robotics / Science",
+   "Recommendation & Specialized",
+   "World Models"
+  ]
+ },
+ "config": {
+  "tau": 0.9,
+  "g_quantile": 0.95,
+  "g_floor": 0.001,
+  "g_fallback": 0.02,
+  "g_cap": 0.5,
+  "f": {
+   "Dense & MoE LLMs": 0.5,
+   "Linear Attention & New Archs": 0.5,
+   "Vision / Video / Audio": 0.5,
+   "Multimodal & Encoders": 0.5,
+   "Edge & Detection": 0.5,
+   "3D / Robotics / Science": 0.5,
+   "Recommendation & Specialized": 0.5,
+   "World Models": 0.5
+  },
+  "g_override": {},
+  "f_override": {},
+  "lambdas": {
+   "blend": 0.5,
+   "thr": 1.0,
+   "lat": 0.0
+  },
+  "broken_threshold": 0.5,
+  "empty_policy": "invalid",
+  "sensitivity_scales": [
+   0.5,
+   1.0,
+   2.0
+  ]
+ },
+ "inventory": {
+  "meta-llama/Llama-3.1-8B-Instruct": {
+   "family": "Dense & MoE LLMs",
+   "in_universe": true,
+   "dir": "00_meta-llama_Llama-3.1-8B-Instruct",
+   "baseline": "ok",
+   "noise": "ok",
+   "sets": {
+    "drkernel-ind": "ok",
+    "drkernel-seq": "ok",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "ok",
+    "kda-seq": "ok",
+    "ako-ind": "ok",
+    "ako-seq": "ok"
+   }
+  },
+  "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+   "family": "Linear Attention & New Archs",
+   "in_universe": true,
+   "dir": "01_Qwen_Qwen3-Next-80B-A3B-Instruct",
+   "baseline": "ok",
+   "noise": "ok",
+   "sets": {
+    "drkernel-ind": "ok",
+    "drkernel-seq": "ok",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "ok",
+    "kda-seq": "ok",
+    "ako-ind": "ok",
+    "ako-seq": "ok"
+   }
+  },
+  "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+   "family": "Linear Attention & New Archs",
+   "in_universe": true,
+   "dir": "02_moonshotai_Kimi-Linear-48B-A3B-Instruct",
+   "baseline": "ok",
+   "noise": "ok",
+   "sets": {
+    "drkernel-ind": "empty",
+    "drkernel-seq": "ok",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "incomplete",
+    "kda-seq": "ok",
+    "ako-ind": "ok",
+    "ako-seq": "ok"
+   }
+  },
+  "openai/gpt-oss-120b": {
+   "family": "Dense & MoE LLMs",
+   "in_universe": true,
+   "dir": "03_openai_gpt-oss-120b",
+   "baseline": "ok",
+   "noise": "ok",
+   "sets": {
+    "drkernel-ind": "ok",
+    "drkernel-seq": "ok",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "ok",
+    "kda-seq": "ok",
+    "ako-ind": "ok",
+    "ako-seq": "ok"
+   }
+  },
+  "fla-hub/gla-2.7B-100B": {
+   "family": "Linear Attention & New Archs",
+   "in_universe": true,
+   "dir": "04_fla-hub_gla-2.7B-100B",
+   "baseline": "ok",
+   "noise": "ok",
+   "sets": {
+    "drkernel-ind": "ok",
+    "drkernel-seq": "ok",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "ok",
+    "kda-seq": "ok",
+    "ako-ind": "ok",
+    "ako-seq": null
+   }
+  },
+  "black-forest-labs/FLUX.1-dev": {
+   "family": "Vision / Video / Audio",
+   "in_universe": true,
+   "dir": "05_black-forest-labs_FLUX.1-dev",
+   "baseline": "ok",
+   "noise": "ok",
+   "sets": {
+    "drkernel-ind": "ok",
+    "drkernel-seq": "ok",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "ok",
+    "kda-seq": "ok",
+    "ako-ind": "ok",
+    "ako-seq": "ok"
+   }
+  },
+  "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+   "family": "Multimodal & Encoders",
+   "in_universe": true,
+   "dir": "06_Qwen_Qwen3-VL-235B-A22B-Instruct-FP8",
+   "baseline": "crash",
+   "noise": null,
+   "sets": {
+    "drkernel-ind": "baseline_failed",
+    "drkernel-seq": "baseline_failed",
+    "claude-ind": "baseline_failed",
+    "claude-seq": "baseline_failed",
+    "kda-ind": "baseline_failed",
+    "kda-seq": "baseline_failed",
+    "ako-ind": "baseline_failed",
+    "ako-seq": "baseline_failed"
+   }
+  },
+  "jameslahm/yolov10n": {
+   "family": "Edge & Detection",
+   "in_universe": true,
+   "dir": "07_jameslahm_yolov10n",
+   "baseline": "ok",
+   "noise": null,
+   "sets": {
+    "drkernel-ind": "ok",
+    "drkernel-seq": "ok",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "ok",
+    "kda-seq": "ok",
+    "ako-ind": "orchestrator_error",
+    "ako-seq": "ok"
+   }
+  },
+  "OpenFold/OpenFold3": {
+   "family": "3D / Robotics / Science",
+   "in_universe": true,
+   "dir": null,
+   "baseline": null,
+   "noise": null,
+   "sets": {
+    "drkernel-ind": null,
+    "drkernel-seq": null,
+    "claude-ind": null,
+    "claude-seq": null,
+    "kda-ind": null,
+    "kda-seq": null,
+    "ako-ind": null,
+    "ako-seq": null
+   }
+  },
+  "BAAI/bge-m3": {
+   "family": "Recommendation & Specialized",
+   "in_universe": true,
+   "dir": "09_BAAI_bge-m3",
+   "baseline": "ok",
+   "noise": "ok",
+   "sets": {
+    "drkernel-ind": "ok",
+    "drkernel-seq": "empty",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "ok",
+    "kda-seq": "ok",
+    "ako-ind": "ok",
+    "ako-seq": "ok"
+   }
+  },
+  "Etched/oasis-500m": {
+   "family": "World Models",
+   "in_universe": true,
+   "dir": "10_Etched_oasis-500m",
+   "baseline": "ok",
+   "noise": "ok",
+   "sets": {
+    "drkernel-ind": "ok",
+    "drkernel-seq": "ok",
+    "claude-ind": "ok",
+    "claude-seq": "ok",
+    "kda-ind": "ok",
+    "kda-seq": "ok",
+    "ako-ind": "ok",
+    "ako-seq": "ok"
+   }
+  }
+ },
+ "calibration": {
+  "meta-llama/Llama-3.1-8B-Instruct": {
+   "g": 0.0036999999999999993,
+   "f": 0.5,
+   "g_source": "noise p95 (per_sample)",
+   "g_capped": false,
+   "noise_status": "ok",
+   "noise_n": 4,
+   "noise_mean_d": 0.0015,
+   "noise_quantile_d": 0.0036999999999999993,
+   "noise_s_thr": 1.001242597975136,
+   "noise_s_lat": 0.997299919783412,
+   "noise_s": 0.9992693143714253
+  },
+  "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+   "g": 0.00273,
+   "f": 0.5,
+   "g_source": "noise p95 (per_sample)",
+   "g_capped": false,
+   "noise_status": "ok",
+   "noise_n": 16,
+   "noise_mean_d": 0.001378125,
+   "noise_quantile_d": 0.00273,
+   "noise_s_thr": 1.0071347079710837,
+   "noise_s_lat": 0.9994492183197703,
+   "noise_s": 1.003284604000485
+  },
+  "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+   "g": 0.0024525,
+   "f": 0.5,
+   "g_source": "noise p95 (per_sample)",
+   "g_capped": false,
+   "noise_status": "ok",
+   "noise_n": 16,
+   "noise_mean_d": 0.0015275,
+   "noise_quantile_d": 0.0024525,
+   "noise_s_thr": 1.0040942435847344,
+   "noise_s_lat": 1.005704658436064,
+   "noise_s": 1.004899128411406
+  },
+  "openai/gpt-oss-120b": {
+   "g": 0.001,
+   "f": 0.5,
+   "g_source": "noise p95 (per_sample)",
+   "g_capped": false,
+   "noise_status": "ok",
+   "noise_n": 4,
+   "noise_mean_d": 0.001,
+   "noise_quantile_d": 0.001,
+   "noise_s_thr": 0.9873028410776503,
+   "noise_s_lat": 1.0081996826026083,
+   "noise_s": 0.9976965525685355
+  },
+  "fla-hub/gla-2.7B-100B": {
+   "g": 0.0028,
+   "f": 0.5,
+   "g_source": "noise p95 (per_sample)",
+   "g_capped": false,
+   "noise_status": "ok",
+   "noise_n": 16,
+   "noise_mean_d": 0.00176,
+   "noise_quantile_d": 0.0028,
+   "noise_s_thr": 1.001849988770774,
+   "noise_s_lat": 0.9978191820164612,
+   "noise_s": 0.9998325541301676
+  },
+  "black-forest-labs/FLUX.1-dev": {
+   "g": 0.1998625,
+   "f": 0.5,
+   "g_source": "noise p95 (per_sample)",
+   "g_capped": false,
+   "noise_status": "ok",
+   "noise_n": 16,
+   "noise_mean_d": 0.10556750000000002,
+   "noise_quantile_d": 0.1998625,
+   "noise_s_thr": 1.0025775880199996,
+   "noise_s_lat": 0.9860275756793012,
+   "noise_s": 0.994268147204647
+  },
+  "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+   "g": 0.02,
+   "f": 0.5,
+   "g_source": "fallback (no usable noise run)",
+   "g_capped": false,
+   "noise_status": null,
+   "noise_n": 0,
+   "noise_mean_d": null,
+   "noise_quantile_d": null
+  },
+  "jameslahm/yolov10n": {
+   "g": 0.02,
+   "f": 0.5,
+   "g_source": "fallback (no usable noise run)",
+   "g_capped": false,
+   "noise_status": null,
+   "noise_n": 0,
+   "noise_mean_d": null,
+   "noise_quantile_d": null
+  },
+  "OpenFold/OpenFold3": {
+   "g": 0.02,
+   "f": 0.5,
+   "g_source": "fallback (no usable noise run)",
+   "g_capped": false,
+   "noise_status": null,
+   "noise_n": 0,
+   "noise_mean_d": null,
+   "noise_quantile_d": null
+  },
+  "BAAI/bge-m3": {
+   "g": 0.002835,
+   "f": 0.5,
+   "g_source": "noise p95 (per_sample)",
+   "g_capped": false,
+   "noise_status": "ok",
+   "noise_n": 16,
+   "noise_mean_d": 0.0014237499999999999,
+   "noise_quantile_d": 0.002835,
+   "noise_s_thr": 0.9919,
+   "noise_s_lat": 0.9982898577066682,
+   "noise_s": 0.9950897998970968
+  },
+  "Etched/oasis-500m": {
+   "g": 0.00248,
+   "f": 0.5,
+   "g_source": "noise p95 (per_sample)",
+   "g_capped": false,
+   "noise_status": "ok",
+   "noise_n": 16,
+   "noise_mean_d": 0.0013625000000000002,
+   "noise_quantile_d": 0.00248,
+   "noise_s_thr": 1.0036902709501572,
+   "noise_s_lat": 1.0079,
+   "noise_s": 1.0057929330089088
+  }
+ },
+ "sets": {
+  "drkernel-ind": {
+   "agent": "drkernel",
+   "mode": "ind",
+   "deployable": {
+    "n_items": 11,
+    "n_valid": 8,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.7083333333333333,
+    "C_macro": 0.7078064052490929,
+    "S_macro": {
+     "blend": 0.997442105611244,
+     "thr": 0.9910318367873185,
+     "lat": 1.0038938378320754
+    },
+    "score": {
+     "blend": 0.5000804371118863,
+     "thr": 0.4968665663343849,
+     "lat": 0.5033150960970763
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9973465374734962,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0234570666336942,
+       "thr": 1.025105539843543,
+       "lat": 1.0218112443352085
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 2,
+      "C_f": 0.6659891574553108,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.0105262999177267,
+       "thr": 0.9802156045593375,
+       "lat": 1.0417742770831342
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9912557496590079,
+       "thr": 0.9895160483792064,
+       "lat": 0.9929985095658502
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9941718309928063,
+       "thr": 0.9937,
+       "lat": 0.9946438860215248
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9999069725342693,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0171648329488323,
+       "thr": 1.0235,
+       "lat": 1.0108688787374949
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9992085745296672,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9498836771367419,
+       "thr": 0.9368487177767817,
+       "lat": 0.9631
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 11,
+    "n_valid": 7,
+    "coverage": 0.6363636363636364,
+    "coverage_macro": 0.6458333333333333,
+    "C_macro": 0.6453071136160081,
+    "S_macro": {
+     "blend": 1.0008140196469337,
+     "thr": 0.9981446969141559,
+     "lat": 1.0034904809076963
+    },
+    "score": {
+     "blend": 0.4171000957255984,
+     "thr": 0.4159876265300161,
+     "lat": 0.4182155399801301
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.49735220440881767,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 1.044392458638595,
+       "thr": 1.0700497371617825,
+       "lat": 1.01935038137041
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 2,
+      "C_f": 0.6659891574553108,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.0105262999177267,
+       "thr": 0.9802156045593375,
+       "lat": 1.0417742770831342
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9912557496590079,
+       "thr": 0.9895160483792064,
+       "lat": 0.9929985095658502
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9941718309928063,
+       "thr": 0.9937,
+       "lat": 0.9946438860215248
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9999069725342693,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0171648329488323,
+       "thr": 1.0235,
+       "lat": 1.0108688787374949
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9992085745296672,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9498836771367419,
+       "thr": 0.9368487177767817,
+       "lat": 0.9631
+      }
+     }
+    }
+   },
+   "drops": {
+    "models": 11,
+    "requested": 21,
+    "kept": 18,
+    "unresolved": 0,
+    "aw_crash": 2,
+    "aw_broken": 0,
+    "aw_none": 0,
+    "empty": 1,
+    "empty_none_requested": 0,
+    "dropped_unique_kernels": 3,
+    "dropped": 3,
+    "dropped_by_category": {
+     "compile": 2,
+     "runtime": 1
+    },
+    "aw_crash_by_category": {
+     "compile": 2
+    },
+    "status": {
+     "ok": 8,
+     "empty": 1,
+     "baseline_failed": 1,
+     "missing": 1
+    }
+   },
+   "items": {
+    "deployable": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9999886661293572,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001570625,
+      "s_thr": 0.9820490873678361,
+      "s_lat": 1.0242780481880884,
+      "s": {
+       "blend": 1.0029413354897785,
+       "thr": 0.9820490873678361,
+       "lat": 1.0242780481880884
+      },
+      "n_dropped": 1,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9992534236933659,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001981875,
+      "s_thr": 0.9922277157991506,
+      "s_lat": 1.0322888064877969,
+      "s": {
+       "blend": 1.0120600597328295,
+       "thr": 0.9922277157991506,
+       "lat": 1.0322888064877969
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "empty",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9947044088176353,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0035793749999999997,
+      "s_thr": 1.0700497371617825,
+      "s_lat": 1.01935038137041,
+      "s": {
+       "blend": 1.044392458638595,
+       "thr": 1.0700497371617825,
+       "lat": 1.01935038137041
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9987140486725665,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0024675,
+      "s_thr": 0.9683489143898495,
+      "s_lat": 1.051346907542891,
+      "s": {
+       "blend": 1.0089948644895492,
+       "thr": 0.9683489143898495,
+       "lat": 1.051346907542891
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00228125,
+      "s_thr": 0.9895160483792064,
+      "s_lat": 0.9929985095658502,
+      "s": {
+       "blend": 0.9912557496590079,
+       "thr": 0.9895160483792064,
+       "lat": 0.9929985095658502
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001646875,
+      "s_thr": 0.9937,
+      "s_lat": 0.9946438860215248,
+      "s": {
+       "blend": 0.9941718309928063,
+       "thr": 0.9937,
+       "lat": 0.9946438860215248
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9999069725342693,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0017306250000000004,
+      "s_thr": 1.0235,
+      "s_lat": 1.0108688787374949,
+      "s": {
+       "blend": 1.0171648329488323,
+       "thr": 1.0235,
+       "lat": 1.0108688787374949
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9992085745296672,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0021687499999999997,
+      "s_thr": 0.9368487177767817,
+      "s_lat": 0.9631,
+      "s": {
+       "blend": 0.9498836771367419,
+       "thr": 0.9368487177767817,
+       "lat": 0.9631
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    },
+    "all_winners": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "crash",
+      "detail": "compile",
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 1
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9992534236933659,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001981875,
+      "s_thr": 0.9922277157991506,
+      "s_lat": 1.0322888064877969,
+      "s": {
+       "blend": 1.0120600597328295,
+       "thr": 0.9922277157991506,
+       "lat": 1.0322888064877969
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "crash",
+      "detail": "compile",
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9947044088176353,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0035793749999999997,
+      "s_thr": 1.0700497371617825,
+      "s_lat": 1.01935038137041,
+      "s": {
+       "blend": 1.044392458638595,
+       "thr": 1.0700497371617825,
+       "lat": 1.01935038137041
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9987140486725665,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0024675,
+      "s_thr": 0.9683489143898495,
+      "s_lat": 1.051346907542891,
+      "s": {
+       "blend": 1.0089948644895492,
+       "thr": 0.9683489143898495,
+       "lat": 1.051346907542891
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00228125,
+      "s_thr": 0.9895160483792064,
+      "s_lat": 0.9929985095658502,
+      "s": {
+       "blend": 0.9912557496590079,
+       "thr": 0.9895160483792064,
+       "lat": 0.9929985095658502
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001646875,
+      "s_thr": 0.9937,
+      "s_lat": 0.9946438860215248,
+      "s": {
+       "blend": 0.9941718309928063,
+       "thr": 0.9937,
+       "lat": 0.9946438860215248
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9999069725342693,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0017306250000000004,
+      "s_thr": 1.0235,
+      "s_lat": 1.0108688787374949,
+      "s": {
+       "blend": 1.0171648329488323,
+       "thr": 1.0235,
+       "lat": 1.0108688787374949
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9992085745296672,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0021687499999999997,
+      "s_thr": 0.9368487177767817,
+      "s_lat": 0.9631,
+      "s": {
+       "blend": 0.9498836771367419,
+       "thr": 0.9368487177767817,
+       "lat": 0.9631
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    }
+   }
+  },
+  "drkernel-seq": {
+   "agent": "drkernel",
+   "mode": "seq",
+   "deployable": {
+    "n_items": 11,
+    "n_valid": 8,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.625,
+    "C_macro": 0.6243881330238247,
+    "S_macro": {
+     "blend": 0.994067585510393,
+     "thr": 0.9915856228096918,
+     "lat": 0.9965557606235232
+    },
+    "score": {
+     "blend": 0.3879275023852097,
+     "thr": 0.3869589348496311,
+     "lat": 0.38889849426866197
+    },
+    "n_families": 8,
+    "n_families_valid": 5,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9976259247035275,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0050003528279325,
+       "thr": 1.009914837401952,
+       "lat": 1.0001097832987602
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 3,
+      "C_f": 0.9978685710677095,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0001040329791526,
+       "thr": 1.005265003037753,
+       "lat": 0.9949695590303993
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9775349218637502,
+       "thr": 0.9368618788273968,
+       "lat": 1.0199737496622157
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.037125583233898,
+       "thr": 1.0183,
+       "lat": 1.056299200037565
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.99961056841936,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9525867611859744,
+       "thr": 0.9897704380309608,
+       "lat": 0.9168
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 11,
+    "n_valid": 7,
+    "coverage": 0.6363636363636364,
+    "coverage_macro": 0.5,
+    "C_macro": 0.4993881330238247,
+    "S_macro": {
+     "blend": 0.9982442571828968,
+     "thr": 1.0057589005614813,
+     "lat": 0.9907857603271775
+    },
+    "score": {
+     "blend": 0.24925566794816076,
+     "thr": 0.25113202981174637,
+     "lat": 0.24739332553818988
+    },
+    "n_families": 8,
+    "n_families_valid": 4,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9976259247035275,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0050003528279325,
+       "thr": 1.009914837401952,
+       "lat": 1.0001097832987602
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 3,
+      "C_f": 0.9978685710677095,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0001040329791526,
+       "thr": 1.005265003037753,
+       "lat": 0.9949695590303993
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.037125583233898,
+       "thr": 1.0183,
+       "lat": 1.056299200037565
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.99961056841936,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9525867611859744,
+       "thr": 0.9897704380309608,
+       "lat": 0.9168
+      }
+     }
+    }
+   },
+   "drops": {
+    "models": 11,
+    "requested": 19,
+    "kept": 18,
+    "unresolved": 0,
+    "aw_crash": 1,
+    "aw_broken": 0,
+    "aw_none": 1,
+    "empty": 1,
+    "empty_none_requested": 1,
+    "dropped_unique_kernels": 1,
+    "dropped": 1,
+    "dropped_by_category": {
+     "compile": 1
+    },
+    "aw_crash_by_category": {
+     "compile": 1
+    },
+    "status": {
+     "ok": 8,
+     "baseline_failed": 1,
+     "missing": 1,
+     "empty": 1
+    }
+   },
+   "items": {
+    "deployable": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9988603163409228,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0033868749999999997,
+      "s_thr": 1.0229705469855914,
+      "s_lat": 1.0034531179880803,
+      "s": {
+       "blend": 1.0131648360373864,
+       "thr": 1.0229705469855914,
+       "lat": 1.0034531179880803
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9978583063526858,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0033556249999999992,
+      "s_thr": 1.0395838013359,
+      "s_lat": 1.021856144474358,
+      "s": {
+       "blend": 1.0306818593004825,
+       "thr": 1.0395838013359,
+       "lat": 1.021856144474358
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9982426301006437,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002778125,
+      "s_thr": 1.0371404437201357,
+      "s_lat": 0.982059672321392,
+      "s": {
+       "blend": 1.0092243577674191,
+       "thr": 1.0371404437201357,
+       "lat": 0.982059672321392
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9963915330661323,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002645625,
+      "s_thr": 0.9970257519241917,
+      "s_lat": 0.9967775880305495,
+      "s": {
+       "blend": 0.9969016622552802,
+       "thr": 0.9970257519241917,
+       "lat": 0.9967775880305495
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.997504776749799,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0038387500000000006,
+      "s_thr": 0.9422032901661933,
+      "s_lat": 0.9815258529453006,
+      "s": {
+       "blend": 0.9616636044003336,
+       "thr": 0.9422032901661933,
+       "lat": 0.9815258529453006
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.07701999999999999,
+      "s_thr": 0.9368618788273968,
+      "s_lat": 1.0199737496622157,
+      "s": {
+       "blend": 0.9775349218637502,
+       "thr": 0.9368618788273968,
+       "lat": 1.0199737496622157
+      },
+      "n_dropped": 1,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001905625,
+      "s_thr": 1.0183,
+      "s_lat": 1.056299200037565,
+      "s": {
+       "blend": 1.037125583233898,
+       "thr": 1.0183,
+       "lat": 1.056299200037565
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "empty",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 0
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.99961056841936,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001949375,
+      "s_thr": 0.9897704380309608,
+      "s_lat": 0.9168,
+      "s": {
+       "blend": 0.9525867611859744,
+       "thr": 0.9897704380309608,
+       "lat": 0.9168
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    },
+    "all_winners": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9988603163409228,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0033868749999999997,
+      "s_thr": 1.0229705469855914,
+      "s_lat": 1.0034531179880803,
+      "s": {
+       "blend": 1.0131648360373864,
+       "thr": 1.0229705469855914,
+       "lat": 1.0034531179880803
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9978583063526858,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0033556249999999992,
+      "s_thr": 1.0395838013359,
+      "s_lat": 1.021856144474358,
+      "s": {
+       "blend": 1.0306818593004825,
+       "thr": 1.0395838013359,
+       "lat": 1.021856144474358
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9982426301006437,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002778125,
+      "s_thr": 1.0371404437201357,
+      "s_lat": 0.982059672321392,
+      "s": {
+       "blend": 1.0092243577674191,
+       "thr": 1.0371404437201357,
+       "lat": 0.982059672321392
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9963915330661323,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002645625,
+      "s_thr": 0.9970257519241917,
+      "s_lat": 0.9967775880305495,
+      "s": {
+       "blend": 0.9969016622552802,
+       "thr": 0.9970257519241917,
+       "lat": 0.9967775880305495
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.997504776749799,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0038387500000000006,
+      "s_thr": 0.9422032901661933,
+      "s_lat": 0.9815258529453006,
+      "s": {
+       "blend": 0.9616636044003336,
+       "thr": 0.9422032901661933,
+       "lat": 0.9815258529453006
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "crash",
+      "detail": "compile",
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 1
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001905625,
+      "s_thr": 1.0183,
+      "s_lat": 1.056299200037565,
+      "s": {
+       "blend": 1.037125583233898,
+       "thr": 1.0183,
+       "lat": 1.056299200037565
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "empty",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 0
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.99961056841936,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.001949375,
+      "s_thr": 0.9897704380309608,
+      "s_lat": 0.9168,
+      "s": {
+       "blend": 0.9525867611859744,
+       "thr": 0.9897704380309608,
+       "lat": 0.9168
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    }
+   }
+  },
+  "claude-ind": {
+   "agent": "claude",
+   "mode": "ind",
+   "deployable": {
+    "n_items": 11,
+    "n_valid": 9,
+    "coverage": 0.8181818181818182,
+    "coverage_macro": 0.75,
+    "C_macro": 0.7406999703092502,
+    "S_macro": {
+     "blend": 1.0447421252226388,
+     "thr": 1.0565742509386589,
+     "lat": 1.033042502450766
+    },
+    "score": {
+     "blend": 0.5803803458499236,
+     "thr": 0.5869533872248371,
+     "lat": 0.5738809131701068
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9634709677263049,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.1765413237801496,
+       "thr": 1.2666368993734993,
+       "lat": 1.0928542246377166
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 3,
+      "C_f": 0.9876873170578878,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0468182152131449,
+       "thr": 1.0647634332339355,
+       "lat": 1.0291754407584672
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0395212098431816,
+       "thr": 1.0480649789015946,
+       "lat": 1.0310470891283288
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9754231770833333,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0162842341114229,
+       "thr": 0.9919,
+       "lat": 1.041267914611797
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9991828668550682,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0279481582706032,
+       "thr": 1.0278,
+       "lat": 1.0280963378983508
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.999835433751407,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9722018103048533,
+       "thr": 0.9654508273340491,
+       "lat": 0.979
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 11,
+    "n_valid": 8,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.6875,
+    "C_macro": 0.6797342889465247,
+    "S_macro": {
+     "blend": 1.0285368598856421,
+     "thr": 1.0395351071777146,
+     "lat": 1.0176549736887002
+    },
+    "score": {
+     "blend": 0.48065309263789,
+     "thr": 0.4857927641272703,
+     "lat": 0.47556779870406324
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.4757455168245013,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 1.071202823901392,
+       "thr": 1.1489125293076057,
+       "lat": 0.998749217771909
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 3,
+      "C_f": 0.9876873170578878,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0468182152131449,
+       "thr": 1.0647634332339355,
+       "lat": 1.0291754407584672
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0395212098431816,
+       "thr": 1.0480649789015946,
+       "lat": 1.0310470891283288
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9754231770833333,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0162842341114229,
+       "thr": 0.9919,
+       "lat": 1.041267914611797
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9991828668550682,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0279481582706032,
+       "thr": 1.0278,
+       "lat": 1.0280963378983508
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.999835433751407,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9722018103048533,
+       "thr": 0.9654508273340491,
+       "lat": 0.979
+      }
+     }
+    }
+   },
+   "drops": {
+    "models": 11,
+    "requested": 46,
+    "kept": 45,
+    "unresolved": 0,
+    "aw_crash": 1,
+    "aw_broken": 0,
+    "aw_none": 0,
+    "empty": 0,
+    "empty_none_requested": 0,
+    "dropped_unique_kernels": 1,
+    "dropped": 1,
+    "dropped_by_category": {
+     "runtime": 1
+    },
+    "aw_crash_by_category": {
+     "runtime": 1
+    },
+    "status": {
+     "ok": 9,
+     "baseline_failed": 1,
+     "missing": 1
+    }
+   },
+   "items": {
+    "deployable": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9514910336490026,
+      "n_samples": 4,
+      "d_source": "per_sample",
+      "mean_d": 0.026250000000000002,
+      "s_thr": 1.1489125293076057,
+      "s_lat": 0.998749217771909,
+      "s": {
+       "blend": 1.071202823901392,
+       "thr": 1.1489125293076057,
+       "lat": 0.998749217771909
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9667019426066321,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.018901250000000005,
+      "s_thr": 1.1079464246975121,
+      "s_lat": 1.0500180188930093,
+      "s": {
+       "blend": 1.0785933941483576,
+       "thr": 1.1079464246975121,
+       "lat": 1.0500180188930093
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9985359438043605,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0024549999999999993,
+      "s_thr": 1.0602649668832786,
+      "s_lat": 0.9739659131612359,
+      "s": {
+       "blend": 1.0161997523436719,
+       "thr": 1.0602649668832786,
+       "lat": 0.9739659131612359
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9754509018036073,
+      "n_samples": 4,
+      "d_source": "per_sample",
+      "mean_d": 0.012875000000000001,
+      "s_thr": 1.396424004376894,
+      "s_lat": 1.1958260743101399,
+      "s": {
+       "blend": 1.2922384591190847,
+       "thr": 1.396424004376894,
+       "lat": 1.1958260743101399
+      },
+      "n_dropped": 1,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9978240647626708,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.003295,
+      "s_thr": 1.0276050067997917,
+      "s_lat": 1.065927661710681,
+      "s": {
+       "blend": 1.0465909430433127,
+       "thr": 1.0276050067997917,
+       "lat": 1.065927661710681
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.100275,
+      "s_thr": 1.0480649789015946,
+      "s_lat": 1.0310470891283288,
+      "s": {
+       "blend": 1.0395212098431816,
+       "thr": 1.0480649789015946,
+       "lat": 1.0310470891283288
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9754231770833333,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.01469375,
+      "s_thr": 0.9919,
+      "s_lat": 1.041267914611797,
+      "s": {
+       "blend": 1.0162842341114229,
+       "thr": 0.9919,
+       "lat": 1.041267914611797
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9991828668550682,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0024693749999999998,
+      "s_thr": 1.0278,
+      "s_lat": 1.0280963378983508,
+      "s": {
+       "blend": 1.0279481582706032,
+       "thr": 1.0278,
+       "lat": 1.0280963378983508
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.999835433751407,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0014675,
+      "s_thr": 0.9654508273340491,
+      "s_lat": 0.979,
+      "s": {
+       "blend": 0.9722018103048533,
+       "thr": 0.9654508273340491,
+       "lat": 0.979
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    },
+    "all_winners": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9514910336490026,
+      "n_samples": 4,
+      "d_source": "per_sample",
+      "mean_d": 0.026250000000000002,
+      "s_thr": 1.1489125293076057,
+      "s_lat": 0.998749217771909,
+      "s": {
+       "blend": 1.071202823901392,
+       "thr": 1.1489125293076057,
+       "lat": 0.998749217771909
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9667019426066321,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.018901250000000005,
+      "s_thr": 1.1079464246975121,
+      "s_lat": 1.0500180188930093,
+      "s": {
+       "blend": 1.0785933941483576,
+       "thr": 1.1079464246975121,
+       "lat": 1.0500180188930093
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9985359438043605,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0024549999999999993,
+      "s_thr": 1.0602649668832786,
+      "s_lat": 0.9739659131612359,
+      "s": {
+       "blend": 1.0161997523436719,
+       "thr": 1.0602649668832786,
+       "lat": 0.9739659131612359
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "crash",
+      "detail": "runtime",
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 1
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9978240647626708,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.003295,
+      "s_thr": 1.0276050067997917,
+      "s_lat": 1.065927661710681,
+      "s": {
+       "blend": 1.0465909430433127,
+       "thr": 1.0276050067997917,
+       "lat": 1.065927661710681
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.100275,
+      "s_thr": 1.0480649789015946,
+      "s_lat": 1.0310470891283288,
+      "s": {
+       "blend": 1.0395212098431816,
+       "thr": 1.0480649789015946,
+       "lat": 1.0310470891283288
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9754231770833333,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.01469375,
+      "s_thr": 0.9919,
+      "s_lat": 1.041267914611797,
+      "s": {
+       "blend": 1.0162842341114229,
+       "thr": 0.9919,
+       "lat": 1.041267914611797
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9991828668550682,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0024693749999999998,
+      "s_thr": 1.0278,
+      "s_lat": 1.0280963378983508,
+      "s": {
+       "blend": 1.0279481582706032,
+       "thr": 1.0278,
+       "lat": 1.0280963378983508
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.999835433751407,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0014675,
+      "s_thr": 0.9654508273340491,
+      "s_lat": 0.979,
+      "s": {
+       "blend": 0.9722018103048533,
+       "thr": 0.9654508273340491,
+       "lat": 0.979
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    }
+   }
+  },
+  "claude-seq": {
+   "agent": "claude",
+   "mode": "seq",
+   "deployable": {
+    "n_items": 11,
+    "n_valid": 9,
+    "coverage": 0.8181818181818182,
+    "coverage_macro": 0.75,
+    "C_macro": 0.7466677575941882,
+    "S_macro": {
+     "blend": 1.056957017200346,
+     "thr": 1.0517130297632926,
+     "lat": 1.062227151888086
+    },
+    "score": {
+     "blend": 0.5918967944298181,
+     "thr": 0.5889601571744606,
+     "lat": 0.5948480741669537
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9974982379629297,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0666614491538675,
+       "thr": 1.0493989564421164,
+       "lat": 1.0842079078947382
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 3,
+      "C_f": 0.9907943066283241,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0584336747757659,
+       "thr": 1.0556879065078868,
+       "lat": 1.0611865845892992
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0539927853547053,
+       "thr": 1.0636742311441034,
+       "lat": 1.0443994590193926
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0719070380612403,
+       "thr": 1.0757,
+       "lat": 1.0681274502605014
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9998881156155401,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0913658735575424,
+       "thr": 1.0805,
+       "lat": 1.10234101801575
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9851614005467116,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0015867723343772,
+       "thr": 0.9880587634346452,
+       "lat": 1.0153
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 11,
+    "n_valid": 9,
+    "coverage": 0.8181818181818182,
+    "coverage_macro": 0.75,
+    "C_macro": 0.7466677575941882,
+    "S_macro": {
+     "blend": 1.056957017200346,
+     "thr": 1.0517130297632926,
+     "lat": 1.062227151888086
+    },
+    "score": {
+     "blend": 0.5918967944298181,
+     "thr": 0.5889601571744606,
+     "lat": 0.5948480741669537
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9974982379629297,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0666614491538675,
+       "thr": 1.0493989564421164,
+       "lat": 1.0842079078947382
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 3,
+      "C_f": 0.9907943066283241,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0584336747757659,
+       "thr": 1.0556879065078868,
+       "lat": 1.0611865845892992
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0539927853547053,
+       "thr": 1.0636742311441034,
+       "lat": 1.0443994590193926
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0719070380612403,
+       "thr": 1.0757,
+       "lat": 1.0681274502605014
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9998881156155401,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0913658735575424,
+       "thr": 1.0805,
+       "lat": 1.10234101801575
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9851614005467116,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0015867723343772,
+       "thr": 0.9880587634346452,
+       "lat": 1.0153
+      }
+     }
+    }
+   },
+   "drops": {
+    "models": 11,
+    "requested": 46,
+    "kept": 45,
+    "unresolved": 0,
+    "aw_crash": 0,
+    "aw_broken": 0,
+    "aw_none": 0,
+    "empty": 0,
+    "empty_none_requested": 0,
+    "dropped_unique_kernels": 1,
+    "dropped": 1,
+    "dropped_by_category": {
+     "import": 1
+    },
+    "aw_crash_by_category": {},
+    "status": {
+     "ok": 9,
+     "baseline_failed": 1,
+     "missing": 1
+    }
+   },
+   "items": {
+    "deployable": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9991172174088253,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002699375,
+      "s_thr": 1.047639012255653,
+      "s_lat": 1.0879025048229276,
+      "s": {
+       "blend": 1.0675809597323955,
+       "thr": 1.047639012255653,
+       "lat": 1.0879025048229276
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.975538942626742,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.014193125000000001,
+      "s_thr": 1.0846060252460337,
+      "s_lat": 1.1189761883078657,
+      "s": {
+       "blend": 1.1016570772910923,
+       "thr": 1.0846060252460337,
+       "lat": 1.1189761883078657
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9989734020369914,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002159375,
+      "s_thr": 1.0300591148084657,
+      "s_lat": 1.0349013044730402,
+      "s": {
+       "blend": 1.032477370986709,
+       "thr": 1.0300591148084657,
+       "lat": 1.0349013044730402
+      },
+      "n_dropped": 1,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9958792585170341,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.003011875,
+      "s_thr": 1.051161857184706,
+      "s_lat": 1.0805258580894768,
+      "s": {
+       "blend": 1.065742730552469,
+       "thr": 1.051161857184706,
+       "lat": 1.0805258580894768
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9978705752212389,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.003523749999999999,
+      "s_thr": 1.0531069461360512,
+      "s_lat": 1.0319424402552693,
+      "s": {
+       "blend": 1.0424709836947075,
+       "thr": 1.0531069461360512,
+       "lat": 1.0319424402552693
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00974,
+      "s_thr": 1.0636742311441034,
+      "s_lat": 1.0443994590193926,
+      "s": {
+       "blend": 1.0539927853547053,
+       "thr": 1.0636742311441034,
+       "lat": 1.0443994590193926
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0016606250000000002,
+      "s_thr": 1.0757,
+      "s_lat": 1.0681274502605014,
+      "s": {
+       "blend": 1.0719070380612403,
+       "thr": 1.0757,
+       "lat": 1.0681274502605014
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9998881156155401,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0015831250000000003,
+      "s_thr": 1.0805,
+      "s_lat": 1.10234101801575,
+      "s": {
+       "blend": 1.0913658735575424,
+       "thr": 1.0805,
+       "lat": 1.10234101801575
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9851614005467116,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00915625,
+      "s_thr": 0.9880587634346452,
+      "s_lat": 1.0153,
+      "s": {
+       "blend": 1.0015867723343772,
+       "thr": 0.9880587634346452,
+       "lat": 1.0153
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    },
+    "all_winners": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9991172174088253,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002699375,
+      "s_thr": 1.047639012255653,
+      "s_lat": 1.0879025048229276,
+      "s": {
+       "blend": 1.0675809597323955,
+       "thr": 1.047639012255653,
+       "lat": 1.0879025048229276
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.975538942626742,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.014193125000000001,
+      "s_thr": 1.0846060252460337,
+      "s_lat": 1.1189761883078657,
+      "s": {
+       "blend": 1.1016570772910923,
+       "thr": 1.0846060252460337,
+       "lat": 1.1189761883078657
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9989734020369914,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002159375,
+      "s_thr": 1.0300591148084657,
+      "s_lat": 1.0349013044730402,
+      "s": {
+       "blend": 1.032477370986709,
+       "thr": 1.0300591148084657,
+       "lat": 1.0349013044730402
+      },
+      "n_dropped": 1,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9958792585170341,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.003011875,
+      "s_thr": 1.051161857184706,
+      "s_lat": 1.0805258580894768,
+      "s": {
+       "blend": 1.065742730552469,
+       "thr": 1.051161857184706,
+       "lat": 1.0805258580894768
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9978705752212389,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.003523749999999999,
+      "s_thr": 1.0531069461360512,
+      "s_lat": 1.0319424402552693,
+      "s": {
+       "blend": 1.0424709836947075,
+       "thr": 1.0531069461360512,
+       "lat": 1.0319424402552693
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00974,
+      "s_thr": 1.0636742311441034,
+      "s_lat": 1.0443994590193926,
+      "s": {
+       "blend": 1.0539927853547053,
+       "thr": 1.0636742311441034,
+       "lat": 1.0443994590193926
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0016606250000000002,
+      "s_thr": 1.0757,
+      "s_lat": 1.0681274502605014,
+      "s": {
+       "blend": 1.0719070380612403,
+       "thr": 1.0757,
+       "lat": 1.0681274502605014
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9998881156155401,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0015831250000000003,
+      "s_thr": 1.0805,
+      "s_lat": 1.10234101801575,
+      "s": {
+       "blend": 1.0913658735575424,
+       "thr": 1.0805,
+       "lat": 1.10234101801575
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9851614005467116,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00915625,
+      "s_thr": 0.9880587634346452,
+      "s_lat": 1.0153,
+      "s": {
+       "blend": 1.0015867723343772,
+       "thr": 0.9880587634346452,
+       "lat": 1.0153
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    }
+   }
+  },
+  "kda-ind": {
+   "agent": "kda",
+   "mode": "ind",
+   "deployable": {
+    "n_items": 11,
+    "n_valid": 7,
+    "coverage": 0.6363636363636364,
+    "coverage_macro": 0.6458333333333333,
+    "C_macro": 0.6739760264009362,
+    "S_macro": {
+     "blend": 1.0305384668249795,
+     "thr": 1.05475249415993,
+     "lat": 1.0068803226218768
+    },
+    "score": {
+     "blend": 0.44856885101342486,
+     "thr": 0.4591086404242078,
+     "lat": 0.4382710242908654
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.8250859201275813,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 1.0269492613187385,
+       "thr": 1.026418043489104,
+       "lat": 1.0274807540776616
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 2,
+      "C_f": 0.6555348013710774,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.0367703479912003,
+       "thr": 1.0568594030743539,
+       "lat": 1.0170631508287502
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0083687946610678,
+       "thr": 1.0080655633439721,
+       "lat": 1.0086721171917068
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9781536458333333,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0425080873815404,
+       "thr": 1.1016,
+       "lat": 0.9865859769933891
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9714732533464745,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0800153160989237,
+       "thr": 1.137,
+       "lat": 1.0258866165420037
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9615605905290238,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9908888570524522,
+       "thr": 1.0052838405147075,
+       "lat": 0.9767
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 11,
+    "n_valid": 7,
+    "coverage": 0.6363636363636364,
+    "coverage_macro": 0.6458333333333333,
+    "C_macro": 0.6739760264009362,
+    "S_macro": {
+     "blend": 1.0305384668249795,
+     "thr": 1.05475249415993,
+     "lat": 1.0068803226218768
+    },
+    "score": {
+     "blend": 0.44856885101342486,
+     "thr": 0.4591086404242078,
+     "lat": 0.4382710242908654
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.8250859201275813,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 1.0269492613187385,
+       "thr": 1.026418043489104,
+       "lat": 1.0274807540776616
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 2,
+      "C_f": 0.6555348013710774,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.0367703479912003,
+       "thr": 1.0568594030743539,
+       "lat": 1.0170631508287502
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0083687946610678,
+       "thr": 1.0080655633439721,
+       "lat": 1.0086721171917068
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9781536458333333,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0425080873815404,
+       "thr": 1.1016,
+       "lat": 0.9865859769933891
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9714732533464745,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0800153160989237,
+       "thr": 1.137,
+       "lat": 1.0258866165420037
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9615605905290238,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9908888570524522,
+       "thr": 1.0052838405147075,
+       "lat": 0.9767
+      }
+     }
+    }
+   },
+   "drops": {
+    "models": 11,
+    "requested": 39,
+    "kept": 35,
+    "unresolved": 4,
+    "aw_crash": 1,
+    "aw_broken": 0,
+    "aw_none": 0,
+    "empty": 0,
+    "empty_none_requested": 0,
+    "dropped_unique_kernels": 0,
+    "dropped": 0,
+    "dropped_by_category": {},
+    "aw_crash_by_category": {
+     "runtime": 1
+    },
+    "status": {
+     "ok": 8,
+     "incomplete": 1,
+     "baseline_failed": 1,
+     "missing": 1
+    }
+   },
+   "items": {
+    "deployable": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9991197360467459,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0031699999999999996,
+      "s_thr": 1.026418043489104,
+      "s_lat": 1.0274807540776616,
+      "s": {
+       "blend": 1.0269492613187385,
+       "thr": 1.026418043489104,
+       "lat": 1.0274807540776616
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9987896414422749,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00251875,
+      "s_thr": 1.068960607319091,
+      "s_lat": 1.0642600950895416,
+      "s": {
+       "blend": 1.0666077618283067,
+       "thr": 1.068960607319091,
+       "lat": 1.0642600950895416
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "incomplete",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 0
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": false,
+      "C": 0.6510521042084167,
+      "n_samples": 8,
+      "d_source": "per_sample",
+      "mean_d": 0.175,
+      "s_thr": 1.0414185037726187,
+      "s_lat": 1.0441344501547682,
+      "s": {
+       "blend": 1.042775592741614,
+       "thr": 1.0414185037726187,
+       "lat": 1.0441344501547682
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9678147626709575,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.018206875,
+      "s_thr": 1.0448951909162947,
+      "s_lat": 0.9719592584054129,
+      "s": {
+       "blend": 1.0077676095580688,
+       "thr": 1.0448951909162947,
+       "lat": 0.9719592584054129
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00223125,
+      "s_thr": 1.0080655633439721,
+      "s_lat": 1.0086721171917068,
+      "s": {
+       "blend": 1.0083687946610678,
+       "thr": 1.0080655633439721,
+       "lat": 1.0086721171917068
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9781536458333333,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.013738750000000001,
+      "s_thr": 1.1016,
+      "s_lat": 0.9865859769933891,
+      "s": {
+       "blend": 1.0425080873815404,
+       "thr": 1.1016,
+       "lat": 0.9865859769933891
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9714732533464745,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.015816874999999998,
+      "s_thr": 1.137,
+      "s_lat": 1.0258866165420037,
+      "s": {
+       "blend": 1.0800153160989237,
+       "thr": 1.137,
+       "lat": 1.0258866165420037
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9615605905290238,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.02109,
+      "s_thr": 1.0052838405147075,
+      "s_lat": 0.9767,
+      "s": {
+       "blend": 0.9908888570524522,
+       "thr": 1.0052838405147075,
+       "lat": 0.9767
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    },
+    "all_winners": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9991197360467459,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0031699999999999996,
+      "s_thr": 1.026418043489104,
+      "s_lat": 1.0274807540776616,
+      "s": {
+       "blend": 1.0269492613187385,
+       "thr": 1.026418043489104,
+       "lat": 1.0274807540776616
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9987896414422749,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00251875,
+      "s_thr": 1.068960607319091,
+      "s_lat": 1.0642600950895416,
+      "s": {
+       "blend": 1.0666077618283067,
+       "thr": 1.068960607319091,
+       "lat": 1.0642600950895416
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "crash",
+      "detail": "runtime",
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 0
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": false,
+      "C": 0.6510521042084167,
+      "n_samples": 8,
+      "d_source": "per_sample",
+      "mean_d": 0.175,
+      "s_thr": 1.0414185037726187,
+      "s_lat": 1.0441344501547682,
+      "s": {
+       "blend": 1.042775592741614,
+       "thr": 1.0414185037726187,
+       "lat": 1.0441344501547682
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9678147626709575,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.018206875,
+      "s_thr": 1.0448951909162947,
+      "s_lat": 0.9719592584054129,
+      "s": {
+       "blend": 1.0077676095580688,
+       "thr": 1.0448951909162947,
+       "lat": 0.9719592584054129
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00223125,
+      "s_thr": 1.0080655633439721,
+      "s_lat": 1.0086721171917068,
+      "s": {
+       "blend": 1.0083687946610678,
+       "thr": 1.0080655633439721,
+       "lat": 1.0086721171917068
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9781536458333333,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.013738750000000001,
+      "s_thr": 1.1016,
+      "s_lat": 0.9865859769933891,
+      "s": {
+       "blend": 1.0425080873815404,
+       "thr": 1.1016,
+       "lat": 0.9865859769933891
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9714732533464745,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.015816874999999998,
+      "s_thr": 1.137,
+      "s_lat": 1.0258866165420037,
+      "s": {
+       "blend": 1.0800153160989237,
+       "thr": 1.137,
+       "lat": 1.0258866165420037
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9615605905290238,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.02109,
+      "s_thr": 1.0052838405147075,
+      "s_lat": 0.9767,
+      "s": {
+       "blend": 0.9908888570524522,
+       "thr": 1.0052838405147075,
+       "lat": 0.9767
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    }
+   }
+  },
+  "kda-seq": {
+   "agent": "kda",
+   "mode": "seq",
+   "deployable": {
+    "n_items": 11,
+    "n_valid": 9,
+    "coverage": 0.8181818181818182,
+    "coverage_macro": 0.75,
+    "C_macro": 0.7309744096811227,
+    "S_macro": {
+     "blend": 1.0281811309095759,
+     "thr": 1.0102951406472964,
+     "lat": 1.046383769876567
+    },
+    "score": {
+     "blend": 0.5636805714089222,
+     "thr": 0.5538749205287733,
+     "lat": 0.5736598188640735
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9805324640314279,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.040637935197889,
+       "thr": 1.024136108300252,
+       "lat": 1.0574056547720487
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 3,
+      "C_f": 0.9891834913991672,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0575902868442546,
+       "thr": 1.0482752676378346,
+       "lat": 1.0669880797127982
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.979647349131648,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0421552956573854,
+       "thr": 1.034714960750061,
+       "lat": 1.0496491318531158
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9711692708333334,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0277029720705133,
+       "thr": 1.0254,
+       "lat": 1.0300111164448662
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.971449367916084,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0178047257647935,
+       "thr": 0.9924,
+       "lat": 1.043859794225259
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9558133341373212,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9847730493219974,
+       "thr": 0.940710019081332,
+       "lat": 1.0309
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 11,
+    "n_valid": 8,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.7083333333333333,
+    "C_macro": 0.6893472818129626,
+    "S_macro": {
+     "blend": 1.0271533123906804,
+     "thr": 1.0113584822552704,
+     "lat": 1.0431948173336723
+    },
+    "score": {
+     "blend": 0.5015462852637016,
+     "thr": 0.4938338646491507,
+     "lat": 0.5093791541423219
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9805324640314279,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.040637935197889,
+       "thr": 1.024136108300252,
+       "lat": 1.0574056547720487
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 2,
+      "C_f": 0.6561664684538858,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.0512628145793763,
+       "thr": 1.054912606296302,
+       "lat": 1.0476256504294146
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.979647349131648,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0421552956573854,
+       "thr": 1.034714960750061,
+       "lat": 1.0496491318531158
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9711692708333334,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0277029720705133,
+       "thr": 1.0254,
+       "lat": 1.0300111164448662
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.971449367916084,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0178047257647935,
+       "thr": 0.9924,
+       "lat": 1.043859794225259
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9558133341373212,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9847730493219974,
+       "thr": 0.940710019081332,
+       "lat": 1.0309
+      }
+     }
+    }
+   },
+   "drops": {
+    "models": 11,
+    "requested": 38,
+    "kept": 37,
+    "unresolved": 0,
+    "aw_crash": 1,
+    "aw_broken": 0,
+    "aw_none": 0,
+    "empty": 0,
+    "empty_none_requested": 0,
+    "dropped_unique_kernels": 1,
+    "dropped": 1,
+    "dropped_by_category": {
+     "timeout": 1
+    },
+    "aw_crash_by_category": {
+     "timeout": 1
+    },
+    "status": {
+     "ok": 9,
+     "baseline_failed": 1,
+     "missing": 1
+    }
+   },
+   "items": {
+    "deployable": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9648700382832965,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.02043625,
+      "s_thr": 0.9915682931598812,
+      "s_lat": 1.0433436825897782,
+      "s": {
+       "blend": 1.0171265970982626,
+       "thr": 0.9915682931598812,
+       "lat": 1.0433436825897782
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9990510688358437,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002355625,
+      "s_thr": 1.0351256107352382,
+      "s_lat": 1.1067931333361263,
+      "s": {
+       "blend": 1.0703597143493986,
+       "thr": 1.0351256107352382,
+       "lat": 1.1067931333361263
+      },
+      "n_dropped": 1,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9983867746295579,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0025387500000000006,
+      "s_thr": 1.018106752752382,
+      "s_lat": 1.0715261452713134,
+      "s": {
+       "blend": 1.0444749897682826,
+       "thr": 1.018106752752382,
+       "lat": 1.0715261452713134
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9961948897795592,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0027443749999999994,
+      "s_thr": 1.0577736052672142,
+      "s_lat": 1.0716571513315254,
+      "s": {
+       "blend": 1.0646927484370035,
+       "thr": 1.0577736052672142,
+       "lat": 1.0716571513315254
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9701126307320997,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.017043125000000003,
+      "s_thr": 1.0930490382411944,
+      "s_lat": 1.0242582584485223,
+      "s": {
+       "blend": 1.058094752046223,
+       "thr": 1.0930490382411944,
+       "lat": 1.0242582584485223
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.979647349131648,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.020229374999999997,
+      "s_thr": 1.034714960750061,
+      "s_lat": 1.0496491318531158,
+      "s": {
+       "blend": 1.0421552956573854,
+       "thr": 1.034714960750061,
+       "lat": 1.0496491318531158
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9711692708333334,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.017560625,
+      "s_thr": 1.0254,
+      "s_lat": 1.0300111164448662,
+      "s": {
+       "blend": 1.0277029720705133,
+       "thr": 1.0254,
+       "lat": 1.0300111164448662
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.971449367916084,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.01662625,
+      "s_thr": 0.9924,
+      "s_lat": 1.043859794225259,
+      "s": {
+       "blend": 1.0178047257647935,
+       "thr": 0.9924,
+       "lat": 1.043859794225259
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9558133341373212,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.023442499999999998,
+      "s_thr": 0.940710019081332,
+      "s_lat": 1.0309,
+      "s": {
+       "blend": 0.9847730493219974,
+       "thr": 0.940710019081332,
+       "lat": 1.0309
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    },
+    "all_winners": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9648700382832965,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.02043625,
+      "s_thr": 0.9915682931598812,
+      "s_lat": 1.0433436825897782,
+      "s": {
+       "blend": 1.0171265970982626,
+       "thr": 0.9915682931598812,
+       "lat": 1.0433436825897782
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "crash",
+      "detail": "timeout",
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 1
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9983867746295579,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0025387500000000006,
+      "s_thr": 1.018106752752382,
+      "s_lat": 1.0715261452713134,
+      "s": {
+       "blend": 1.0444749897682826,
+       "thr": 1.018106752752382,
+       "lat": 1.0715261452713134
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9961948897795592,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0027443749999999994,
+      "s_thr": 1.0577736052672142,
+      "s_lat": 1.0716571513315254,
+      "s": {
+       "blend": 1.0646927484370035,
+       "thr": 1.0577736052672142,
+       "lat": 1.0716571513315254
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9701126307320997,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.017043125000000003,
+      "s_thr": 1.0930490382411944,
+      "s_lat": 1.0242582584485223,
+      "s": {
+       "blend": 1.058094752046223,
+       "thr": 1.0930490382411944,
+       "lat": 1.0242582584485223
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.979647349131648,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.020229374999999997,
+      "s_thr": 1.034714960750061,
+      "s_lat": 1.0496491318531158,
+      "s": {
+       "blend": 1.0421552956573854,
+       "thr": 1.034714960750061,
+       "lat": 1.0496491318531158
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9711692708333334,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.017560625,
+      "s_thr": 1.0254,
+      "s_lat": 1.0300111164448662,
+      "s": {
+       "blend": 1.0277029720705133,
+       "thr": 1.0254,
+       "lat": 1.0300111164448662
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.971449367916084,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.01662625,
+      "s_thr": 0.9924,
+      "s_lat": 1.043859794225259,
+      "s": {
+       "blend": 1.0178047257647935,
+       "thr": 0.9924,
+       "lat": 1.043859794225259
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9558133341373212,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.023442499999999998,
+      "s_thr": 0.940710019081332,
+      "s_lat": 1.0309,
+      "s": {
+       "blend": 0.9847730493219974,
+       "thr": 0.940710019081332,
+       "lat": 1.0309
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    }
+   }
+  },
+  "ako-ind": {
+   "agent": "ako",
+   "mode": "ind",
+   "deployable": {
+    "n_items": 11,
+    "n_valid": 8,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.625,
+    "C_macro": 0.6229732637617263,
+    "S_macro": {
+     "blend": 1.0654308476008933,
+     "thr": 1.0493604028026104,
+     "lat": 1.0817474034543721
+    },
+    "score": {
+     "blend": 0.4148343327764694,
+     "thr": 0.4085771718726638,
+     "lat": 0.42118731905983947
+    },
+    "n_families": 8,
+    "n_families_valid": 5,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.991460295666893,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0620601802163443,
+       "thr": 1.0547284389948088,
+       "lat": 1.0694428866222363
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 3,
+      "C_f": 0.9937488820899593,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0530205394578402,
+       "thr": 1.0439606367116308,
+       "lat": 1.0621590676185382
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.1103227727022913,
+       "thr": 1.0801978291035397,
+       "lat": 1.1412878515081109
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9994588064324721,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.1053973689267549,
+       "thr": 1.086,
+       "lat": 1.125141200027801
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9991181259044862,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0001673932696737,
+       "thr": 0.9850662871096544,
+       "lat": 1.0155
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 11,
+    "n_valid": 7,
+    "coverage": 0.6363636363636364,
+    "coverage_macro": 0.5833333333333333,
+    "C_macro": 0.5813347193928053,
+    "S_macro": {
+     "blend": 1.0637140330393857,
+     "thr": 1.0495426673042891,
+     "lat": 1.0780767465043593
+    },
+    "score": {
+     "blend": 0.3607181076981653,
+     "thr": 0.35591242865973394,
+     "lat": 0.36558867503259507
+    },
+    "n_families": 8,
+    "n_families_valid": 5,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.991460295666893,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0620601802163443,
+       "thr": 1.0547284389948088,
+       "lat": 1.0694428866222363
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 2,
+      "C_f": 0.6606405271385914,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.044563753450554,
+       "thr": 1.04486758476782,
+       "lat": 1.0442600104827315
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.1103227727022913,
+       "thr": 1.0801978291035397,
+       "lat": 1.1412878515081109
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9994588064324721,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.1053973689267549,
+       "thr": 1.086,
+       "lat": 1.125141200027801
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9991181259044862,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0001673932696737,
+       "thr": 0.9850662871096544,
+       "lat": 1.0155
+      }
+     }
+    }
+   },
+   "drops": {
+    "models": 11,
+    "requested": 39,
+    "kept": 38,
+    "unresolved": 0,
+    "aw_crash": 0,
+    "aw_broken": 1,
+    "aw_none": 0,
+    "empty": 0,
+    "empty_none_requested": 0,
+    "dropped_unique_kernels": 1,
+    "dropped": 1,
+    "dropped_by_category": {
+     "incorrect": 1
+    },
+    "aw_crash_by_category": {},
+    "status": {
+     "ok": 8,
+     "baseline_failed": 1,
+     "orchestrator_error": 1,
+     "missing": 1
+    }
+   },
+   "items": {
+    "deployable": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9865278057626435,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.009459375,
+      "s_thr": 1.0753635199317486,
+      "s_lat": 1.0596996178162943,
+      "s": {
+       "blend": 1.0675028389120373,
+       "thr": 1.0753635199317486,
+       "lat": 1.0596996178162943
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9993250648541033,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0021662500000000006,
+      "s_thr": 1.0421491016164626,
+      "s_lat": 1.0988828326987368,
+      "s": {
+       "blend": 1.0701400641405507,
+       "thr": 1.0421491016164626,
+       "lat": 1.0988828326987368
+      },
+      "n_dropped": 1,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9829020721639642,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.01037625,
+      "s_thr": 1.0401176375775962,
+      "s_lat": 1.0581646847253976,
+      "s": {
+       "blend": 1.0491023553708296,
+       "thr": 1.0401176375775962,
+       "lat": 1.0581646847253976
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9963927855711423,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002550625,
+      "s_thr": 1.0344893232895156,
+      "s_lat": 1.0792757386321625,
+      "s": {
+       "blend": 1.0566452708929228,
+       "thr": 1.0344893232895156,
+       "lat": 1.0792757386321625
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9990195092518102,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0025875000000000004,
+      "s_thr": 1.0496392237335646,
+      "s_lat": 1.0305380487881077,
+      "s": {
+       "blend": 1.0400447863230946,
+       "thr": 1.0496392237335646,
+       "lat": 1.0305380487881077
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.007866875,
+      "s_thr": 1.0801978291035397,
+      "s_lat": 1.1412878515081109,
+      "s": {
+       "blend": 1.1103227727022913,
+       "thr": 1.0801978291035397,
+       "lat": 1.1412878515081109
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "orchestrator_error",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 0
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9994588064324721,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00270125,
+      "s_thr": 1.086,
+      "s_lat": 1.125141200027801,
+      "s": {
+       "blend": 1.1053973689267549,
+       "thr": 1.086,
+       "lat": 1.125141200027801
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9991181259044862,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002270625,
+      "s_thr": 0.9850662871096544,
+      "s_lat": 1.0155,
+      "s": {
+       "blend": 1.0001673932696737,
+       "thr": 0.9850662871096544,
+       "lat": 1.0155
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    },
+    "all_winners": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9865278057626435,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.009459375,
+      "s_thr": 1.0753635199317486,
+      "s_lat": 1.0596996178162943,
+      "s": {
+       "blend": 1.0675028389120373,
+       "thr": 1.0753635199317486,
+       "lat": 1.0596996178162943
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "broken",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 1,
+      "d_source": "mean_d_proxy",
+      "mean_d": 0.83,
+      "s_thr": 1.0501187361436801,
+      "s_lat": 1.0788736719375442,
+      "s": {
+       "blend": 1.0643991059906737,
+       "thr": 1.0501187361436801,
+       "lat": 1.0788736719375442
+      },
+      "n_dropped": 1,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9829020721639642,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.01037625,
+      "s_thr": 1.0401176375775962,
+      "s_lat": 1.0581646847253976,
+      "s": {
+       "blend": 1.0491023553708296,
+       "thr": 1.0401176375775962,
+       "lat": 1.0581646847253976
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9963927855711423,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002550625,
+      "s_thr": 1.0344893232895156,
+      "s_lat": 1.0792757386321625,
+      "s": {
+       "blend": 1.0566452708929228,
+       "thr": 1.0344893232895156,
+       "lat": 1.0792757386321625
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9990195092518102,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0025875000000000004,
+      "s_thr": 1.0496392237335646,
+      "s_lat": 1.0305380487881077,
+      "s": {
+       "blend": 1.0400447863230946,
+       "thr": 1.0496392237335646,
+       "lat": 1.0305380487881077
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.007866875,
+      "s_thr": 1.0801978291035397,
+      "s_lat": 1.1412878515081109,
+      "s": {
+       "blend": 1.1103227727022913,
+       "thr": 1.0801978291035397,
+       "lat": 1.1412878515081109
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "orchestrator_error",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": 0
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9994588064324721,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00270125,
+      "s_thr": 1.086,
+      "s_lat": 1.125141200027801,
+      "s": {
+       "blend": 1.1053973689267549,
+       "thr": 1.086,
+       "lat": 1.125141200027801
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9991181259044862,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.002270625,
+      "s_thr": 0.9850662871096544,
+      "s_lat": 1.0155,
+      "s": {
+       "blend": 1.0001673932696737,
+       "thr": 0.9850662871096544,
+       "lat": 1.0155
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    }
+   }
+  },
+  "ako-seq": {
+   "agent": "ako",
+   "mode": "seq",
+   "deployable": {
+    "n_items": 11,
+    "n_valid": 8,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.7083333333333333,
+    "C_macro": 0.7000018870809187,
+    "S_macro": {
+     "blend": 1.0861872437496256,
+     "thr": 1.0788651998123662,
+     "lat": 1.093558980945532
+    },
+    "score": {
+     "blend": 0.5385692935798048,
+     "thr": 0.5349387703403335,
+     "lat": 0.5422244564597791
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9971755039143367,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0868086370755197,
+       "thr": 1.0711847079551473,
+       "lat": 1.1026604514143288
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 2,
+      "C_f": 0.6462897078200865,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.083556978893247,
+       "thr": 1.0655529567886965,
+       "lat": 1.1018652043786585
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.133124329742387,
+       "thr": 1.1415853450355782,
+       "lat": 1.1247260244166133
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9718177083333334,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.065108378495711,
+       "thr": 1.0518,
+       "lat": 1.0785851473110504
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9996901179688836,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.09658228771791,
+       "thr": 1.0952,
+       "lat": 1.0979663200663305
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9850420586107091,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.053684912401804,
+       "thr": 1.0505790070242218,
+       "lat": 1.0568
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 11,
+    "n_valid": 8,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.7083333333333333,
+    "C_macro": 0.7000018870809187,
+    "S_macro": {
+     "blend": 1.0861872437496256,
+     "thr": 1.0788651998123662,
+     "lat": 1.093558980945532
+    },
+    "score": {
+     "blend": 0.5385692935798048,
+     "thr": 0.5349387703403335,
+     "lat": 0.5422244564597791
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9971755039143367,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0868086370755197,
+       "thr": 1.0711847079551473,
+       "lat": 1.1026604514143288
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 3,
+      "n_valid": 2,
+      "C_f": 0.6462897078200865,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.083556978893247,
+       "thr": 1.0655529567886965,
+       "lat": 1.1018652043786585
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.133124329742387,
+       "thr": 1.1415853450355782,
+       "lat": 1.1247260244166133
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9718177083333334,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.065108378495711,
+       "thr": 1.0518,
+       "lat": 1.0785851473110504
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 1,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9996901179688836,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.09658228771791,
+       "thr": 1.0952,
+       "lat": 1.0979663200663305
+      }
+     },
+     "World Models": {
+      "n": 1,
+      "n_valid": 1,
+      "C_f": 0.9850420586107091,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.053684912401804,
+       "thr": 1.0505790070242218,
+       "lat": 1.0568
+      }
+     }
+    }
+   },
+   "drops": {
+    "models": 11,
+    "requested": 42,
+    "kept": 42,
+    "unresolved": 0,
+    "aw_crash": 0,
+    "aw_broken": 0,
+    "aw_none": 0,
+    "empty": 0,
+    "empty_none_requested": 0,
+    "dropped_unique_kernels": 0,
+    "dropped": 0,
+    "dropped_by_category": {},
+    "aw_crash_by_category": {},
+    "status": {
+     "ok": 8,
+     "missing": 2,
+     "baseline_failed": 1
+    }
+   },
+   "items": {
+    "deployable": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9992695950030223,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.003029375,
+      "s_thr": 1.05265907111467,
+      "s_lat": 1.109503168089213,
+      "s": {
+       "blend": 1.0807074415953535,
+       "thr": 1.05265907111467,
+       "lat": 1.109503168089213
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9987079453817845,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00244625,
+      "s_thr": 1.0611250633172322,
+      "s_lat": 1.0743003304476826,
+      "s": {
+       "blend": 1.0676923743138846,
+       "thr": 1.0611250633172322,
+       "lat": 1.0743003304476826
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.940161178078475,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0318825,
+      "s_thr": 1.069999327102592,
+      "s_lat": 1.1301373500597174,
+      "s": {
+       "blend": 1.0996573121192819,
+       "thr": 1.069999327102592,
+       "lat": 1.1301373500597174
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9950814128256512,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0033975,
+      "s_thr": 1.0900363755398257,
+      "s_lat": 1.0958599363057306,
+      "s": {
+       "blend": 1.0929442772026408,
+       "thr": 1.0900363755398257,
+       "lat": 1.0958599363057306
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.01790625,
+      "s_thr": 1.1415853450355782,
+      "s_lat": 1.1247260244166133,
+      "s": {
+       "blend": 1.133124329742387,
+       "thr": 1.1415853450355782,
+       "lat": 1.1247260244166133
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9718177083333334,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.016555624999999997,
+      "s_thr": 1.0518,
+      "s_lat": 1.0785851473110504,
+      "s": {
+       "blend": 1.065108378495711,
+       "thr": 1.0518,
+       "lat": 1.0785851473110504
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9996901179688836,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0017925,
+      "s_thr": 1.0952,
+      "s_lat": 1.0979663200663305,
+      "s": {
+       "blend": 1.09658228771791,
+       "thr": 1.0952,
+       "lat": 1.0979663200663305
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9850420586107091,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00895,
+      "s_thr": 1.0505790070242218,
+      "s_lat": 1.0568,
+      "s": {
+       "blend": 1.053684912401804,
+       "thr": 1.0505790070242218,
+       "lat": 1.0568
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    },
+    "all_winners": {
+     "meta-llama/Llama-3.1-8B-Instruct": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9992695950030223,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.003029375,
+      "s_thr": 1.05265907111467,
+      "s_lat": 1.109503168089213,
+      "s": {
+       "blend": 1.0807074415953535,
+       "thr": 1.05265907111467,
+       "lat": 1.109503168089213
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-Next-80B-A3B-Instruct": {
+      "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9987079453817845,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00244625,
+      "s_thr": 1.0611250633172322,
+      "s_lat": 1.0743003304476826,
+      "s": {
+       "blend": 1.0676923743138846,
+       "thr": 1.0611250633172322,
+       "lat": 1.0743003304476826
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "moonshotai/Kimi-Linear-48B-A3B-Instruct": {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "family": "Linear Attention & New Archs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.940161178078475,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0318825,
+      "s_thr": 1.069999327102592,
+      "s_lat": 1.1301373500597174,
+      "s": {
+       "blend": 1.0996573121192819,
+       "thr": 1.069999327102592,
+       "lat": 1.1301373500597174
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "openai/gpt-oss-120b": {
+      "model": "openai/gpt-oss-120b",
+      "family": "Dense & MoE LLMs",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9950814128256512,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0033975,
+      "s_thr": 1.0900363755398257,
+      "s_lat": 1.0958599363057306,
+      "s": {
+       "blend": 1.0929442772026408,
+       "thr": 1.0900363755398257,
+       "lat": 1.0958599363057306
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "fla-hub/gla-2.7B-100B": {
+      "model": "fla-hub/gla-2.7B-100B",
+      "family": "Linear Attention & New Archs",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "black-forest-labs/FLUX.1-dev": {
+      "model": "black-forest-labs/FLUX.1-dev",
+      "family": "Vision / Video / Audio",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 1.0,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.01790625,
+      "s_thr": 1.1415853450355782,
+      "s_lat": 1.1247260244166133,
+      "s": {
+       "blend": 1.133124329742387,
+       "thr": 1.1415853450355782,
+       "lat": 1.1247260244166133
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 2
+     },
+     "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8": {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct-FP8",
+      "family": "Multimodal & Encoders",
+      "outcome": "baseline_failed",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "jameslahm/yolov10n": {
+      "model": "jameslahm/yolov10n",
+      "family": "Edge & Detection",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9718177083333334,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.016555624999999997,
+      "s_thr": 1.0518,
+      "s_lat": 1.0785851473110504,
+      "s": {
+       "blend": 1.065108378495711,
+       "thr": 1.0518,
+       "lat": 1.0785851473110504
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "OpenFold/OpenFold3": {
+      "model": "OpenFold/OpenFold3",
+      "family": "3D / Robotics / Science",
+      "outcome": "missing",
+      "detail": null,
+      "valid": false,
+      "C": 0.0,
+      "n_samples": 0,
+      "d_source": null,
+      "mean_d": null,
+      "s_thr": null,
+      "s_lat": null,
+      "s": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      },
+      "n_dropped": null
+     },
+     "BAAI/bge-m3": {
+      "model": "BAAI/bge-m3",
+      "family": "Recommendation & Specialized",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9996901179688836,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.0017925,
+      "s_thr": 1.0952,
+      "s_lat": 1.0979663200663305,
+      "s": {
+       "blend": 1.09658228771791,
+       "thr": 1.0952,
+       "lat": 1.0979663200663305
+      },
+      "n_dropped": 0,
+      "n_thr": 1,
+      "n_lat": 2
+     },
+     "Etched/oasis-500m": {
+      "model": "Etched/oasis-500m",
+      "family": "World Models",
+      "outcome": "ok",
+      "detail": null,
+      "valid": true,
+      "C": 0.9850420586107091,
+      "n_samples": 16,
+      "d_source": "per_sample",
+      "mean_d": 0.00895,
+      "s_thr": 1.0505790070242218,
+      "s_lat": 1.0568,
+      "s": {
+       "blend": 1.053684912401804,
+       "thr": 1.0505790070242218,
+       "lat": 1.0568
+      },
+      "n_dropped": 0,
+      "n_thr": 2,
+      "n_lat": 1
+     }
+    }
+   }
+  }
+ },
+ "agents_pooled": {
+  "drkernel": {
+   "deployable": {
+    "n_items": 22,
+    "n_valid": 16,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.6666666666666667,
+    "C_macro": 0.6660972691364588,
+    "S_macro": {
+     "blend": 0.9974888495661447,
+     "thr": 0.994347146572538,
+     "lat": 1.0006404789699936
+    },
+    "score": {
+     "blend": 0.44294973246005137,
+     "thr": 0.44155461260373186,
+     "lat": 0.44434926028620736
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 4,
+      "n_valid": 4,
+      "C_f": 0.9974862310885119,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0141867249531042,
+       "thr": 1.017481839931766,
+       "lat": 1.0109022812044306
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 6,
+      "n_valid": 5,
+      "C_f": 0.8319288642615102,
+      "coverage_f": 0.8333333333333334,
+      "S_f": {
+       "blend": 1.0042599782253059,
+       "thr": 0.9951693294758742,
+       "lat": 1.0134336680133205
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9843714297915759,
+       "thr": 0.9628290939800296,
+       "lat": 1.006395753772278
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0154216070446436,
+       "thr": 1.0059248033526165,
+       "lat": 1.0250080688105785
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.49995348626713465,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 1.0171648329488323,
+       "thr": 1.0235,
+       "lat": 1.0108688787374949
+      }
+     },
+     "World Models": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9994095714745136,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9512342590062202,
+       "thr": 0.9629460866334465,
+       "lat": 0.9396648764320181
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 22,
+    "n_valid": 14,
+    "coverage": 0.6363636363636364,
+    "coverage_macro": 0.5729166666666667,
+    "C_macro": 0.5723476233199164,
+    "S_macro": {
+     "blend": 0.999266951902615,
+     "thr": 1.0008573068562785,
+     "lat": 0.9976791240113625
+    },
+    "score": {
+     "blend": 0.32766712056352026,
+     "thr": 0.328188609868604,
+     "lat": 0.32714645990113517
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 4,
+      "n_valid": 3,
+      "C_f": 0.7474890645561726,
+      "coverage_f": 0.75,
+      "S_f": {
+       "blend": 1.0179631381541672,
+       "thr": 1.0295746085276256,
+       "lat": 1.0064826211308757
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 6,
+      "n_valid": 5,
+      "C_f": 0.8319288642615102,
+      "coverage_f": 0.8333333333333334,
+      "S_f": {
+       "blend": 1.0042599782253059,
+       "thr": 0.9951693294758742,
+       "lat": 1.0134336680133205
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.5,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 0.9912557496590079,
+       "thr": 0.9895160483792064,
+       "lat": 0.9929985095658502
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0154216070446436,
+       "thr": 1.0059248033526165,
+       "lat": 1.0250080688105785
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.49995348626713465,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 1.0171648329488323,
+       "thr": 1.0235,
+       "lat": 1.0108688787374949
+      }
+     },
+     "World Models": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9994095714745136,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9512342590062202,
+       "thr": 0.9629460866334465,
+       "lat": 0.9396648764320181
+      }
+     }
+    }
+   }
+  },
+  "claude": {
+   "deployable": {
+    "n_items": 22,
+    "n_valid": 18,
+    "coverage": 0.8181818181818182,
+    "coverage_macro": 0.75,
+    "C_macro": 0.7436838639517191,
+    "S_macro": {
+     "blend": 1.0508318230901035,
+     "thr": 1.0541408381352932,
+     "lat": 1.0475331952533142
+    },
+    "score": {
+     "blend": 0.5861150029193081,
+     "thr": 0.587960648740319,
+     "lat": 0.5842751506977566
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 4,
+      "n_valid": 4,
+      "C_f": 0.9804846028446172,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.1202550037436763,
+       "thr": 1.1529125900924269,
+       "lat": 1.088522481406969
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 6,
+      "n_valid": 6,
+      "C_f": 0.9892408118431059,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0526099231672945,
+       "thr": 1.0602159590182008,
+       "lat": 1.0450584533516123
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.046731988332213,
+       "thr": 1.0558407600685884,
+       "lat": 1.0377017982586068
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9877115885416666,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0437251665140166,
+       "thr": 1.032950545766834,
+       "lat": 1.0546121764290264
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9995354912353042,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0591824865068642,
+       "thr": 1.053820620409375,
+       "lat": 1.0645716339153193
+      }
+     },
+     "World Models": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9924984171490594,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9867849174165951,
+       "thr": 0.9766893828708468,
+       "lat": 0.9969848042974376
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 22,
+    "n_valid": 17,
+    "coverage": 0.7727272727272727,
+    "coverage_macro": 0.71875,
+    "C_macro": 0.7132010232703564,
+    "S_macro": {
+     "blend": 1.0425270692511837,
+     "thr": 1.0429782548212685,
+     "lat": 1.0420760788610246
+    },
+    "score": {
+     "blend": 0.5344131740397114,
+     "thr": 0.5346444577345926,
+     "lat": 0.5341819903966437
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 4,
+      "n_valid": 3,
+      "C_f": 0.7366218773937154,
+      "coverage_f": 0.75,
+      "S_f": {
+       "blend": 1.0681730974508652,
+       "thr": 1.0815735894724483,
+       "lat": 1.0549386349885912
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 6,
+      "n_valid": 6,
+      "C_f": 0.9892408118431059,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0526099231672945,
+       "thr": 1.0602159590182008,
+       "lat": 1.0450584533516123
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.046731988332213,
+       "thr": 1.0558407600685884,
+       "lat": 1.0377017982586068
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9877115885416666,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0437251665140166,
+       "thr": 1.032950545766834,
+       "lat": 1.0546121764290264
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9995354912353042,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0591824865068642,
+       "thr": 1.053820620409375,
+       "lat": 1.0645716339153193
+      }
+     },
+     "World Models": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9924984171490594,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9867849174165951,
+       "thr": 0.9766893828708468,
+       "lat": 0.9969848042974376
+      }
+     }
+    }
+   }
+  },
+  "kda": {
+   "deployable": {
+    "n_items": 22,
+    "n_valid": 16,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.6979166666666667,
+    "C_macro": 0.7024752180410295,
+    "S_macro": {
+     "blend": 1.030079096040545,
+     "thr": 1.0320804018235186,
+     "lat": 1.0280816709870475
+    },
+    "score": {
+     "blend": 0.5050160158184316,
+     "thr": 0.5059971943287388,
+     "lat": 0.5040367399101148
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 4,
+      "n_valid": 3,
+      "C_f": 0.9028091920795045,
+      "coverage_f": 0.75,
+      "S_f": {
+       "blend": 1.036054889466267,
+       "thr": 1.0248961891161612,
+       "lat": 1.0473350817243585
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 6,
+      "n_valid": 5,
+      "C_f": 0.8223591463851223,
+      "coverage_f": 0.8333333333333334,
+      "S_f": {
+       "blend": 1.0492126043341394,
+       "thr": 1.0517005231866594,
+       "lat": 1.046730570940531
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.989823674565824,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0251228606033944,
+       "thr": 1.0213033436785304,
+       "lat": 1.028956661932231
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9746614583333333,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0350790596903965,
+       "thr": 1.0628173126177425,
+       "lat": 1.0080647417858686
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9714613106312793,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0484487076742677,
+       "thr": 1.0622423452301268,
+       "lat": 1.0348341859650672
+      }
+     },
+     "World Models": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9586869623331724,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9878262201919588,
+       "thr": 0.9724610947450522,
+       "lat": 1.0034341184153546
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 22,
+    "n_valid": 15,
+    "coverage": 0.6818181818181818,
+    "coverage_macro": 0.6770833333333333,
+    "C_macro": 0.6816616541069493,
+    "S_macro": {
+     "blend": 1.0292229930981058,
+     "thr": 1.0327637627331718,
+     "lat": 1.0256943627828543
+    },
+    "score": {
+     "blend": 0.47502937619594165,
+     "thr": 0.47666358919184065,
+     "lat": 0.47340076600289266
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 4,
+      "n_valid": 3,
+      "C_f": 0.9028091920795045,
+      "coverage_f": 0.75,
+      "S_f": {
+       "blend": 1.036054889466267,
+       "thr": 1.0248961891161612,
+       "lat": 1.0473350817243585
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 6,
+      "n_valid": 4,
+      "C_f": 0.6558506349124816,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.0439914339215952,
+       "thr": 1.0558855560078093,
+       "lat": 1.032231294291526
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.989823674565824,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0251228606033944,
+       "thr": 1.0213033436785304,
+       "lat": 1.028956661932231
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9746614583333333,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0350790596903965,
+       "thr": 1.0628173126177425,
+       "lat": 1.0080647417858686
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9714613106312793,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0484487076742677,
+       "thr": 1.0622423452301268,
+       "lat": 1.0348341859650672
+      }
+     },
+     "World Models": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9586869623331724,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 0.9878262201919588,
+       "thr": 0.9724610947450522,
+       "lat": 1.0034341184153546
+      }
+     }
+    }
+   }
+  },
+  "ako": {
+   "deployable": {
+    "n_items": 22,
+    "n_valid": 16,
+    "coverage": 0.7272727272727273,
+    "coverage_macro": 0.6666666666666667,
+    "C_macro": 0.6614875754213225,
+    "S_macro": {
+     "blend": 1.0752194497942125,
+     "thr": 1.0638534043978958,
+     "lat": 1.0867069282633728
+    },
+    "score": {
+     "blend": 0.47416287126014806,
+     "thr": 0.4691505393859226,
+     "lat": 0.47922875411366106
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 4,
+      "n_valid": 4,
+      "C_f": 0.9943178997906149,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0743631494765193,
+       "thr": 1.062924726825302,
+       "lat": 1.0859246641110598
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 6,
+      "n_valid": 5,
+      "C_f": 0.8200192949550229,
+      "coverage_f": 0.8333333333333334,
+      "S_f": {
+       "blend": 1.0651304655696134,
+       "thr": 1.0525445565987812,
+       "lat": 1.077866871831633
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.121665613102226,
+       "thr": 1.1104674742845226,
+       "lat": 1.1329766758153919
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.4859088541666667,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 1.065108378495711,
+       "thr": 1.0518,
+       "lat": 1.0785851473110504
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9995744622006779,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.1009810060373701,
+       "thr": 1.09059029887488,
+       "lat": 1.1114707116921885
+      }
+     },
+     "World Models": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9920800922575976,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0265774652526212,
+       "thr": 1.0172954151890676,
+       "lat": 1.0359442069918632
+      }
+     }
+    }
+   },
+   "all_winners": {
+    "n_items": 22,
+    "n_valid": 15,
+    "coverage": 0.6818181818181818,
+    "coverage_macro": 0.6458333333333333,
+    "C_macro": 0.640668303236862,
+    "S_macro": {
+     "blend": 1.0750092538998144,
+     "thr": 1.0642934694691097,
+     "lat": 1.085832929658672
+    },
+    "score": {
+     "blend": 0.4448011457178643,
+     "thr": 0.44036732975325565,
+     "lat": 0.4492796033320229
+    },
+    "n_families": 8,
+    "n_families_valid": 6,
+    "families": {
+     "Dense & MoE LLMs": {
+      "n": 4,
+      "n_valid": 4,
+      "C_f": 0.9943178997906149,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0743631494765193,
+       "thr": 1.062924726825302,
+       "lat": 1.0859246641110598
+      }
+     },
+     "Linear Attention & New Archs": {
+      "n": 6,
+      "n_valid": 4,
+      "C_f": 0.653465117479339,
+      "coverage_f": 0.6666666666666666,
+      "S_f": {
+       "blend": 1.063881734475347,
+       "thr": 1.055159582433868,
+       "lat": 1.0726759855030852
+      }
+     },
+     "Vision / Video / Audio": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 1.0,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.121665613102226,
+       "thr": 1.1104674742845226,
+       "lat": 1.1329766758153919
+      }
+     },
+     "Multimodal & Encoders": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Edge & Detection": {
+      "n": 2,
+      "n_valid": 1,
+      "C_f": 0.4859088541666667,
+      "coverage_f": 0.5,
+      "S_f": {
+       "blend": 1.065108378495711,
+       "thr": 1.0518,
+       "lat": 1.0785851473110504
+      }
+     },
+     "3D / Robotics / Science": {
+      "n": 2,
+      "n_valid": 0,
+      "C_f": 0.0,
+      "coverage_f": 0.0,
+      "S_f": {
+       "blend": null,
+       "thr": null,
+       "lat": null
+      }
+     },
+     "Recommendation & Specialized": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9995744622006779,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.1009810060373701,
+       "thr": 1.09059029887488,
+       "lat": 1.1114707116921885
+      }
+     },
+     "World Models": {
+      "n": 2,
+      "n_valid": 2,
+      "C_f": 0.9920800922575976,
+      "coverage_f": 1.0,
+      "S_f": {
+       "blend": 1.0265774652526212,
+       "thr": 1.0172954151890676,
+       "lat": 1.0359442069918632
+      }
+     }
+    }
+   }
+  }
+ },
+ "sensitivity": {
+  "joint": {
+   "0.5x": {
+    "g_scale": 0.5,
+    "f_scale": 0.5,
+    "set_scores": {
+     "drkernel-ind": 0.49894115488270707,
+     "drkernel-seq": 0.3834402591205416,
+     "claude-ind": 0.4283120440728407,
+     "claude-seq": 0.5875476848280223,
+     "kda-ind": 0.42454866135508235,
+     "kda-seq": 0.5457774153007089,
+     "ako-ind": 0.41234992878898974,
+     "ako-seq": 0.49516277614777615
+    },
+    "set_ranks": {
+     "drkernel-ind": 3,
+     "drkernel-seq": 8,
+     "claude-ind": 5,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 2,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.4400121414933696,
+     "claude": 0.5037803304362872,
+     "kda": 0.4836978329962948,
+     "ako": 0.4524100722879392
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.65625,
+     "kda": 0.6979166666666667,
+     "ako": 0.6458333333333333
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6616797897311109,
+     "claude": 0.7278770549840785,
+     "kda": 0.6728217126923928,
+     "ako": 0.6523669793678881
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 4,
+    "agent_top_changed": false
+   },
+   "1x": {
+    "g_scale": 1.0,
+    "f_scale": 1.0,
+    "set_scores": {
+     "drkernel-ind": 0.5000804371118863,
+     "drkernel-seq": 0.3879275023852097,
+     "claude-ind": 0.5803803458499236,
+     "claude-seq": 0.5918967944298181,
+     "kda-ind": 0.44856885101342486,
+     "kda-seq": 0.5636805714089222,
+     "ako-ind": 0.4148343327764694,
+     "ako-seq": 0.5385692935798048
+    },
+    "set_ranks": {
+     "drkernel-ind": 5,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.44294973246005137,
+     "claude": 0.5861150029193081,
+     "kda": 0.5050160158184316,
+     "ako": 0.47416287126014806
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6666666666666667
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6660972691364588,
+     "claude": 0.7436838639517191,
+     "kda": 0.7024752180410295,
+     "ako": 0.6614875754213225
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 0,
+    "agent_top_changed": false
+   },
+   "2x": {
+    "g_scale": 2.0,
+    "f_scale": 2.0,
+    "set_scores": {
+     "drkernel-ind": 0.5003726100595081,
+     "drkernel-seq": 0.388257171547016,
+     "claude-ind": 0.5843410087863534,
+     "claude-seq": 0.5934321463828252,
+     "kda-ind": 0.4602941830027995,
+     "kda-seq": 0.5723296929836224,
+     "ako-ind": 0.415661580032032,
+     "ako-seq": 0.5420712104632004
+    },
+    "set_ranks": {
+     "drkernel-ind": 5,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.4432636607369682,
+     "claude": 0.5888701047436643,
+     "kda": 0.5153803259715592,
+     "ako": 0.47623944386344397
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6666666666666667
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6665693470103919,
+     "claude": 0.7471796365562633,
+     "kda": 0.7168919311879662,
+     "ako": 0.6643845272068767
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 0,
+    "agent_top_changed": false
+   }
+  },
+  "grid": {
+   "g0.5x_f0.5x": {
+    "g_scale": 0.5,
+    "f_scale": 0.5,
+    "set_scores": {
+     "drkernel-ind": 0.49894115488270707,
+     "drkernel-seq": 0.3834402591205416,
+     "claude-ind": 0.4283120440728407,
+     "claude-seq": 0.5875476848280223,
+     "kda-ind": 0.42454866135508235,
+     "kda-seq": 0.5457774153007089,
+     "ako-ind": 0.41234992878898974,
+     "ako-seq": 0.49516277614777615
+    },
+    "set_ranks": {
+     "drkernel-ind": 3,
+     "drkernel-seq": 8,
+     "claude-ind": 5,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 2,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.4400121414933696,
+     "claude": 0.5037803304362872,
+     "kda": 0.4836978329962948,
+     "ako": 0.4524100722879392
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.65625,
+     "kda": 0.6979166666666667,
+     "ako": 0.6458333333333333
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6616797897311109,
+     "claude": 0.7278770549840785,
+     "kda": 0.6728217126923928,
+     "ako": 0.6523669793678881
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 4,
+    "agent_top_changed": false
+   },
+   "g0.5x_f1x": {
+    "g_scale": 0.5,
+    "f_scale": 1.0,
+    "set_scores": {
+     "drkernel-ind": 0.499698529479618,
+     "drkernel-seq": 0.3862906661238663,
+     "claude-ind": 0.5753379919604895,
+     "claude-seq": 0.5911325456733795,
+     "kda-ind": 0.4480646643076638,
+     "kda-seq": 0.5620233497551367,
+     "ako-ind": 0.4142723508018842,
+     "ako-seq": 0.5366224205000695
+    },
+    "set_ranks": {
+     "drkernel-ind": 5,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.44189401894265395,
+     "claude": 0.5831992203640058,
+     "kda": 0.5039712220336736,
+     "ako": 0.472953469372249
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6666666666666667
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6645097122662392,
+     "claude": 0.7399842138380558,
+     "kda": 0.7010219141481493,
+     "ako": 0.6598003823258146
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 0,
+    "agent_top_changed": false
+   },
+   "g0.5x_f2x": {
+    "g_scale": 0.5,
+    "f_scale": 2.0,
+    "set_scores": {
+     "drkernel-ind": 0.50007602245684,
+     "drkernel-seq": 0.3873687934547107,
+     "claude-ind": 0.5817663346684401,
+     "claude-seq": 0.5928510182498726,
+     "kda-ind": 0.45976793070381633,
+     "kda-seq": 0.5703745714882041,
+     "ako-ind": 0.41522948761960465,
+     "ako-seq": 0.5408948778083363
+    },
+    "set_ranks": {
+     "drkernel-ind": 5,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.4426486512359863,
+     "claude": 0.5872863837126472,
+     "kda": 0.5141847529274943,
+     "ako": 0.475458898690579
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6666666666666667
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6656445103549506,
+     "claude": 0.7451701541681617,
+     "kda": 0.7152288939604193,
+     "ako": 0.6632956166970067
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 0,
+    "agent_top_changed": false
+   },
+   "g1x_f0.5x": {
+    "g_scale": 1.0,
+    "f_scale": 0.5,
+    "set_scores": {
+     "drkernel-ind": 0.49970573847633976,
+     "drkernel-seq": 0.38637017511156363,
+     "claude-ind": 0.5686081306878532,
+     "claude-seq": 0.5892288777251331,
+     "kda-ind": 0.42541550513465387,
+     "kda-seq": 0.5468885052212636,
+     "ako-ind": 0.413469247959541,
+     "ako-seq": 0.49650563983112384
+    },
+    "set_ranks": {
+     "drkernel-ind": 4,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 5
+    },
+    "agent_scores": {
+     "drkernel": 0.44193996230791677,
+     "claude": 0.5788683579011138,
+     "kda": 0.4846839192208457,
+     "ako": 0.4536375342209369
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6458333333333333
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6645788008058496,
+     "claude": 0.7344890592786179,
+     "kda": 0.6741933546084933,
+     "ako": 0.6541369568342807
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 1,
+    "agent_top_changed": false
+   },
+   "g1x_f1x": {
+    "g_scale": 1.0,
+    "f_scale": 1.0,
+    "set_scores": {
+     "drkernel-ind": 0.5000804371118863,
+     "drkernel-seq": 0.3879275023852097,
+     "claude-ind": 0.5803803458499236,
+     "claude-seq": 0.5918967944298181,
+     "kda-ind": 0.44856885101342486,
+     "kda-seq": 0.5636805714089222,
+     "ako-ind": 0.4148343327764694,
+     "ako-seq": 0.5385692935798048
+    },
+    "set_ranks": {
+     "drkernel-ind": 5,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.44294973246005137,
+     "claude": 0.5861150029193081,
+     "kda": 0.5050160158184316,
+     "ako": 0.47416287126014806
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6666666666666667
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6660972691364588,
+     "claude": 0.7436838639517191,
+     "kda": 0.7024752180410295,
+     "ako": 0.6614875754213225
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 0,
+    "agent_top_changed": false
+   },
+   "g1x_f2x": {
+    "g_scale": 1.0,
+    "f_scale": 2.0,
+    "set_scores": {
+     "drkernel-ind": 0.5002668798803681,
+     "drkernel-seq": 0.3881179888838548,
+     "claude-ind": 0.5840552517362675,
+     "claude-seq": 0.593220831523573,
+     "kda-ind": 0.46003673528041045,
+     "kda-seq": 0.5713035008289626,
+     "ako-ind": 0.41551104734115657,
+     "ako-seq": 0.5418064144153375
+    },
+    "set_ranks": {
+     "drkernel-ind": 5,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.4431394167945214,
+     "claude": 0.5886213482619129,
+     "kda": 0.5147629373828988,
+     "ako": 0.4760350705004857
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6666666666666667
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6663825119257178,
+     "claude": 0.746864005356566,
+     "kda": 0.7160331461794702,
+     "ako": 0.664099413275487
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 0,
+    "agent_top_changed": false
+   },
+   "g2x_f0.5x": {
+    "g_scale": 2.0,
+    "f_scale": 0.5,
+    "set_scores": {
+     "drkernel-ind": 0.5001303326350459,
+     "drkernel-seq": 0.3869305189070825,
+     "claude-ind": 0.569372354657526,
+     "claude-seq": 0.5900463058659449,
+     "kda-ind": 0.4260347782312899,
+     "kda-seq": 0.5475277278896638,
+     "ako-ind": 0.41405708365827587,
+     "ako-seq": 0.49712502324077235
+    },
+    "set_ranks": {
+     "drkernel-ind": 4,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 5
+    },
+    "agent_scores": {
+     "drkernel": 0.4424396592584814,
+     "claude": 0.5796590427014751,
+     "kda": 0.48531634242091237,
+     "ako": 0.45424095249534646
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6458333333333333
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6653302331914578,
+     "claude": 0.7354923086828674,
+     "kda": 0.6750730527001293,
+     "ako": 0.6550070748557059
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 1,
+    "agent_top_changed": false
+   },
+   "g2x_f1x": {
+    "g_scale": 2.0,
+    "f_scale": 1.0,
+    "set_scores": {
+     "drkernel-ind": 0.5002921752519223,
+     "drkernel-seq": 0.3882064667495458,
+     "claude-ind": 0.5808957482502496,
+     "claude-seq": 0.5923148669083842,
+     "kda-ind": 0.4490207015558483,
+     "kda-seq": 0.5649965643286565,
+     "ako-ind": 0.41513307181199177,
+     "ako-seq": 0.5390398630602325
+    },
+    "set_ranks": {
+     "drkernel-ind": 5,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.4431986716584102,
+     "claude": 0.5865820310830415,
+     "kda": 0.5058734845771194,
+     "ako": 0.4745428709827022
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6666666666666667
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6664716179802586,
+     "claude": 0.7442764461372111,
+     "kda": 0.7036679535867457,
+     "ako": 0.6620176993731728
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 0,
+    "agent_top_changed": false
+   },
+   "g2x_f2x": {
+    "g_scale": 2.0,
+    "f_scale": 2.0,
+    "set_scores": {
+     "drkernel-ind": 0.5003726100595081,
+     "drkernel-seq": 0.388257171547016,
+     "claude-ind": 0.5843410087863534,
+     "claude-seq": 0.5934321463828252,
+     "kda-ind": 0.4602941830027995,
+     "kda-seq": 0.5723296929836224,
+     "ako-ind": 0.415661580032032,
+     "ako-seq": 0.5420712104632004
+    },
+    "set_ranks": {
+     "drkernel-ind": 5,
+     "drkernel-seq": 8,
+     "claude-ind": 2,
+     "claude-seq": 1,
+     "kda-ind": 6,
+     "kda-seq": 3,
+     "ako-ind": 7,
+     "ako-seq": 4
+    },
+    "agent_scores": {
+     "drkernel": 0.4432636607369682,
+     "claude": 0.5888701047436643,
+     "kda": 0.5153803259715592,
+     "ako": 0.47623944386344397
+    },
+    "agent_ranks": {
+     "drkernel": 4,
+     "claude": 1,
+     "kda": 2,
+     "ako": 3
+    },
+    "agent_coverage_macro": {
+     "drkernel": 0.6666666666666667,
+     "claude": 0.75,
+     "kda": 0.6979166666666667,
+     "ako": 0.6666666666666667
+    },
+    "agent_C_macro": {
+     "drkernel": 0.6665693470103919,
+     "claude": 0.7471796365562633,
+     "kda": 0.7168919311879662,
+     "ako": 0.6643845272068767
+    },
+    "agent_discordant_pairs_vs_1x": 0,
+    "set_discordant_pairs_vs_1x": 0,
+    "agent_top_changed": false
+   }
+  }
+ },
+ "warnings": [
+  "jameslahm/yolov10n: fallback (no usable noise run) -> g = 0.020"
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "model": "fla-hub/gla-2.7B-100B",
+ "status": "ok",
+ "error": null,
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5210.4
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2103.57
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.067484662576687
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.496142915144134
+  }
+ },
+ "speedups": {
+  "mixed": 1.002,
+  "long-context": 1.0017,
+  "single-request": 1.0106,
+  "fixed-batch-32": 0.9852
+ },
+ "correctness": {
+  "per_sample": [
+   0.00217,
+   0.00092,
+   0.00187,
+   0.00273,
+   8e-05,
+   0.00279,
+   0.00043,
+   0.00012,
+   0.0019,
+   0.00221,
+   0.00177,
+   0.00245,
+   0.00267,
+   0.0026,
+   0.00283,
+   0.00062
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99824
+  }
+ },
+ "mean_d": 0.00176
+}

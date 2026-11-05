@@ -1,0 +1,125 @@
+{
+ "kernels_requested": [
+  "L1:linear",
+  "L1:rotary_emb",
+  "L2:flux_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:linear",
+    "L1:rotary_emb",
+    "L2:flux_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:linear",
+    "L1:rotary_emb",
+    "L2:flux_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "1024x1024": 0.9561,
+    "512x512": 1.0241,
+    "single-1024x1024": 1.0156,
+    "single-512x512": 0.9709
+   },
+   "mean_d": 0.00228125
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:linear",
+   "L1:rotary_emb",
+   "L2:flux_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:linear",
+   "L1:rotary_emb",
+   "L2:flux_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "1024x1024": 0.9561,
+   "512x512": 1.0241,
+   "single-1024x1024": 1.0156,
+   "single-512x512": 0.9709
+  },
+  "mean_d": 0.00228125
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:linear",
+  "L1:rotary_emb",
+  "L2:flux_attention"
+ ],
+ "timings": {
+  "1024x1024": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 0.401562
+  },
+  "512x512": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 1.63856
+  },
+  "single-1024x1024": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.8554549035053167
+  },
+  "single-512x512": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.8239777526006798
+  }
+ },
+ "speedups": {
+  "1024x1024": 0.9561,
+  "512x512": 1.0241,
+  "single-1024x1024": 1.0156,
+  "single-512x512": 0.9709
+ },
+ "correctness": {
+  "per_sample": [
+   0.00161,
+   0.00109,
+   0.0039,
+   0.00317,
+   0.00127,
+   0.00235,
+   0.00314,
+   0.00289,
+   0.00218,
+   0.0012,
+   0.00076,
+   0.00243,
+   0.00316,
+   0.00245,
+   0.00251,
+   0.00239
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99771875
+  }
+ },
+ "mean_d": 0.00228125,
+ "model": "black-forest-labs/FLUX.1-dev",
+ "set": "drkernel-ind"
+}

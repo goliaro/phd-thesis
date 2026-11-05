@@ -1,0 +1,8 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{ML serving and inference systems.} Numerous ML serving systems~\cite{258862,gunasekaran2022cocktail,lee2018pretzel,romero2021infaas,crankshaw2017clipper} address challenges like latency prediction, scalability, swapping~\cite{bai2020pipeswitch}, preemption~\cite{choi2020prema}, workload estimation~\cite{285173}, and cost-effectiveness~\cite{zhang2019mark}. Systems like Nexus~\cite{shen2019nexus} and Gpulet~\cite{choi2022serving} focus on batching and GPU virtualization for small models. 
+Recent LLM serving systems include vLLM~\cite{10.1145/3600006.3613165}, Sarathi~\cite{agrawal2023sarathi}, SGLang~\cite{sglang}, AlpaServe~\cite{li2023alpaserve}, Punica~\cite{chen2023punica}, and S-LoRA~\cite{sheng2023s}, which improve throughput through batching and specialized PEFT kernels. Aqua~\cite{aqua2024} introduces fine-grained fair scheduling among multiple inference workloads.
+Speculative decoding~\cite{specsampling, miao2023specinfer, suffixdecoding} can reduce serving latency and improve SLO attainment~\cite{adaserve} and goodput~\cite{turbospec}; combining it with co-serving is future work.
+
+\paragraph{GPU resource sharing for ML.} GPU resource sharing focuses on efficient allocation among multiple ML users. Lyra~\cite{li2023lyra} allocates dedicated resources with dynamic adjustment. Gandiva~\cite{xiao2018gandiva} and Antman~\cite{xiao2020antman} use time-slicing for better cluster utilization. GSLICE~\cite{dhakal2020gslice} develops adaptive allocation schemes for different SLO constraints. Although these approaches can not directly solve the resource utilization problem in PEFT service, we believe GPU resource sharing will be increasingly important as GPUs become more powerful.

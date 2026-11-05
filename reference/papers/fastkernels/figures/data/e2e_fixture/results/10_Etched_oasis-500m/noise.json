@@ -1,0 +1,52 @@
+{
+ "model": "Etched/oasis-500m",
+ "status": "ok",
+ "error": null,
+ "timings": {
+  "short-bs4-16f-4ddim": {
+   "kind": "throughput",
+   "unit": "frame/s",
+   "value": 54.604
+  },
+  "medium-bs8-24f-4ddim": {
+   "kind": "throughput",
+   "unit": "frame/s",
+   "value": 72.0437
+  },
+  "latency-bs1-8f-4ddim": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.35717829149717234
+  }
+ },
+ "speedups": {
+  "short-bs4-16f-4ddim": 0.9928,
+  "medium-bs8-24f-4ddim": 1.0147,
+  "latency-bs1-8f-4ddim": 1.0079
+ },
+ "correctness": {
+  "per_sample": [
+   0.00013,
+   0.00091,
+   0.00093,
+   0.00048,
+   0.00171,
+   0.00167,
+   0.00141,
+   0.00146,
+   0.001,
+   0.00079,
+   0.00287,
+   0.00235,
+   0.00108,
+   0.00086,
+   0.00219,
+   0.00196
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.9986375
+  }
+ },
+ "mean_d": 0.0013625000000000002
+}

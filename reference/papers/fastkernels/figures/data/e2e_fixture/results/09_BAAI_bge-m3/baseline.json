@@ -1,0 +1,28 @@
+{
+ "model": "BAAI/bge-m3",
+ "tp": 1,
+ "status": "ok",
+ "candidates": false,
+ "candidate_dir": null,
+ "adapter": "embedding",
+ "timings": {
+  "bge-m3-mldr-docs": {
+   "kind": "throughput",
+   "unit": "doc/s",
+   "value": 410.0
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.012
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.19
+  }
+ },
+ "t_run_s": 900.0,
+ "t_total_s": 1010.0,
+ "_dir": "/out/runs/09_BAAI_bge-m3/baseline"
+}

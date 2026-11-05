@@ -1,0 +1,199 @@
+\section{Evaluation}
+\label{sec:eval}
+% Data: baseline checkpoint run_20260616_011948; 16 archived KernelSeek sessions
+% (paper/analysis/traces); figures from scripts/plot_eval.py.
+
+We ask five questions, one per hypothesis of \S\ref{sec:hypotheses}. RQ1: how fast and how correct
+are the kernels? RQ2: on the same task, evaluator, hardware, and week, how does \sys compare with the
+equipped agent? RQ3: which human messages redirected the agent, and how? RQ4: what does evolutionary
+search add on top of questions? RQ5: do the questions transfer?
+
+\subsection{Setup}
+\label{sec:eval-setup}
+
+Hopper experiments and the head-to-head ran on one 8$\times$H200 node; Blackwell experiments on one
+8$\times$B200 node. The upstream kernels are vLLM's FA3 and the CuteDSL FA4 at pinned commits;
+cuDNN's fused attention (9.20 on Hopper, 9.19 on Blackwell) and FlashInfer are comparison columns
+fed the same buffers. Implementations are timed back to back on one idle GPU with an L2 flush before
+each sample; clocks are not locked, so only ratios are reported; four independent Hopper batches
+agree to within 0.3\% on every aggregate (Appendix~\ref{app:bench}). The equipped
+agent ran \texttt{claude-opus-4-8} through Claude Code in headless mode, one fresh session per step.
+\sys sessions used two front-ends: Claude Code with the Stop-hook goal, on \texttt{claude-opus-4-8}
+for seven sessions and \texttt{claude-opus-5} for the last two, and Cursor with the same instructions
+and without the hook, whose exports do not record the model. Sixteen \sys sessions are archived, nine
+in Claude Code and seven in Cursor, from June 17 to August 7, 2026: twelve for the Hopper campaign
+and four for Blackwell. They contain 162 human messages and 11,532 agent tool calls, 8,791 in the
+parent sessions and 2,741 in subagents. One author labeled each human message by its primary act
+(goal, directive, question, approval, correction), flagged interrogative phrasing, and assigned
+questions to the eight categories of \S\ref{sec:workflow-questions}; tool calls were classified by
+target (Appendix~\ref{app:traces}).
+
+\subsection{RQ1: Kernel Performance}
+\label{sec:eval-perf}
+
+The kernels are reported in \S\ref{sec:kernels}. In brief: \fathree is correct on all 182 Hopper
+scenarios at 1.16$\times$ FA3 and 1.10$\times$ the fastest available implementation including cuDNN;
+\fafour is correct on all 154 runnable Blackwell scenarios at 1.46$\times$ FA4 and 1.07$\times$ the
+fastest available. Per-scenario Hopper ratios vary by 1\% at the median and 6\% at most across
+repeats. Every Blackwell scenario below parity has a measured root cause (Appendix~\ref{app:kernels}).
+This is H1's quality half, and the result the rest of the section explains.
+
+\subsection{RQ2: Head-to-Head on the Same Task}
+\label{sec:eval-h2h}
+
+\begin{table}[t]
+\centering\small
+\caption{Head-to-head on the equipped agent's own evaluator: 26 FA3 configurations, same H200 node,
+overlapping days in June 2026. Upper block: outcome; the \sys hours run from the message that set
+the 26-configuration goal to the best result, excluding a 26.7-hour idle gap. Lower block: tool use;
+equipped-agent figures are over its 133 steps, \sys figures over all 16 sessions.}
+\label{tab:h2h}
+\setlength{\tabcolsep}{3pt}\footnotesize\raggedright
+\begin{tabular}{@{}p{0.40\columnwidth}>{\raggedright\arraybackslash}p{0.25\columnwidth}>{\raggedright\arraybackslash}p{0.28\columnwidth}@{}}
+\toprule
+ & Equipped agent & \sys \\
+\midrule
+Human text in prompts       & none          & 40 messages, 17 questions \\
+Model-driven steps / turns  & 133 steps     & 40 turns \\
+Wall-clock to best          & 44.7 h of 62.4 h & 68.0 h, 41.3 h active \\
+API cost                    & \$660         & not recoverable (Cursor) \\
+Candidates correct          & 132 / 133     & all reported \\
+Best geomean                & 0.48$\times$  & 1.13$\times$ \\
+Worst configuration         & 0.24$\times$  & 0.87$\times$ \\
+Configurations $\ge$1.0$\times$ & 0 / 26    & 22 / 26 \\
+Goal met                    & no            & yes \\
+\midrule
+Reference material pushed into prompt & 37\% of prompt & none \\
+Tool-result text re-reading own kernel & 82\% & 26\% \\
+Profiler (NCU) runs         & 1 per step, parsed & 429, raw \\
+SASS / PTX inspections      & 1 per step, parsed & 372 \\
+Documentation reads         & 92 lookups    & 36 \\
+Builds / benchmark runs     & 133 / 133     & 377 / 937 \\
+Subagents spawned           & 0             & 48 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The comparison is controlled in the ways that matter. During its first Hopper session, \sys adopted
+the equipped agent's own evaluator, the same 26 configurations, FA3 baseline, and correctness gate,
+on the same machine, in overlapping days. Table~\ref{tab:h2h} and Figure~\ref{fig:teaser} give the
+outcome. The equipped agent's lineage champion reached 0.48$\times$ FA3 at step 35, after 44.7
+hours, and did not improve in the remaining 98 model-driven steps (\S\ref{sec:baseline}). Its worst
+configuration stayed at 0.24$\times$ and none reached parity. \sys started from 0.009$\times$,
+because its kernel of the time routed the evaluator's paged and grouped-query configurations to the
+scalar fallback, and reached 0.96$\times$ after 21 hours, 1.02$\times$ after 66, and 1.13$\times$
+after 68, of which 26.7 were an idle gap. At the end, 22 of 26 configurations were at or above parity
+and the worst was 0.87$\times$. This supports H1 and, counting the 40 human turns against 133 steps
+and 62 model-hours, H2.
+
+Three caveats qualify the comparison: \sys had built a kernel for FA3's 40-scenario test grid in
+the two preceding days, so the 0.009$\times$ start understates its head start; the front-ends
+differ, and token usage is not recoverable for the Cursor sessions; and each arm is a single run.
+The fair reading is that in one calendar week a steered agent crossed parity on an evaluator on
+which an unsteered one, given more compute, did not reach half of it. We treat Table~\ref{tab:h2h}
+as showing that the gap exists and is large, and RQ3 as the evidence for why.
+
+\paragraph{Where the effort went.} The lower block of Table~\ref{tab:h2h} contrasts tool use. The
+equipped agent received a third of its context as pre-fetched reference material, yet spent 82\% of
+what it read on its own kernel. \sys, with nothing pushed to it, spent 26\% on its own kernels and
+ran the profiler 429 times on raw output. The questions did not reduce tool use; they aimed it.
+
+\subsection{RQ3: Anatomy of the Questions}
+\label{sec:eval-cases}
+
+\paragraph{What the human said.} Of the 162 human messages, directives are the largest class (58,
+36\%), followed by questions (44, 27\%), approvals (30, 19\%), corrections (19, 12\%), and goals
+(11, 7\%); 63 messages (39\%) are interrogative in phrasing, and 12 of the 19 corrections are
+phrased as questions (Appendix~\ref{app:traces}). The steering was interrogative, not mostly questions:
+directives and approvals keep the agent moving, and the questions are where its course changed. The
+agent also asked. Across the Claude Code sessions it
+posed 35 structured questions to the human, 24 of which offered an option to accept the current
+state or stop, and its messages assert a limit or an impossibility 126 times. The Stop hook returned
+it to work 59 times. Autonomous agents seek closure; the harness and the human refused it.
+
+\begin{table*}[t]
+\centering\small
+\caption{Case studies from the archived traces: the question (paraphrased for length), what the
+agent believed before it, the measurement the question triggered, and the outcome. Speedups are
+vs.\ the upstream kernel on the evaluator in use at the time.}
+\label{tab:cases}
+\setlength{\tabcolsep}{4pt}\footnotesize
+\begin{tabular}{@{}p{0.22\textwidth}p{0.22\textwidth}p{0.24\textwidth}p{0.26\textwidth}@{}}
+\toprule
+Question (category) & Agent's belief & Measurement it triggered & Outcome \\
+\midrule
+``What configs are bringing down the geomean?'' (gap triage) &
+Tuning the hd128 paths was the right priority. &
+Per-configuration table: hd96, hd192, hd256 were on the scalar fallback at 0.01$\times$. &
+Fallback removed; 0.44 $\to$ 0.96 geomean in 4 hours. \\
+\addlinespace
+``Is this ceiling a property of the hardware, or of our design? Where does the time go outside the kernel?'' (bound differencing) &
+Split-KV decode was at a ``genuine ceiling within the harness rules''. &
+Host-side profile: a per-call tensor fill of 2--5~$\mu$s outside the kernel. &
+Fill removed; split-KV 0.87 $\to$ 0.97, geomean 1.02 $\to$ 1.13. \\
+\addlinespace
+``Do our scenarios cover the shapes and features the operator is actually called with?'' (benchmark validity) &
+40 of 40 scenarios correct meant the kernel was done. &
+The operator's full test grid ported: 52 of 58 correct, with sink and left-pad outputs off by 495$\times$ and 103$\times$. &
+Six fixes; 58 of 58 correct, geomean 1.10 on the new grid. \\
+\addlinespace
+``Why do you think the goal was achieved? We are still well below parity.'' (challenge a limit) &
+The Stop-hook judge had accepted ``goal met''. &
+Agent: ``I stopped after the first successful lever and declared victory prematurely.'' &
+fp8 hd256 decode 0.20/0.34 $\to$ 0.66/0.77 after ``this is not a rare corner''. \\
+\addlinespace
+``Is it NCU that hangs, or our kernel?'' (hypothesis check) &
+``No deadlock in our kernel.'' &
+Sanitizer, then debugger: a warp-convergent \texttt{tcgen05.wait} inside a divergent branch. &
+All 8 hanging shapes fixed. \\
+\addlinespace
+``Is this really a register floor?'' (challenge a limit) &
+hd256 was register-capped; the judge had accepted the limit twice. &
+A collective rewrite of the consumer loop. &
+0.84 $\to$ 0.95--0.96$\times$; the agent's own note: ``the `floor' conclusion was wrong''. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\paragraph{Which questions mattered.} Table~\ref{tab:cases} walks through six turning points we can
+verify in the archived traces. Two patterns stand out. First, every large jump followed a question
+that either moved the agent to a different layer (from kernel tuning to the per-configuration table,
+to the host launch path, to the benchmark itself) or rejected a claimed limit; none followed a
+message that supplied information the agent lacked, which supports H3. Second, the measurement the
+question triggered was always one the agent could already make: the per-configuration table, the
+host-side profile, the sanitizer, and the debugger were available at every earlier step. What the
+agent lacked was a reason to look. Four further episodes, among them the 38~$\mu$s host copy and a
+routing sweep that moved the Blackwell geomean from 0.88 to 1.15$\times$ without changing a kernel
+body, are documented in the repository's history but not in archived sessions, and we cite them as
+outcomes only.
+
+\subsection{RQ4: Questions and Evolutionary Search}
+\label{sec:eval-evo}
+
+
+We wrapped the same agent in the loop of \S\ref{sec:workflow-evo} and ran it on the Blackwell
+dense-prefill kernel from a correct but slow port (Figure~\ref{fig:evo}, Appendix~\ref{app:traces}). The first generation,
+whose directive asked whether a persistent schedule with longest-first ordering and cross-tile
+overlap would recover the lost overlap, took the kernel from 0.29$\times$ to 0.68$\times$. Three
+more generations added 0.10$\times$ between them through a folded softmax scale, a split K/V
+barrier, and a depth-two softmax--correction handshake, while directives on register rebalancing and
+address hoisting measured neutral or negative. The search stalled at 0.78$\times$ with the kernel's
+own cycle count already below upstream's. The last 22 points came
+from a question, not a generation: asked where the time was going, the agent profiled the whole call
+rather than the kernel and found that synchronous host copies accounted for the gap. Evolution
+amplified the direction the directives carried and searched efficiently within the layer it was
+pointed at; it could not move to a layer it was not pointed at. This is H4.
+
+\subsection{RQ5: Reuse}
+\label{sec:eval-auto}
+
+The question categories were populated mostly during the Hopper campaign, which came first. Five of
+the eight recur in the Blackwell campaign, and the Blackwell skill's self-questions restate Hopper
+questions nearly verbatim. Of the 63 interrogative messages, 17 mention a concept specific to
+attention and 32 mention the upstream kernel; the rest name only measurements, layers, and process,
+and where a question names the upstream it uses it as a bound, a role a roofline fills when no
+upstream exists. This is the evidence for H5 that we have: necessary, since a bank that did not
+transfer across two architectures would not transfer further, but not sufficient, since both
+campaigns were attention and the 72 bank entries mined from public sources (\S\ref{sec:workflow-bank})
+have not yet steered an agent. The experiment that would test both, and whether the bank can replace
+the human at decision points, is described in \S\ref{sec:discussion}.

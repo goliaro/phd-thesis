@@ -1,0 +1,129 @@
+{
+ "kernels_requested": [
+  "L1:conv2d",
+  "L1:max_pool2d",
+  "L1:sigmoid",
+  "L1:silu",
+  "L2:yolov10_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:conv2d",
+    "L1:max_pool2d",
+    "L1:sigmoid",
+    "L1:silu",
+    "L2:yolov10_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:conv2d",
+    "L1:max_pool2d",
+    "L1:sigmoid",
+    "L1:silu",
+    "L2:yolov10_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "coco-val": 0.9919,
+    "single-image": 1.0153,
+    "batch-4": 1.0679
+   },
+   "mean_d": 0.01469375
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:conv2d",
+   "L1:max_pool2d",
+   "L1:sigmoid",
+   "L1:silu",
+   "L2:yolov10_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:conv2d",
+   "L1:max_pool2d",
+   "L1:sigmoid",
+   "L1:silu",
+   "L2:yolov10_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "coco-val": 0.9919,
+   "single-image": 1.0153,
+   "batch-4": 1.0679
+  },
+  "mean_d": 0.01469375
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:conv2d",
+  "L1:max_pool2d",
+  "L1:sigmoid",
+  "L1:silu",
+  "L2:yolov10_attention"
+ ],
+ "timings": {
+  "coco-val": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 843.115
+  },
+  "single-image": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.004038215305820939
+  },
+  "batch-4": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.008708680588070042
+  }
+ },
+ "speedups": {
+  "coco-val": 0.9919,
+  "single-image": 1.0153,
+  "batch-4": 1.0679
+ },
+ "correctness": {
+  "per_sample": [
+   0.00217,
+   0.00091,
+   0.00185,
+   0.00379,
+   0.20875,
+   0.00239,
+   0.00014,
+   0.00021,
+   0.0016,
+   0.00286,
+   0.00226,
+   0.00128,
+   0.00224,
+   0.00059,
+   0.00141,
+   0.00265
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.98530625
+  }
+ },
+ "mean_d": 0.01469375,
+ "model": "jameslahm/yolov10n",
+ "set": "claude-ind"
+}

@@ -1,0 +1,17 @@
+\begin{table}
+\caption{Average number of tokens verified by \Sys in a decoding step. We used OPT-13B as the LLM and used different numbers of collectively boost-tuned SSMs, all of which were derived from OPT-125M. The speculation length is 16 for all SSMs.}
+\label{tab:cbt-opt}
+\begin{center}
+\footnotesize
+\begin{tabular}{cccccc}
+\toprule
+               \# SSMs             & 1 & 2 & 3 & 4 & 5 \\ \midrule
+CIP & 3.00     & 3.39     & 3.52     & 3.58     & \textbf{3.74}     \\
+CP           & 2.95     & 3.35     & 3.49     & 3.52     & \textbf{3.68}     \\
+WebQA                      & 2.51     & 2.92     & 3.04     & 3.09     & \textbf{3.20}     \\
+Alpaca               & 3.33     & 3.89     & 4.06     & 4.17     & \textbf{4.35}     \\
+PIQA                        & 2.75     & 3.14     & 3.26     & 3.31     & \textbf{3.43}     \\ \midrule
+Avg                         & 2.91     & 3.34     & 3.47     & 3.53     & \textbf{3.68}     \\ \bottomrule
+\end{tabular}
+\end{center}
+\end{table}

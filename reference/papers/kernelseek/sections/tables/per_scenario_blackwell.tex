@@ -1,0 +1,188 @@
+\begin{longtable}{@{}llrrrrr@{}}
+\caption{Per-scenario results on B200. Speedups are upstream (FA4) time over the implementation's time; ``best'' is our speedup over the fastest available baseline (upstream, cuDNN, or FlashInfer). ``---'': the implementation does not support the scenario.}\label{tab:per-scenario-blackwell}\\
+\toprule Set & Scenario & FA4 ($\mu$s) & ours & cuDNN & FlashInfer & best \\ \midrule \endfirsthead
+\toprule Set & Scenario & FA4 ($\mu$s) & ours & cuDNN & FlashInfer & best \\ \midrule \endhead
+\bottomrule \endfoot
+attntest & attn\_dense\_hd64\_causal & 102.2 & 1.49 & 1.40 & 1.05 & 1.06 \\
+attntest & attn\_dense\_hd96\_causal & 104.6 & 1.00 & 1.33 & --- & 0.75 \\
+attntest & attn\_dense\_hd128\_causal & 110.4 & 1.38 & 1.39 & 1.02 & 0.99 \\
+attntest & attn\_dense\_hd192\_causal & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, FlashInfer})} \\
+attntest & attn\_dense\_hd256\_causal & --- & \multicolumn{4}{l}{UNSUP({ours})} \\
+attntest & attn\_dense\_hd128\_noncausal & 123.7 & 1.26 & 1.51 & 1.05 & 0.83 \\
+attntest & attn\_dense\_hd128\_nc4k & 266.4 & 0.99 & 1.17 & 0.96 & 0.84 \\
+attntest & attn\_dense\_hd128\_gqa & 104.0 & 1.35 & 1.34 & 0.97 & 1.01 \\
+attntest & attn\_dense\_hd128\_mqa & 103.5 & 1.36 & 1.35 & 0.97 & 1.01 \\
+attntest & attn\_dense\_hd128\_fp16 & 109.6 & 1.38 & 1.39 & 1.01 & 1.00 \\
+attntest & attn\_dense\_hd128\_fp8 & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN, FlashInfer})} \\
+attntest & attn\_dense\_hd128\_softcap & 429.4 & 2.50 & --- & --- & 2.50 \\
+attntest & attn\_dense\_hd128\_local & 92.4 & 1.21 & 1.20 & 0.97 & 1.00 \\
+attntest & attn\_dense\_hd128\_oddseq & 54.7 & 1.91 & 1.60 & 1.02 & 1.20 \\
+attntest & attn\_dense\_hd128\_seq256 & 54.5 & 1.80 & 1.71 & 0.98 & 1.05 \\
+attntest & attn\_dense\_hd128\_large4k & 166.5 & 1.10 & 1.28 & 0.86 & 0.86 \\
+attntest & attn\_dense\_hd128\_splits3 & 103.2 & 1.35 & 1.33 & 0.96 & 1.02 \\
+attntest & attn\_varlen\_hd128\_causal & 55.0 & 1.63 & 1.23 & 1.00 & 1.32 \\
+attntest & attn\_varlen\_hd128\_noncausal & 53.3 & 1.75 & 1.22 & 0.97 & 1.43 \\
+attntest & attn\_varlen\_hd64\_causal & 53.0 & 1.78 & 1.17 & 0.99 & 1.52 \\
+attntest & attn\_varlen\_hd128\_mqa & 54.2 & 1.57 & 1.20 & 0.98 & 1.31 \\
+attntest & attn\_kv\_hd128\_decode\_mha & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_decode\_gqa5 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_decode\_mqa32 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_decode\_qlen120 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_decode\_qlen8 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd64\_decode\_gqa3 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd256\_decode\_mqa16 & --- & \multicolumn{4}{l}{UNSUP({ours, FA4})} \\
+attntest & attn\_kv\_hd128\_decode\_noncausal & 94.5 & 2.09 & 2.57 & 1.10 & 0.81 \\
+attntest & attn\_kv\_hd128\_fp8\_decode & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, cuDNN, FlashInfer})} \\
+attntest & attn\_kv\_hd128\_split2 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd256\_split\_auto & --- & \multicolumn{4}{l}{UNSUP({ours, FA4})} \\
+attntest & attn\_kv\_hd128\_local\_decode & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_decode\_gqa9 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_decode\_gqa7 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_decode\_128k\_splitkv & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_page1 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_page4 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_page128 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_ctx20k & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_prefill3577 & 134.5 & 1.05 & 1.32 & 0.96 & 0.79 \\
+attntest & attn\_kv\_hd128\_dec339 & 53.5 & 1.42 & 1.69 & 1.09 & 0.84 \\
+attntest & attn\_kv\_hd128\_dec1024 & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd128\_dec800 & --- & --- & --- & --- & --- \\
+attntest & attn\_dense\_hd192\_dv128 & 130.7 & 1.35 & 1.36 & --- & 0.99 \\
+attntest & attn\_varlen\_hd192\_dv128 & 54.7 & 1.56 & 1.16 & --- & 1.35 \\
+attntest & attn\_dense\_hd64\_fp16 & 101.3 & 1.48 & 1.41 & 1.04 & 1.04 \\
+attntest & attn\_dense\_hd192\_fp16 & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, FlashInfer})} \\
+attntest & attn\_dense\_hd128\_fp8\_gqa & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN, FlashInfer})} \\
+attntest & attn\_varlen\_hd128\_fp8 & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN, FlashInfer})} \\
+attntest & attn\_kv\_hd128\_fp16\_decode & --- & --- & --- & --- & --- \\
+attntest & attn\_kv\_hd64\_fp8\_decode & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, cuDNN, FlashInfer})} \\
+attntest & attn\_dense\_hd256\_fp8 & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, cuDNN, FlashInfer})} \\
+attntest & attn\_kv\_hd256\_fp8\_decode & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, cuDNN, FlashInfer})} \\
+attntest & attn\_dense\_hd128\_kgtq & 58.9 & 1.72 & 1.62 & 0.98 & 1.06 \\
+attntest & attn\_dense\_hd128\_deg\_q239k1 & 53.2 & 1.97 & --- & 1.00 & 1.97 \\
+attntest & attn\_dense\_hd128\_local\_noncausal & 103.7 & 1.17 & 1.19 & --- & 0.98 \\
+attntest & attn\_varlen\_hd128\_local & 55.5 & 1.60 & 1.20 & 1.01 & 1.33 \\
+attntest & attn\_dense\_hd128\_softcap\_gqa & 357.8 & 2.09 & --- & --- & 2.09 \\
+attntest & attn\_dense\_hd128\_sink & 112.2 & 1.31 & 1.40 & 0.94 & 0.94 \\
+attntest & attn\_varlen\_hd128\_sink & 54.5 & 1.38 & 1.18 & 0.82 & 1.17 \\
+attntest & attn\_kv\_hd128\_leftpad & --- & --- & --- & --- & --- \\
+attntest & attn\_dense\_hd128\_seq8k & 493.0 & 0.93 & 1.10 & 0.84 & 0.84 \\
+attntest & attn\_dense\_hd128\_seq16k & 896.1 & 0.88 & 1.06 & 0.78 & 0.83 \\
+edge & attn\_edge\_causal\_q1k1 & 51.6 & 2.19 & 1.84 & 1.09 & 1.19 \\
+edge & attn\_edge\_causal\_q3k3 & 51.5 & 2.18 & 1.81 & 1.00 & 1.20 \\
+edge & attn\_edge\_causal\_q64k1 & 52.0 & 2.20 & --- & 1.05 & 2.09 \\
+edge & attn\_edge\_causal\_q64k32 & 52.0 & 2.18 & --- & 1.05 & 2.07 \\
+edge & attn\_edge\_causal\_q64k128 & 51.6 & 2.17 & 1.84 & 1.05 & 1.18 \\
+edge & attn\_edge\_causal\_q128k192 & 51.9 & 1.88 & 1.68 & 1.01 & 1.11 \\
+edge & attn\_edge\_causal\_q255k256 & 52.6 & 1.89 & 1.65 & 0.99 & 1.14 \\
+edge & attn\_edge\_causal\_q108k256 & 52.1 & 2.01 & 1.59 & 1.02 & 1.26 \\
+edge & attn\_edge\_causal\_q113k128 & 52.4 & 2.18 & 1.86 & 1.05 & 1.17 \\
+edge & attn\_edge\_causal\_q113k211 & 51.7 & 1.90 & 1.60 & 1.02 & 1.18 \\
+edge & attn\_edge\_causal\_q128k217 & 51.9 & 1.90 & 1.60 & 1.01 & 1.18 \\
+edge & attn\_edge\_causal\_q799k3 & 52.9 & 2.02 & --- & 1.07 & 1.89 \\
+edge & attn\_edge\_causal\_q384k256 & 52.5 & 2.04 & --- & 1.02 & 1.99 \\
+edge & attn\_edge\_causal\_q640k128 & 52.2 & 2.05 & --- & 1.05 & 1.94 \\
+edge & attn\_edge\_causal\_q512k256 & 54.4 & 1.96 & --- & 1.02 & 1.91 \\
+edge & attn\_edge\_causal\_q1023k1024 & --- & --- & --- & --- & --- \\
+edge & attn\_edge\_causal\_q1024k1023 & --- & --- & --- & --- & --- \\
+edge & attn\_edge\_causal\_q2048k2048 & 78.0 & 1.42 & 1.53 & 1.01 & 0.93 \\
+edge & attn\_edge\_noncausal\_q1k1 & 52.6 & 2.21 & 1.85 & 1.07 & 1.19 \\
+edge & attn\_edge\_noncausal\_q64k128 & 52.6 & 2.26 & 1.83 & 1.07 & 1.23 \\
+edge & attn\_edge\_noncausal\_q255k256 & 52.7 & 1.92 & 1.82 & 0.99 & 1.05 \\
+edge & attn\_edge\_noncausal\_q128k217 & 52.4 & 2.03 & 1.65 & 1.02 & 1.23 \\
+edge & attn\_edge\_noncausal\_q512k256 & 53.2 & 2.04 & --- & 1.01 & 2.01 \\
+edge & attn\_edge\_noncausal\_q1024k1023 & 105.5 & 2.74 & --- & 1.67 & 1.63 \\
+edge & attn\_edge\_local\_q128k217 & 55.0 & 1.97 & 1.61 & 1.06 & 1.22 \\
+edge & attn\_edge\_local\_q255k256 & 55.3 & 1.87 & 1.56 & 1.03 & 1.19 \\
+edge & attn\_edge\_local\_q512k256 & 54.1 & 1.79 & --- & 1.01 & 1.76 \\
+edge & attn\_edge\_local\_q1024k1023 & --- & --- & --- & --- & --- \\
+edge & attn\_edge\_gqa\_q113k211 & 53.5 & 1.94 & 1.64 & 1.03 & 1.18 \\
+edge & attn\_edge\_gqa\_q384k256 & 53.0 & 2.06 & --- & 1.03 & 2.00 \\
+edge & attn\_edge\_gqa\_q640k128 & 52.5 & 2.04 & --- & 1.05 & 1.94 \\
+claim & dense\_c\_d64\_s1k & 227.0 & 1.25 & 1.36 & 1.16 & 0.91 \\
+claim & dense\_c\_d64\_s4k & 448.0 & 0.99 & 1.13 & 0.94 & 0.87 \\
+claim & dense\_c\_d64\_s8k & 759.4 & 0.92 & 1.12 & 0.89 & 0.83 \\
+claim & dense\_c\_d128\_s1k & 153.7 & 1.25 & 1.39 & 1.07 & 0.90 \\
+claim & dense\_c\_d128\_s4k & 297.9 & 0.99 & 1.17 & 0.89 & 0.85 \\
+claim & dense\_c\_d128\_s8k & 496.8 & 0.92 & 1.09 & 0.82 & 0.85 \\
+claim & dense\_c\_d128\_gqa8\_s2k & 184.5 & 1.11 & 1.22 & 0.95 & 0.91 \\
+claim & dense\_c\_d128\_gqa8\_s8k & 477.3 & 0.90 & 1.11 & 0.80 & 0.82 \\
+claim & dense\_c\_d96\_s2k & 183.4 & 0.85 & 1.25 & --- & 0.68 \\
+claim & dense\_c\_d128\_softcap50\_s2k & 802.5 & 1.92 & --- & --- & 1.92 \\
+claim & dense\_c\_d128\_sink\_s2k & 194.3 & 1.07 & 1.23 & 0.89 & 0.87 \\
+claim & dense\_c\_d256\_s2k & --- & \multicolumn{4}{l}{UNSUP({ours})} \\
+claim & dense\_c\_d256\_s8k & --- & \multicolumn{4}{l}{UNSUP({ours})} \\
+claim & dense\_c\_d192\_s2k & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, FlashInfer})} \\
+claim & dense\_c\_d192\_dv128\_s2k & 161.8 & 1.32 & 1.51 & --- & 0.87 \\
+claim & dense\_nc\_d128\_s2k & 271.7 & 0.93 & 1.17 & 0.94 & 0.80 \\
+claim & dense\_nc\_d128\_s8k & 889.3 & 0.88 & 1.10 & 0.93 & 0.79 \\
+claim & dense\_nc\_d256\_s8k & --- & \multicolumn{4}{l}{UNSUP({ours})} \\
+claim & dense\_c\_d64\_fp8\_s8k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN, FlashInfer})} \\
+claim & dense\_c\_d128\_fp8\_s4k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN, FlashInfer})} \\
+claim & dense\_c\_d128\_fp8\_s8k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN, FlashInfer})} \\
+claim & dense\_c\_d128\_fp8\_gqa\_s4k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN, FlashInfer})} \\
+claim & dense\_c\_d256\_fp8\_s8k & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, cuDNN, FlashInfer})} \\
+claim & dense\_c\_d128\_fp8\_scalar\_s4k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN})} \\
+claim & dense\_c\_d128\_fp8\_scalar\_gqa\_s4k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN})} \\
+claim & dense\_c\_d64\_fp8\_scalar\_s8k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN})} \\
+claim & dense\_c\_d128\_swa256\_s4k & 128.9 & 1.05 & 1.14 & 1.01 & 0.92 \\
+claim & dense\_c\_d128\_swa4k\_s4k & 266.2 & 0.97 & 0.92 & 0.85 & 0.97 \\
+claim & varlen\_c\_d128\_mix & 54.1 & 1.59 & 1.19 & 0.98 & 1.33 \\
+claim & varlen\_c\_d64\_mix & 51.9 & 1.77 & 1.18 & 0.98 & 1.50 \\
+claim & varlen\_c\_d128\_mqa\_mix & 54.1 & 1.62 & 1.20 & 0.99 & 1.35 \\
+claim & varlen\_c\_d128\_realmix & 214.9 & 1.02 & 0.87 & 0.88 & 1.02 \\
+claim & llama8b\_dec\_b16\_s512 & 55.1 & 1.56 & 1.81 & 1.12 & 0.86 \\
+claim & llama8b\_dec\_b32\_s1k & 77.2 & 1.04 & 1.45 & 1.07 & 0.71 \\
+claim & llama8b\_dec\_b16\_s4k & 98.0 & 1.20 & 1.33 & 1.06 & 0.90 \\
+claim & llama8b\_dec\_b64\_s4k & 230.9 & 0.95 & 1.18 & 1.12 & 0.80 \\
+claim & llama8b\_dec\_b16\_s4k\_p16 & 100.2 & 1.09 & 1.36 & 1.09 & 0.80 \\
+claim & llama8b\_dec\_b16\_s4k\_p128 & 96.5 & 1.19 & 1.32 & 1.04 & 0.90 \\
+claim & qwen3\_dec\_b16\_s4k & --- & --- & --- & --- & --- \\
+claim & qwen3\_dec\_b64\_s4k & 145.1 & 1.02 & 1.18 & 1.12 & 0.87 \\
+claim & llama70b\_dec\_b16\_s4k & 98.9 & 1.18 & 1.35 & 1.07 & 0.88 \\
+claim & mistral\_dec\_b16\_s4k & 100.0 & 1.22 & 1.35 & 1.07 & 0.91 \\
+claim & gemma2\_dec\_b16\_s4k & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, cuDNN, FlashInfer})} \\
+claim & llama8b\_dec\_b16\_s16k & 220.8 & 1.05 & 1.20 & 1.09 & 0.87 \\
+claim & llama8b\_dec\_b64\_s16k & 844.5 & 0.97 & 1.32 & 1.30 & 0.74 \\
+claim & llama8b\_dec\_b16\_s32k & 401.3 & 0.96 & 1.22 & 1.16 & 0.79 \\
+claim & qwen3\_dec\_b16\_s32k & --- & --- & --- & --- & --- \\
+claim & llama70b\_dec\_b4\_s128k & --- & --- & --- & --- & --- \\
+claim & mistral\_dec\_b16\_s16k & 101.4 & 1.18 & 1.36 & 1.08 & 0.86 \\
+claim & llama8b\_pf\_q512 & 59.5 & 1.58 & 1.52 & 1.05 & 1.04 \\
+claim & llama8b\_pf\_q2k & 85.3 & 1.09 & 1.38 & 0.87 & 0.79 \\
+claim & llama8b\_pf\_q8k & 505.9 & 0.97 & 1.17 & 0.88 & 0.83 \\
+claim & llama8b\_pf\_q2k\_p16 & 86.4 & 1.07 & 1.36 & 0.87 & 0.79 \\
+claim & qwen3\_pf\_q4k & 166.2 & 1.06 & 1.23 & 0.87 & 0.86 \\
+claim & llama70b\_pf\_q8k & 989.7 & 0.96 & 1.06 & 0.89 & 0.90 \\
+claim & mistral\_pf\_q4k & 169.3 & 1.07 & 0.93 & 0.88 & 1.07 \\
+claim & gemma2\_pf\_q4k & --- & \multicolumn{4}{l}{UNSUP({ours, FA4, cuDNN, FlashInfer})} \\
+claim & llama8b\_pf\_ragged & 215.5 & 1.02 & 0.86 & 0.88 & 1.02 \\
+claim & llama8b\_ext\_q512\_k16k & --- & --- & --- & --- & --- \\
+claim & llama8b\_ext\_q1k\_k64k & 1010.2 & 0.97 & 1.10 & 1.04 & 0.88 \\
+claim & qwen3\_ext\_q512\_k32k & --- & --- & --- & --- & --- \\
+claim & llama70b\_ext\_q1k\_k128k & 4019.9 & 0.94 & 1.07 & 1.07 & 0.88 \\
+claim & llama8b\_spec\_q2\_b16\_s1k & 62.9 & 1.19 & 0.35 & 1.07 & 1.11 \\
+claim & llama8b\_spec\_q4\_b32\_s4k & 145.1 & 0.93 & 0.14 & 1.09 & 0.85 \\
+claim & llama8b\_spec\_q8\_b16\_s4k & 99.8 & 1.00 & 0.17 & 1.03 & 0.98 \\
+claim & qwen3\_spec\_q4\_b16\_s4k & --- & --- & --- & --- & --- \\
+claim & mixed\_2pf2k\_8dec1k & 141.4 & 0.94 & 0.93 & 0.90 & 0.94 \\
+claim & mixed\_1pf8k\_64dec4k & 789.6 & 0.78 & 0.56 & 0.49 & 0.78 \\
+claim & mixed\_2pf2k\_8dec16k & 351.1 & 1.17 & 0.52 & 0.65 & 1.17 \\
+claim & llama8b\_dec\_bf16q\_fp8kv\_b16\_s1k & 224.4 & 4.69 & 6.20 & --- & 0.76 \\
+claim & llama8b\_dec\_bf16q\_fp8kv\_b32\_s4k & 1171.8 & 8.57 & 9.77 & --- & 0.88 \\
+claim & llama8b\_dec\_bf16q\_fp8kv\_b16\_s16k & 2088.7 & 9.91 & 11.35 & --- & 0.87 \\
+claim & llama8b\_pf\_bf16q\_fp8kv\_q2k & 132.7 & 1.70 & 2.12 & --- & 0.80 \\
+claim & llama8b\_dec\_bf16q\_fp8kv\_scalar\_b16\_s1k & 228.8 & 4.55 & 2.96 & 2.42 & 1.54 \\
+claim & llama8b\_dec\_bf16q\_fp8kv\_scalar\_b32\_s4k & 1161.5 & 8.30 & 7.28 & 7.23 & 1.14 \\
+claim & llama8b\_dec\_fp8\_scalar\_b16\_s4k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN})} \\
+claim & llama8b\_pf\_fp8\_scalar\_q2k & --- & \multicolumn{4}{l}{UNSUP({ours, cuDNN})} \\
+real & attn\_real\_llama8b\_dec\_s512 & 56.6 & 1.50 & 1.36 & --- & 1.10 \\
+real & attn\_real\_llama8b\_dec\_s4k & 100.7 & 1.17 & 0.64 & --- & 1.17 \\
+real & attn\_real\_llama8b\_dec\_s16k & 224.3 & 1.01 & 0.43 & --- & 1.01 \\
+real & attn\_real\_llama8b\_dec\_b64\_s4k & 234.2 & 0.88 & 0.50 & --- & 0.88 \\
+real & attn\_real\_qwen3moe\_dec\_s512 & 54.5 & 1.49 & 1.38 & --- & 1.08 \\
+real & attn\_real\_qwen3moe\_dec\_s4k & --- & --- & --- & --- & --- \\
+real & attn\_real\_qwen3moe\_dec\_s32k & --- & --- & --- & --- & --- \\
+real & attn\_real\_llama8b\_pf\_s2k & 128.2 & 1.04 & 0.75 & --- & 1.04 \\
+real & attn\_real\_llama8b\_pf\_s16k & 1865.5 & 0.91 & 0.48 & --- & 0.91 \\
+real & attn\_real\_qwen3moe\_pf\_s4k & 167.8 & 0.98 & 0.55 & --- & 0.98 \\
+\end{longtable}

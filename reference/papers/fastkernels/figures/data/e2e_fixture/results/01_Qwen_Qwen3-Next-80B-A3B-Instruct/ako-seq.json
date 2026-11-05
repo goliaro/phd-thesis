@@ -1,0 +1,143 @@
+{
+ "kernels_requested": [
+  "L1:gated_delta_rule",
+  "L1:linear",
+  "L1:rms_norm",
+  "L1:silu_and_mul",
+  "L2:moe_router",
+  "L3:decoder_layer"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:gated_delta_rule",
+    "L1:linear",
+    "L1:rms_norm",
+    "L1:silu_and_mul",
+    "L2:moe_router",
+    "L3:decoder_layer"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gated_delta_rule",
+    "L1:linear",
+    "L1:rms_norm",
+    "L1:silu_and_mul",
+    "L2:moe_router",
+    "L3:decoder_layer"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0832,
+    "long-context": 1.0395,
+    "single-request": 1.039,
+    "fixed-batch-32": 1.1108
+   },
+   "mean_d": 0.00244625
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:gated_delta_rule",
+   "L1:linear",
+   "L1:rms_norm",
+   "L1:silu_and_mul",
+   "L2:moe_router",
+   "L3:decoder_layer"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:gated_delta_rule",
+   "L1:linear",
+   "L1:rms_norm",
+   "L1:silu_and_mul",
+   "L2:moe_router",
+   "L3:decoder_layer"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 1.0832,
+   "long-context": 1.0395,
+   "single-request": 1.039,
+   "fixed-batch-32": 1.1108
+  },
+  "mean_d": 0.00244625
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:gated_delta_rule",
+  "L1:linear",
+  "L1:rms_norm",
+  "L1:silu_and_mul",
+  "L2:moe_router",
+  "L3:decoder_layer"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5632.639999999999
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2182.9500000000003
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.9836381135707413
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 5.761613251710479
+  }
+ },
+ "speedups": {
+  "mixed": 1.0832,
+  "long-context": 1.0395,
+  "single-request": 1.039,
+  "fixed-batch-32": 1.1108
+ },
+ "correctness": {
+  "per_sample": [
+   0.00203,
+   0.00167,
+   0.00076,
+   0.00378,
+   0.0013,
+   0.00149,
+   0.00268,
+   0.00509,
+   0.00013,
+   0.00426,
+   0.00284,
+   0.0,
+   0.00556,
+   0.00513,
+   0.00149,
+   0.00093
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99755375
+  }
+ },
+ "mean_d": 0.00244625,
+ "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+ "set": "ako-seq"
+}

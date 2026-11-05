@@ -1,0 +1,129 @@
+{
+ "kernels_requested": [
+  "L1:conv2d",
+  "L1:max_pool2d",
+  "L1:sigmoid",
+  "L1:silu",
+  "L2:yolov10_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:conv2d",
+    "L1:max_pool2d",
+    "L1:sigmoid",
+    "L1:silu",
+    "L2:yolov10_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:conv2d",
+    "L1:max_pool2d",
+    "L1:sigmoid",
+    "L1:silu",
+    "L2:yolov10_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "coco-val": 1.0757,
+    "single-image": 1.0491,
+    "batch-4": 1.0875
+   },
+   "mean_d": 0.0016606250000000002
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:conv2d",
+   "L1:max_pool2d",
+   "L1:sigmoid",
+   "L1:silu",
+   "L2:yolov10_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:conv2d",
+   "L1:max_pool2d",
+   "L1:sigmoid",
+   "L1:silu",
+   "L2:yolov10_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "coco-val": 1.0757,
+   "single-image": 1.0491,
+   "batch-4": 1.0875
+  },
+  "mean_d": 0.0016606250000000002
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:conv2d",
+  "L1:max_pool2d",
+  "L1:sigmoid",
+  "L1:silu",
+  "L2:yolov10_attention"
+ ],
+ "timings": {
+  "coco-val": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 914.3450000000001
+  },
+  "single-image": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.003908111714803165
+  },
+  "batch-4": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.008551724137931035
+  }
+ },
+ "speedups": {
+  "coco-val": 1.0757,
+  "single-image": 1.0491,
+  "batch-4": 1.0875
+ },
+ "correctness": {
+  "per_sample": [
+   0.0009,
+   0.00159,
+   0.00181,
+   0.00392,
+   0.00016,
+   0.00248,
+   0.00249,
+   0.00323,
+   0.0004,
+   5e-05,
+   0.00016,
+   0.00139,
+   0.00024,
+   0.00368,
+   0.00034,
+   0.00373
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.998339375
+  }
+ },
+ "mean_d": 0.0016606250000000002,
+ "model": "jameslahm/yolov10n",
+ "set": "claude-seq"
+}

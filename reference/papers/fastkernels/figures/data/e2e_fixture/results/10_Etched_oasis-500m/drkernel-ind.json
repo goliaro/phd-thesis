@@ -1,0 +1,111 @@
+{
+ "kernels_requested": [
+  "L1:conv3d",
+  "L2:spatial_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:conv3d",
+    "L2:spatial_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:conv3d",
+    "L2:spatial_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "short-bs4-16f-4ddim": 0.9588,
+    "medium-bs8-24f-4ddim": 0.9154,
+    "latency-bs1-8f-4ddim": 0.9631
+   },
+   "mean_d": 0.0021687499999999997
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:conv3d",
+   "L2:spatial_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:conv3d",
+   "L2:spatial_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "short-bs4-16f-4ddim": 0.9588,
+   "medium-bs8-24f-4ddim": 0.9154,
+   "latency-bs1-8f-4ddim": 0.9631
+  },
+  "mean_d": 0.0021687499999999997
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:conv3d",
+  "L2:spatial_attention"
+ ],
+ "timings": {
+  "short-bs4-16f-4ddim": {
+   "kind": "throughput",
+   "unit": "frame/s",
+   "value": 52.734
+  },
+  "medium-bs8-24f-4ddim": {
+   "kind": "throughput",
+   "unit": "frame/s",
+   "value": 64.9934
+  },
+  "latency-bs1-8f-4ddim": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.3737929602325823
+  }
+ },
+ "speedups": {
+  "short-bs4-16f-4ddim": 0.9588,
+  "medium-bs8-24f-4ddim": 0.9154,
+  "latency-bs1-8f-4ddim": 0.9631
+ },
+ "correctness": {
+  "per_sample": [
+   0.00371,
+   0.00314,
+   0.00297,
+   0.00074,
+   0.00128,
+   0.0022,
+   0.00333,
+   0.00017,
+   0.00251,
+   0.00282,
+   0.00378,
+   0.002,
+   0.0012,
+   0.00032,
+   0.00065,
+   0.00388
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.99783125
+  }
+ },
+ "mean_d": 0.0021687499999999997,
+ "model": "Etched/oasis-500m",
+ "set": "drkernel-ind"
+}

@@ -1,0 +1,119 @@
+{
+ "kernels_requested": [
+  "L1:rms_norm",
+  "L2:moe_router"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:rms_norm",
+    "L2:moe_router"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:rms_norm",
+    "L2:moe_router"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 0.9585,
+    "long-context": 1.0371,
+    "single-request": 0.9699,
+    "fixed-batch-32": 1.0244
+   },
+   "mean_d": 0.002645625
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:rms_norm",
+   "L2:moe_router"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:rms_norm",
+   "L2:moe_router"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "mixed": 0.9585,
+   "long-context": 1.0371,
+   "single-request": 0.9699,
+   "fixed-batch-32": 1.0244
+  },
+  "mean_d": 0.002645625
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:rms_norm",
+  "L2:moe_router"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 4984.2
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2177.91
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 3.196205794411795
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 6.247559547051933
+  }
+ },
+ "speedups": {
+  "mixed": 0.9585,
+  "long-context": 1.0371,
+  "single-request": 0.9699,
+  "fixed-batch-32": 1.0244
+ },
+ "correctness": {
+  "per_sample": [
+   0.00371,
+   0.00141,
+   0.00468,
+   0.00108,
+   0.00064,
+   0.00258,
+   0.00265,
+   0.00024,
+   0.00049,
+   0.00467,
+   0.00033,
+   0.00227,
+   0.00082,
+   0.00598,
+   0.00489,
+   0.00589
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.997354375
+  }
+ },
+ "mean_d": 0.002645625,
+ "model": "openai/gpt-oss-120b",
+ "set": "drkernel-seq"
+}

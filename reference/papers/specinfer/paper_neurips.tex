@@ -1,0 +1,104 @@
+%\documentclass[sigplan,10pt]{acmart}
+\documentclass[preprint]{article}
+
+
+\PassOptionsToPackage{numbers, compress}{natbib}
+
+
+% ready for submission
+\usepackage{neurips_2023}
+
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+%\usepackage{listings}
+%\usepackage{pifont}
+%\usepackage{tikz}
+\usepackage{subfig}
+\usepackage{multirow}
+%\usepackage{pgfplots}
+\usepackage{booktabs}
+%\usepackage{dcolumn}
+%\usepackage{cancel}
+%\usepackage{ifmtarg}
+%\usepackage{verbatim}
+\usepackage{graphicx}
+%\usepackage{chngpage}
+\usepackage{xspace}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{balance}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{times}
+%\usepackage{fullpage}
+%\usepackage{footnote}
+%\usepackage[symbol]{footmisc}
+\usepackage{threeparttable}
+%\usepackage[small,compact]{titlesec}
+%\usepackage{tabularx}
+%\usepackage{titling}
+%\usepackage{authblk}
+%\makesavenoteenv{tabular}
+%\makesavenoteenv{table}
+\usepackage{cleveref}
+\usepackage{mathtools}
+
+
+\newcommand{\Sys}{SpecInfer\xspace}
+\newcommand{\sys}{SpecInfer\xspace}
+\newcommand{\llama}{LLaMA\xspace}
+\newcommand{\m}{\mathcal}
+\newcommand{\Continue}{\State {\bf continue}}
+\newcommand{\ZJ}[1]{\textcolor{red}{ZJ: #1}}
+\newcommand{\XM}[1]{\textcolor{blue}{XM: #1}}
+\algnewcommand{\LineComment}[1]{\State \textcolor{violet}{\(\triangleright\) #1}}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+
+\title{\Sys: Accelerating Generative LLM Serving\\with Speculative Inference and Token Tree Verification}
+\author{Xupeng Miao$^{\spadesuit}$, Gabriele Oliaro$^{\spadesuit}$, Zhihao Zhang$^{\spadesuit}$, Xinhao Cheng, Zeyu Wang,\\{\bf Rae Ying Yee Wong, Zhuoming Chen, Daiyaan Arfeen, Reyna Abhyankar$^{\dag}$, Zhihao Jia}\\ Carnegie Mellon University $^{\dag}$University of California San Diego}
+
+\begin{document}
+
+%\date{}
+\maketitle
+
+\input{abstract}
+\pagestyle{plain}
+
+\input{intro}
+%\input{background}
+\input{overview}
+\input{speculation}
+\input{verification}
+\input{discussion}
+\input{eval}
+\input{related}
+\input{conclusion}
+
+\bibliographystyle{plain}
+\bibliography{reference}
+
+\end{document}

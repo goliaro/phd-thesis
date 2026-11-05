@@ -1,0 +1,129 @@
+{
+ "kernels_requested": [
+  "L1:conv2d",
+  "L1:max_pool2d",
+  "L1:sigmoid",
+  "L1:silu",
+  "L2:yolov10_attention"
+ ],
+ "dropped": [],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:conv2d",
+    "L1:max_pool2d",
+    "L1:sigmoid",
+    "L1:silu",
+    "L2:yolov10_attention"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:conv2d",
+    "L1:max_pool2d",
+    "L1:sigmoid",
+    "L1:silu",
+    "L2:yolov10_attention"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "coco-val": 1.0518,
+    "single-image": 1.1264,
+    "batch-4": 1.0328
+   },
+   "mean_d": 0.016555624999999997
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:conv2d",
+   "L1:max_pool2d",
+   "L1:sigmoid",
+   "L1:silu",
+   "L2:yolov10_attention"
+  ],
+  "exclude": [],
+  "status": "ok",
+  "error": "",
+  "swapped": [
+   "L1:conv2d",
+   "L1:max_pool2d",
+   "L1:sigmoid",
+   "L1:silu",
+   "L2:yolov10_attention"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "speedups": {
+   "coco-val": 1.0518,
+   "single-image": 1.1264,
+   "batch-4": 1.0328
+  },
+  "mean_d": 0.016555624999999997
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:conv2d",
+  "L1:max_pool2d",
+  "L1:sigmoid",
+  "L1:silu",
+  "L2:yolov10_attention"
+ ],
+ "timings": {
+  "coco-val": {
+   "kind": "throughput",
+   "unit": "img/s",
+   "value": 894.0300000000001
+  },
+  "single-image": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.003639914772727273
+  },
+  "batch-4": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 0.009004647560030983
+  }
+ },
+ "speedups": {
+  "coco-val": 1.0518,
+  "single-image": 1.1264,
+  "batch-4": 1.0328
+ },
+ "correctness": {
+  "per_sample": [
+   0.23644,
+   0.00152,
+   0.00215,
+   0.00174,
+   0.00093,
+   0.00132,
+   0.00243,
+   0.0013,
+   0.00357,
+   0.0001,
+   0.00358,
+   0.00215,
+   0.00248,
+   0.0033,
+   0.00172,
+   0.00016
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.983444375
+  }
+ },
+ "mean_d": 0.016555624999999997,
+ "model": "jameslahm/yolov10n",
+ "set": "ako-seq"
+}

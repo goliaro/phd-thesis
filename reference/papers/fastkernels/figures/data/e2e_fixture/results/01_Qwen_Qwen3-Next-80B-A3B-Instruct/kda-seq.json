@@ -1,0 +1,217 @@
+{
+ "kernels_requested": [
+  "L1:gated_delta_rule",
+  "L1:rms_norm",
+  "L2:moe_router",
+  "L3:decoder_layer"
+ ],
+ "dropped": [
+  {
+   "kernel": "L1:rms_norm",
+   "category": "timeout",
+   "attempt": 4,
+   "reason": "found by bisection (timeout)"
+  }
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "purpose": "full",
+   "only": [
+    "L1:gated_delta_rule",
+    "L1:rms_norm",
+    "L2:moe_router",
+    "L3:decoder_layer"
+   ],
+   "exclude": [],
+   "status": "crash",
+   "error": "TIMEOUT",
+   "swapped": [
+    "L1:gated_delta_rule",
+    "L1:rms_norm",
+    "L2:moe_router",
+    "L3:decoder_layer"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "category": "timeout",
+   "culprits": []
+  },
+  {
+   "n": 2,
+   "purpose": "bisect",
+   "only": [
+    "L1:gated_delta_rule",
+    "L1:rms_norm"
+   ],
+   "exclude": [],
+   "status": "crash",
+   "error": "TIMEOUT",
+   "swapped": [
+    "L1:gated_delta_rule",
+    "L1:rms_norm"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "category": "timeout",
+   "culprits": []
+  },
+  {
+   "n": 3,
+   "purpose": "bisect",
+   "only": [
+    "L1:gated_delta_rule"
+   ],
+   "exclude": [],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gated_delta_rule"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 1.0892,
+    "long-context": 1.0251,
+    "single-request": 1.0199,
+    "fixed-batch-32": 1.0353
+   },
+   "mean_d": 0.001
+  },
+  {
+   "n": 4,
+   "purpose": "bisect",
+   "only": [
+    "L1:rms_norm"
+   ],
+   "exclude": [],
+   "status": "crash",
+   "error": "TIMEOUT",
+   "swapped": [
+    "L1:rms_norm"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "category": "timeout",
+   "culprits": []
+  },
+  {
+   "n": 5,
+   "purpose": "full",
+   "only": [
+    "L1:gated_delta_rule",
+    "L2:moe_router",
+    "L3:decoder_layer"
+   ],
+   "exclude": [
+    "L1:rms_norm"
+   ],
+   "status": "ok",
+   "error": "",
+   "swapped": [
+    "L1:gated_delta_rule",
+    "L2:moe_router",
+    "L3:decoder_layer"
+   ],
+   "not_swapped": [],
+   "t_import_s": 41.3,
+   "t_total_s": 812.0,
+   "speedups": {
+    "mixed": 0.9779,
+    "long-context": 1.0957,
+    "single-request": 1.1284,
+    "fixed-batch-32": 1.0856
+   },
+   "mean_d": 0.002355625
+  }
+ ],
+ "all_winners": {
+  "n": 1,
+  "purpose": "full",
+  "only": [
+   "L1:gated_delta_rule",
+   "L1:rms_norm",
+   "L2:moe_router",
+   "L3:decoder_layer"
+  ],
+  "exclude": [],
+  "status": "crash",
+  "error": "TIMEOUT",
+  "swapped": [
+   "L1:gated_delta_rule",
+   "L1:rms_norm",
+   "L2:moe_router",
+   "L3:decoder_layer"
+  ],
+  "not_swapped": [],
+  "t_import_s": 41.3,
+  "t_total_s": 812.0,
+  "category": "timeout",
+  "culprits": []
+ },
+ "status": "ok",
+ "kernels_final": [
+  "L1:gated_delta_rule",
+  "L2:moe_router",
+  "L3:decoder_layer"
+ ],
+ "timings": {
+  "mixed": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 5085.08
+  },
+  "long-context": {
+   "kind": "throughput",
+   "unit": "tok/s",
+   "value": 2300.97
+  },
+  "single-request": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 2.7472527472527473
+  },
+  "fixed-batch-32": {
+   "kind": "latency",
+   "unit": "s",
+   "value": 5.895357406042742
+  }
+ },
+ "speedups": {
+  "mixed": 0.9779,
+  "long-context": 1.0957,
+  "single-request": 1.1284,
+  "fixed-batch-32": 1.0856
+ },
+ "correctness": {
+  "per_sample": [
+   0.00497,
+   0.00458,
+   0.00037,
+   0.00374,
+   0.0018,
+   0.00316,
+   0.00056,
+   0.00249,
+   0.00197,
+   0.00475,
+   0.00203,
+   0.00208,
+   0.0006,
+   0.00162,
+   0.00199,
+   0.00098
+  ],
+  "summary": {
+   "n": 16,
+   "top1_agreement": 0.997644375
+  }
+ },
+ "mean_d": 0.002355625,
+ "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+ "set": "kda-seq"
+}
